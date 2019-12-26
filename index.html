@@ -224,7 +224,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2019-12-26 16:35:12 / 修改时间：19:57:34" itemprop="dateCreated datePublished" datetime="2019-12-26T16:35:12+08:00">2019-12-26</time>
+              <time title="创建时间：2019-12-26 16:35:12 / 修改时间：20:34:25" itemprop="dateCreated datePublished" datetime="2019-12-26T16:35:12+08:00">2019-12-26</time>
             </span>
 
           
@@ -252,9 +252,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="BSGS"><a href="#BSGS" class="headerlink" title="BSGS"></a>BSGS</h3><p>求$a^x\equiv b\space( \mod p)$ 的解，保证$p$为质数。</p>
-<p>我们设$x=i<em>m-j$，其中$0\leq j &lt;m$。那么原式可转化为$a^{im}\equiv b</em>a^j(\mod p)$的解。我们预处理出$b<em>a^0,b</em>a^1,…,b*a^{m-1}$的值，将它们存入$hash$表中，枚举$i$的值，每次查看$a^{im}$在表中是否出现。</p>
-<p>由费马小定理可知，等号左边是有循环节$p-1$的，所以只需要从$1$到$\frac{p}{m}$枚举$i$ ，则不包含哈希表的时间复杂度在当$m=\lceil\sqrt{n}\rceil$时最优，为$O(\sqrt{p})$，在实际中常使用std::map作为哈希表，时间复杂度为$O(\sqrt p\log_2p)$</p>
+          <h3 id="bsgs">BSGS</h3>
+<p>求<span class="math inline">\(a^x\equiv b\space( \mod p)\)</span> 的解，保证<span class="math inline">\(p\)</span>为质数。</p>
+<p>我们设<span class="math inline">\(x=i*m-j\)</span> ，其中<span class="math inline">\(0\leqslant j &lt;m\)</span> 。那么原式可转化为<span class="math inline">\(a^{im}\equiv b*a^j(\mod p)\)</span>的解。我们预处理出<span class="math inline">\(b*a^0,b*a^1,...,b*a^{m-1}\)</span>的值，将它们存入<span class="math inline">\(hash\)</span>表中，枚举<span class="math inline">\(i\)</span>的值，每次查看<span class="math inline">\(a^{im}\)</span>在表中是否出现。</p>
+<p>由费马小定理可知，等号左边是有循环节<span class="math inline">\(p-1\)</span>的，所以只需要从<span class="math inline">\(1\)</span>到<span class="math inline">\(\frac{p}{m}\)</span>枚举<span class="math inline">\(i\)</span> ，则不包含哈希表的时间复杂度在当<span class="math inline">\(m=\lceil\sqrt{n}\rceil\)</span>时最优，为<span class="math inline">\(O(\sqrt{p})\)</span>，在实际中常使用std::map作为哈希表，时间复杂度为<span class="math inline">\(O(\sqrt p\log_2p)\)</span></p>
+<p>code:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bsgs</span><span class="params">(ll a,ll b,ll p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll m=<span class="built_in">ceil</span>(<span class="built_in">sqrt</span>((<span class="keyword">double</span>)p));</span><br><span class="line">    mp.clear();</span><br><span class="line">    for(ll i=0;i&lt;=m;i++)mp[b*pw(a,i,p)%p]=i;</span><br><span class="line">    <span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ll t=pw(a,i*m,p);</span><br><span class="line">        <span class="keyword">if</span>(mp.count(t))&#123;<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,i*m-mp[t]);<span class="keyword">return</span>;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="exbsgs">EXBSGS</h3>
+<p>待更新</p>
 
       
     </div>
@@ -333,45 +338,62 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="分治FFT"><a href="#分治FFT" class="headerlink" title="分治FFT"></a>分治FFT</h4><p>给定数组$g[1],…,g[n-1]$，求$f[0],…,f[n-1]$，其中</p>
-<script type="math/tex; mode=display">
-f[i]=\sum\limits_{j=1}^i{f[i-j]g[j]}\\f[0]=1</script><p>在模$998244353$意义下进行</p>
-<p>考虑分治，先计算左半边，再计算左对右贡献，最后计算右半边，复杂度$O(Nlog^2N)$ </p>
-<p>也可以求逆解决，设</p>
-<script type="math/tex; mode=display">
-F(x)=\sum\limits_{i=0}^{n-1}f[i]x^i\\G(x)=\sum\limits_{i=0}^{n-1}g[i]x^i</script><p>其中，$g[0]=0$</p>
-<p>对其卷积（在$\mod x^n$意义下进行）</p>
-<script type="math/tex; mode=display">
+          <h4 id="分治fft">分治FFT</h4>
+<p>给定数组<span class="math inline">\(g[1],...,g[n-1]\)</span>，求<span class="math inline">\(f[0],...,f[n-1]\)</span>，其中 <span class="math display">\[
+f[i]=\sum\limits_{j=1}^i{f[i-j]g[j]}\\f[0]=1
+\]</span> 在模<span class="math inline">\(998244353\)</span>意义下进行</p>
+<p>考虑分治，先计算左半边，再计算左对右贡献，最后计算右半边，复杂度<span class="math inline">\(O(Nlog^2N)\)</span></p>
+<p>也可以求逆解决，设 <span class="math display">\[
+F(x)=\sum\limits_{i=0}^{n-1}f[i]x^i\\G(x)=\sum\limits_{i=0}^{n-1}g[i]x^i
+\]</span> 其中，<span class="math inline">\(g[0]=0\)</span></p>
+<p>对其卷积（在<span class="math inline">\(\mod x^n\)</span>意义下进行） <span class="math display">\[
 F(x)G(x)\sum\limits_{k=0}^{n-1}\sum\limits_{i+j=k}f[i]g[j]x^k\\
 F(x)G(x)=\sum\limits_{k=0}^{n-1}f[k]x^k-f[0]\\
 F(x)G(x)=F(x)-f[0]\\
 F(x)(G(x)-1)=-f[0]\\
-F(x)=\frac{f[0]}{1-G(x)}</script><p>（第二行是因为$g[0]=0$,所以$f[0]g[0]=0$）由于$f[0]=1$，求逆就好了，复杂度$O(NlogN)$</p>
-<h4 id="多项式-ln"><a href="#多项式-ln" class="headerlink" title="多项式 $\ln$"></a>多项式 $\ln$</h4><p>求$B(x)$使得</p>
-<script type="math/tex; mode=display">
-B(x)\equiv \ln A(x) \mod p</script><p>设</p>
-<script type="math/tex; mode=display">
-G(x)=\ln(x)</script><script type="math/tex; mode=display">
-B(x)\equiv G(A(x))\mod p</script><p>两边同时求导得</p>
-<script type="math/tex; mode=display">
-B'(x)\equiv G'(A(x))A'(x)\mod p</script><script type="math/tex; mode=display">
-B'(x)\equiv \frac{A'(x)}{A(x)}\mod p</script><script type="math/tex; mode=display">
-B(x) \equiv \int \frac{A'(x)}{A(x)}dx\mod p</script><p>多项式求导，求逆，积分即可</p>
+F(x)=\frac{f[0]}{1-G(x)}
+\]</span> （第二行是因为<span class="math inline">\(g[0]=0\)</span>,所以<span class="math inline">\(f[0]g[0]=0\)</span>）由于<span class="math inline">\(f[0]=1\)</span>，求逆就好了，复杂度<span class="math inline">\(O(NlogN)\)</span></p>
+<h4 id="多项式-ln">多项式 <span class="math inline">\(\ln\)</span></h4>
+<p>求<span class="math inline">\(B(x)\)</span>使得 <span class="math display">\[
+B(x)\equiv \ln A(x) \mod p
+\]</span> 设 <span class="math display">\[
+G(x)=\ln(x)
+\]</span></p>
+<p><span class="math display">\[
+B(x)\equiv G(A(x))\mod p
+\]</span></p>
+<p>两边同时求导得 <span class="math display">\[
+B&#39;(x)\equiv G&#39;(A(x))A&#39;(x)\mod p
+\]</span></p>
+<p><span class="math display">\[
+B&#39;(x)\equiv \frac{A&#39;(x)}{A(x)}\mod p
+\]</span></p>
+<p><span class="math display">\[
+B(x) \equiv \int \frac{A&#39;(x)}{A(x)}dx\mod p
+\]</span></p>
+<p>多项式求导，求逆，积分即可</p>
 <p>注：</p>
-<script type="math/tex; mode=display">
-A'(x)=\sum\limits_{i=1}^{n-1}ia_ix^{i-1}</script><script type="math/tex; mode=display">
-\int A(x)=\sum\limits_{i=0}^{n-1}\frac{a_{i}}{i+1}x^{i+1}dx</script><h4 id="ZJOI2014-力"><a href="#ZJOI2014-力" class="headerlink" title="[ZJOI2014]力"></a>[ZJOI2014]力</h4><p>给出n个数$q_i$，给出$F_j$的定义如下：</p>
-<script type="math/tex; mode=display">
-F_j = \sum_{i<j}\frac{q_i q_j}{(i-j)^2 }-\sum_{i>j}\frac{q_i q_j}{(i-j)^2 }</script><p>令$E_i=\frac{F_i}{q_i}$，求$E_i$</p>
-<script type="math/tex; mode=display">
-E_j=\sum_{i<j}\frac{q_i}{(i-j)^2 }-\sum_{i>j}\frac{q_i}{(i-j)^2 }</script><p>设$f[i]=q[i],g[i]=\frac{1}{i^2}$</p>
-<p>则</p>
-<script type="math/tex; mode=display">
-E_j=\sum\limits_{i<j}f[i]g[j-i]-\sum\limits_{i>j}f[i]g[i-j]\\
-E_j=\sum\limits_{i=1}^{j-1}f[i]g[j-i]-\sum\limits_{i=j+1}^nf[i]g[i-j]</script><p>设$f’[i]=f[n-i+1]$</p>
-<p>则</p>
-<script type="math/tex; mode=display">
-E_j=\sum\limits_{i=1}^{j-1}f[i]g[j-i]-\sum\limits_{i=1}^{n-j}f'[i]g[j-i]</script><p>直接卷积就好了</p>
+<p><span class="math display">\[
+A&#39;(x)=\sum\limits_{i=1}^{n-1}ia_ix^{i-1}
+\]</span></p>
+<p><span class="math display">\[
+\int A(x)=\sum\limits_{i=0}^{n-1}\frac{a_{i}}{i+1}x^{i+1}dx
+\]</span></p>
+<h4 id="zjoi2014力">[ZJOI2014]力</h4>
+<p>给出n个数<span class="math inline">\(q_i\)</span>，给出<span class="math inline">\(F_j\)</span>的定义如下： <span class="math display">\[
+F_j = \sum_{i&lt;j}\frac{q_i q_j}{(i-j)^2 }-\sum_{i&gt;j}\frac{q_i q_j}{(i-j)^2 }
+\]</span></p>
+<p>令<span class="math inline">\(E_i=\frac{F_i}{q_i}\)</span>，求<span class="math inline">\(E_i\)</span> <span class="math display">\[
+E_j=\sum_{i&lt;j}\frac{q_i}{(i-j)^2 }-\sum_{i&gt;j}\frac{q_i}{(i-j)^2 }
+\]</span></p>
+<p>设<span class="math inline">\(f[i]=q[i],g[i]=\frac{1}{i^2}\)</span></p>
+<p>则 <span class="math display">\[
+E_j=\sum\limits_{i&lt;j}f[i]g[j-i]-\sum\limits_{i&gt;j}f[i]g[i-j]\\
+E_j=\sum\limits_{i=1}^{j-1}f[i]g[j-i]-\sum\limits_{i=j+1}^nf[i]g[i-j]
+\]</span> 设<span class="math inline">\(f&#39;[i]=f[n-i+1]\)</span></p>
+<p>则 <span class="math display">\[
+E_j=\sum\limits_{i=1}^{j-1}f[i]g[j-i]-\sum\limits_{i=1}^{n-j}f&#39;[i]g[j-i]
+\]</span> 直接卷积就好了</p>
 
       
     </div>
