@@ -4,8 +4,8 @@
     <title>bsgs</title>
     <url>/2019/12/26/bsgs-exbsgs/</url>
     <content><![CDATA[<h3 id="BSGS"><a href="#BSGS" class="headerlink" title="BSGS"></a>BSGS</h3><p>求$a^x\equiv b\space( \mod p)$ 的解，保证$p$为质数。</p>
-<p>我们设$x=i<em>m+j$，其中$0\leqslant j &lt;m$。那么原式可转化为$a^{im}\equiv b</em>a^j(\mod p)$的解。我们预处理出$b<em>a^0,b</em>a^1,…,b*a^{m-1}$的值，将它们存入$hash$表中，枚举$i$的值，每次查看$a^{im}$在表中是否出现。</p>
-<p>由费马小定理可知，等号左边是有循环节$p-1$的，所以只需要从$0$到$\frac{p}{m}$枚举$i$ ，则不包含哈希表的时间复杂度在当$m=\lceil\sqrt{n}\rceil$时最优，为$O(\sqrt{p})$，在实际中常使用std::map作为哈希表，时间复杂度为$O(\sqrt p\log_2p)$</p>
+<p>我们设$x=i<em>m-j$，其中$0\leq j &lt;m$。那么原式可转化为$a^{im}\equiv b</em>a^j(\mod p)$的解。我们预处理出$b<em>a^0,b</em>a^1,…,b*a^{m-1}$的值，将它们存入$hash$表中，枚举$i$的值，每次查看$a^{im}$在表中是否出现。</p>
+<p>由费马小定理可知，等号左边是有循环节$p-1$的，所以只需要从$1$到$\frac{p}{m}$枚举$i$ ，则不包含哈希表的时间复杂度在当$m=\lceil\sqrt{n}\rceil$时最优，为$O(\sqrt{p})$，在实际中常使用std::map作为哈希表，时间复杂度为$O(\sqrt p\log_2p)$</p>
 ]]></content>
       <tags>
         <tag>数论</tag>
