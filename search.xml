@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>「ZJOI2014」力-FFT</title>
+    <title>「ZJOI2014」力 - FFT</title>
     <url>/2019/12/29/ZJOI2014-%E5%8A%9B/</url>
     <content><![CDATA[<p>给出n个数<span class="math inline">\(q_i\)</span>，给出<span class="math inline">\(F_j\)</span>的定义如下： <span class="math display">\[
 F_j = \sum_{i&lt;j}\frac{q_i q_j}{(i-j)^2 }-\sum_{i&gt;j}\frac{q_i q_j}{(i-j)^2 }
