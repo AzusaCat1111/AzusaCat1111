@@ -7,6 +7,7 @@
 <blockquote>
 <p>在计算机科学里，<strong>k-d树</strong>（ <strong>k-维树</strong>的缩写）是在<strong>k</strong>维欧几里德空间组织点的数据1结构。<strong>k-d</strong>树可以使用在多种应用场合，如多维键值搜索（例：范围搜寻及最邻近搜索）。<strong>k-d树</strong>是空间二分树（Binary space partitioning ）的一种特殊情况。</p>
 </blockquote>
+<a id="more"></a>
 <hr />
 <h3 id="如何构造k-dtree">如何构造K-Dtree</h3>
 <h4 id="节点存储">节点存储</h4>
@@ -62,6 +63,7 @@ E_j=\sum\limits_{i=1}^{j-1}f[i]g[j-i]-\sum\limits_{i=1}^{n-j}f&#39;[i]g[j-i]
     <title>csp2019游记</title>
     <url>/2019/12/29/csp2019%E6%B8%B8%E8%AE%B0/</url>
     <content><![CDATA[<p>咕咕咕了一个多月的游记qwq</p>
+<a id="more"></a>
 <h3 id="day-8">Day-8</h3>
 <p>期中考完了开始快乐的停课生活qwq</p>
 <h3 id="day0">Day0</h3>
