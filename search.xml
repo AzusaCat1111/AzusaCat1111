@@ -40,7 +40,9 @@
     <content><![CDATA[<p>给出n个数<span class="math inline">\(q_i\)</span>，给出<span class="math inline">\(F_j\)</span>的定义如下： <span class="math display">\[
 F_j = \sum_{i&lt;j}\frac{q_i q_j}{(i-j)^2 }-\sum_{i&gt;j}\frac{q_i q_j}{(i-j)^2 }
 \]</span></p>
-<p>令<span class="math inline">\(E_i=\frac{F_i}{q_i}\)</span>，求<span class="math inline">\(E_i\)</span> <span class="math display">\[
+<p>令<span class="math inline">\(E_i=\frac{F_i}{q_i}\)</span>，求<span class="math inline">\(E_i\)</span></p>
+<a id="more"></a>
+<p><span class="math display">\[
 E_j=\sum_{i&lt;j}\frac{q_i}{(i-j)^2 }-\sum_{i&gt;j}\frac{q_i}{(i-j)^2 }
 \]</span></p>
 <p>设<span class="math inline">\(f[i]=q[i],g[i]=\frac{1}{i^2}\)</span></p>
@@ -97,6 +99,7 @@ E_j=\sum\limits_{i=1}^{j-1}f[i]g[j-i]-\sum\limits_{i=1}^{n-j}f&#39;[i]g[j-i]
     <url>/2019/12/26/bsgs-exbsgs/</url>
     <content><![CDATA[<h3 id="bsgs">BSGS</h3>
 <p>求<span class="math inline">\(a^x\equiv b\space( \mod p)\)</span> 的解，保证<span class="math inline">\(p\)</span>为质数。</p>
+<a id="more"></a>
 <p>我们设<span class="math inline">\(x=i*m-j\)</span> ，其中<span class="math inline">\(0\leqslant j &lt;m\)</span> 。那么原式可转化为<span class="math inline">\(a^{im}\equiv b*a^j(\mod p)\)</span>的解。我们预处理出<span class="math inline">\(b*a^0,b*a^1,...,b*a^{m-1}\)</span>的值，将它们存入<span class="math inline">\(hash\)</span>表中，枚举<span class="math inline">\(i\)</span>的值，每次查看<span class="math inline">\(a^{im}\)</span>在表中是否出现。</p>
 <p>由费马小定理可知，等号左边是有循环节<span class="math inline">\(p-1\)</span>的，所以只需要从<span class="math inline">\(1\)</span>到<span class="math inline">\(\frac{p}{m}\)</span>枚举<span class="math inline">\(i\)</span> ，则不包含哈希表的时间复杂度在当<span class="math inline">\(m=\lceil\sqrt{n}\rceil\)</span>时最优，为<span class="math inline">\(O(\sqrt{p})\)</span>，在实际中常使用std::map作为哈希表，时间复杂度为<span class="math inline">\(O(\sqrt p\log_2p)\)</span></p>
 <p>code:</p>
@@ -115,6 +118,7 @@ E_j=\sum\limits_{i=1}^{j-1}f[i]g[j-i]-\sum\limits_{i=1}^{n-j}f&#39;[i]g[j-i]
 <p>给定数组<span class="math inline">\(g[1],...,g[n-1]\)</span>，求<span class="math inline">\(f[0],...,f[n-1]\)</span>，其中 <span class="math display">\[
 f[i]=\sum\limits_{j=1}^i{f[i-j]g[j]}\\f[0]=1
 \]</span> 在模<span class="math inline">\(998244353\)</span>意义下进行</p>
+<a id="more"></a>
 <p>考虑分治，先计算左半边，再计算左对右贡献，最后计算右半边，复杂度<span class="math inline">\(O(Nlog^2N)\)</span></p>
 <p>也可以求逆解决，设 <span class="math display">\[
 F(x)=\sum\limits_{i=0}^{n-1}f[i]x^i\\G(x)=\sum\limits_{i=0}^{n-1}g[i]x^i
