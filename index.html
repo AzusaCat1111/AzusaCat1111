@@ -224,7 +224,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-01-29 20:59:25 / 修改时间：23:24:18" itemprop="dateCreated datePublished" datetime="2020-01-29T20:59:25+08:00">2020-01-29</time>
+              <time title="创建时间：2020-01-29 20:59:25 / 修改时间：23:26:20" itemprop="dateCreated datePublished" datetime="2020-01-29T20:59:25+08:00">2020-01-29</time>
             </span>
 
           
@@ -264,52 +264,14 @@
 C_i=\sum_{j\oplus k = i}A_j \times B_k
 \]</span></p>
 <p>分别当<span class="math inline">\(\oplus\)</span>是<span class="math inline">\(\text{or}\)</span>,<span class="math inline">\(\text{and}\)</span>和<span class="math inline">\(\text{xor}\)</span>时求出<span class="math inline">\(C\)</span></p>
-<h3 id="什么是fwt">什么是FWT</h3>
-<p>FWT（快速沃尔什变换）是一种类似FFT的优化卷积运算的算法，只不过卷积时下标由<span class="math inline">\(+\)</span>变成了位运算。类似FFT，我们需要找到一种变换方式，设<span class="math inline">\(A\)</span>，<span class="math inline">\(B\)</span>为原序列，<span class="math inline">\(FWT(A)\)</span>，<span class="math inline">\(FWT(B)\)</span>变换后的序列，<span class="math inline">\(\otimes\)</span>为卷积运算，<span class="math inline">\(*\)</span>为对应下标相乘的运算，使得 <span class="math display">\[
-FWT(A\otimes B)=FWTA*FWTB
-\]</span> （想想FFT，通过变换为点值表达使得卷积运算可以变为对应下标相乘，两者实际上思想一样！）</p>
-<p>接下来说一下如何实现</p>
-<h4 id="or">OR</h4>
-<p>设<span class="math inline">\(A\)</span>为原序列，<span class="math inline">\(FWT_A\)</span>为变换后序列，则有 <span class="math display">\[
-FWT_A[i]=\sum\limits_{i|j=i}A[j]
-\]</span> 考虑为什么是对的，我们考虑两个变换后的数组按位相乘后的结果 <span class="math display">\[
-FWT_A[i]*FWT_B[i]=(\sum\limits_{i|j=i}A[j])*(\sum\limits_{i|k=i}B[k])\\
-=\sum\limits_{i|(j|k)=i}A[j]*B[k]
-\]</span> 这正是<span class="math inline">\(FWT_{A*B}\)</span>！</p>
-<p>但是不能直接这么求，像FFT，我们是否可以把原序列分为两半，通过子问题的解合并出问题的解呢？是可以的，下面给出式子 <span class="math display">\[
-FWT_A=
-\begin{cases}
-A &amp;     &amp;|A|=1\\
-merge(FWT_{A_0},FWT_{A_0+A_1})&amp;    &amp;\text{otherwise}
-\end{cases}
-\]</span></p>
-<p>其中，<span class="math inline">\(merge\)</span>为把两个序列拼接起来（左面的序列拼合完成后下标较小），<span class="math inline">\(A_0\)</span>，<span class="math inline">\(A_1\)</span>分别为序列的前半部分（下标较小的部分）和后半部分，<span class="math inline">\(+\)</span>为对应下标的值相加。</p>
-<p>考虑正确性，当<span class="math inline">\(|A|=1\)</span>时，显然只有这一个元素，当<span class="math inline">\(|A|!=1\)</span>时，我们按下标的最高位分为<span class="math inline">\(0\)</span>与<span class="math inline">\(1\)</span>两部分，递归处理左右两边，再考虑这一位的影响，因为只有<span class="math inline">\(0|0=0\)</span>，所以<span class="math inline">\(0\)</span>只有自己的贡献，而<span class="math inline">\(0|1=1,1|1=1\)</span>，所以<span class="math inline">\(0\)</span>和<span class="math inline">\(1\)</span>都有贡献。</p>
-<p>或者换种想法，最初定义<span class="math inline">\(FWT\)</span>的式子，如果我们把下标看作集合的状压表示，那么<span class="math inline">\(FWT_A[i]\)</span>实际上是<span class="math inline">\(i\)</span>所有子集对应值的和，我们按位相加时，保证除了最高位，其他低位都是相等的（低位的子集已经递归算过），所以我们只关注最高位，而这一位下标为0或者为1都是这一位为1的子集，所以右边是左右相加，而左边只有0是0的子集，所以只有左边一半。</p>
-<p>接下来考虑逆变换，也就是把<span class="math inline">\(FWT\)</span>序列还原为原序列。其实很简单，就是解方程，下面直接给出式子，不做解释 <span class="math display">\[
-IFWT_A=
-\begin{cases}
-FWT_A &amp;     &amp;|A|=1\\
-merge(IFWT{A_0},IFWT{A_1}-IFWT{A_0})&amp;    &amp;\text{otherwise}
-\end{cases}
-\]</span> 然后对于整个序列，<span class="math inline">\(IFWT_A\)</span>就是它自己了</p>
-<p>下面是<span class="math inline">\(or\)</span>的代码</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fwtor</span><span class="params">(<span class="keyword">int</span> *f,<span class="keyword">int</span> n,<span class="keyword">int</span> op)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> len=<span class="number">2</span>;len&lt;=n;len&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i+=len)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;i+(len&gt;&gt;<span class="number">1</span>);j++)</span><br><span class="line">                <span class="keyword">if</span>(op==<span class="number">1</span>)f[j+(len&gt;&gt;<span class="number">1</span>)]+=f[j],f[j+(len&gt;&gt;<span class="number">1</span>)]%=p;</span><br><span class="line">                <span class="keyword">else</span> f[j+(len&gt;&gt;<span class="number">1</span>)]+=(p-f[j]),f[j+(len&gt;&gt;<span class="number">1</span>)]%=p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><span class="math inline">\(p\)</span>是板子题的模数，op==1时是正变换，其它时为逆变换，采用像FFT一样的迭代实现</p>
-<h4 id="and">AND</h4>
-<p>and操作和or操作类似，下面只给出式子和代码 <span class="math display">\[
-FWT_A[i]=\sum\limits_{i\&amp;j=i}A[j]
-\]</span> <span class="math display">\[
-FWT_A=
-\begin{cases}
-A &amp;     &amp;|A|=1\\
-merge(FWT_{A_0+A_1},FWT_{A_0})&amp;    &amp;\text{otherwise}
-\end{cases}
-\]</span></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fwtand</span><span class="params">(<span class="keyword">int</span> *f,<span class="keyword">int</span> n,<span class="keyword">int</span> op)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> len=<span class="number">2</span>;len&lt;=n;len&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i+=len)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;i+(len&gt;&gt;<span class="number">1</span>);j++)</span><br><span class="line">                <span class="keyword">if</span>(op==<span class="number">1</span>)f[j]+=f[j+(len&gt;&gt;<span class="number">1</span>)],f[j]%=p;</span><br><span class="line">                <span class="keyword">else</span> f[j]+=(p-f[j+(len&gt;&gt;<span class="number">1</span>)]),f[j]%=p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="xor">XOR</h4>
-<p>待更新</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/01/29/fwt/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -359,7 +321,7 @@ merge(FWT_{A_0+A_1},FWT_{A_0})&amp;    &amp;\text{otherwise}
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-29 23:23:31" itemprop="dateModified" datetime="2020-01-29T23:23:31+08:00">2020-01-29</time>
+                <time title="修改时间：2020-01-29 23:25:25" itemprop="dateModified" datetime="2020-01-29T23:25:25+08:00">2020-01-29</time>
               </span>
 
           
@@ -395,24 +357,14 @@ merge(FWT_{A_0+A_1},FWT_{A_0})&amp;    &amp;\text{otherwise}
 
       
           <p>给定一张无向图，边权在<span class="math inline">\([0,1]\)</span>之间随机均匀分布，求这张图的最小生成树边权最大值的期望。</p>
-<p><span class="math inline">\(1\leqslant n\leqslant 10\)</span>，<span class="math inline">\(1\leqslant m\leqslant \frac{n(n-1)}{2}\)</span>（分别是点数与边数）</p>
-<p>提示：对于<span class="math inline">\(n\)</span>个<span class="math inline">\([0,1]\)</span>之间的随机变量<span class="math inline">\(x1\)</span>,<span class="math inline">\(x2\)</span>,...,<span class="math inline">\(xn\)</span>，第<span class="math inline">\(k\)</span>小的那个的期望值是<span class="math inline">\(\frac{k}{n+1}\)</span>。</p>
-<p>如果我们按照边权从小到大加入边，那么最下生成树边权的最大值也就是加入某一条边使得图恰好联通的那条边的权值。于是我们只需计算这张图是从小到大加了第<span class="math inline">\(i\)</span>条边后恰好联通的概率，记为<span class="math inline">\(P[i]\)</span>，则 <span class="math display">\[
-ans=\sum\limits_{i=1}^{m}P[i]E[i]
-\]</span> 其中<span class="math inline">\(E[i]\)</span>是这条边的边权期望，由提示我们知道<span class="math inline">\(E[i]=\frac{i}{m+1}\)</span>，那么 <span class="math display">\[
-ans=\frac{1}{m+1}\sum\limits_{i=1}^m iP[i]\\
-=\frac{1}{m+1}\sum\limits_{i=1}^m\sum\limits_{j=i}^mP[j]
-\]</span> 我们设<span class="math inline">\(p[i]=\sum\limits_{j=i}^mP[j]\)</span>那么<span class="math inline">\(ans=\frac{1}{m+1}\sum\limits_{i=1}^m p[i]\)</span>，而<span class="math inline">\(p[i]\)</span>的意义是加入至少<span class="math inline">\(i\)</span>条边才联通的概率，这显然比<span class="math inline">\(P\)</span> 要好计算！</p>
-<p>我们考虑如何计算<span class="math inline">\(p\)</span>，不难发现这等价于加了<span class="math inline">\(i-1\)</span>条边还没有联通的概率，可以用不连通方案数除以总方案数来计算概率。于是我们成功的把一个期望问题转化为了计数问题！</p>
-<p>考虑状压计算方案，设<span class="math inline">\(f[i][s]\)</span>和<span class="math inline">\(g[i][s]\)</span>为当前点集为<span class="math inline">\(s\)</span>，内部连了<span class="math inline">\(i\)</span>条边，联通/不连通的方案数，那么有 <span class="math display">\[
-f[i][s]+g[i][s]=\binom{size[s]}{i}\\
-f[i][s]=\sum\limits_{j=0}^{i-1}\sum\limits_{t\subsetneqq s且r\in t}g[j][t]*\binom{size[s-t]}{i-j}
-\]</span> 第一条，不连通+联通=总方案数，其中<span class="math inline">\(size[s]\)</span>为子图<span class="math inline">\(s\)</span>中的边数</p>
-<p>第二条，<span class="math inline">\(r\)</span>是<span class="math inline">\(s\)</span>中的第一个点（其实可以是任何一个但是在枚举<span class="math inline">\(j\)</span>和<span class="math inline">\(t\)</span>中不能变），这样的话通过枚举这个点所在的连通块大小，可以不重不漏计算出所有不连通图的数量（连通图计数貌似有很多类似的trick，可惜我并没做过）</p>
-<p>最后答案式子就不列了，直接上代码</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> __int128 ll;</span><br><span class="line"><span class="keyword">int</span> ss[<span class="number">46</span>],tt[<span class="number">46</span>],cnt[<span class="number">1</span>+<span class="number">1</span>&lt;&lt;<span class="number">10</span>];</span><br><span class="line">ll f[<span class="number">1</span>+<span class="number">1</span>&lt;&lt;<span class="number">10</span>][<span class="number">46</span>],g[<span class="number">1</span>+<span class="number">1</span>&lt;&lt;<span class="number">10</span>][<span class="number">46</span>],c[<span class="number">46</span>][<span class="number">46</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,m;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;ss[i],&amp;tt[i]),ss[i]--,tt[i]--;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;(<span class="number">1</span>&lt;&lt;n);i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">            <span class="keyword">if</span>((i&amp;(<span class="number">1</span>&lt;&lt;ss[j]))&amp;&amp;(i&amp;(<span class="number">1</span>&lt;&lt;tt[j])))cnt[i]++;</span><br><span class="line">    c[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">45</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        c[i][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=i;j++)</span><br><span class="line">            c[i][j]=c[i<span class="number">-1</span>][j]+c[i<span class="number">-1</span>][j<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> s=<span class="number">1</span>;s&lt;(<span class="number">1</span>&lt;&lt;n);s++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(s==(s&amp;(-s)))&#123;g[s][<span class="number">0</span>]=<span class="number">1</span>;<span class="keyword">continue</span>;&#125;</span><br><span class="line">        <span class="keyword">int</span> lowbit=(s&amp;(-s));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> t=s&amp;(s<span class="number">-1</span>);t;t=s&amp;(t<span class="number">-1</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!(t&amp;lowbit))<span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=cnt[t];i++)</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=cnt[s^t];j++)</span><br><span class="line">                    f[s][i+j]+=g[t][i]*c[cnt[s^t]][j];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=cnt[s];i++)g[s][i]=c[cnt[s]][i]-f[s][i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">double</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=m;i++)ans+=<span class="number">1.0</span>*f[(<span class="number">1</span>&lt;&lt;n)<span class="number">-1</span>][i]/c[cnt[(<span class="number">1</span>&lt;&lt;n)<span class="number">-1</span>]][i];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.6Lf"</span>,ans/(m+<span class="number">1.0</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>代码里更新方式和上面长得不太一样，但实际上是一个东西。复杂度为<span class="math inline">\(O(3^nm)\)</span></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/01/21/%E3%80%8CZJOI2015%E3%80%8D%E5%9C%B0%E9%9C%87%E5%90%8E%E7%9A%84%E5%B9%BB%E6%83%B3%E4%B9%A1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

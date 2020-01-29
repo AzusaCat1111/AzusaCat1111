@@ -8,6 +8,7 @@
 C_i=\sum_{j\oplus k = i}A_j \times B_k
 \]</span></p>
 <p>分别当<span class="math inline">\(\oplus\)</span>是<span class="math inline">\(\text{or}\)</span>,<span class="math inline">\(\text{and}\)</span>和<span class="math inline">\(\text{xor}\)</span>时求出<span class="math inline">\(C\)</span></p>
+<a id="more"></a>
 <h3 id="什么是fwt">什么是FWT</h3>
 <p>FWT（快速沃尔什变换）是一种类似FFT的优化卷积运算的算法，只不过卷积时下标由<span class="math inline">\(+\)</span>变成了位运算。类似FFT，我们需要找到一种变换方式，设<span class="math inline">\(A\)</span>，<span class="math inline">\(B\)</span>为原序列，<span class="math inline">\(FWT(A)\)</span>，<span class="math inline">\(FWT(B)\)</span>变换后的序列，<span class="math inline">\(\otimes\)</span>为卷积运算，<span class="math inline">\(*\)</span>为对应下标相乘的运算，使得 <span class="math display">\[
 FWT(A\otimes B)=FWTA*FWTB
@@ -64,6 +65,7 @@ merge(FWT_{A_0+A_1},FWT_{A_0})&amp;    &amp;\text{otherwise}
     <title>「ZJOI2015」地震后的幻想乡</title>
     <url>/2020/01/21/%E3%80%8CZJOI2015%E3%80%8D%E5%9C%B0%E9%9C%87%E5%90%8E%E7%9A%84%E5%B9%BB%E6%83%B3%E4%B9%A1/</url>
     <content><![CDATA[<p>给定一张无向图，边权在<span class="math inline">\([0,1]\)</span>之间随机均匀分布，求这张图的最小生成树边权最大值的期望。</p>
+<a id="more"></a>
 <p><span class="math inline">\(1\leqslant n\leqslant 10\)</span>，<span class="math inline">\(1\leqslant m\leqslant \frac{n(n-1)}{2}\)</span>（分别是点数与边数）</p>
 <p>提示：对于<span class="math inline">\(n\)</span>个<span class="math inline">\([0,1]\)</span>之间的随机变量<span class="math inline">\(x1\)</span>,<span class="math inline">\(x2\)</span>,...,<span class="math inline">\(xn\)</span>，第<span class="math inline">\(k\)</span>小的那个的期望值是<span class="math inline">\(\frac{k}{n+1}\)</span>。</p>
 <p>如果我们按照边权从小到大加入边，那么最下生成树边权的最大值也就是加入某一条边使得图恰好联通的那条边的权值。于是我们只需计算这张图是从小到大加了第<span class="math inline">\(i\)</span>条边后恰好联通的概率，记为<span class="math inline">\(P[i]\)</span>，则 <span class="math display">\[
