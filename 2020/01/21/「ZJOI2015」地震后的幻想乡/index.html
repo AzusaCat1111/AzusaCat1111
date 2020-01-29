@@ -46,19 +46,21 @@
   };
 </script>
 
-  <meta name="description" content="BSGS 求\(a^x\equiv b\space( \mod p)\) 的解，保证\(p\)为质数。">
+  <meta name="description" content="给定一张无向图，边权在\([0,1]\)之间随机均匀分布，求这张图的最小生成树边权最大值的期望。 \(1\leqslant n\leqslant 10\)，\(1\leqslant m\leqslant \frac{n(n-1)}{2}\)（分别是点数与边数） 提示：对于\(n\)个\([0,1]\)之间的随机变量\(x1\),\(x2\),...,\(xn\)，第\(k\)小的那个的期望值是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="bsgs">
-<meta property="og:url" content="http://s1rius.top/2019/12/26/bsgs-exbsgs/index.html">
+<meta property="og:title" content="「ZJOI2015」地震后的幻想乡">
+<meta property="og:url" content="http://s1rius.top/2020/01/21/%E3%80%8CZJOI2015%E3%80%8D%E5%9C%B0%E9%9C%87%E5%90%8E%E7%9A%84%E5%B9%BB%E6%83%B3%E4%B9%A1/index.html">
 <meta property="og:site_name" content="S1rius&#39; Blog">
-<meta property="og:description" content="BSGS 求\(a^x\equiv b\space( \mod p)\) 的解，保证\(p\)为质数。">
-<meta property="article:published_time" content="2019-12-26T08:35:12.000Z">
-<meta property="article:modified_time" content="2020-01-20T08:50:54.500Z">
+<meta property="og:description" content="给定一张无向图，边权在\([0,1]\)之间随机均匀分布，求这张图的最小生成树边权最大值的期望。 \(1\leqslant n\leqslant 10\)，\(1\leqslant m\leqslant \frac{n(n-1)}{2}\)（分别是点数与边数） 提示：对于\(n\)个\([0,1]\)之间的随机变量\(x1\),\(x2\),...,\(xn\)，第\(k\)小的那个的期望值是">
+<meta property="article:published_time" content="2020-01-21T07:56:53.000Z">
+<meta property="article:modified_time" content="2020-01-29T15:23:31.083Z">
 <meta property="article:author" content="S1rius">
-<meta property="article:tag" content="数论">
+<meta property="article:tag" content="概率与期望">
+<meta property="article:tag" content="DP">
+<meta property="article:tag" content="状态压缩">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://s1rius.top/2019/12/26/bsgs-exbsgs/">
+<link rel="canonical" href="http://s1rius.top/2020/01/21/%E3%80%8CZJOI2015%E3%80%8D%E5%9C%B0%E9%9C%87%E5%90%8E%E7%9A%84%E5%B9%BB%E6%83%B3%E4%B9%A1/">
 
 
 <script id="page-configurations">
@@ -70,7 +72,7 @@
   };
 </script>
 
-  <title>bsgs | S1rius' Blog</title>
+  <title>「ZJOI2015」地震后的幻想乡 | S1rius' Blog</title>
   
 
 
@@ -204,7 +206,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://s1rius.top/2019/12/26/bsgs-exbsgs/">
+    <link itemprop="mainEntityOfPage" href="http://s1rius.top/2020/01/21/%E3%80%8CZJOI2015%E3%80%8D%E5%9C%B0%E9%9C%87%E5%90%8E%E7%9A%84%E5%B9%BB%E6%83%B3%E4%B9%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -217,7 +219,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          bsgs
+          「ZJOI2015」地震后的幻想乡
         </h1>
 
         <div class="post-meta">
@@ -227,18 +229,18 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-12-26 16:35:12" itemprop="dateCreated datePublished" datetime="2019-12-26T16:35:12+08:00">2019-12-26</time>
+              <time title="创建时间：2020-01-21 15:56:53" itemprop="dateCreated datePublished" datetime="2020-01-21T15:56:53+08:00">2020-01-21</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-20 16:50:54" itemprop="dateModified" datetime="2020-01-20T16:50:54+08:00">2020-01-20</time>
+                <time title="修改时间：2020-01-29 23:23:31" itemprop="dateModified" datetime="2020-01-29T23:23:31+08:00">2020-01-29</time>
               </span>
 
           
-            <span id="/2019/12/26/bsgs-exbsgs/" class="post-meta-item leancloud_visitors" data-flag-title="bsgs" title="阅读次数">
+            <span id="/2020/01/21/%E3%80%8CZJOI2015%E3%80%8D%E5%9C%B0%E9%9C%87%E5%90%8E%E7%9A%84%E5%B9%BB%E6%83%B3%E4%B9%A1/" class="post-meta-item leancloud_visitors" data-flag-title="「ZJOI2015」地震后的幻想乡" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -253,8 +255,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/12/26/bsgs-exbsgs/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/26/bsgs-exbsgs/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/01/21/%E3%80%8CZJOI2015%E3%80%8D%E5%9C%B0%E9%9C%87%E5%90%8E%E7%9A%84%E5%B9%BB%E6%83%B3%E4%B9%A1/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/01/21/%E3%80%8CZJOI2015%E3%80%8D%E5%9C%B0%E9%9C%87%E5%90%8E%E7%9A%84%E5%B9%BB%E6%83%B3%E4%B9%A1/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -269,15 +271,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="bsgs">BSGS</h3>
-<p>求<span class="math inline">\(a^x\equiv b\space( \mod p)\)</span> 的解，保证<span class="math inline">\(p\)</span>为质数。</p>
-<a id="more"></a>
-<p>我们设<span class="math inline">\(x=i*m-j\)</span> ，其中<span class="math inline">\(0\leqslant j &lt;m\)</span> 。那么原式可转化为<span class="math inline">\(a^{im}\equiv b*a^j(\mod p)\)</span>的解。我们预处理出<span class="math inline">\(b*a^0,b*a^1,...,b*a^{m-1}\)</span>的值，将它们存入<span class="math inline">\(hash\)</span>表中，枚举<span class="math inline">\(i\)</span>的值，每次查看<span class="math inline">\(a^{im}\)</span>在表中是否出现。</p>
-<p>由费马小定理可知，等号左边是有循环节<span class="math inline">\(p-1\)</span>的，所以只需要从<span class="math inline">\(1\)</span>到<span class="math inline">\(\frac{p}{m}\)</span>枚举<span class="math inline">\(i\)</span> ，则不包含哈希表的时间复杂度在当<span class="math inline">\(m=\lceil\sqrt{n}\rceil\)</span>时最优，为<span class="math inline">\(O(\sqrt{p})\)</span>，在实际中常使用std::map作为哈希表，时间复杂度为<span class="math inline">\(O(\sqrt p\log_2p)\)</span></p>
-<p>code:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bsgs</span><span class="params">(ll a,ll b,ll p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll m=<span class="built_in">ceil</span>(<span class="built_in">sqrt</span>((<span class="keyword">double</span>)p));</span><br><span class="line">    mp.clear();</span><br><span class="line">    ll now=<span class="number">1</span>,t=pw(a,m,p);</span><br><span class="line">    <span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;=m;i++)mp[b*now%p]=i,now*=a,now%=p;</span><br><span class="line">    now=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        now*=t,now%=p;</span><br><span class="line">        <span class="keyword">if</span>(mp.count(now))&#123;<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,i*m-mp[now]);<span class="keyword">return</span>;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="exbsgs">EXBSGS</h3>
-<p>待更新</p>
+        <p>给定一张无向图，边权在<span class="math inline">\([0,1]\)</span>之间随机均匀分布，求这张图的最小生成树边权最大值的期望。</p>
+<p><span class="math inline">\(1\leqslant n\leqslant 10\)</span>，<span class="math inline">\(1\leqslant m\leqslant \frac{n(n-1)}{2}\)</span>（分别是点数与边数）</p>
+<p>提示：对于<span class="math inline">\(n\)</span>个<span class="math inline">\([0,1]\)</span>之间的随机变量<span class="math inline">\(x1\)</span>,<span class="math inline">\(x2\)</span>,...,<span class="math inline">\(xn\)</span>，第<span class="math inline">\(k\)</span>小的那个的期望值是<span class="math inline">\(\frac{k}{n+1}\)</span>。</p>
+<p>如果我们按照边权从小到大加入边，那么最下生成树边权的最大值也就是加入某一条边使得图恰好联通的那条边的权值。于是我们只需计算这张图是从小到大加了第<span class="math inline">\(i\)</span>条边后恰好联通的概率，记为<span class="math inline">\(P[i]\)</span>，则 <span class="math display">\[
+ans=\sum\limits_{i=1}^{m}P[i]E[i]
+\]</span> 其中<span class="math inline">\(E[i]\)</span>是这条边的边权期望，由提示我们知道<span class="math inline">\(E[i]=\frac{i}{m+1}\)</span>，那么 <span class="math display">\[
+ans=\frac{1}{m+1}\sum\limits_{i=1}^m iP[i]\\
+=\frac{1}{m+1}\sum\limits_{i=1}^m\sum\limits_{j=i}^mP[j]
+\]</span> 我们设<span class="math inline">\(p[i]=\sum\limits_{j=i}^mP[j]\)</span>那么<span class="math inline">\(ans=\frac{1}{m+1}\sum\limits_{i=1}^m p[i]\)</span>，而<span class="math inline">\(p[i]\)</span>的意义是加入至少<span class="math inline">\(i\)</span>条边才联通的概率，这显然比<span class="math inline">\(P\)</span> 要好计算！</p>
+<p>我们考虑如何计算<span class="math inline">\(p\)</span>，不难发现这等价于加了<span class="math inline">\(i-1\)</span>条边还没有联通的概率，可以用不连通方案数除以总方案数来计算概率。于是我们成功的把一个期望问题转化为了计数问题！</p>
+<p>考虑状压计算方案，设<span class="math inline">\(f[i][s]\)</span>和<span class="math inline">\(g[i][s]\)</span>为当前点集为<span class="math inline">\(s\)</span>，内部连了<span class="math inline">\(i\)</span>条边，联通/不连通的方案数，那么有 <span class="math display">\[
+f[i][s]+g[i][s]=\binom{size[s]}{i}\\
+f[i][s]=\sum\limits_{j=0}^{i-1}\sum\limits_{t\subsetneqq s且r\in t}g[j][t]*\binom{size[s-t]}{i-j}
+\]</span> 第一条，不连通+联通=总方案数，其中<span class="math inline">\(size[s]\)</span>为子图<span class="math inline">\(s\)</span>中的边数</p>
+<p>第二条，<span class="math inline">\(r\)</span>是<span class="math inline">\(s\)</span>中的第一个点（其实可以是任何一个但是在枚举<span class="math inline">\(j\)</span>和<span class="math inline">\(t\)</span>中不能变），这样的话通过枚举这个点所在的连通块大小，可以不重不漏计算出所有不连通图的数量（连通图计数貌似有很多类似的trick，可惜我并没做过）</p>
+<p>最后答案式子就不列了，直接上代码</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> __int128 ll;</span><br><span class="line"><span class="keyword">int</span> ss[<span class="number">46</span>],tt[<span class="number">46</span>],cnt[<span class="number">1</span>+<span class="number">1</span>&lt;&lt;<span class="number">10</span>];</span><br><span class="line">ll f[<span class="number">1</span>+<span class="number">1</span>&lt;&lt;<span class="number">10</span>][<span class="number">46</span>],g[<span class="number">1</span>+<span class="number">1</span>&lt;&lt;<span class="number">10</span>][<span class="number">46</span>],c[<span class="number">46</span>][<span class="number">46</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,m;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;ss[i],&amp;tt[i]),ss[i]--,tt[i]--;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;(<span class="number">1</span>&lt;&lt;n);i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">            <span class="keyword">if</span>((i&amp;(<span class="number">1</span>&lt;&lt;ss[j]))&amp;&amp;(i&amp;(<span class="number">1</span>&lt;&lt;tt[j])))cnt[i]++;</span><br><span class="line">    c[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">45</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        c[i][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=i;j++)</span><br><span class="line">            c[i][j]=c[i<span class="number">-1</span>][j]+c[i<span class="number">-1</span>][j<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> s=<span class="number">1</span>;s&lt;(<span class="number">1</span>&lt;&lt;n);s++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(s==(s&amp;(-s)))&#123;g[s][<span class="number">0</span>]=<span class="number">1</span>;<span class="keyword">continue</span>;&#125;</span><br><span class="line">        <span class="keyword">int</span> lowbit=(s&amp;(-s));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> t=s&amp;(s<span class="number">-1</span>);t;t=s&amp;(t<span class="number">-1</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!(t&amp;lowbit))<span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=cnt[t];i++)</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=cnt[s^t];j++)</span><br><span class="line">                    f[s][i+j]+=g[t][i]*c[cnt[s^t]][j];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=cnt[s];i++)g[s][i]=c[cnt[s]][i]-f[s][i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">double</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=m;i++)ans+=<span class="number">1.0</span>*f[(<span class="number">1</span>&lt;&lt;n)<span class="number">-1</span>][i]/c[cnt[(<span class="number">1</span>&lt;&lt;n)<span class="number">-1</span>]][i];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.6Lf"</span>,ans/(m+<span class="number">1.0</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码里更新方式和上面长得不太一样，但实际上是一个东西。复杂度为<span class="math inline">\(O(3^nm)\)</span></p>
 
     </div>
 
@@ -287,7 +298,9 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag"># 数论</a>
+              <a href="/tags/%E6%A6%82%E7%8E%87%E4%B8%8E%E6%9C%9F%E6%9C%9B/" rel="tag"># 概率与期望</a>
+              <a href="/tags/DP/" rel="tag"># DP</a>
+              <a href="/tags/%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9/" rel="tag"># 状态压缩</a>
           </div>
 
         
@@ -296,12 +309,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/12/22/%E5%A4%9A%E9%A1%B9%E5%BC%8F/" rel="prev" title="多项式全家桶">
-      <i class="fa fa-chevron-left"></i> 多项式全家桶
+    <a href="/2020/01/17/KDtree/" rel="prev" title="K-Dtree学习笔记">
+      <i class="fa fa-chevron-left"></i> K-Dtree学习笔记
     </a></div>
       <div class="post-nav-item">
-    <a href="/2019/12/29/csp2019%E6%B8%B8%E8%AE%B0/" rel="next" title="csp2019游记">
-      csp2019游记 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/01/29/fwt/" rel="next" title="FWT学习笔记">
+      FWT学习笔记 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -363,7 +376,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#bsgs"><span class="nav-number">1.</span> <span class="nav-text">BSGS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#exbsgs"><span class="nav-number">2.</span> <span class="nav-text">EXBSGS</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
