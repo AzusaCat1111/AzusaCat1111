@@ -107,8 +107,8 @@ merge(FWT_{A_0+A_1},FWT_{A_0})&amp;    &amp;\text{otherwise}
 ]]></content>
       <tags>
         <tag>多项式</tag>
-        <tag>FFT</tag>
         <tag>位运算</tag>
+        <tag>FFT</tag>
       </tags>
   </entry>
   <entry>
