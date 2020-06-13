@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>CF235D</title>
-    <url>/2020/06/13/CF235D/</url>
-    <content><![CDATA[<h3 id="cf235d-graph-game">CF235D Graph Game</h3>
-<p>求基环树随机点分治总遍历次数期望</p>
+    <title>CF235D Graph Game</title>
+    <url>/2020/06/13/CF235D%20Graph%20Game/</url>
+    <content><![CDATA[<p>求基环树随机点分治总遍历次数期望</p>
 <p>基环树随机点分治步骤：</p>
 <p>①遍历当前分治区域所有点一次</p>
 <p>②在当前分治区域随机选择一个点 <span class="math inline">\(x\)</span></p>
@@ -26,30 +25,9 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> target[<span class="number">6005</span>],pre[<span class="number">6005</span>],last[<span class="number">3005</span>],tot,fa[<span class="number">3005</span>],belong[<span class="number">3005</span>],</span><br><span class="line">deep[<span class="number">3005</span>],f[<span class="number">3005</span>][<span class="number">12</span>],index[<span class="number">3005</span>];</span><br><span class="line"><span class="keyword">bool</span> cir[<span class="number">3005</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;<span class="keyword">return</span> fa[x]==x?x:fa[x]=find(fa[x]);&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    target[++tot]=y;</span><br><span class="line">    pre[tot]=last[x];</span><br><span class="line">    last[x]=tot;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> fa)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(cir[x])&#123;index[x]=<span class="number">1</span>;<span class="keyword">return</span>;&#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=last[x];i;i=pre[i])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> tar=target[i];</span><br><span class="line">        <span class="keyword">if</span>(tar==fa)<span class="keyword">continue</span>;</span><br><span class="line">        dfs(tar,x);</span><br><span class="line">        <span class="keyword">if</span>(cir[tar])cir[x]=<span class="number">1</span>,index[x]=index[tar]+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs2</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> fa,<span class="keyword">int</span> z)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    deep[x]=deep[fa]+<span class="number">1</span>;belong[x]=z;</span><br><span class="line">    f[x][<span class="number">0</span>]=fa;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=last[x];i;i=pre[i])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> tar=target[i];</span><br><span class="line">        <span class="keyword">if</span>(tar==fa||cir[tar])<span class="keyword">continue</span>;</span><br><span class="line">        dfs2(tar,x,z);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lca</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(deep[x]&lt;deep[y])swap(x,y);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">11</span>;k&gt;=<span class="number">0</span>;k--)<span class="keyword">if</span>(deep[f[x][k]]&gt;=deep[y])x=f[x][k];</span><br><span class="line">    <span class="keyword">if</span>(x==y)<span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">11</span>;k&gt;=<span class="number">0</span>;k--)<span class="keyword">if</span>(f[x][k]!=f[y][k])x=f[x][k],y=f[y][k];</span><br><span class="line">    <span class="keyword">return</span> f[x][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,x,y,len;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)fa[i]=i;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;x,&amp;y);</span><br><span class="line">        x++,y++;</span><br><span class="line">        <span class="keyword">int</span> fx=find(x),fy=find(y);</span><br><span class="line">        <span class="keyword">if</span>(fx!=fy)fa[fx]=fy;</span><br><span class="line">        <span class="keyword">else</span> cir[y]=<span class="number">1</span>,dfs(x,<span class="number">0</span>),len=index[x];</span><br><span class="line">        add(x,y),add(y,x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)<span class="keyword">if</span>(cir[i])dfs2(i,<span class="number">0</span>,i); </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">1</span>;k&lt;=<span class="number">11</span>;k++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">            f[i][k]=f[f[i][k<span class="number">-1</span>]][k<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">double</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(belong[i]==belong[j])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> l=lca(i,j);</span><br><span class="line">                ans+=<span class="number">1.0</span>/(deep[i]+deep[j]<span class="number">-2</span>*deep[l]+<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> a=deep[i]+deep[j],b=<span class="built_in">abs</span>(index[belong[i]]-index[belong[j]])<span class="number">-1</span>,c=len-b<span class="number">-2</span>;</span><br><span class="line">                ans+=<span class="number">1.0</span>/(a+b+c)*(<span class="number">1</span>+<span class="number">1.0</span>*b/(a+c)+<span class="number">1.0</span>*c/(a+b));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.8lf"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>概率与期望</tag>
-        <tag>图论</tag>
+        <tag>graphs</tag>
+        <tag>probablities</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>qwq</title>
-    <url>/2020/06/06/qwq/</url>
-    <content><![CDATA[<h3 id="nod-1318-最大公约数与最小公倍数方程组">51nod 1318 最大公约数与最小公倍数方程组</h3>
-<p>求解一个有趣的方程组，方程组有 <span class="math inline">\(N\)</span> 个未知正整数 <span class="math inline">\(x_0,x_1,x_2,...,x_{N-1}\)</span></p>
-<p>方程组由 <span class="math inline">\(M\)</span> 个方程组成，方程只有两种类型：</p>
-<p>1）<span class="math inline">\(\text{gcd}(x[i],x[j]) = G\)</span> ；其中， <span class="math inline">\(i\not= j\)</span> ，且 <span class="math inline">\(\text{gcd}(a,b)\)</span> 为正整数 <span class="math inline">\(a\)</span> 与 <span class="math inline">\(b\)</span> 的最大公约数的值</p>
-<p>2）<span class="math inline">\(\text{lcm}(x[i],x[j]) = L\)</span> ；其中， <span class="math inline">\(i \not= j\)</span> ，且 <span class="math inline">\(\text{lcm}(c,d)\)</span> 为正整数 <span class="math inline">\(c\)</span> 与 <span class="math inline">\(d\)</span> 的最小公倍数的值</p>
-<p>你需要判断这样一个方程组是否存在解，且 <span class="math inline">\(N\)</span> 个未知数都是正整数。</p>
-<p>例如， <span class="math inline">\(N=4\)</span> ，有8个方程构成的方程组： $$ { \begin{aligned} &amp;(x_0,x_1)=6\</p>
-<p>&amp;(x_0,x_1)=12\</p>
-<p>&amp;(x_1,x_2)=6\</p>
-<p>&amp;(x_1,x_2)=12\</p>
-<p>&amp;(x_2,x_3)=6\</p>
-<p>&amp;(x_2,x_3)=12\</p>
-<p>&amp;(x_3,x_0)=6\</p>
-<p>&amp;(x_3,x_0)=12\ \end{aligned} . $$ 这个方程组是有解的，因为 <span class="math inline">\(x_0=x_2=6\)</span> 且 <span class="math inline">\(x_1=x_3=12\)</span> 就是它的一组解。</p>
-<p>多组询问， <span class="math inline">\(T\leqslant10,n,m\leqslant200,L_i,G_i\leqslant10^9\)</span>。只需要回答解是否存在。</p>
-<p>根据唯一分解定理，我们可以把 <span class="math inline">\(\text{gcd}(x,y)=G\)</span> 或者 <span class="math inline">\(\text{lcm}(x,y)=L\)</span> 这样的方程化为一些指数的 <span class="math inline">\(\min\max\)</span> 方程，我们对每个未知数的每个质因子的指数视作新的未知数，则方程就被划为了 <span class="math inline">\(\max(x,y)=a,\min(x&#39;,y&#39;)=b\)</span> 这样的形式，对每个新的未知数，我们开30个变量（因为指数最大是29） <span class="math inline">\(f[x][i],g[x][i]\)</span> 表示 <span class="math inline">\(x=i\)</span> 是否成立（网上也有题解表示的是 <span class="math inline">\(x\leqslant i\)</span> 是否成立，都可以做）这样的话对于每个方程我们就转化为了01变量的满足性问题，可以使用2-SAT求解。</p>
-]]></content>
   </entry>
   <entry>
     <title>FWT学习笔记</title>
@@ -106,9 +84,8 @@ merge(FWT_{A_0+A_1},FWT_{A_0})&amp;    &amp;\text{otherwise}
 <h4 id="xor">XOR</h4>
 ]]></content>
       <tags>
-        <tag>多项式</tag>
-        <tag>位运算</tag>
-        <tag>FFT</tag>
+        <tag>polynomial</tag>
+        <tag>bitmasks</tag>
       </tags>
   </entry>
   <entry>
@@ -135,9 +112,8 @@ f[i][s]=\sum\limits_{j=0}^{i-1}\sum\limits_{t\subsetneqq s且r\in t}g[j][t]*\bin
 <p>代码里更新方式和上面长得不太一样，但实际上是一个东西。复杂度为<span class="math inline">\(O(3^nm)\)</span></p>
 ]]></content>
       <tags>
-        <tag>概率与期望</tag>
-        <tag>DP</tag>
-        <tag>状态压缩</tag>
+        <tag>probabilities</tag>
+        <tag>dp</tag>
       </tags>
   </entry>
   <entry>
@@ -162,7 +138,40 @@ f[i][s]=\sum\limits_{j=0}^{i-1}\sum\limits_{t\subsetneqq s且r\in t}g[j][t]*\bin
 <p>待更新qwq</p>
 ]]></content>
       <tags>
-        <tag>data_structure</tag>
+        <tag>data structure</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>51nod 1318 最大公约数与最小公倍数方程组</title>
+    <url>/2020/01/17/qwq/</url>
+    <content><![CDATA[<p>求解一个有趣的方程组，方程组有 <span class="math inline">\(N\)</span> 个未知正整数 <span class="math inline">\(x_0,x_1,x_2,...,x_{N-1}\)</span></p>
+<p>方程组由 <span class="math inline">\(M\)</span> 个方程组成，方程只有两种类型：</p>
+<p>1）<span class="math inline">\(\text{gcd}(x[i],x[j]) = G\)</span> ；其中， <span class="math inline">\(i\not= j\)</span> ，且 <span class="math inline">\(\text{gcd}(a,b)\)</span> 为正整数 <span class="math inline">\(a\)</span> 与 <span class="math inline">\(b\)</span> 的最大公约数的值</p>
+<p>2）<span class="math inline">\(\text{lcm}(x[i],x[j]) = L\)</span> ；其中， <span class="math inline">\(i \not= j\)</span> ，且 <span class="math inline">\(\text{lcm}(c,d)\)</span> 为正整数 <span class="math inline">\(c\)</span> 与 <span class="math inline">\(d\)</span> 的最小公倍数的值</p>
+<p>你需要判断这样一个方程组是否存在解，且 <span class="math inline">\(N\)</span> 个未知数都是正整数。</p>
+<p>例如， <span class="math inline">\(N=4\)</span> ，有8个方程构成的方程组： $$ { <span class="math display">\[\begin{align}
+&amp;\text{gcd}(x_0,x_1)=6\\
+
+&amp;\text{lcm}(x_0,x_1)=12\\
+
+&amp;\text{gcd}(x_1,x_2)=6\\
+
+&amp;\text{lcm}(x_1,x_2)=12\\
+
+&amp;\text{gcd}(x_2,x_3)=6\\
+
+&amp;\text{lcm}(x_2,x_3)=12\\
+
+&amp;\text{gcd}(x_3,x_0)=6\\
+
+&amp;\text{lcm}(x_3,x_0)=12\\
+\end{align}\]</span> . $$ 这个方程组是有解的，因为 <span class="math inline">\(x_0=x_2=6\)</span> 且 <span class="math inline">\(x_1=x_3=12\)</span> 就是它的一组解。</p>
+<p>多组询问， <span class="math inline">\(T\leqslant10,n,m\leqslant200,L_i,G_i\leqslant10^9\)</span>。只需要回答解是否存在。</p>
+<p>根据唯一分解定理，我们可以把 <span class="math inline">\(\text{gcd}(x,y)=G\)</span> 或者 <span class="math inline">\(\text{lcm}(x,y)=L\)</span> 这样的方程化为一些指数的 <span class="math inline">\(\min\max\)</span> 方程，我们对每个未知数的每个质因子的指数视作新的未知数，则方程就被划为了 <span class="math inline">\(\max(x,y)=a,\min(x&#39;,y&#39;)=b\)</span> 这样的形式，对每个新的未知数，我们开30个变量（因为指数最大是29） <span class="math inline">\(f[x][i],g[x][i]\)</span> 表示 <span class="math inline">\(x=i\)</span> 是否成立（网上也有题解表示的是 <span class="math inline">\(x\leqslant i\)</span> 是否成立，都可以做）这样的话对于每个方程我们就转化为了01变量的满足性问题，可以使用2-SAT求解。</p>
+]]></content>
+      <tags>
+        <tag>graphs</tag>
+        <tag>number theory</tag>
       </tags>
   </entry>
   <entry>
@@ -188,8 +197,7 @@ E_j=\sum\limits_{i=1}^{j-1}f[i]g[j-i]-\sum\limits_{i=1}^{n-j}f&#39;[i]g[j-i]
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">double</span> <span class="keyword">const</span> pi=<span class="built_in">acos</span>(<span class="number">-1</span>);</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">comp</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">double</span> r=<span class="number">0</span>,i=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">friend</span> comp <span class="keyword">operator</span> +(<span class="keyword">const</span> comp &amp;x,<span class="keyword">const</span> comp &amp;y)&#123;<span class="keyword">return</span> (comp)&#123;x.r+y.r,x.i+y.i&#125;;&#125;</span><br><span class="line">    <span class="keyword">friend</span> comp <span class="keyword">operator</span> -(<span class="keyword">const</span> comp &amp;x,<span class="keyword">const</span> comp &amp;y)&#123;<span class="keyword">return</span> (comp)&#123;x.r-y.r,x.i-y.i&#125;;&#125;</span><br><span class="line">    <span class="keyword">friend</span> comp <span class="keyword">operator</span> *(<span class="keyword">const</span> comp &amp;x,<span class="keyword">const</span> comp &amp;y)&#123;<span class="keyword">return</span> (comp)&#123;x.r*y.r-x.i*y.i,x.r*y.i+x.i*y.r&#125;;&#125;</span><br><span class="line">&#125;q[<span class="number">400005</span>],qq[<span class="number">400005</span>],f[<span class="number">400005</span>];</span><br><span class="line"><span class="keyword">int</span> r[<span class="number">400005</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getrev</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)r[i]=(r[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)+((i&amp;<span class="number">1</span>)?(n&gt;&gt;<span class="number">1</span>):<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fft</span><span class="params">(comp* f,<span class="keyword">int</span> n,<span class="keyword">int</span> op)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)<span class="keyword">if</span>(i&lt;r[i])swap(f[i],f[r[i]]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> len=<span class="number">2</span>;len&lt;=n;len&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> q=len&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        comp wn=&#123;<span class="built_in">cos</span>(<span class="number">2</span>*pi/len),op*<span class="built_in">sin</span>(<span class="number">2</span>*pi/len)&#125;;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i+=len)</span><br><span class="line">        &#123;</span><br><span class="line">            comp w=&#123;<span class="number">1</span>,<span class="number">0</span>&#125;;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;i+q;++j)</span><br><span class="line">            &#123;</span><br><span class="line">                comp d=f[j+q]*w;</span><br><span class="line">                f[j+q]=f[j]-d;</span><br><span class="line">                f[j]=f[j]+d;</span><br><span class="line">                w=w*wn;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)<span class="built_in">scanf</span>(<span class="string">"%lf"</span>,&amp;q[i].r),qq[n-i+<span class="number">1</span>].r=q[i].r;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)f[i].r=(((<span class="keyword">double</span>)<span class="number">1.0</span>)/(<span class="keyword">double</span>)i/(<span class="keyword">double</span>)i);</span><br><span class="line">    <span class="keyword">int</span> len=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(len&lt;(n&lt;&lt;<span class="number">1</span>))len&lt;&lt;=<span class="number">1</span>;</span><br><span class="line">    getrev(len);</span><br><span class="line">    fft(q,len,<span class="number">1</span>),fft(qq,len,<span class="number">1</span>),fft(f,len,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++)q[i]=q[i]*f[i],qq[i]=qq[i]*f[i];</span><br><span class="line">    fft(q,len,<span class="number">-1</span>),fft(qq,len,<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)<span class="built_in">printf</span>(<span class="string">"%.5lf\n"</span>,(q[i].r-qq[n-i+<span class="number">1</span>].r)/len);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>多项式</tag>
-        <tag>FFT</tag>
+        <tag>polynomials</tag>
       </tags>
   </entry>
   <entry>
@@ -222,7 +230,7 @@ E_j=\sum\limits_{i=1}^{j-1}f[i]g[j-i]-\sum\limits_{i=1}^{n-j}f&#39;[i]g[j-i]
 <p>感觉这次败在了D2T1上，要多做做DP了（</p>
 ]]></content>
       <tags>
-        <tag>游记</tag>
+        <tag>others</tag>
       </tags>
   </entry>
   <entry>
@@ -238,7 +246,7 @@ E_j=\sum\limits_{i=1}^{j-1}f[i]g[j-i]-\sum\limits_{i=1}^{n-j}f&#39;[i]g[j-i]
 <h3 id="exbsgs">EXBSGS</h3>
 ]]></content>
       <tags>
-        <tag>数论</tag>
+        <tag>number theory</tag>
       </tags>
   </entry>
   <entry>
@@ -323,7 +331,8 @@ F_r(x)\equiv G_r(x)Q_r(x)\pmod{x^{n-m}}
 \]</span> 所以我们只需要求出 <span class="math inline">\(G_r(x)\)</span> 的逆元，再与 <span class="math inline">\(F_r(x)\)</span> 相乘就得到了 <span class="math inline">\(Q_r(x)\)</span> ，在利用定义计算出 <span class="math inline">\(R(x)\)</span></p>
 ]]></content>
       <tags>
-        <tag>多项式</tag>
+        <tag>combinatorics</tag>
+        <tag>polynomials</tag>
       </tags>
   </entry>
 </search>
