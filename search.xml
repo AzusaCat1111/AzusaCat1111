@@ -30,7 +30,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Codeforces Round</title>
+    <title>Codeforces Round &amp;#35;652 (Div. 2)简要题解</title>
     <url>/2020/06/27/Codeforces%20Round%20#652%20(Div.%202)%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/</url>
     <content><![CDATA[<h3 id="a.-fashionablee">A. <a href="https://codeforces.com/contest/1369/problem/A" target="_blank" rel="noopener">FashionabLee</a></h3>
 <p>问是否可以通过旋转使得在平面直角坐标系中的正 <span class="math inline">\(n\)</span> 边形同时有至少一条边与 X 轴平行，有至少一条边与 Y 轴平行。</p>
