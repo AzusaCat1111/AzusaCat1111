@@ -4,6 +4,7 @@
     <title>「NOI2011」阿狸的打字机</title>
     <url>/2020/07/04/%E3%80%8CNOI2011%E3%80%8D%E9%98%BF%E7%8B%B8%E7%9A%84%E6%89%93%E5%AD%97%E6%9C%BA/</url>
     <content><![CDATA[<p><a href="https://www.luogu.com.cn/problem/P2414" target="_blank" rel="noopener">题目链接</a></p>
+<a id="more"></a>
 <p>首先我们发现按这个样子生成字符串的话总长可能很长，但是它们所构成的trie树节点个数最多只有 <span class="math inline">\(n+1\)</span> 个，这样的话我们考虑在trie树上来做这个问题。</p>
 <p>发现这是一个字符串匹配问题，单纯的trie肯定是很难处理，所以我们把trie建成AC自动机。我们考虑AC自动机fail边的含义，它实际上指向了这个节点的存在于这个trie树中的最长的真后缀，那么如果字符串 <span class="math inline">\(x\)</span> 在 <span class="math inline">\(y\)</span> 的某一位出现（设这位为 <span class="math inline">\(c\)</span> 则 <span class="math inline">\(x\)</span> 是 <span class="math inline">\(y[1,c]\)</span> 的后缀）我们从这一位在AC自动机上对应的节点一直跳fail，那么一定是可以跳到 <span class="math inline">\(x\)</span> 的终止节点的。换句话说，这一位的节点在fail树中 <span class="math inline">\(x\)</span> 的子树内。</p>
 <p>这样的话我们就有了一个暴力算法，对于每组询问，我们把 <span class="math inline">\(y\)</span> 的所有前缀代表的节点都打上标记，然后询问 <span class="math inline">\(x\)</span> 在fail树的子树内有多少标记。</p>
