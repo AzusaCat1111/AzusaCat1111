@@ -19,7 +19,7 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    hostname: new URL('https://s1rius.gitee.io').hostname,
+    hostname: new URL('https://s1rius.top').hostname,
     root: '/',
     scheme: 'Gemini',
     version: '7.6.0',
@@ -49,7 +49,7 @@
   <meta name="description" content="BSGS 求\(a^x\equiv b\space( \mod p)\) 的解，保证\(gcd(a,p)&#x3D;1\)。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="bsgs">
-<meta property="og:url" content="https://s1rius.gitee.io/2019/12/26/bsgs-exbsgs/index.html">
+<meta property="og:url" content="https://s1rius.top/2019/12/26/bsgs-exbsgs/index.html">
 <meta property="og:site_name" content="S1rius&#39; Blog">
 <meta property="og:description" content="BSGS 求\(a^x\equiv b\space( \mod p)\) 的解，保证\(gcd(a,p)&#x3D;1\)。">
 <meta property="article:published_time" content="2019-12-26T08:35:12.000Z">
@@ -58,7 +58,7 @@
 <meta property="article:tag" content="number theory">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://s1rius.gitee.io/2019/12/26/bsgs-exbsgs/">
+<link rel="canonical" href="https://s1rius.top/2019/12/26/bsgs-exbsgs/">
 
 
 <script id="page-configurations">
@@ -204,7 +204,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://s1rius.gitee.io/2019/12/26/bsgs-exbsgs/">
+    <link itemprop="mainEntityOfPage" href="https://s1rius.top/2019/12/26/bsgs-exbsgs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -378,7 +378,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -478,6 +478,7 @@
   
       
 <script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
 
   MathJax.Hub.Config({
     tex2jax: {
@@ -486,6 +487,7 @@
       skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
     },
     TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
       equationNumbers: {
         autoNumber: 'AMS'
       }

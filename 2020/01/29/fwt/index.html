@@ -19,7 +19,7 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    hostname: new URL('https://s1rius.gitee.io').hostname,
+    hostname: new URL('https://s1rius.top').hostname,
     root: '/',
     scheme: 'Gemini',
     version: '7.6.0',
@@ -49,7 +49,7 @@
   <meta name="description" content="题目描述 给定长度为 \(2^n\) 两个序列 \(A\),\(B\)，设 \[ C_i&#x3D;\sum_{j\oplus k &#x3D; i}A_j \times B_k \] 分别当\(\oplus\)是\(\text{or}\),\(\text{and}\)和\(\text{xor}\)时求出\(C\)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="FWT学习笔记">
-<meta property="og:url" content="https://s1rius.gitee.io/2020/01/29/fwt/index.html">
+<meta property="og:url" content="https://s1rius.top/2020/01/29/fwt/index.html">
 <meta property="og:site_name" content="S1rius&#39; Blog">
 <meta property="og:description" content="题目描述 给定长度为 \(2^n\) 两个序列 \(A\),\(B\)，设 \[ C_i&#x3D;\sum_{j\oplus k &#x3D; i}A_j \times B_k \] 分别当\(\oplus\)是\(\text{or}\),\(\text{and}\)和\(\text{xor}\)时求出\(C\)">
 <meta property="article:published_time" content="2020-01-29T12:59:25.000Z">
@@ -59,7 +59,7 @@
 <meta property="article:tag" content="bitmasks">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://s1rius.gitee.io/2020/01/29/fwt/">
+<link rel="canonical" href="https://s1rius.top/2020/01/29/fwt/">
 
 
 <script id="page-configurations">
@@ -205,7 +205,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://s1rius.gitee.io/2020/01/29/fwt/">
+    <link itemprop="mainEntityOfPage" href="https://s1rius.top/2020/01/29/fwt/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -422,7 +422,7 @@ merge(FWT_{A_0+A_1},FWT_{A_0})&amp;    &amp;\text{otherwise}
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -522,6 +522,7 @@ merge(FWT_{A_0+A_1},FWT_{A_0})&amp;    &amp;\text{otherwise}
   
       
 <script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
 
   MathJax.Hub.Config({
     tex2jax: {
@@ -530,6 +531,7 @@ merge(FWT_{A_0+A_1},FWT_{A_0})&amp;    &amp;\text{otherwise}
       skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
     },
     TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
       equationNumbers: {
         autoNumber: 'AMS'
       }
