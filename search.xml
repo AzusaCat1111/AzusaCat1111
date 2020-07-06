@@ -4,6 +4,7 @@
     <title>「IOI2018」会议</title>
     <url>/2020/07/04/%E3%80%8CIOI2018%E3%80%8D%E4%BC%9A%E8%AE%AE/</url>
     <content><![CDATA[<p>给定长为 <span class="math inline">\(n\)</span> 的序列 <span class="math inline">\(h\)</span>，有 <span class="math inline">\(q\)</span> 次询问，每次询问在 <span class="math inline">\([l,r]\)</span> 内找一个点 <span class="math inline">\(x\)</span>，使得 <span class="math inline">\([l,r]\)</span> 内每个点到 <span class="math inline">\(x\)</span> 之间最大值的和（即 <span class="math inline">\(\sum\limits_{i=l}^x\max\limits_{j=i}^xh_j+\sum\limits_{i=x+1}^r\max\limits_{j=x}^ih_j\)</span>）最小。<span class="math inline">\(n,q\leqslant 750000,h\leqslant 10^9\)</span> 。</p>
+<a id="more"></a>
 <p>发现这个东西没有什么一般性结论，所以我们考虑dp求解。</p>
 <p>设 <span class="math inline">\(f[l,r]\)</span> 为 <span class="math inline">\([l,r]\)</span> 的答案。首先我们有一个结论，当区间内值不唯一时，区间的最大值的位置一定不为最优解（因为这样每一个元素的贡献都是最大值）。所以我们可以得到转移方程：</p>
 <p><span class="math display">\[
