@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://s1rius.top').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="一种亚线性复杂度求积性函数前缀和的筛法。 适用条件：  \(f(p)\) 为多项式（除代码外，本文 \(p\) 均指质数） \(f(p^k)\) 便于计算  我们以 LuoguP5325 为例简单介绍。 求 \(\sum\limits_{i&#x3D;1}^nf(i)\)，其中 \(f\) 是一个积性函数，且 \(f(p^k)&#x3D;p^k(p^k-1)\)。\(n\leqslant10^{10}\">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Min_25筛">
+<meta property="og:url" content="https://s1rius.top/2020/07/14/Min_25%E7%AD%9B/index.html">
+<meta property="og:site_name" content="S1rius&#39; Blog">
+<meta property="og:description" content="一种亚线性复杂度求积性函数前缀和的筛法。 适用条件：  \(f(p)\) 为多项式（除代码外，本文 \(p\) 均指质数） \(f(p^k)\) 便于计算  我们以 LuoguP5325 为例简单介绍。 求 \(\sum\limits_{i&#x3D;1}^nf(i)\)，其中 \(f\) 是一个积性函数，且 \(f(p^k)&#x3D;p^k(p^k-1)\)。\(n\leqslant10^{10}\">
+<meta property="article:published_time" content="2020-07-14T11:30:15.000Z">
+<meta property="article:modified_time" content="2020-07-14T11:30:40.601Z">
+<meta property="article:author" content="S1rius">
+<meta property="article:tag" content="数论">
+<meta property="article:tag" content="筛法">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://s1rius.top/2020/07/14/Min_25%E7%AD%9B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Min_25筛 | S1rius' Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">S1rius' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://s1rius.top/2020/07/14/Min_25%E7%AD%9B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="S1rius">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="S1rius' Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Min_25筛
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-14 19:30:15 / 修改时间：19:30:40" itemprop="dateCreated datePublished" datetime="2020-07-14T19:30:15+08:00">2020-07-14</time>
+            </span>
+
+          
+            <span id="/2020/07/14/Min_25%E7%AD%9B/" class="post-meta-item leancloud_visitors" data-flag-title="Min_25筛" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/07/14/Min_25%E7%AD%9B/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/14/Min_25%E7%AD%9B/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>一种亚线性复杂度求积性函数前缀和的筛法。</p>
+<p>适用条件：</p>
+<ul>
+<li><p><span class="math inline">\(f(p)\)</span> 为多项式（除代码外，本文 <span class="math inline">\(p\)</span> 均指质数）</p></li>
+<li><p><span class="math inline">\(f(p^k)\)</span> 便于计算</p></li>
+</ul>
+<p>我们以 LuoguP5325 为例简单介绍。</p>
+<p>求 <span class="math inline">\(\sum\limits_{i=1}^nf(i)\)</span>，其中 <span class="math inline">\(f\)</span> 是一个积性函数，且 <span class="math inline">\(f(p^k)=p^k(p^k-1)\)</span>。<span class="math inline">\(n\leqslant10^{10}\)</span>。</p>
+<p>Min_25筛的主要思想是把要求的前缀和转化为质数和非质数两部分进行计算。</p>
+<h5 id="第一部分">第一部分</h5>
+<p>对于质数部分，我们定义以下函数： <span class="math display">\[
+g(n,j)=\sum\limits_{i=2}^n[i\ \text{is a prime or}\ \text{minp}(i)&gt;p_j]i^k
+\]</span> 其中，<span class="math inline">\(p_j\)</span> 表示第 <span class="math inline">\(j\)</span> 个质数，<span class="math inline">\(\text{minp}(i)\)</span> 表示 <span class="math inline">\(i\)</span> 的最小质因子。翻译成中文就是对所有质数和最小质因子大于第 <span class="math inline">\(j\)</span> 个质数的 <span class="math inline">\(k\)</span> 次幂求和。</p>
+<p>这里需要注意，如果我们求的 <span class="math inline">\(f(p)\)</span> 是一个多项式，就拆成单项式。比如这题就是 <span class="math inline">\(p^2-p\)</span>，那么我们就计算 <span class="math inline">\(g_1\)</span> 和 <span class="math inline">\(g_2\)</span> 分别代表一次项的和以及二次项的和，这里先不管系数，会在后面算上。</p>
+<p>我们考虑计算 <span class="math inline">\(g(n,j)\)</span>，这是一个比较明显的可以递推的式子，于是我们尝试从 <span class="math inline">\(g(n,j-1)\)</span> 递推到 <span class="math inline">\(g(n,j)\)</span>。</p>
+<p>发现 <span class="math inline">\(g(n,j-1)\)</span> 和 <span class="math inline">\(g(n,j)\)</span> 实际上只差了最小质因子为 <span class="math inline">\(p_j\)</span>（不包括 <span class="math inline">\(p_j\)</span> 本身）的函数值，所以我们只需要减掉这些多出来的值就可以了，下面先给出式子： <span class="math display">\[
+g(n,j)=g(n,j-1)-p_j^k\left(g(\frac{n}{p_j},j-1)-g(p_{j-1},j-1)\right)
+\]</span> 注意一下这里除法为了美观没有写取整。我们发现 <span class="math inline">\(i^k\)</span> 是一个完全积性函数，所以对于所有最小质因子为 <span class="math inline">\(p_j\)</span> 的数，我们都可以提一个 <span class="math inline">\(p_j\)</span> 出来而且不需要管是否互质（也就是剩下的仍有 <span class="math inline">\(p_j\)</span> 这个因子），然后剩下的数一定小于等于 <span class="math inline">\(\frac{n}{p_j}\)</span> 且最小质因子仍大于等于 <span class="math inline">\(p_j\)</span>，所以就是 <span class="math inline">\(g(\frac{n}{p_j},j-1)\)</span>。然后发现所有小于 <span class="math inline">\(p_j\)</span> 的质数都被多减掉了，所以再用 <span class="math inline">\(g(p_{j-1},j-1)\)</span>，即所有小于等于 <span class="math inline">\(p_{j-1}\)</span> 的质数的幂次和。</p>
+<p>我们注意到小于等于 <span class="math inline">\(n\)</span> 的合数，它的最小质因子一定小于等于 <span class="math inline">\(\sqrt n\)</span>，即如果 <span class="math inline">\(p_j&gt;\sqrt n\)</span> 那么 <span class="math inline">\(g(n,j)=g(n,j-1)\)</span>，所以我们只需要枚举小于等于 <span class="math inline">\(\sqrt n\)</span> 的质数。然后我们发现 <span class="math inline">\(g(p_{j-1},j-1)\)</span> 求的就是所有小于等于 <span class="math inline">\(p_{j-1}\)</span> 的质数的幂次和，而且 <span class="math inline">\(p_{j-1}\)</span> 是小于等于 <span class="math inline">\(\sqrt n\)</span> 的。所以我们一开始线性筛到 <span class="math inline">\(\sqrt n\)</span> 求出每个质数的这个东西，我们设它为 <span class="math inline">\(sp(j-1)\)</span>。然后对于 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 的 <span class="math inline">\(k\)</span> 次方和，也即是 <span class="math inline">\(g(n,\text{maxp}(n))\)</span>，其中 <span class="math inline">\(p_{\text{maxp}(n)}\)</span> 是小于等于 <span class="math inline">\(n\)</span> 的最大质数。</p>
+<p>但是这样枚举量还是太大，我们发现一个很重要的式子：<span class="math inline">\(\lfloor\frac{\lfloor\frac{n}{a}\rfloor}{b}\rfloor=\lfloor\frac{n}{ab}\rfloor\)</span>。所以所有能用到的第一个数值都形如 <span class="math inline">\(\lfloor\frac{n}{a}\rfloor\)</span>，而众所周知这样的数只有 <span class="math inline">\(O(\sqrt n)\)</span> 个，所以我们只需要求出这样的 <span class="math inline">\(g\)</span> 就可以了。具体实现因为下标还是很大，用 <code>map</code> 和 <code>unordered_map</code> 都比较慢。根据那个 <span class="math inline">\(O(\sqrt n)\)</span> 的证明，我们手动离散化一下：记 <code>id1[x]</code> 为 <span class="math inline">\(x\)</span> 离散化的下标，<code>id2[x]</code> 为 <span class="math inline">\(\lfloor\frac{n}{x}\rfloor\)</span> 的下标，可以看代码。</p>
+<p>这一部分的复杂度是 <span class="math inline">\(O(\frac{n^{\frac{3}{4}}}{\log n})\)</span> 的。</p>
+<h5 id="第二部分">第二部分</h5>
+<p>接下来，我们计算所有数的和，记 <span class="math inline">\(s(n,j)\)</span> 为 <span class="math inline">\(\sum\limits_{i=2}^n[\text{minp}(i)&gt;j]f(i)\)</span>，即所有最小质因子大于 <span class="math inline">\(p_j\)</span> 的 <span class="math inline">\(f\)</span> 的和。</p>
+<p>我们依旧尝试递推，首先，我们把所有大于 质数的函数和 <span class="math inline">\(\sum g(n,\text{maxp}(n))-sp(j)\)</span> 算上（这里带上系数，比如板子题就是 <span class="math inline">\(g2(n,\text{maxp}(n))-sp2(j)-(g1(n,\text{maxp}(n))-sp1(j))\)</span> ，那么剩下合数部分枚举提出一个最小质因子，先看式子： <span class="math display">\[
+s(n,j)=\sum(g(n,\text{maxp}(n))-sp(j))+\sum\limits_{c&gt;j,p_c^e\leqslant n}f(p_c^e)\left(s(\frac{n}{p_c^e},c)+[e\not=1]\right)
+\]</span> 因为这一次并不是完全积性函数了，所以我们要一次把最小质因子提全，这样的话剩下的最小质因子都大于 <span class="math inline">\(p_c\)</span>，然后因为我们没算 <span class="math inline">\(1\)</span>，所以当 <span class="math inline">\(e\not=1\)</span> 的时候 <span class="math inline">\(f(p_c^e)\)</span> 没有算进去，当 <span class="math inline">\(e=1\)</span> 时会在前面质数部分算到。</p>
+<p>则 <span class="math inline">\(s(n,0)+f(1)\)</span> 即为答案。这里直接递归计算，不需要记忆化。</p>
+<p>这一部分的复杂度据说是 <span class="math inline">\(O(n^{1-\epsilon})\)</span> 的，即大于任何一个 <span class="math inline">\(O(n^k),k&lt;1\)</span>，但是常数很小。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line">ll <span class="keyword">const</span> p=<span class="number">1e9</span>+<span class="number">7</span>,inv2=<span class="number">500000004</span>,inv6=<span class="number">166666668</span>;</span><br><span class="line">ll n,pr[<span class="number">100005</span>],cnt,sp1[<span class="number">100005</span>],sp2[<span class="number">100005</span>],tot,bas[<span class="number">300005</span>],g1[<span class="number">300005</span>],</span><br><span class="line">g2[<span class="number">300005</span>],sqr;</span><br><span class="line"><span class="keyword">int</span> id1[<span class="number">100005</span>],id2[<span class="number">100005</span>];</span><br><span class="line"><span class="keyword">bool</span> flag[<span class="number">100005</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">mod</span><span class="params">(ll <span class="keyword">const</span> &amp;x)</span></span>&#123;<span class="keyword">return</span> x&gt;=p?x-p:x;&#125;</span><br><span class="line"><span class="function">ll <span class="title">s</span><span class="params">(ll i,<span class="keyword">int</span> j)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(pr[j]&gt;=i)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> t=(i&lt;=sqr)?id1[i]:id2[n/i];</span><br><span class="line">    <span class="keyword">if</span>(sp1[j]&lt;<span class="number">0</span>||sp2[j]&lt;<span class="number">0</span>)<span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    ll res=(g2[t]-sp2[j]-(g1[t]-sp1[j])+p+p)%p;<span class="comment">//part1:质数部分</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> c=j+<span class="number">1</span>;c&lt;=cnt&amp;&amp;pr[c]*pr[c]&lt;=i;c++)<span class="comment">//part2 注意这里依旧只需要消去 sqrti 的最小质因子</span></span><br><span class="line">    &#123;</span><br><span class="line">        ll now=pr[c];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> e=<span class="number">1</span>;now&lt;=i;e++,now*=pr[c])</span><br><span class="line">        &#123;</span><br><span class="line">            ll tmp=now%p;</span><br><span class="line">            res=(res+tmp*(tmp<span class="number">-1</span>+p)%p*(s(i/now,c)+(<span class="keyword">int</span>)(e!=<span class="number">1</span>)))%p;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;n);</span><br><span class="line">    sqr=<span class="built_in">sqrt</span>(n);</span><br><span class="line">    <span class="keyword">for</span>(ll i=<span class="number">2</span>;i&lt;=sqr;i++)<span class="comment">//get prime</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!flag[i])pr[++cnt]=i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=cnt&amp;&amp;i*pr[j]&lt;=sqr;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            flag[i*pr[j]]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(!(i%pr[j]))<span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=cnt;i++)<span class="comment">//计算sp</span></span><br><span class="line">        sp1[i]=mod(sp1[i<span class="number">-1</span>]+pr[i]),</span><br><span class="line">        sp2[i]=mod(sp2[i<span class="number">-1</span>]+pr[i]*pr[i]%p);</span><br><span class="line">    <span class="keyword">for</span>(ll l=<span class="number">1</span>,r;l&lt;=n;l=r+<span class="number">1</span>)</span><br><span class="line">    &#123;<span class="comment">//计算 g(x,0)，因为 g(n,j) 总是由 g(xxx,j-1) 推出而且后面只需要 g(n,maxp(n)) 所以滚动掉一维</span></span><br><span class="line">        r=n/(n/l);</span><br><span class="line">        bas[++tot]=n/l;<span class="comment">//这一次计算 g(n/l,0) 也就是 2 到 n/l 的幂次和</span></span><br><span class="line">        g1[tot]=bas[tot]%p;<span class="comment">//因为减少取模所以暂时借用一下这个数</span></span><br><span class="line">        g2[tot]=(g1[tot]*(g1[tot]+<span class="number">1</span>)%p*(<span class="number">2</span>*g1[tot]+<span class="number">1</span>)%p*inv6+p<span class="number">-1</span>)%p;</span><br><span class="line">        g1[tot]=mod((g1[tot]+<span class="number">1</span>)*g1[tot]%p*inv2%p+p<span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">if</span>(bas[tot]&lt;=sqr)id1[bas[tot]]=tot;</span><br><span class="line">        <span class="keyword">else</span> id2[l]=tot;<span class="comment">//此时一定有 l=r</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=cnt;j++)<span class="comment">//为了和写的式子一样换了一下内外层变量</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=tot&amp;&amp;pr[j]*pr[j]&lt;=bas[i];i++)<span class="comment">//递推 g(bas[i],j)</span></span><br><span class="line">        &#123;</span><br><span class="line">            ll t=bas[i]/pr[j];</span><br><span class="line">            t=(t&lt;=sqr)?id1[t]:id2[n/t];<span class="comment">//找到 bas[i]/pr[j] 对应的下标</span></span><br><span class="line">            g1[i]=mod(g1[i]-pr[j]*(g1[t]-sp1[j<span class="number">-1</span>]+p)%p+p);</span><br><span class="line">            g2[i]=mod(g2[i]-pr[j]*pr[j]%p*(g2[t]-sp2[j<span class="number">-1</span>]+p)%p+p);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>,mod(s(n,<span class="number">0</span>)+<span class="number">1</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag"># 数论</a>
+              <a href="/tags/%E7%AD%9B%E6%B3%95/" rel="tag"># 筛法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/04/%E3%80%8CIOI2018%E3%80%8D%E4%BC%9A%E8%AE%AE/" rel="prev" title="「IOI2018」会议">
+      <i class="fa fa-chevron-left"></i> 「IOI2018」会议
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#第一部分"><span class="nav-number">1.</span> <span class="nav-text">第一部分</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第二部分"><span class="nav-number">2.</span> <span class="nav-text">第二部分</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="S1rius"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">S1rius</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">S1rius</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'mrFMgDKOa2CvtBeD7CUzjR9B-gzGzoHsz',
+      appKey: 'miAoX0qqIvhAvxAHYOcO7fFR',
+      placeholder: "Just go go",
+      avatar: 'mp',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: 'zh-cn' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: '',
+      avatar_cdn:'',
+      emojiCDN: '//i0.hdslb.com/bfs/emote/',
+      emojiMaps: {
+      "蛆音娘_卖萌":"4cd1024d0c2ecee93224477946656d32c1705ccf.png@112w_112h.webp" ,
+      "蛆音娘_吃瓜群众":"5d0d6cc54b508d30b4f50b6b5f7b7e1e259d84ea.png@112w_112h.webp" ,
+      "蛆音娘_吃惊":"7a4cb0b644214d476ce198ddf6a7a0aa31311199.png@112w_112h.webp" ,
+      "蛆音娘_害怕":"7407634bf67bfe9d7806f15d57608a1b18c2b4c2.png@112w_112h.webp" ,
+      "蛆音娘_扶额":"a4d8f95baaa24821fd591a7dbeee1b869e760f59.png@112w_112h.webp" ,
+      "蛆音娘_滑稽":"d3717f10ffe9787336bc39a09214270988521a67.png@112w_112h.webp" ,
+      "蛆音娘_哼":"8854f1b8a82126e3b87f3a1563da5feb55b23e71.png@112w_112h.webp" ,
+      "蛆音娘_机智":"e543c0a823ca915df9362283f4ae950e9e9cc2e9.png@112w_112h.webp" ,
+      "蛆音娘_哭泣":"a23055546c19eba663b16370b8e072394d87ff53.png@112w_112h.webp" ,
+      "蛆音娘_睡觉觉":"40ef7e6d931acb37e5514b70d13663e86dc3698b.png@112w_112h.webp" ,
+      "蛆音娘_生气":"bf398cbbcfaae107d1b59aaf03895f38422e3d87.png@112w_112h.webp" ,
+      "蛆音娘_偷看":"52463ded4f23649db10ba3ced662ed946c5edf0b.png@112w_112h.webp" ,
+      "蛆音娘_吐血":"5772d22015e5b2b40a9fe302b5967ec7282ac848.png@112w_112h.webp" ,
+      "蛆音娘_无语":"b6c763c6484ce2e48299ceb21861e46318868871.png@112w_112h.webp" ,
+      "蛆音娘_摇头":"b7278f750c6f2235f41f37056d727f25d3bf781f.png@112w_112h.webp" ,
+      "蛆音娘_疑问":"7750b698d15a1b8e83c0f59106e8e9cd5cb57897.png@112w_112h.webp" ,
+      "蛆音娘_die":"52543025a070fde5c01a10320c9636ec3173ac99.png@112w_112h.webp" ,
+      "蛆音娘_OK":"52a0dcee66c91bf123bf53bd48a269b1317d17f9.png@112w_112h.webp" ,
+      "蛆音娘_肥皂":"7f1a857e9430dcf3050ce0ef5fa19aefebea6dc4.png@112w_112h.webp" ,
+      "蛆音娘_大笑":"1d3355fb89c24ab3c50e5c152d8b990a290dc63e.png@112w_112h.webp" ,
+      "2233娘_大笑":"16b8794be990cefa6caeba4d901b934a227ee3b8.png@112w_112h.webp" ,
+      "2233娘_吃惊":"d1628c43d35b1530c0504a643ff80b6189fa0a43.png@112w_112h.webp" ,
+      "2233娘_大哭":"476a2a60f6e337b8c0697a592e0aa82781f6b33b.png@112w_112h.webp" ,
+      "2233娘_耶":"d7178e258a0efc969b65ccc2b1322fb235f5dff4.png@112w_112h.webp" ,
+      "2233娘_卖萌":"ea893aa25355de95ab4f03c2dad3f0c58d0c159e.png@112w_112h.webp" ,
+      "2233娘_疑问":"0b41f509351958dbb63d472fec0132d1bd03bd14.png@112w_112h.webp" ,
+      "2233娘_汗":"247cd9df8cdf84b18368c21e3b2dd374e84c0927.png@112w_112h.webp" ,
+      "2233娘_困惑":"714eeb4eae0d0933b4ff08b7df788b1982f6b940.png@112w_112h.webp" ,
+      "2233娘_怒":"f31953119c51b9748016440ac0b632f779929b37.png@112w_112h.webp" ,
+      "2233娘_委屈":"d9d0bf9d358af8d5761093ec66d4e3f60d963a63.png@112w_112h.webp" ,
+      "2233娘_郁闷":"485203fe7100f2c8fc40b2800a18fe20b35f2f1a.png@112w_112h.webp" ,
+      "2233娘_第一":"3754ee6e5985bd0bd7dfb668981f2a8733398ebd.png@112w_112h.webp" ,
+      "2233娘_喝水":"695bf5429472049b52c1e0de586f8a2511195a23.png@112w_112h.webp" ,
+      "2233娘_吐魂":"e999af499edf38a91ca68b1a9d2f97042c1d6734.png@112w_112h.webp" ,
+      "2233娘_无言":"fdb5870f32cfaf7949e0f88a13f6feba4a48b719.png@112w_112h.webp" ,
+      "小电视_笑":"f80d384875183dfe2e24be13011c595c0210d273.png@112w_112h.webp" ,
+      "小电视_发愁":"05e279abbf3f72d5cc45548504a4220c5514b8b9.png@112w_112h.webp" ,
+      "小电视_赞":"86ccf6d0b5480169bf80f3582fae09d7ed455c06.png@112w_112h.webp" ,
+      "小电视_差评":"38456e3bde2839b00b536a8be13934fa57c8e298.png@112w_112h.webp" ,
+      "小电视_嘟嘴":"6fd437f547ef1e4f231ff475d02f58bb94cef5a5.png@112w_112h.webp" ,
+      "小电视_汗":"5c150cec77eae1b05d5ca46526450ff3beeb44d2.png@112w_112h.webp" ,
+      "小电视_害羞":"de3aee88f7b6cc20ba9480c96c02f83a844381a9.png@112w_112h.webp" ,
+      "小电视_吃惊":"05188008ea84c70d94e0076e28de15bf56f4c441.png@112w_112h.webp" ,
+      "小电视_哭泣":"938bdf98df945576ae88e2a22931db07ded9e663.png@112w_112h.webp" ,
+      "小电视_太太喜欢":"eb41a8c04840e4f77e76a4bff7a29ac89c432f4e.png@112w_112h.webp" ,
+      "小电视_好怒啊":"68d524b7e515396b6563d320fb710c64abfb1063.png@112w_112h.webp" ,
+      "小电视_困惑":"6853161f0eab3332b874ab7c6c0311035b7538f3.png@112w_112h.webp" ,
+      "小电视_我好兴奋":"a695fe1301aab2675ab6f6e34757c25a863a8617.png@112w_112h.webp" ,
+      "小电视_思索":"f8219e484d5a55787c3f1722dc3112d0eba03a69.png@112w_112h.webp" ,
+      "小电视_无语":"fbd12affebfdaadd3d721bffdb685a6b1ee71219.png@112w_112h.webp" ,
+      }
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
