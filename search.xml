@@ -4,6 +4,7 @@
     <title>Min_25筛</title>
     <url>/2020/07/14/Min_25%E7%AD%9B/</url>
     <content><![CDATA[<p>一种亚线性复杂度求积性函数前缀和的筛法。</p>
+<a id="more"></a>
 <p>适用条件：</p>
 <ul>
 <li><p><span class="math inline">\(f(p)\)</span> 为多项式（除代码外，本文 <span class="math inline">\(p\)</span> 均指质数）</p></li>
