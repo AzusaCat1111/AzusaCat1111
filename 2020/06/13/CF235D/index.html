@@ -49,20 +49,20 @@
   <meta name="description" content="求基环树随机点分治总遍历次数期望">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CF235D Graph Game">
-<meta property="og:url" content="https://s1rius.top/2020/06/13/CF235D%20Graph%20Game/index.html">
+<meta property="og:url" content="https://s1rius.top/2020/06/13/CF235D/index.html">
 <meta property="og:site_name" content="S1rius&#39; Blog">
 <meta property="og:description" content="求基环树随机点分治总遍历次数期望">
-<meta property="og:image" content="https://s1rius.top/2020/06/13/CF235D%20Graph%20Game/1.png">
-<meta property="og:image" content="https://s1rius.top/2020/06/13/CF235D%20Graph%20Game/2.png">
+<meta property="og:image" content="https://s1rius.top/2020/06/13/CF235D/1.png">
+<meta property="og:image" content="https://s1rius.top/2020/06/13/CF235D/2.png">
 <meta property="article:published_time" content="2020-06-13T06:59:19.000Z">
 <meta property="article:modified_time" content="2020-07-21T12:02:14.807Z">
 <meta property="article:author" content="S1rius">
 <meta property="article:tag" content="概率论">
 <meta property="article:tag" content="图论">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s1rius.top/2020/06/13/CF235D%20Graph%20Game/1.png">
+<meta name="twitter:image" content="https://s1rius.top/2020/06/13/CF235D/1.png">
 
-<link rel="canonical" href="https://s1rius.top/2020/06/13/CF235D%20Graph%20Game/">
+<link rel="canonical" href="https://s1rius.top/2020/06/13/CF235D/">
 
 
 <script id="page-configurations">
@@ -208,7 +208,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://s1rius.top/2020/06/13/CF235D%20Graph%20Game/">
+    <link itemprop="mainEntityOfPage" href="https://s1rius.top/2020/06/13/CF235D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/Misaka_Will_Novel.png">
@@ -242,7 +242,7 @@
               </span>
 
           
-            <span id="/2020/06/13/CF235D%20Graph%20Game/" class="post-meta-item leancloud_visitors" data-flag-title="CF235D Graph Game" title="阅读次数">
+            <span id="/2020/06/13/CF235D/" class="post-meta-item leancloud_visitors" data-flag-title="CF235D Graph Game" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -257,8 +257,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/06/13/CF235D%20Graph%20Game/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/13/CF235D%20Graph%20Game/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/06/13/CF235D/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/13/CF235D/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -281,7 +281,7 @@
 <p>③将 <span class="math inline">\(x\)</span> 删掉，产生的所有连通块递归处理。</p>
 <p><span class="math inline">\(n\leqslant 3000\)</span></p>
 <p>按照套路，我们先考虑如果是一棵树的情况，再扩展到基环树的情况。不难发现如果我们把分治过程建成点分树，那么我们实际上求的是 <span class="math inline">\(\sum\limits_xsize_x\)</span> 的期望，其中 <span class="math inline">\(size_x\)</span> 是 <span class="math inline">\(x\)</span> 子树的大小。 根据期望的线性性，我们考虑计算点的贡献，每个点会被计算 <span class="math inline">\(deep_x\)</span> 次，那么答案就化为 <span class="math inline">\(\sum\limits_xdeep_x\)</span> ， 再进行一步转化， <span class="math inline">\(deep_x\)</span> 等价于 <span class="math inline">\(\sum_\limits y[y是x的祖先]\)</span> （当 <span class="math inline">\(x=y\)</span> 时也成立） 。我们可以画图发现，点对 <span class="math inline">\((x,y)\)</span> 会产生贡献当且仅当 <span class="math inline">\(y\)</span> 被选中时 <span class="math inline">\(x\)</span> 和 <span class="math inline">\(y\)</span> 在一个连通块内，也就是 <span class="math inline">\(y\)</span> 是在原树中 <span class="math inline">\(x\rightarrow y\)</span> 路径（包括端点）上第一个被选中的点，举个例子</p>
-<p><img src="/2020/06/13/CF235D%20Graph%20Game/1.png"></p>
+<p><img src="/2020/06/13/CF235D/1.png"></p>
 <p>我们现在考虑 <span class="math inline">\((3,1)\)</span> 的贡献，如果我们按照 <span class="math inline">\(1,2,3\)</span> 或 <span class="math inline">\(1,3,2\)</span> 的顺序，那么1就是3的祖先，会产生贡献，而如果是 <span class="math inline">\(2,1,3\)</span> <span class="math inline">\(2,3,1\)</span> <span class="math inline">\(3,1,2\)</span> <span class="math inline">\(3,2,1\)</span> 就都不会产生贡献（点对是有序的）。</p>
 <p>显然，这个的概率是 <span class="math inline">\(\frac{1}{dis(x,y)}\)</span> 所以答案就是 <span class="math inline">\(\sum\limits_{i=1}^n\sum\limits_{j=1}^n\frac{1}{dis(i,j)}\)</span> 。</p>
 <p>接下来我们把树上的做法扩展到基环树上，我们仍旧考虑点对对答案的贡献，分类讨论一下：</p>
@@ -289,7 +289,7 @@
 <li>当 <span class="math inline">\(x,y\)</span> 在同一棵树内，概率仍为 <span class="math inline">\(\frac{1}{dis(x,y)}\)</span></li>
 <li>当路径 <span class="math inline">\(x\rightarrow y\)</span> 经过环上的点时，有两种情况可以造成贡献，分别是直接删掉 <span class="math inline">\(y\)</span> 或者先删掉环上的某一个点再删掉 <span class="math inline">\(y\)</span> ，如图</li>
 </ul>
-<p><img src="/2020/06/13/CF235D%20Graph%20Game/2.png"></p>
+<p><img src="/2020/06/13/CF235D/2.png"></p>
 <p>我们考虑点对 <span class="math inline">\((1,7)\)</span> 设两个点到对应的树根的距离之和为 <span class="math inline">\(a\)</span> （蓝色区域），两个点对应的树根将环切为两条链，链长为 <span class="math inline">\(b,c\)</span> （绿色区域和黄色区域）。那么直接删掉 <span class="math inline">\(y\)</span> 的概率为 <span class="math inline">\(\frac{1}{a+b+c}\)</span> ，先切掉绿色区域后，剩余的绿色区域就已经不在 <span class="math inline">\(x\rightarrow y\)</span> 这条路径上了，不会对后面造成影响 ，所以我们不需要管剩余的绿色区域，只需要看 <span class="math inline">\(y\)</span> 是否是蓝色+黄色区域中第一个被切掉的点，这样总概率为 <span class="math inline">\(\frac{b}{a+b+c} \cdot \frac{1}{a+c}\)</span> 。类似，先切掉黄色，再切掉 <span class="math inline">\(y\)</span> 的概率为 <span class="math inline">\(\frac{c}{a+b+c}\cdot \frac{1}{a+b}\)</span> 。</p>
 <p>所以总概率为 <span class="math inline">\(\frac{1}{a+b+c}(1+\frac{b}{a+c}+\frac{c}{a+b})\)</span> 。实现上我们只需要找到环然后暴力枚举计算答案就可以了。还需要写一个lca，代码中用倍增实现，所以复杂度为 <span class="math inline">\(O(n^2\log n)\)</span></p>
 <h5 id="code">code:</h5>
@@ -403,7 +403,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

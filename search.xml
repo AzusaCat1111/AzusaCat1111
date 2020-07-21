@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>「USACO19FEB」Mowing_Mischief_P</title>
+    <title>「USACO19FEB」Mowing Mischief P</title>
     <url>/2020/07/21/%E3%80%8CUSACO19FEB%E3%80%8DMowing_Mischief_P/</url>
     <content><![CDATA[<p>给你一个长、宽均为 <span class="math inline">\(T\)</span> 的网格图，左下角坐标为 <span class="math inline">\((0,0)\)</span>，右上角坐标为 <span class="math inline">\((T,T)\)</span>。现在图上面有 <span class="math inline">\(n\)</span> 个点（一定在格点上），你需要选择一些点，使得你选择的点按 <span class="math inline">\(x\)</span> 从小到大排序后 <span class="math inline">\(y\)</span> 也单调上升。最大化选的点的数量；在此基础上，让排序好的相邻的两点形成的矩形的面积之和最小。输出最小面积和。<span class="math inline">\(T\leqslant 10^6,N\leqslant 2\times 10^5\)</span>。</p>
+<a id="more"></a>
 <p>首先，对于最大化选点的数量，这可以看作按 <span class="math inline">\(x\)</span> 排好序之后求一遍 LIS。为了方便，我们把按 <span class="math inline">\(x\)</span> 排完序的点重编号，以后认为 <span class="math inline">\(i&lt;j\)</span> 等价于 <span class="math inline">\(x_i&lt;x_j\)</span>（题目保证了不存在两个点使得 <span class="math inline">\(x\)</span> 或 <span class="math inline">\(y\)</span> 相等）。我们设 <span class="math inline">\(l_i\)</span> 为以 <span class="math inline">\(i\)</span> 结尾的 LIS 的长度。</p>
 <p>第二问比较明显还需要 dp 求解，为了保证选的点数最多，我们只能在 <span class="math inline">\(l\)</span> 值相差为 <span class="math inline">\(1\)</span> 的点之间进行转移。具体地，设 <span class="math inline">\(f[i]\)</span> 为选择了以 <span class="math inline">\(i\)</span> 为结尾的 <span class="math inline">\(l_i\)</span> 个点矩形面积和的最小值，那么转移显然： <span class="math display">\[
 f[i]=\min_{l_i=l_j+1,j&lt;i,y_j&lt;y_i}f[j]+(x_i-x_j)(y_i-y_j)
@@ -19,7 +20,13 @@ f[j]-x_iy_j-x_jy_i+x_jy_j\leq f[k]-x_iy_k-x_ky_i+x_ky_k\\
 <p>那么如果我们把 <span class="math inline">\(x_i\)</span>，<span class="math inline">\(y_i\)</span> 看作变量，那么 <span class="math inline">\(j\)</span> 比 <span class="math inline">\(k\)</span> 优的情况对应了坐标系里的一个半平面（也就是不等式的解集），而且因为我们钦定 <span class="math inline">\(j&gt;k\)</span>，那么这个半平面一定长这个样子</p>
 <p><img src="/2020/07/21/%E3%80%8CUSACO19FEB%E3%80%8DMowing_Mischief_P/1.png"></p>
 <p>其中蓝色为解集部分，解集一定是一条斜率为正的直线的下方。</p>
+<p>那么如果</p>
 ]]></content>
+      <tags>
+        <tag>dp</tag>
+        <tag>线段树</tag>
+        <tag>决策单调性</tag>
+      </tags>
   </entry>
   <entry>
     <title>Min_25筛</title>
@@ -234,7 +241,7 @@ val(T)=\left(\sum\limits_{i=1}^{n-1}w_{e_i}\right)\times\gcd(w_{e_1},w_{e_2},\do
   </entry>
   <entry>
     <title>CF235D Graph Game</title>
-    <url>/2020/06/13/CF235D%20Graph%20Game/</url>
+    <url>/2020/06/13/CF235D/</url>
     <content><![CDATA[<p>求基环树随机点分治总遍历次数期望</p>
 <a id="more"></a>
 <p>基环树随机点分治步骤：</p>
@@ -243,7 +250,7 @@ val(T)=\left(\sum\limits_{i=1}^{n-1}w_{e_i}\right)\times\gcd(w_{e_1},w_{e_2},\do
 <p>③将 <span class="math inline">\(x\)</span> 删掉，产生的所有连通块递归处理。</p>
 <p><span class="math inline">\(n\leqslant 3000\)</span></p>
 <p>按照套路，我们先考虑如果是一棵树的情况，再扩展到基环树的情况。不难发现如果我们把分治过程建成点分树，那么我们实际上求的是 <span class="math inline">\(\sum\limits_xsize_x\)</span> 的期望，其中 <span class="math inline">\(size_x\)</span> 是 <span class="math inline">\(x\)</span> 子树的大小。 根据期望的线性性，我们考虑计算点的贡献，每个点会被计算 <span class="math inline">\(deep_x\)</span> 次，那么答案就化为 <span class="math inline">\(\sum\limits_xdeep_x\)</span> ， 再进行一步转化， <span class="math inline">\(deep_x\)</span> 等价于 <span class="math inline">\(\sum_\limits y[y是x的祖先]\)</span> （当 <span class="math inline">\(x=y\)</span> 时也成立） 。我们可以画图发现，点对 <span class="math inline">\((x,y)\)</span> 会产生贡献当且仅当 <span class="math inline">\(y\)</span> 被选中时 <span class="math inline">\(x\)</span> 和 <span class="math inline">\(y\)</span> 在一个连通块内，也就是 <span class="math inline">\(y\)</span> 是在原树中 <span class="math inline">\(x\rightarrow y\)</span> 路径（包括端点）上第一个被选中的点，举个例子</p>
-<p><img src="/2020/06/13/CF235D%20Graph%20Game/1.png"></p>
+<p><img src="/2020/06/13/CF235D/1.png"></p>
 <p>我们现在考虑 <span class="math inline">\((3,1)\)</span> 的贡献，如果我们按照 <span class="math inline">\(1,2,3\)</span> 或 <span class="math inline">\(1,3,2\)</span> 的顺序，那么1就是3的祖先，会产生贡献，而如果是 <span class="math inline">\(2,1,3\)</span> <span class="math inline">\(2,3,1\)</span> <span class="math inline">\(3,1,2\)</span> <span class="math inline">\(3,2,1\)</span> 就都不会产生贡献（点对是有序的）。</p>
 <p>显然，这个的概率是 <span class="math inline">\(\frac{1}{dis(x,y)}\)</span> 所以答案就是 <span class="math inline">\(\sum\limits_{i=1}^n\sum\limits_{j=1}^n\frac{1}{dis(i,j)}\)</span> 。</p>
 <p>接下来我们把树上的做法扩展到基环树上，我们仍旧考虑点对对答案的贡献，分类讨论一下：</p>
@@ -251,7 +258,7 @@ val(T)=\left(\sum\limits_{i=1}^{n-1}w_{e_i}\right)\times\gcd(w_{e_1},w_{e_2},\do
 <li>当 <span class="math inline">\(x,y\)</span> 在同一棵树内，概率仍为 <span class="math inline">\(\frac{1}{dis(x,y)}\)</span></li>
 <li>当路径 <span class="math inline">\(x\rightarrow y\)</span> 经过环上的点时，有两种情况可以造成贡献，分别是直接删掉 <span class="math inline">\(y\)</span> 或者先删掉环上的某一个点再删掉 <span class="math inline">\(y\)</span> ，如图</li>
 </ul>
-<p><img src="/2020/06/13/CF235D%20Graph%20Game/2.png"></p>
+<p><img src="/2020/06/13/CF235D/2.png"></p>
 <p>我们考虑点对 <span class="math inline">\((1,7)\)</span> 设两个点到对应的树根的距离之和为 <span class="math inline">\(a\)</span> （蓝色区域），两个点对应的树根将环切为两条链，链长为 <span class="math inline">\(b,c\)</span> （绿色区域和黄色区域）。那么直接删掉 <span class="math inline">\(y\)</span> 的概率为 <span class="math inline">\(\frac{1}{a+b+c}\)</span> ，先切掉绿色区域后，剩余的绿色区域就已经不在 <span class="math inline">\(x\rightarrow y\)</span> 这条路径上了，不会对后面造成影响 ，所以我们不需要管剩余的绿色区域，只需要看 <span class="math inline">\(y\)</span> 是否是蓝色+黄色区域中第一个被切掉的点，这样总概率为 <span class="math inline">\(\frac{b}{a+b+c} \cdot \frac{1}{a+c}\)</span> 。类似，先切掉黄色，再切掉 <span class="math inline">\(y\)</span> 的概率为 <span class="math inline">\(\frac{c}{a+b+c}\cdot \frac{1}{a+b}\)</span> 。</p>
 <p>所以总概率为 <span class="math inline">\(\frac{1}{a+b+c}(1+\frac{b}{a+c}+\frac{c}{a+b})\)</span> 。实现上我们只需要找到环然后暴力枚举计算答案就可以了。还需要写一个lca，代码中用倍增实现，所以复杂度为 <span class="math inline">\(O(n^2\log n)\)</span></p>
 <h5 id="code">code:</h5>
