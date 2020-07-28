@@ -68,7 +68,7 @@ ans=\frac{\sum\limits_{i=k}^n\binom{i}{k}(-1)^{i-k}f(i)}{N!}
 f_i=\binom{N}{g_i}(N-g_i)!b_ih_i
 \]</span> 即我们先选出 <span class="math inline">\(g_i\)</span> 个要填的数，然后剩下的数随便填，然后我们钦定格子的方案数为 <span class="math inline">\(b_i\)</span>，往格子里填数的方案数为 <span class="math inline">\(h_i\)</span>。</p>
 <p>对于 <span class="math inline">\(g\)</span>，有 <span class="math inline">\(g_i=N-(n-i)(m-i)(l-i)\)</span>，即用所有数减去三维坐标都不与任何一个点相同的点的个数。</p>
-<p>显然 <span class="math inline">\(b_i=\frac{\prod\limits_{j=0}^{i-1}(n-j)(m-j)(l-j)}{i!}\)</span>，也就是你选第 <span class="math inline">\(j\)</span> 个数时候的三维坐标的方案数，因为极大点是无编号的所以要除以 <span class="math inline">\(i!\)</span>，或者可以写成 <span class="math inline">\(\frac{\binom{n}{i}\binom{m}{i}\binom{l}{i}}{(i!)^2}\)</span>。</p>
+<p>显然 <span class="math inline">\(b_i=\frac{\prod\limits_{j=0}^{i-1}(n-j)(m-j)(l-j)}{i!}\)</span>，也就是你选第 <span class="math inline">\(j\)</span> 个数时候的三维坐标的方案数，因为极大点是无编号的所以要除以 <span class="math inline">\(i!\)</span>，或者可以写成 <span class="math inline">\(\binom{n}{i}\binom{m}{i}\binom{l}{i}(i!)^2\)</span>。</p>
 <p>对于 <span class="math inline">\(h\)</span>，我们考虑按照极大点上的数的大小从小到大添加极大点和与其关联的点。即我们考虑从 <span class="math inline">\(h_{i-1}\)</span> 递推出 <span class="math inline">\(h_i\)</span>。首先由于我们强制从小到大填极大点，所以当前填的极大点上的数一定比任何其它点的数都大的，然后我们考虑新关联的点的填法（注意有的点可能与不止一个极大点某一维坐标相同），具体地，如果我们知道一开始有 <span class="math inline">\(s\)</span> 个点，这次新增的有关联的点（不包括极大点）的个数为 <span class="math inline">\(r\)</span>，则有 <span class="math display">\[
 h_i=i(s+1)^{\overline{r}}h_{i-1}
 \]</span> 其中 <span class="math inline">\((s+1)^{\overline{r}}\)</span> 表示 <span class="math inline">\(s+1\)</span> 的 <span class="math inline">\(r\)</span> 次上升幂，即 <span class="math inline">\((s+1)(s+2)\dots (s+r)\)</span></p>
