@@ -6,6 +6,7 @@
     <content><![CDATA[<p><a href="https://www.luogu.com.cn/problem/P4191" target="_blank" rel="noopener">题目链接</a></p>
 <p>难得写了一次一句话题解/cy</p>
 <p>jiqimao：我认为做了 [CTSC2010]性能优化 才算理解 fft。</p>
+<a id="more"></a>
 <p>其实 DFT 的基并不一定为 <span class="math inline">\(2\)</span>，如果保证 <span class="math inline">\(m\)</span> 次单位根存在（即 <span class="math inline">\(m\mid (p-1)\)</span> ），我们就可以做基为 <span class="math inline">\(m\)</span> 的 DFT，如果做一次长度为 <span class="math inline">\(m\)</span> 的 DFT，其复杂度为 <span class="math inline">\(O(nm)+mT(\frac{n}{m})\)</span>，即我们按照模 <span class="math inline">\(m\)</span> 的余数分为 <span class="math inline">\(m\)</span> 个多项式，然后递归下去，再分别带入单位根进行计算就可以了。这道题保证 <span class="math inline">\(n\)</span> 的每个质因子小于 <span class="math inline">\(10\)</span>，所以复杂度是对的。</p>
 <p>也可以按照一般的 FFT 写法写一个蝴蝶变换，我比较懒没写，跑的也不慢。</p>
 <p>代码：</p>
@@ -116,6 +117,7 @@ c_k&amp;=\sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{n-1}[i+j\equiv k\pmod n]a_ib_
 &amp;=\frac{1}{n}\sum\limits_{t=0}^{n-1}w_n^{-kt}\left(\sum\limits_{i=0}^{n-1}w_n^{it}a_i\right)\left(\sum\limits_{j=0}^{n-1}w_n^{jt}b_j\right)
 \end{aligned}
 \]</span> 注意到两个括号内都是长度为 <span class="math inline">\(n\)</span> 的 DFT，所以对 <span class="math inline">\(a\)</span> 和 <span class="math inline">\(b\)</span> 做任意基 DFT，然后相乘就得到点值表示了，最后需要做长度为 <span class="math inline">\(n\)</span> 的 IDFT，和正着做类似。</p>
+<p>顺便说一下关于 FFT 的本质，我们需要注意到如果我们把两个长为 <span class="math inline">\(n\)</span> 的数组都做一遍 DFT，然后对应位相乘再 IDFT 回去，这样得到的是两个数组做长度为 <span class="math inline">\(n\)</span> 的循环卷积。我们平时写的 FFT 也是长度为 <span class="math inline">\(2^k\)</span> 的循环卷积，只不过我们一开始已经补到了比最高次还要高的 <span class="math inline">\(2^k\)</span> 长度，所以不会出现循环。</p>
 ]]></content>
       <tags>
         <tag>fft</tag>
