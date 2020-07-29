@@ -46,19 +46,20 @@
   };
 </script>
 
-  <meta name="description" content="A. FashionabLee 问是否可以通过旋转使得在平面直角坐标系中的正 \(n\) 边形同时有至少一条边与 X 轴平行，有至少一条边与 Y 轴平行。">
+  <meta name="description" content="这东西就一个式子，但是能推出很多有意思的东西。 \[ [n\mid a]&#x3D;\frac{1}{n}\sum\limits_{i&#x3D;0}^{n-1}w_n^{ai} \] 其中 \(\mid\) 为整除符号，\(w_n^i\) 为第 \(i\) 个 \(n\) 次单位根。 考虑证明：  当 \(n\mid a\) 时，设 \(a&#x3D;kn\)，则 \[ \begin{aligned} &amp;amp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Codeforces Round &amp;#35;652 (Div. 2)简要题解">
-<meta property="og:url" content="https://s1rius.top/2020/06/27/Codeforces%20Round%20652(Div.%202)/index.html">
+<meta property="og:title" content="单位根反演">
+<meta property="og:url" content="https://s1rius.top/2020/07/28/%E5%8D%95%E4%BD%8D%E6%A0%B9%E5%8F%8D%E6%BC%94/index.html">
 <meta property="og:site_name" content="S1rius&#39; Blog">
-<meta property="og:description" content="A. FashionabLee 问是否可以通过旋转使得在平面直角坐标系中的正 \(n\) 边形同时有至少一条边与 X 轴平行，有至少一条边与 Y 轴平行。">
-<meta property="article:published_time" content="2020-06-27T02:00:37.000Z">
-<meta property="article:modified_time" content="2020-07-04T09:55:29.045Z">
+<meta property="og:description" content="这东西就一个式子，但是能推出很多有意思的东西。 \[ [n\mid a]&#x3D;\frac{1}{n}\sum\limits_{i&#x3D;0}^{n-1}w_n^{ai} \] 其中 \(\mid\) 为整除符号，\(w_n^i\) 为第 \(i\) 个 \(n\) 次单位根。 考虑证明：  当 \(n\mid a\) 时，设 \(a&#x3D;kn\)，则 \[ \begin{aligned} &amp;amp">
+<meta property="article:published_time" content="2020-07-28T07:31:39.000Z">
+<meta property="article:modified_time" content="2020-07-29T09:42:44.105Z">
 <meta property="article:author" content="S1rius">
-<meta property="article:tag" content="套题题解">
+<meta property="article:tag" content="fft">
+<meta property="article:tag" content="单位根反演">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://s1rius.top/2020/06/27/Codeforces%20Round%20652(Div.%202)/">
+<link rel="canonical" href="https://s1rius.top/2020/07/28/%E5%8D%95%E4%BD%8D%E6%A0%B9%E5%8F%8D%E6%BC%94/">
 
 
 <script id="page-configurations">
@@ -70,7 +71,7 @@
   };
 </script>
 
-  <title>Codeforces Round &#35;652 (Div. 2)简要题解 | S1rius' Blog</title>
+  <title>单位根反演 | S1rius' Blog</title>
   
 
 
@@ -204,7 +205,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://s1rius.top/2020/06/27/Codeforces%20Round%20652(Div.%202)/">
+    <link itemprop="mainEntityOfPage" href="https://s1rius.top/2020/07/28/%E5%8D%95%E4%BD%8D%E6%A0%B9%E5%8F%8D%E6%BC%94/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/Misaka_Will_Novel.png">
@@ -217,7 +218,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Codeforces Round &#35;652 (Div. 2)简要题解
+          单位根反演
         </h1>
 
         <div class="post-meta">
@@ -227,18 +228,18 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-06-27 10:00:37" itemprop="dateCreated datePublished" datetime="2020-06-27T10:00:37+08:00">2020-06-27</time>
+              <time title="创建时间：2020-07-28 15:31:39" itemprop="dateCreated datePublished" datetime="2020-07-28T15:31:39+08:00">2020-07-28</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-04 17:55:29" itemprop="dateModified" datetime="2020-07-04T17:55:29+08:00">2020-07-04</time>
+                <time title="修改时间：2020-07-29 17:42:44" itemprop="dateModified" datetime="2020-07-29T17:42:44+08:00">2020-07-29</time>
               </span>
 
           
-            <span id="/2020/06/27/Codeforces%20Round%20652(Div.%202)/" class="post-meta-item leancloud_visitors" data-flag-title="Codeforces Round &#35;652 (Div. 2)简要题解" title="阅读次数">
+            <span id="/2020/07/28/%E5%8D%95%E4%BD%8D%E6%A0%B9%E5%8F%8D%E6%BC%94/" class="post-meta-item leancloud_visitors" data-flag-title="单位根反演" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -253,8 +254,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/06/27/Codeforces%20Round%20652(Div.%202)/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/27/Codeforces%20Round%20652(Div.%202)/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/07/28/%E5%8D%95%E4%BD%8D%E6%A0%B9%E5%8F%8D%E6%BC%94/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/28/%E5%8D%95%E4%BD%8D%E6%A0%B9%E5%8F%8D%E6%BC%94/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -269,40 +270,103 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="a.-fashionablee">A. <a href="https://codeforces.com/contest/1369/problem/A" target="_blank" rel="noopener">FashionabLee</a></h3>
-<p>问是否可以通过旋转使得在平面直角坐标系中的正 <span class="math inline">\(n\)</span> 边形同时有至少一条边与 X 轴平行，有至少一条边与 Y 轴平行。</p>
-<a id="more"></a>
-<p>显然，当且仅当 <span class="math inline">\(n\bmod 4=0\)</span> 时有解，因为通过轴对称性可知可以被分为全等的四份（我一开始没看清题WA了一次/dk）</p>
-<p>提交记录：<a href="https://codeforces.com/problemset/submission/1369/84757021" target="_blank" rel="noopener">#84757021</a></p>
-<h3 id="b.-accuratelee">B. <a href="https://codeforces.com/contest/1369/problem/B" target="_blank" rel="noopener">AccurateLee</a></h3>
-<p>给定一个01串 <span class="math inline">\(s\)</span> ，如果 <span class="math inline">\(s_i=1\)</span> 且 <span class="math inline">\(s_{i+1}=0\)</span> 那么可以选择这两个数中的一个删除，然后后面的串向前补全。问这个串经过若干操作后最短的长度是多少，如果有多个最短的，输出字典序最小的。</p>
-<p>我们考虑 <span class="math inline">\(1...0...1... 0\)</span> 这样的串，我们可以把它消到只剩下一个 <span class="math inline">\(0\)</span> （先用每个0前面的1消掉0，留下最后一个0消掉前面的所有1）。</p>
-<p>对于含有前缀0和后缀1的情况，显然它们都不能被消去，所以最后答案为 前缀0的个数+[除去前缀0和后缀1后不是空串] 个0 和 后缀1的个数 个1。</p>
-<p>提交记录：<a href="https://codeforces.com/problemset/submission/1369/84770401" target="_blank" rel="noopener">#84770401</a></p>
-<h3 id="c.-rationallee">C. <a href="https://codeforces.com/contest/1369/problem/C" target="_blank" rel="noopener">RationalLee</a></h3>
-<p>给定 <span class="math inline">\(n\)</span> 个元素，<span class="math inline">\(k\)</span> 个集合，你需要把每个元素恰好放在一个集合内。第 <span class="math inline">\(i\)</span> 个集合需要放进恰好 <span class="math inline">\(w_i\)</span> 个元素，第 <span class="math inline">\(j\)</span> 个元素的价值为 <span class="math inline">\(a_j\)</span> ，每个集合的价值为它包含的元素的价值的最大值和最小值之和（如果只有一个元素计算两次），求所有集合的价值之和的最大值。<span class="math inline">\(k\leqslant n\leqslant 2\times 10^5\)</span>。</p>
-<p>考虑贪心，如果我们有 <span class="math inline">\(w=1\)</span> 的集合，那么一定优先把最大的元素放到这种集合里。我们把元素按价值从大到小排序，把集合按大小从小到大排序，那么首先往第 <span class="math inline">\(i\)</span> 个集合内放入第 <span class="math inline">\(i\)</span> 个元素，然后贪心把价值小的元素放入大的集合中（比如说剩下的元素为 <span class="math inline">\(5,3,1\)</span> 集合大小为 <span class="math inline">\(2,1\)</span>，那么就分成 <span class="math inline">\(\{3,1\},\{5\}\)</span> ，这样就是答案。</p>
-<p>提交记录：<a href="https://codeforces.com/problemset/submission/1369/84777478" target="_blank" rel="noopener">#84777478</a></p>
-<h3 id="d.-tediouslee">D. <a href="https://codeforces.com/contest/1369/problem/D" target="_blank" rel="noopener">TediousLee</a></h3>
-<p>给定一种有根树的构造方式，版本1为一个单独的节点，对于版本 <span class="math inline">\(i\)</span> ，我们从版本 <span class="math inline">\(i-1\)</span> 递推：对于版本 <span class="math inline">\(i-1\)</span> 的每个节点，如果它没有儿子，那么长出一个儿子；如果有一个儿子，那么再长出两个新的儿子；如果有三个儿子，那么不变。</p>
-<p>现在给定版本 <span class="math inline">\(n\)</span> 的树，每个节点一开始都是绿色，如果一个节点有三个儿子，且它们和这个节点本身都是绿色，那么可以把这四个点染成黄色，问最多能染出多少黄色的节点，答案 <span class="math inline">\(\bmod 10^9+7\)</span>。<span class="math inline">\(n\leqslant2\times 10^6\)</span>。</p>
-<p>我们发现对于版本 <span class="math inline">\(i(i\geqslant3)\)</span> ，它实际上由一个根接上两个版本 <span class="math inline">\(i-2\)</span> 的树再接上一个版本 <span class="math inline">\(i-1\)</span> 的树构成，那么我们可以考虑递推。发现这实际上在求一个类似最大独立集的东西，设 <span class="math inline">\(f[n][0/1]\)</span> 为版本 <span class="math inline">\(n\)</span> ，是否染了根节点的色的答案，那么对于 <span class="math inline">\(n\geqslant 3\)</span> 则有 <span class="math display">\[
-\left\{
+        <p>这东西就一个式子，但是能推出很多有意思的东西。 <span class="math display">\[
+[n\mid a]=\frac{1}{n}\sum\limits_{i=0}^{n-1}w_n^{ai}
+\]</span> 其中 <span class="math inline">\(\mid\)</span> 为整除符号，<span class="math inline">\(w_n^i\)</span> 为第 <span class="math inline">\(i\)</span> 个 <span class="math inline">\(n\)</span> 次单位根。</p>
+<p>考虑证明：</p>
+<ul>
+<li>当 <span class="math inline">\(n\mid a\)</span> 时，设 <span class="math inline">\(a=kn\)</span>，则 <span class="math display">\[
 \begin{aligned}
-&amp;f[n][0]=2*\max(f[n-2][0],f[n-2][1])+\max(f[n-1][0],f[n-1][1])\\
-&amp;f[n][1]=2*f[n-2][0]+f[n-1][0]+4
+&amp;\frac{1}{n}\sum\limits_{i=0}^{n-1}w_n^{ai}\\
+=&amp;\frac{1}{n}\sum\limits_{i=0}^{n-1}w_n^{nki}\\
+=&amp;\frac{1}{n}\sum\limits_{i=0}^{n-1}(w_n^n)^{ki}\\
+=&amp;\frac{1}{n}\sum\limits_{i=0}^{n-1}1\\
+=&amp;1
 \end{aligned}
-\right.
-\]</span> 这个东西在取模意义下是会WA的，因为取模后的 <span class="math inline">\(\max\)</span> 不一定是取模前的 <span class="math inline">\(\max\)</span> ，但是如果你直接这样交上去是会AC的，因为 <span class="math inline">\(f[n][0]\)</span> 和 <span class="math inline">\(f[n][1]\)</span> 的差实际上很小，在 <span class="math inline">\(n\leqslant 2\times 10^6\)</span> 的情况下不会出现两个数取模次数不一样的情况。</p>
-<p>考虑能不能不用 <span class="math inline">\(\max\)</span> 来做，我们设 <span class="math inline">\(f_n\)</span> 表示 <span class="math inline">\(n\)</span> 的答案，<span class="math inline">\(r_i\)</span> 表示是否可以在不染根节点的情况下让答案达到 <span class="math inline">\(f_n\)</span> （对应到我们刚才的想法就是若 <span class="math inline">\(f[n][0]\geqslant f[n][1]\)</span> 则 <span class="math inline">\(r_n=1\)</span>），那么有 <span class="math inline">\(r_0=r_1=1\)</span> ，我们发现当 <span class="math inline">\(r_{n-1}=r_{n-2}=1\)</span> 时，我们可以把根节点染色，这时候染色的答案是不染色的答案+4，所以此时 <span class="math inline">\(r_n=0\)</span> ，其他时刻如果我们强制染根节点，最多只会让答案+4，但是子树的答案至少少了4，所以不优，这时 <span class="math inline">\(r_n=1\)</span>。简单归纳就知道当且仅当 <span class="math inline">\(n\bmod 3=0\)</span> 时 <span class="math inline">\(r_n=0\)</span> ，所以有 <span class="math inline">\(f_n=f_{n-1}+2*f_{n-2}+4[n\bmod 3=0]\)</span> ，这样就避免了同时取模和取 <span class="math inline">\(\max\)</span> ，然后这题也可以用矩阵快速幂或者其他方法加速到 <span class="math inline">\(n=10^{18}\)</span>。</p>
-<p>提交记录（第一种方法）：<a href="https://codeforces.com/problemset/submission/1369/84785701" target="_blank" rel="noopener">#84785701</a></p>
-<h3 id="e.-deadlee">E. <a href="https://codeforces.com/contest/1369/problem/E" target="_blank" rel="noopener">DeadLee</a></h3>
-<p>你有 <span class="math inline">\(n\)</span> 种菜和 <span class="math inline">\(m\)</span> 个朋友。每种菜有 <span class="math inline">\(w_i\)</span> 份，每个朋友有两种喜欢的菜（不会相同）。你需要安排朋友来的顺序，每个朋友来了会吃掉他喜欢的菜各一份（如果某一种没有就不吃那一种），问是否有一种顺序使得每个朋友都能吃到至少一种他喜欢的菜，有的话输出任意一种方案。<span class="math inline">\(n,m\leqslant 2\times 10^5\)</span>。</p>
-<p>我们把菜看成点，对每个朋友喜欢的两种菜之间连上一条边，设每个点的度数为 <span class="math inline">\(d_i\)</span>，即喜欢吃这种菜的朋友的个数。</p>
-<p>首先，我们发现如果 <span class="math inline">\(\forall i,d_i&gt;w_i\)</span> 则无解（证明待补），如果 <span class="math inline">\(\exist i,w_i\geqslant d_i\)</span> ，那么对于所有与 <span class="math inline">\(i\)</span> 相连的边都可以吃 <span class="math inline">\(i\)</span> ，我们把这些边放到栈中，并且将与这些边相连的点的 <span class="math inline">\(d\)</span> 都减去1（重边减去多次）。重复这个步骤如果最终所有边都被访过那么就合法，这时从栈顶一个一个输出就是答案。</p>
-<p>提交记录：<a href="https://codeforces.com/contest/1369/submission/84807161" target="_blank" rel="noopener">#84807161</a></p>
-<h3 id="f.-barelee">F. <a href="https://codeforces.com/contest/1369/problem/F" target="_blank" rel="noopener">BareLee</a></h3>
-<p>现在还不是很明白，所以鸽了。</p>
+\]</span></li>
+</ul>
+<p>当 <span class="math inline">\(n\nmid a\)</span> 时，考虑等比数列求和 <span class="math display">\[
+\begin{aligned}
+&amp;\frac{1}{n}\sum\limits_{i=0}^{n-1}w_n^{ai}\\
+=&amp;\frac{1}{n}\frac{1-w_n^{an}}{1-w_n^a}
+\end{aligned}
+\]</span> 注意到 <span class="math inline">\(1-w_n^{an}=0\)</span> 且 <span class="math inline">\(1-w_n^a\not= 0\)</span>（这也是为啥 <span class="math inline">\(n\mid a\)</span> 时不能这么做，因为公比为 <span class="math inline">\(1\)</span> 了），所以原式为 <span class="math inline">\(0\)</span>。</p>
+<p>注意一下如果在模质数意义下有 <span class="math inline">\(n\)</span> 次单位根（即 <span class="math inline">\(n\mid(p-1)\)</span>）那么这个式子也是成立的。</p>
+<p>一个推导： <span class="math display">\[
+[a\equiv b\pmod n]=\frac{1}{n}\sum\limits_{i=0}^{n-1}w_n^{ak}w_n^{-bk}
+\]</span></p>
+<p>另一个推导：如果我们有一个项数很多的多项式（设项数为 <span class="math inline">\(n\)</span>），我们想求 <span class="math inline">\(a_t,a_{k+t},a_{2k+t},\dots\)</span> 之和，且满足：</p>
+<ul>
+<li><span class="math inline">\(t\)</span> 较小</li>
+<li>多项式的点值便于快速计算</li>
+<li>如果是在模质数意义下，则应存在 <span class="math inline">\(t\)</span> 次单位根</li>
+</ul>
+<p>我们可以通过单位根反演快速计算，具体如下： <span class="math display">\[
+\begin{aligned}
+&amp;\sum\limits_{i=0}^n[t\mid i][x^i]f(x)\\
+=&amp;\sum\limits_{i=0}^n\sum\limits_{j=0}^{t-1}w_t^{ij}[x^i]f(x)\\
+=&amp;\sum\limits_{j=0}^{t-1}\sum\limits_{i=0}^{n}(w_t^j)^i[x^i]f(x)\\
+=&amp;\sum\limits_{j=0}^{t-1}f(w_t^j)
+\end{aligned}
+\]</span> 来一道例题</p>
+<h5 id="loj6485-ljj-学二项式定理">loj6485 LJJ 学二项式定理</h5>
+<p>输入以下变量的值：$ n, s , a_0 , a_1 , a_2 , a_3$，求以下式子的值： <span class="math display">\[
+\left[ \sum_{i=0}^n \left( {n\choose i} \cdot s^{i} \cdot a_{i\bmod 4} \right)     \right] \bmod 998244353
+\]</span> 我们枚举 <span class="math inline">\(a_0,a_1,a_2,a_3\)</span> 前面的系数，则 <span class="math display">\[
+\begin{aligned}
+ans=&amp;\sum\limits_{k=0}^3a_k\sum\limits_{i=0}^n[i\bmod4=k]\binom{n}{i}s^i\\
+=&amp;\sum\limits_{k=0}^3a_k\sum\limits_{i=0}^n[4\mid(i-k)]\binom{n}{i}s^i\\
+=&amp;\frac{1}{4}\sum\limits_{k=0}^3a_k\sum\limits_{i=0}^{n}\sum_{j=0}^{3}w_4^{j(i-k)}\binom{n}{i}s^i\\
+=&amp;\frac{1}{4}\sum\limits_{k=0}^3a_k\sum\limits_{i=0}^{n}\sum_{j=0}^{3}w_4^{ji}w_4^{-jk}\binom{n}{i}s^i\\
+=&amp;\frac{1}{4}\sum\limits_{k=0}^3a_k\sum_{j=0}^{3}w_4^{-jk}\sum\limits_{i=0}^{n}w_4^{ji}\binom{n}{i}s^i\\
+=&amp;\frac{1}{4}\sum\limits_{k=0}^3a_k\sum_{j=0}^{3}w_4^{-jk}(sw_t^j+1)^n
+\end{aligned}
+\]</span> 然后在模 <span class="math inline">\(998244353\)</span> 意义下的 <span class="math inline">\(4\)</span> 次单位根为 <span class="math inline">\(g^{\frac{p-1}{4}}\)</span>，其中 <span class="math inline">\(g\)</span> 是某个原根。直接快速幂就好了。</p>
+<p><a href="https://loj.ac/submission/880657" target="_blank" rel="noopener">代码</a></p>
+<h4 id="用单位根反演证明-idft-正确性">用单位根反演证明 IDFT 正确性</h4>
+<p>证明 IDFT 那个方法本质就是单位根反演。 <span class="math display">\[
+\begin{aligned}
+f&#39;[k]&amp;=\sum\limits_{i=0}^nw_n^{-ki}F(w_n^i)\\
+&amp;=\sum\limits_{i=0}^{n-1}w_n^{-ki}\sum\limits_{j=0}^{n-1}f_jw_n^{ij}\\
+&amp;=\sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{n-1}f_jw_n^{(j-k)i}\\
+&amp;=\sum\limits_{j=0}^{n-1}f_j\sum\limits_{i=0}^{n-1}w_n^{(j-k)i}\\
+&amp;=\sum\limits_{j=0}^{n-1}f_j[(j-k)\mid n]\\
+&amp;=nf_k
+\end{aligned}
+\]</span></p>
+<h4 id="bluesteins-algorithm">Bluestein's Algorithm</h4>
+<p>有的时候我们单位根反演完了以后要对每个 <span class="math inline">\(k\)</span> 求形似 <span class="math inline">\(\sum\limits_{i=0}^{n-1}w_n^{ik}f_i\)</span> 的东西，而 <span class="math inline">\(n\)</span> 不一定是 <span class="math inline">\(2\)</span> 的次幂。暴力求是 <span class="math inline">\(O(n^2)\)</span> 的，有没有优化方法？</p>
+<p>注意到这实际上是一个任意长度的 DFT，当 <span class="math inline">\(n\)</span> 是 <span class="math inline">\(2\)</span> 的次幂时就是普通的 FFT，而 <span class="math inline">\(n\)</span> 不是 <span class="math inline">\(2\)</span> 的次幂时不能直接 FFT，我们考虑对 <span class="math inline">\(ik\)</span> 做文章。</p>
+<p>形式1： <span class="math display">\[
+ik=\frac{-(k-i)^2+i^2+k^2}{2}
+\]</span> 所以有 <span class="math display">\[
+\begin{aligned}
+&amp;\sum\limits_{i=0}^{n-1}w_n^{ik}f_i\\
+=&amp;\sum\limits_{i=0}^{n-1}w_n^{\frac{-(k-i)^2}{2}+\frac{i^2}{2}+\frac{k^2}{2}}f_i\\
+=&amp;w_n^{\frac{k^2}{2}}\sum\limits_{i=0}^{n-1}w_n^{\frac{-(k-i)^2}{2}}w_n^{\frac{i^2}{2}}f_i\\
+=&amp;w_{2n}^{k^2}\sum\limits_{i=0}^{n-1}w_{2n}^{-(k-i)^2}w_{2n}^{i^2}f_i\\
+\end{aligned}
+\]</span> 我们注意到求和号右面是一个卷积的形式，所以我们做一次正常的卷积就可以了。</p>
+<p>有的时候我们是在模质数意义下做的，可能没有 <span class="math inline">\(2n\)</span> 次单位根，所以这个时候我们要利用到形式2： <span class="math display">\[
+ik=\binom{i+k}{2}-\binom{i}{2}-\binom{k}{2}
+\]</span> 所以有 <span class="math display">\[
+\begin{aligned}
+&amp;\sum\limits_{i=0}^{n-1}w_n^{ik}f_i\\
+=&amp;\sum\limits_{i=0}^{n-1}w_n^{\binom{i+k}{2}-\binom{i}{2}-\binom{k}{2}}f_i\\
+=&amp;w_n^{-\binom{k}{2}}\sum\limits_{i=0}^{n-1}w_n^{\binom{i+k}{2}}w_n^{-\binom{i}{2}}f_i\\
+=&amp;w_n^{-\binom{k}{2}}\sum\limits_{i=0}^{n-1}w_n^{\binom{i+k}{2}}w_n^{-\binom{i}{2}}f_i\\
+\end{aligned}
+\]</span> 这样就可以避免不存在 <span class="math inline">\(2n\)</span> 次单位根的问题了。</p>
+<p>这个东西可以用来做循环卷积，即 <span class="math display">\[
+c_k=\sum\limits_{i=0}^n\sum\limits_{j=0}^{n}[i+j\equiv k\pmod n]a_ib_j
+\]</span> 然后是推式子时间 <span class="math display">\[
+\begin{aligned}
+c_k&amp;=\sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{n-1}[i+j\equiv k\pmod n]a_ib_j\\
+&amp;=\sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{n-1}[(i+j-k)\bmod n=0]a_ib_j\\
+&amp;=\frac{1}{n}\sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{n-1}\sum\limits_{t=0}^{n-1}w_n^{t(i+j-k)}a_ib_j\\
+&amp;=\frac{1}{n}\sum\limits_{t=0}^{n-1}w_n^{-kt}\left(\sum\limits_{i=0}^{n-1}w_n^{it}a_i\right)\left(\sum\limits_{j=0}^{n-1}w_n^{jt}b_j\right)
+\end{aligned}
+\]</span> 注意到两个括号内都是长度为 <span class="math inline">\(n\)</span> 的 DFT，所以对 <span class="math inline">\(a\)</span> 和 <span class="math inline">\(b\)</span> 做任意基 DFT，然后相乘就得到点值表示了，最后需要做长度为 <span class="math inline">\(n\)</span> 的 IDFT，和正着做类似。</p>
 
     </div>
 
@@ -312,7 +376,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E5%A5%97%E9%A2%98%E9%A2%98%E8%A7%A3/" rel="tag"># 套题题解</a>
+              <a href="/tags/fft/" rel="tag"># fft</a>
+              <a href="/tags/%E5%8D%95%E4%BD%8D%E6%A0%B9%E5%8F%8D%E6%BC%94/" rel="tag"># 单位根反演</a>
           </div>
 
         
@@ -321,12 +386,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/06/21/HEOI2020%20%E9%80%80%E5%BD%B9%E8%AE%B0/" rel="prev" title="HEOI2020 退役记">
-      <i class="fa fa-chevron-left"></i> HEOI2020 退役记
+    <a href="/2020/07/27/%E3%80%8CCTS2019%E3%80%8D%E7%8F%8D%E7%8F%A0/" rel="prev" title="「CTS2019」珍珠">
+      <i class="fa fa-chevron-left"></i> 「CTS2019」珍珠
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/06/28/%E3%80%8CBJOI2020%E3%80%8D%E5%B0%81%E5%8D%B0/" rel="next" title="「BJOI2020」封印">
-      「BJOI2020」封印 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/07/29/%E3%80%8CCTSC2010%E3%80%8D%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="next" title="「CTSC2010」性能优化">
+      「CTSC2010」性能优化 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -388,7 +453,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#a.-fashionablee"><span class="nav-number">1.</span> <span class="nav-text">A. FashionabLee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b.-accuratelee"><span class="nav-number">2.</span> <span class="nav-text">B. AccurateLee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c.-rationallee"><span class="nav-number">3.</span> <span class="nav-text">C. RationalLee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d.-tediouslee"><span class="nav-number">4.</span> <span class="nav-text">D. TediousLee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#e.-deadlee"><span class="nav-number">5.</span> <span class="nav-text">E. DeadLee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#f.-barelee"><span class="nav-number">6.</span> <span class="nav-text">F. BareLee</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#loj6485-ljj-学二项式定理"><span class="nav-number">1.</span> <span class="nav-text">loj6485 LJJ 学二项式定理</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用单位根反演证明-idft-正确性"><span class="nav-number"></span> <span class="nav-text">用单位根反演证明 IDFT 正确性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bluesteins-algorithm"><span class="nav-number"></span> <span class="nav-text">Bluestein&#39;s Algorithm</span></a></div>
       </div>
       <!--/noindex-->
 
@@ -502,56 +567,6 @@
   
 
   
-      
-<script type="text/x-mathjax-config">
-    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        extensions: ['[mhchem]/mhchem.js'],
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') {
-          next = next.nextSibling;
-        }
-        if (next && next.nodeName.toLowerCase() === 'br') {
-          next.parentNode.removeChild(next);
-        }
-      }
-    });
-  });
-
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
-      if (element.nodeName.toLowerCase() == 'li') {
-        element = element.parentNode;
-      }
-      element.classList.add('has-jax');
-    }
-  });
-</script>
-<script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
-    MathJax.Hub.Typeset();
-  }, window.MathJax);
-</script>
-
-    
 
   
 
