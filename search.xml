@@ -79,7 +79,7 @@ g_n=\sum\limits_{j=1}^n\binom{n}{j}(-1)^{j+1}2^{j(n-j)}g_{n-j}\\
 \frac{g_n}{n!2^{\binom{n}{2}}}=\sum\limits_{j=1}^n\frac{(-1)^{j+1}}{2^{\binom{j}{2}}j!}\frac{g^{n-j}}{2^\binom{n-j}{2}(n-j)!}
 \end{aligned}
 \]</span> 设 <span class="math display">\[
-F(x)=\sum\limits_{i=0}^\infty \frac{(-1)^{i+1}}{2^{\binom{i}{2}}i!}x^i\\
+F(x)=\sum\limits_{i=1}^\infty \frac{(-1)^{i+1}}{2^{\binom{i}{2}}i!}x^i\\
 G(x)=\sum\limits_{i=0}^\infty \frac{g_i}{2^{\binom{i}{2}}i!}x^i
 \]</span></p>
 <p>则 <span class="math inline">\(G(x)=F(x)G(x)+1\)</span>，故 <span class="math inline">\(G(x)=\frac{1}{1-F(x)}\)</span>。这样就可以求出 <span class="math inline">\(g\)</span>，然后再做一遍 <span class="math inline">\(\ln\)</span> 就好了。</p>
