@@ -4,6 +4,7 @@
     <title>「NOI2018」冒泡排序</title>
     <url>/2020/08/04/%E3%80%8CNOI2018%E3%80%8D%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</url>
     <content><![CDATA[<p><a href="https://www.luogu.com.cn/problem/P4769" target="_blank" rel="noopener">题目链接</a></p>
+<a id="more"></a>
 <p>我们先来考虑，好的排列满足什么性质。不难发现，如果这个排列的最长下降子序列长度大于 2，那么这个排列一定不是好的排列，设不满足的 3 个数为 <span class="math inline">\(c,b,a(c&gt;b&gt;a)\)</span>，那么 <span class="math inline">\(c\)</span> 要移到 <span class="math inline">\(b\)</span> 的右面，一定会和 <span class="math inline">\(b\)</span> 交换一次，然后 <span class="math inline">\(a\)</span> 和 <span class="math inline">\(c\)</span> 再交换一次，这时变成了 <span class="math inline">\(b,a,c\)</span>，还需要额外交换一次。现在我们再来证明一下这个条件也是充分条件：</p>
 <p>我们发现，如果要保证这个排列是好的排列，我们改变任何一个数的位置的时候，都需要让它往它应该在的位置移动，也就是说，如果 <span class="math inline">\(p_i&lt;i\)</span>，那么 <span class="math inline">\(p_i\)</span> 一定只会向左移动，<span class="math inline">\(p_i&gt;i\)</span> 同理，当 <span class="math inline">\(p_i=i\)</span> 时，这个位置不能移动，反之，如果不是好的排列，至少有一次交换使得某一个数距离它应该在的位置变远了。</p>
 <p>考虑任何一次交换，设我们交换的数为 <span class="math inline">\(p_i\)</span> 和 <span class="math inline">\(p_{i+1}\)</span>，那么我们有 <span class="math inline">\(p_i&gt;p_{i+1}\)</span>，由不存在长度为 3 的下降子序列我们可知 <span class="math inline">\(p_1\dots p_{i-1}&lt;p_i\)</span>，<span class="math inline">\(p_{i+2}\dots p_n&gt;p_{i+1}\)</span>，这样就有 <span class="math inline">\(p_{i+1}&lt;i+1\)</span>，<span class="math inline">\(p_i&gt;i\)</span>，故这一次交换两个数都往应该走的方向走了，显然这样的交换不会增加最长下降子序列的长度。</p>
