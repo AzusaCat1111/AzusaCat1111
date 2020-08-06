@@ -53,7 +53,7 @@
 <meta property="og:site_name" content="S1rius&#39; Blog">
 <meta property="og:description" content="这东西就一个式子，但是能推出很多有意思的东西。">
 <meta property="article:published_time" content="2020-07-28T07:31:39.000Z">
-<meta property="article:modified_time" content="2020-08-05T01:51:19.827Z">
+<meta property="article:modified_time" content="2020-08-05T06:26:53.437Z">
 <meta property="article:author" content="S1rius">
 <meta property="article:tag" content="fft">
 <meta property="article:tag" content="单位根反演">
@@ -235,7 +235,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-05 09:51:19" itemprop="dateModified" datetime="2020-08-05T09:51:19+08:00">2020-08-05</time>
+                <time title="修改时间：2020-08-05 14:26:53" itemprop="dateModified" datetime="2020-08-05T14:26:53+08:00">2020-08-05</time>
               </span>
 
           
@@ -295,20 +295,20 @@
 \]</span> 注意到 <span class="math inline">\(1-w_n^{an}=0\)</span> 且 <span class="math inline">\(1-w_n^a\not= 0\)</span>（这也是为啥 <span class="math inline">\(n\mid a\)</span> 时不能这么做，因为公比为 <span class="math inline">\(1\)</span> 了），所以原式为 <span class="math inline">\(0\)</span>。</p>
 <p>注意一下如果在模质数意义下有 <span class="math inline">\(n\)</span> 次单位根（即 <span class="math inline">\(n\mid(p-1)\)</span>）那么这个式子也是成立的。</p>
 <p>一个推导： <span class="math display">\[
-[a\equiv b\pmod n]=\frac{1}{n}\sum\limits_{i=0}^{n-1}w_n^{ak}w_n^{-bk}
+[a\equiv b\pmod n]=\frac{1}{n}\sum\limits_{i=0}^{n-1}w_n^{ai}w_n^{-bi}
 \]</span></p>
 <p>另一个推导：如果我们有一个项数很多的多项式（设项数为 <span class="math inline">\(n\)</span>），我们想求 <span class="math inline">\(a_t,a_{k+t},a_{2k+t},\dots\)</span> 之和，且满足：</p>
 <ul>
 <li><span class="math inline">\(t\)</span> 较小</li>
 <li>多项式的点值便于快速计算</li>
-<li>如果是在模质数意义下，则应存在 <span class="math inline">\(t\)</span> 次单位根</li>
+<li>如果是在模质数意义下，则应存在 <span class="math inline">\(k\)</span> 次单位根</li>
 </ul>
 <p>我们可以通过单位根反演快速计算，具体如下： <span class="math display">\[
 \begin{aligned}
-&amp;\sum\limits_{i=0}^n[t\mid i][x^i]f(x)\\
-=&amp;\sum\limits_{i=0}^n\sum\limits_{j=0}^{t-1}w_t^{ij}[x^i]f(x)\\
-=&amp;\sum\limits_{j=0}^{t-1}\sum\limits_{i=0}^{n}(w_t^j)^i[x^i]f(x)\\
-=&amp;\sum\limits_{j=0}^{t-1}f(w_t^j)
+&amp;\sum\limits_{i=0}^{n-1}[i\equiv t\pmod k][x^i]f(x)\\
+=&amp;\frac{1}{k}\sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{k-1}w_k^{(i-t)j}[x^i]f(x)\\
+=&amp;\frac{1}{k}\sum\limits_{j=0}^{k-1}w_k^{-tj}\sum\limits_{i=0}^{n-1}w_k^{ij}[x^i]f(x)\\
+=&amp;\frac{1}{k}\sum\limits_{j=0}^{k-1}w_k^{-tj}f(w_k^j)
 \end{aligned}
 \]</span> 来一道例题</p>
 <h4 id="loj6485-ljj-学二项式定理">loj6485 LJJ 学二项式定理</h4>
@@ -481,7 +481,7 @@ c_k&amp;=\sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{n-1}[i+j\equiv k\pmod n]a_ib_
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
