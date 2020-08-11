@@ -230,7 +230,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-11 10:20:23" itemprop="dateModified" datetime="2020-08-11T10:20:23+08:00">2020-08-11</time>
+                <time title="修改时间：2020-08-11 10:23:51" itemprop="dateModified" datetime="2020-08-11T10:23:51+08:00">2020-08-11</time>
               </span>
 
           
@@ -279,7 +279,7 @@
 <p><a href="https://atcoder.jp/contests/agc047/submissions/15810387" target="_blank" rel="noopener">代码</a></p>
 <h2 id="d---twin-binary-trees">D - Twin Binary Trees</h2>
 <p>首先我们发现如果我们确定了两条特殊边，那么我们就唯一确定了一条回路。我们考虑枚举这条回路在第一棵树上的 LCA，那么所有的回路在第一棵树上的叶子一定分别在两个子树内。</p>
-<p>我们设两棵子树分别为 <span class="math inline">\(L\)</span> 和 <span class="math inline">\(R\)</span>，我们先枚举 <span class="math inline">\(L\)</span> 中的每个叶子，然后我们参照 LNOI LCA 那道题的套路，把第二棵树中对应叶子（通过特殊边连接的）到第二棵树上的根上的每个节点加上从枚举的 LCA 到这个节点的权值乘积。然后我们枚举 <span class="math inline">\(R\)</span> 中的叶子，并从第二棵树中对应的叶子向上跳，那么每当我们跳到一个点 <span class="math inline">\(x\)</span> 时，第二棵树的 LCA 为这个点的所有回路的贡献为 <span class="math inline">\(\text{dis}(LCA,x)\cdot(w[x]-x\cdot w[pre])\)</span>，其中 <span class="math inline">\(pre\)</span> 是上一个经过的点，<span class="math inline">\(w\)</span> 是点上的权值， <span class="math inline">\(\text{dis}\)</span> 为 LCA 到 <span class="math inline">\(x\)</span> 路径点的乘积（不含端点），要减去 <span class="math inline">\(x\cdot w[pre]\)</span> 是因为要减去 LCA 已经被算过的部分。这样总复杂度为 <span class="math inline">\(O(H^22^H)\)</span>。</p>
+<p>我们设两棵子树分别为 <span class="math inline">\(L\)</span> 和 <span class="math inline">\(R\)</span>，我们先枚举 <span class="math inline">\(L\)</span> 中的每个叶子，然后我们参照 LNOI LCA 那道题的套路，把第二棵树中对应叶子（通过特殊边连接的）到第二棵树上的根上的每个节点加上从枚举的 LCA 到这个节点的编号乘积。然后我们枚举 <span class="math inline">\(R\)</span> 中的叶子，并从第二棵树中对应的叶子向上跳，那么每当我们跳到一个点 <span class="math inline">\(x\)</span> 时，第二棵树的 LCA 为这个点的所有回路的贡献为 <span class="math inline">\(\text{dis}(LCA,x)\cdot(w[x]-x\cdot w[pre])\)</span>，其中 <span class="math inline">\(pre\)</span> 是上一个经过的点，<span class="math inline">\(w\)</span> 是点上的权值， <span class="math inline">\(\text{dis}\)</span> 为 LCA 到 <span class="math inline">\(x\)</span> 路径点的乘积（不含端点），要减去 <span class="math inline">\(x\cdot w[pre]\)</span> 是因为要减去 LCA 已经被算过的部分。这样总复杂度为 <span class="math inline">\(O(H^22^H)\)</span>。</p>
 <p><a href="https://atcoder.jp/contests/agc047/submissions/15812896" target="_blank" rel="noopener">代码</a></p>
 
       
