@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>ARC102</title>
+    <url>/2020/09/23/ARC102/</url>
+    <content><![CDATA[<h3 id="c---triangular-relationship">C - Triangular Relationship</h3>
+<p>如果 <span class="math inline">\(K\)</span> 是奇数，那么一定有 <span class="math inline">\(K\mid a,K\mid b,K\mid c\)</span>，所以答案为 <span class="math inline">\(\lfloor\frac{N}{K}\rfloor^3\)</span>。</p>
+<p>如果 <span class="math inline">\(K\)</span> 是偶数，还有可能 <span class="math inline">\(a,b,c\equiv \frac{K}{2}\pmod K\)</span>，所以在奇数的基础上还要加上 <span class="math inline">\(\left(\lfloor\frac{N-\frac{K}{2}}{K}\rfloor+1\right)^3\)</span>，注意如果 <span class="math inline">\(N&lt;\frac{K}{2}\)</span> 时不能加上。</p>
+<h3 id="d---all-your-paths-are-different-lengths">D - All Your Paths are Different Lengths</h3>
+<p>先考虑 <span class="math inline">\(L=2^k\)</span> 怎么做：只需要把 <span class="math inline">\(1-k+1\)</span> 的点排成一排，<span class="math inline">\(i\)</span> 和 <span class="math inline">\(i+1\)</span> 的点分别连权值为 <span class="math inline">\(0\)</span> 和 <span class="math inline">\(2^{i-1}\)</span> 的两条边就可以了。</p>
+<p>然后我们考虑 <span class="math inline">\(L\not=2^k\)</span> 的情况，首先设 <span class="math inline">\(2^{mx}\leqslant L&lt;2^{mx+1}\)</span>，那么我们先构造一个如上的长为 <span class="math inline">\(mx+1\)</span> 的链，然后我们从高到低遍历 <span class="math inline">\(L\)</span> 的二进制，同时维护把比当前位更低（包括当前位）的位都置为 <span class="math inline">\(0\)</span> 后 <span class="math inline">\(L\)</span> 的值 <span class="math inline">\(now\)</span>，如果 <span class="math inline">\(2^k(k\not=mx)\)</span> 这一位是 <span class="math inline">\(1\)</span>，则从 <span class="math inline">\(k+1\)</span> 向 <span class="math inline">\(mx+1\)</span> 连一条权值为 <span class="math inline">\(now\)</span> 的边。</p>
+<p>不难发现这样的构造方式是对的。</p>
+<h3 id="e---stop.-otherwise...">E - Stop. Otherwise...</h3>
+<p>我们考虑现在求 <span class="math inline">\(y\)</span> 的答案。</p>
+<p>那么如果 <span class="math inline">\(i\)</span> 出现，则 <span class="math inline">\(y-i\)</span> 就不能出现了，这样，我们可以把若干的两个和为 <span class="math inline">\(y\)</span> 的权值一起考虑；如果 <span class="math inline">\(y\)</span> 为偶数，则 <span class="math inline">\(\dfrac{y}{2}\)</span> 只能出现一次； 剩下的数没有要求。</p>
+<p>我们考虑以上三种情况的 OGF：</p>
+<p>对于两个和为 <span class="math inline">\(y\)</span> 的权值 <span class="math inline">\(a,b\)</span>，当至少出现一次时，一定只能全是 <span class="math inline">\(a\)</span> 或全是 <span class="math inline">\(b\)</span>，所以其 OGF 为 <span class="math display">\[
+1+2x+2x^2+2x^3+\dots=(1+x)(1+x+x^2+\dots)=\frac{1+x}{1-x}
+\]</span> 对于 <span class="math inline">\(\dfrac{y}{2}\)</span>，其只能出现 <span class="math inline">\(0\)</span> 或 <span class="math inline">\(1\)</span> 次，所以其 OGF 为 <span class="math inline">\(1+x\)</span>。</p>
+<p>对于剩下的没有要求的数，可以选任意个，所以其 OGF 为 <span class="math display">\[
+1+x+x^2+x^3+\dots=\frac{1}{1-x}
+\]</span> 我们把所有的 OGF 乘起来，发现其一定形如 <span class="math inline">\(\dfrac{(1+x)^p}{(1-x)^q}\)</span>，其中 <span class="math inline">\(p,q\)</span> 可以根据 <span class="math inline">\(y\)</span> 计算得到。</p>
+<p>分别考虑 <span class="math inline">\((1+x)^p\)</span> 和 <span class="math inline">\(\frac{1}{(1-x)^q}\)</span> 的展开形式，其分别为 <span class="math inline">\(\sum\limits_{i=0}^p\dbinom{p}{i}x^i\)</span> 和 <span class="math inline">\(\sum\limits_{i=0}^{\infty}\dbinom{i+q-1}{q-1}x^i\)</span> 。由于我们只需要求 <span class="math inline">\([x^n]\dfrac{(1+x)^p}{(1-x)^q}\)</span>，所以只需要暴力 <span class="math inline">\(O(n)\)</span> 计算两部分的卷积。</p>
+<p>所以总复杂度为 <span class="math inline">\(O(nk)\)</span>。</p>
+<h3 id="f---revenge-of-bbubbblesort">F - Revenge of BBuBBBlesort!</h3>
+<p>我们发现一次操作交换的两个数下标的奇偶性一定相同，所以如果一开始有一个偶/奇数的下标是奇/偶数一定无解。</p>
+<p>我们把原序列按下标的奇偶性分为两个新序列。我们发现，对于在原序列上的一次交换，它使得原序列的逆序对个数减小了 <span class="math inline">\(3\)</span>，而使得某一个新序列的逆序对个数减小了 <span class="math inline">\(1\)</span>，所以必须保证两个新序列的逆序对之和的三倍等于原序列的逆序对个数（因为我们要保证最后两个新序列逆序对个数为 <span class="math inline">\(0\)</span>）。</p>
+<p>下面我们证明这两个条件都满足是充分的：考虑对新序列冒泡排序，那么每一次交换，其至多让原排列的逆序对个数下降 <span class="math inline">\(3\)</span>，且如果能，一定等价于合法的对原序列的一次操作。由我们给出的前两个必要条件可知对两个新序列都冒泡排序后原序列有序，故每一次操作都一定让原序列的逆序对个数下降了 <span class="math inline">\(3\)</span>，所以每一次操作都合法。</p>
+<p>所以我们只需要上一个树状数组就可以了。</p>
+<p>提交记录：#16951728,#16952239,#16964800,#16968538。</p>
+]]></content>
+      <tags>
+        <tag>套题题解</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ARC103 简要题解</title>
+    <url>/2020/09/21/ARC103/</url>
+    <content><![CDATA[<h3 id="c--">C - ////</h3>
+<p>计算出 <code>t1[]</code> 和 <code>t2[]</code> 表示奇数和偶数位置上每个数出现的次数，枚举奇数位改成了哪一种数，那么偶数位就改成不等于这个数之外的出现最多的数，用前缀和后缀最大值解决。</p>
+<h3 id="d---robot-arms">D - Robot Arms</h3>
+<p>首先考虑无解的情况，当存在两个点 <span class="math inline">\((x_1,y_1),(x_2,y_2)\)</span>，且 <span class="math inline">\(x_1+y_1\not\equiv x_2+y_2\pmod 2\)</span> 时，一定无解。因为任何两个点的操作一定是把某一个 <span class="math inline">\(\pm d_i\)</span> 改成 <span class="math inline">\(\mp d_i\)</span>，这样差一定是 <span class="math inline">\(2d_i\)</span> 为偶数，所以所有的 <span class="math inline">\(x_i+y_i\)</span> 奇偶性一定相同。</p>
+<p>然后考虑构造方案，看到最多只有 <span class="math inline">\(40\)</span> 节考虑倍增。我们让 <span class="math inline">\(d={1,2,4,\dots,2^k}\)</span>，那么通过作图可以发现，所有可以达到的点为 <span class="math inline">\(x+y&lt;2^k\)</span> 且为奇数的所有点。至于构造方案，从大到小枚举长度，每一次走走完后的坐标距离目标最近的点，这样一定可以走到。</p>
+<p>如果 <span class="math inline">\(x+y\)</span> 都是偶数，那么再添加一个 <span class="math inline">\(1\)</span> 然后把所有点坐标都偏移一下。</p>
+<h3 id="e---tree">E - Tr/ee</h3>
+<p>依旧先考虑无解，显然如果 <span class="math inline">\(s_1=0\)</span> 或 <span class="math inline">\(s_n=1\)</span> 时无解，同时我们发现如果 <span class="math inline">\(s_i\)</span> 和 <span class="math inline">\(s_{n-i}\)</span> 不同也无解，因为如果断出了一个大小为 <span class="math inline">\(i\)</span> 的连通块，那么另一部分大小为 <span class="math inline">\(n-i\)</span>。下面的构造方式证明其他情况一定有解。</p>
+<p>我们首先让 <span class="math inline">\(1,2\)</span> 连边，然后我们从 <span class="math inline">\(2\)</span> 开始到 <span class="math inline">\(n-1\)</span> 遍历 <span class="math inline">\(s\)</span>，记一个变量 <code>now</code>，其初值为 <span class="math inline">\(2\)</span>，然后每一次连接 <span class="math inline">\(now\)</span> 和 <span class="math inline">\(i+1\)</span>，如果 <span class="math inline">\(s_i=1\)</span>，令 <span class="math inline">\(now=i+1\)</span>。</p>
+<p>考虑这样为什么是对的，这样构造出来的树一定是一条长链，然后每个链上的点挂了若干个点，显然切开链和挂着的点之间的边只会得到 <span class="math inline">\(1\)</span>，那么考虑切链上的边，如果从一段 dfs，那么切掉一条边后连通块大小就是某个端点的 <span class="math inline">\(size\)</span>，显然根据我们的构造方式，只会存在 <span class="math inline">\(s_i=1\)</span> 的 <span class="math inline">\(size\)</span>。</p>
+<h3 id="f---distance-sums">F - Distance Sums</h3>
+<p>我们考虑如果从 <span class="math inline">\(u\)</span> 变到 <span class="math inline">\(v\)</span>，<span class="math inline">\(d\)</span> 的变化。设断开 <span class="math inline">\((u,v)\)</span> 后，两棵树的大小分别为 <span class="math inline">\(siz_u,siz_v\)</span>，则所有 <span class="math inline">\(u\)</span> 树中的点 <span class="math inline">\(dis\)</span> 增加 <span class="math inline">\(1\)</span>，<span class="math inline">\(v\)</span> 树中的点 <span class="math inline">\(dis\)</span> 减小 <span class="math inline">\(1\)</span>。故 <span class="math inline">\(\Delta d=siz_u-siz_v=siz_u-(n-siz_u)=2siz_u-n\)</span>。我们不难有推论：<span class="math inline">\(d\)</span> 最小的点一定是重心，<span class="math inline">\(d\)</span> 最大的点一定是叶子；且以重心为根，父亲的 <span class="math inline">\(d\)</span>，一定小于儿子的 <span class="math inline">\(d\)</span>。</p>
+<p>然后我们考虑构造方案，我们把 <span class="math inline">\(d\)</span> 从大到小排序，那么第一个一定是叶子，即它的 <span class="math inline">\(siz\)</span> 已经确定，因为 <span class="math inline">\(d\)</span> 两两不同，我们也就确定了它的父节点，这样我们每访问到一个点，都可以确定它的 <span class="math inline">\(siz\)</span>，也就可以一个一个确定父亲。如果某一次找不到父亲对应的 <span class="math inline">\(d\)</span>，那么一定无解。</p>
+<p>然后如果我们都构造完了，也不一定有解。因为我们只是保证了所有 <span class="math inline">\(d\)</span> 之间的相对大小，并没有算出 <span class="math inline">\(d\)</span> 的值，所以我们需要随便计算一个点的 <span class="math inline">\(d\)</span> 查看是否正确。</p>
+<p>提交记录（按题号排序）：#16938465,#16947314,#16939196,#16951309。</p>
+]]></content>
+      <tags>
+        <tag>套题题解</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CF516E Drazil and His Happy Friends</title>
     <url>/2020/09/20/CF516E%20Drazil%20and%20His%20Happy%20Friends/</url>
     <content><![CDATA[<p><a href="https://codeforces.com/problemset/problem/516/E" target="_blank" rel="noopener">题目链接</a></p>
@@ -167,7 +223,7 @@ ans&amp;=\sum\limits_{j=1}^m[\gcd(j,k)=1]\sum\limits_{i=1}^n\sum\limits_{d\mid i
 ans=\sum\limits_{d=1}^n\lfloor\frac{n}{d}\rfloor\mu(d)\sum\limits_{d\mid j,j\leqslant m}[\gcd(j,k)=1]
 \]</span> 我们发现，<span class="math inline">\(j\)</span> 可以表示为 <span class="math inline">\(xd\)</span>，那么 <span class="math inline">\(\gcd(j,k)=1\)</span> 等价于 <span class="math inline">\(\gcd(x,k)=1\)</span> 且 <span class="math inline">\(\gcd(d,k)=1\)</span> ，于是我们有 <span class="math display">\[
 ans=\sum\limits_{d=1}^n\lfloor\frac{n}{d}\rfloor\mu(d)[\gcd(d,k)=1]\sum\limits_{x=1}^{\lfloor\frac{m}{d}\rfloor}[\gcd(x,k)=1]
-\]</span> 然后我们观察第二个求和号，如果我们设 <span class="math inline">\(f(z)=\sum\limits_{i=1}^z[\gcd(i,z)=1]\)</span>，那么后面的就是 $ f()$。</p>
+\]</span> 然后我们观察第二个求和号，如果我们设 <span class="math inline">\(f(z)=\sum\limits_{i=1}^z[\gcd(i,k)=1]\)</span>，那么后面的就是 $ f()$。</p>
 <p>我们考虑是否能够快速计算 <span class="math inline">\(f\)</span>，根据辗转相除（减）法的原理，我们有 <span class="math inline">\(\gcd(x,k)=\gcd(x+k,k)\)</span>，所以我们有 <span class="math display">\[
 f(z)=\lfloor \frac{z}{k}\rfloor f(k)+f(z\bmod k)
 \]</span> 即我们按照每个数模 <span class="math inline">\(k\)</span> 的余数将其分为若干等价类。这样我们只需要预处理 <span class="math inline">\(f(1)\dots f(k)\)</span> 就可以在 <span class="math inline">\(O(1)\)</span> 时间内计算 <span class="math inline">\(f(z)\)</span>。</p>
