@@ -43,6 +43,7 @@ F_i=\max(G_i,\frac{F_{i-1}+F_{i+1}}{2})
     <content><![CDATA[<h3 id="c---triangular-relationship">C - Triangular Relationship</h3>
 <p>如果 <span class="math inline">\(K\)</span> 是奇数，那么一定有 <span class="math inline">\(K\mid a,K\mid b,K\mid c\)</span>，所以答案为 <span class="math inline">\(\lfloor\frac{N}{K}\rfloor^3\)</span>。</p>
 <p>如果 <span class="math inline">\(K\)</span> 是偶数，还有可能 <span class="math inline">\(a,b,c\equiv \frac{K}{2}\pmod K\)</span>，所以在奇数的基础上还要加上 <span class="math inline">\(\left(\lfloor\frac{N-\frac{K}{2}}{K}\rfloor+1\right)^3\)</span>，注意如果 <span class="math inline">\(N&lt;\frac{K}{2}\)</span> 时不能加上。</p>
+<a id="more"></a>
 <h3 id="d---all-your-paths-are-different-lengths">D - All Your Paths are Different Lengths</h3>
 <p>先考虑 <span class="math inline">\(L=2^k\)</span> 怎么做：只需要把 <span class="math inline">\(1-k+1\)</span> 的点排成一排，<span class="math inline">\(i\)</span> 和 <span class="math inline">\(i+1\)</span> 的点分别连权值为 <span class="math inline">\(0\)</span> 和 <span class="math inline">\(2^{i-1}\)</span> 的两条边就可以了。</p>
 <p>然后我们考虑 <span class="math inline">\(L\not=2^k\)</span> 的情况，首先设 <span class="math inline">\(2^{mx}\leqslant L&lt;2^{mx+1}\)</span>，那么我们先构造一个如上的长为 <span class="math inline">\(mx+1\)</span> 的链，然后我们从高到低遍历 <span class="math inline">\(L\)</span> 的二进制，同时维护把比当前位更低（包括当前位）的位都置为 <span class="math inline">\(0\)</span> 后 <span class="math inline">\(L\)</span> 的值 <span class="math inline">\(now\)</span>，如果 <span class="math inline">\(2^k(k\not=mx)\)</span> 这一位是 <span class="math inline">\(1\)</span>，则从 <span class="math inline">\(k+1\)</span> 向 <span class="math inline">\(mx+1\)</span> 连一条权值为 <span class="math inline">\(now\)</span> 的边。</p>
@@ -73,7 +74,7 @@ F_i=\max(G_i,\frac{F_{i-1}+F_{i+1}}{2})
   <entry>
     <title>ARC103 简要题解</title>
     <url>/2020/09/21/ARC103/</url>
-    <content><![CDATA[<h3 id="c--">C - ////</h3>
+    <content><![CDATA[<h3 id="c--">C - /\/\/\/</h3>
 <p>计算出 <code>t1[]</code> 和 <code>t2[]</code> 表示奇数和偶数位置上每个数出现的次数，枚举奇数位改成了哪一种数，那么偶数位就改成不等于这个数之外的出现最多的数，用前缀和后缀最大值解决。</p>
 <a id="more"></a>
 <h3 id="d---robot-arms">D - Robot Arms</h3>
