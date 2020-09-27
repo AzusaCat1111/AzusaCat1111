@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script>  
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://azusacat1111.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="对每个 \(1\leqslant i\leqslant n\) 求 \(i\) 个点的弱连通有标号有向无环图数目，\(n\leqslant 10^5\)。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="luoguP6295 有标号 DAG 计数">
+<meta property="og:url" content="https://azusacat1111.github.io/2020/07/30/luoguP6295%E6%9C%89%E6%A0%87%E5%8F%B7DAG%E8%AE%A1%E6%95%B0/index.html">
+<meta property="og:site_name" content="AzusaCat&#39;s Blog">
+<meta property="og:description" content="对每个 \(1\leqslant i\leqslant n\) 求 \(i\) 个点的弱连通有标号有向无环图数目，\(n\leqslant 10^5\)。">
+<meta property="article:published_time" content="2020-07-30T12:02:44.000Z">
+<meta property="article:modified_time" content="2020-08-04T00:12:36.160Z">
+<meta property="article:author" content="AzusaCat">
+<meta property="article:tag" content="生成函数">
+<meta property="article:tag" content="多项式">
+<meta property="article:tag" content="二项式反演">
+<meta property="article:tag" content="容斥">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://azusacat1111.github.io/2020/07/30/luoguP6295%E6%9C%89%E6%A0%87%E5%8F%B7DAG%E8%AE%A1%E6%95%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>luoguP6295 有标号 DAG 计数 | AzusaCat's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AzusaCat's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/07/30/luoguP6295%E6%9C%89%E6%A0%87%E5%8F%B7DAG%E8%AE%A1%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="AzusaCat">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AzusaCat's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          luoguP6295 有标号 DAG 计数
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-30 20:02:44" itemprop="dateCreated datePublished" datetime="2020-07-30T20:02:44+08:00">2020-07-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-04 08:12:36" itemprop="dateModified" datetime="2020-08-04T08:12:36+08:00">2020-08-04</time>
+              </span>
+
+          
+            <span id="/2020/07/30/luoguP6295%E6%9C%89%E6%A0%87%E5%8F%B7DAG%E8%AE%A1%E6%95%B0/" class="post-meta-item leancloud_visitors" data-flag-title="luoguP6295 有标号 DAG 计数" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/07/30/luoguP6295%E6%9C%89%E6%A0%87%E5%8F%B7DAG%E8%AE%A1%E6%95%B0/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/30/luoguP6295%E6%9C%89%E6%A0%87%E5%8F%B7DAG%E8%AE%A1%E6%95%B0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>对每个 <span class="math inline">\(1\leqslant i\leqslant n\)</span> 求 <span class="math inline">\(i\)</span> 个点的弱连通有标号有向无环图数目，<span class="math inline">\(n\leqslant 10^5\)</span>。 <a id="more"></a></p>
+<p>首先，根据 exp 的组合意义，即有标号对象组成的集合个数，如果我们求出了不一定弱连通的 DAG 数目的 EGF <span class="math inline">\(G(x)\)</span>，设弱连通的 DAG 数目的 EGF 为 <span class="math inline">\(F(x)\)</span>，则 <span class="math display">\[
+F(x)=\ln(G(x))
+\]</span> 显然一张 DAG 一定有至少一个入度为 <span class="math inline">\(0\)</span> 的点，所以我们尝试枚举度数为 <span class="math inline">\(0\)</span> 的点的个数，然后我们计算度数为 <span class="math inline">\(0\)</span> 的点和其它点的连边情况，然后就递归到了子问题，这样你可能会写出以下式子 <span class="math display">\[
+g_i=\sum\limits_{j=1}^i\binom{i}{j}2^{j(i-j)}g_{i-j}
+\]</span> 但是写个暴力试一下发现是错的，为什么？因为剩下的点里可能也有入度为 <span class="math inline">\(0\)</span> 的点，所以会计重。</p>
+<p>我们发现，我们实际上不是枚举入度为 <span class="math inline">\(0\)</span> 的点，而是在钦定入度为 <span class="math inline">\(0\)</span> 的点，我们设 <span class="math inline">\(h_{i,j}\)</span> 为<span class="math inline">\(i\)</span> 个点的图钦定 <span class="math inline">\(j\)</span> 个入度为 <span class="math inline">\(0\)</span> 个点的方案数，<span class="math inline">\(c_{i,j}\)</span> 为恰好 <span class="math inline">\(j\)</span> 个入度为 <span class="math inline">\(0\)</span> 的点的方案数，那么有（这个式子都不知道见了多少遍了）： <span class="math display">\[
+h_{i,j}=\sum\limits_{k=j}^i \binom{k}{j}c_{i,k}
+\]</span> 由二项式反演： <span class="math display">\[
+c_{i,j}=\sum\limits_{k=j}^i \binom{k}{j}(-1)^{k-j}h_{i,k}
+\]</span> 同时类似刚才那个假的式子，我们有 $h_{i,j}=2^{j(i-j)}g_{i-j} $，有 <span class="math inline">\(g_i=\sum\limits_{j=1}^i c_{i,j}\)</span>。</p>
+<p>然后我们把能带入的都带入 <span class="math display">\[
+\begin{aligned}
+g_n&amp;=\sum\limits_{i=1}^nc_{n,i}\\
+&amp;=\sum\limits_{i=1}^n\sum\limits_{j=i}^n\binom{j}{i}(-1)^{j-i}h_{i,j}\\
+&amp;=\sum\limits_{i=1}^n\sum\limits_{j=i}^n\binom{j}{i}(-1)^{j-i}\binom{n}{j}2^{j(n-j)}g_{n-j}\\
+&amp;=\sum\limits_{j=1}^n\binom{n}{j}2^{j(n-j)}g_{n-j}\sum\limits_{i=1}^{j}\binom{j}{i}(-1)^{i-j}\\
+&amp;=\sum\limits_{j=1}^n\binom{n}{j}2^{j(n-j)}g_{n-j}(0-(-1)^j)\\
+&amp;=\sum\limits_{j=1}^n\binom{n}{j}(-1)^{j+1}2^{j(n-j)}g_{n-j}
+\end{aligned}
+\]</span></p>
+<p>然后注意到有个 <span class="math inline">\(j(n-j)\)</span>，我们采用和 Bluestein 一样的套路，把 <span class="math inline">\(j(n-j)\)</span> 拆成组合数的和。 <span class="math display">\[
+j(n-j)=\binom{n}{2}-\binom{j}{2}-\binom{n-j}{2}
+\]</span></p>
+<p>如果记不住可以考虑组合意义：等价于有两堆石子，各有 <span class="math inline">\(j\)</span> 和 <span class="math inline">\(n-j\)</span> 个，然后从两堆石子各取一个的方案数等于任取的方案数减去同时在一堆石子里取的方案数。</p>
+<p>这里没有用平方式的那个，因为不一定存在 <span class="math inline">\(2\)</span> 的二次剩余（虽然 AKrry 证明了如果是 NTT 模数都存在）。</p>
+<p>这样就是卷积形式了 <span class="math display">\[
+\begin{aligned}
+g_n=\sum\limits_{j=1}^n\binom{n}{j}(-1)^{j+1}2^{j(n-j)}g_{n-j}\\
+\frac{g_n}{n!2^{\binom{n}{2}}}=\sum\limits_{j=1}^n\frac{(-1)^{j+1}}{2^{\binom{j}{2}}j!}\frac{g^{n-j}}{2^\binom{n-j}{2}(n-j)!}
+\end{aligned}
+\]</span> 设 <span class="math display">\[
+F(x)=\sum\limits_{i=1}^\infty \frac{(-1)^{i+1}}{2^{\binom{i}{2}}i!}x^i\\
+G(x)=\sum\limits_{i=0}^\infty \frac{g_i}{2^{\binom{i}{2}}i!}x^i
+\]</span></p>
+<p>则 <span class="math inline">\(G(x)=F(x)G(x)+1\)</span>，故 <span class="math inline">\(G(x)=\frac{1}{1-F(x)}\)</span>。这样就可以求出 <span class="math inline">\(g\)</span>，然后再做一遍 <span class="math inline">\(\ln\)</span> 就好了。</p>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> <span class="keyword">const</span> inv2=<span class="number">499122177</span>;</span><br><span class="line"><span class="keyword">namespace</span> polynomials</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> <span class="keyword">const</span> p=<span class="number">998244353</span>,g=<span class="number">3</span>;</span><br><span class="line">    <span class="keyword">int</span> <span class="keyword">const</span> N=(<span class="number">1</span>&lt;&lt;<span class="number">19</span>)+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> w[N],iv[N],r[N],last;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">mod</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;<span class="keyword">return</span> x&gt;=p?x-p:x;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">pw</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(y)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(y&amp;<span class="number">1</span>)res=<span class="number">1l</span>l*res*x%p;</span><br><span class="line">            x=<span class="number">1l</span>l*x*x%p;</span><br><span class="line">            y&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> lim=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(lim&lt;n)lim&lt;&lt;=<span class="number">1</span>;</span><br><span class="line">        iv[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=lim;i++)iv[i]=mod(p<span class="number">-1l</span>l*(p/i)*iv[p%i]%p);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;lim;i&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> wn=pw(g,(p<span class="number">-1</span>)/(i&lt;&lt;<span class="number">1</span>));</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>,ww=<span class="number">1</span>;j&lt;i;j++,ww=<span class="number">1l</span>l*ww*wn%p)w[i+j]=ww;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">ntt</span><span class="params">(vec &amp;f,<span class="keyword">int</span> n,<span class="keyword">int</span> op)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        f.resize(n);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)r[i]=(r[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)?(n&gt;&gt;<span class="number">1</span>):<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)<span class="keyword">if</span>(i&lt;r[i])swap(f[i],f[r[i]]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j+=i&lt;&lt;<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;i;k++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> x=f[j+k],y=<span class="number">1l</span>l*f[i+j+k]*w[i+k]%p;</span><br><span class="line">                f[j+k]=mod(x+y);f[i+j+k]=mod(x-y+p);</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">if</span>(op==<span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            reverse(&amp;f[<span class="number">1</span>],&amp;f[n]);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)f[i]=<span class="number">1l</span>l*f[i]*iv[n]%p;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getinv</span><span class="params">(vec f,vec &amp;g,<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">static</span> vec x;</span><br><span class="line">        g.resize(n);</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">1</span>)&#123;g[<span class="number">0</span>]=pw(f[<span class="number">0</span>],p<span class="number">-2</span>);<span class="keyword">return</span>;&#125;</span><br><span class="line">        getinv(f,g,(n+<span class="number">1</span>)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">int</span> lim=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(lim&lt;(n&lt;&lt;<span class="number">1</span>))lim&lt;&lt;=<span class="number">1</span>;</span><br><span class="line">        x.resize(lim);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)x[i]=f[i];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=n;i&lt;lim;i++)x[i]=<span class="number">0</span>;</span><br><span class="line">        g.resize(lim);</span><br><span class="line">        ntt(x,lim,<span class="number">1</span>),ntt(g,lim,<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;lim;i++)g[i]=<span class="number">1l</span>l*g[i]*(<span class="number">2</span><span class="number">-1l</span>l*g[i]*x[i]%p+p)%p;</span><br><span class="line">        ntt(g,lim,<span class="number">-1</span>);</span><br><span class="line">        g.resize(n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getln</span><span class="params">(vec f,vec &amp;g,<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">static</span> vec x;</span><br><span class="line">        getinv(f,x,n);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n<span class="number">-1</span>;i++)f[i]=<span class="number">1l</span>l*f[i+<span class="number">1</span>]*(i+<span class="number">1</span>)%p;</span><br><span class="line">        f[n<span class="number">-1</span>]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> lim=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(lim&lt;((n&lt;&lt;<span class="number">1</span>)<span class="number">-1</span>))lim&lt;&lt;=<span class="number">1</span>;</span><br><span class="line">        ntt(f,lim,<span class="number">1</span>),ntt(x,lim,<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;lim;i++)x[i]=<span class="number">1l</span>l*x[i]*f[i]%p;</span><br><span class="line">        ntt(x,lim,<span class="number">-1</span>);</span><br><span class="line">        g.resize(n);</span><br><span class="line">        g[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)g[i]=<span class="number">1l</span>l*x[i<span class="number">-1</span>]*iv[i]%p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> polynomials;</span><br><span class="line"><span class="keyword">int</span> fac[<span class="number">200005</span>],inv[<span class="number">200005</span>];</span><br><span class="line">vec f,G,ans;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    n++;</span><br><span class="line">    init(n&lt;&lt;<span class="number">1</span>);</span><br><span class="line">    fac[<span class="number">0</span>]=inv[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)fac[i]=<span class="number">1l</span>l*fac[i<span class="number">-1</span>]*i%p;</span><br><span class="line">    inv[n<span class="number">-1</span>]=pw(fac[n<span class="number">-1</span>],p<span class="number">-2</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=n<span class="number">-2</span>;i&gt;=<span class="number">1</span>;i--)inv[i]=<span class="number">1l</span>l*inv[i+<span class="number">1</span>]*(i+<span class="number">1</span>)%p;</span><br><span class="line">    f.resize(n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)</span><br><span class="line">        f[i]=<span class="number">1l</span>l*(((i+<span class="number">1</span>)&amp;<span class="number">1</span>)?(p<span class="number">-1</span>):<span class="number">1</span>)*inv[i]%p*pw(inv2,(<span class="number">1l</span>l*i*(i<span class="number">-1</span>)&gt;&gt;<span class="number">1</span>)%(p<span class="number">-1</span>))%p;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)f[i]=mod(p-f[i]);</span><br><span class="line">    f[<span class="number">0</span>]=mod(f[<span class="number">0</span>]+<span class="number">1</span>);</span><br><span class="line">    getinv(f,G,n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)G[i]=<span class="number">1l</span>l*G[i]*pw(<span class="number">2</span>,(<span class="number">1l</span>l*i*(i<span class="number">-1</span>)&gt;&gt;<span class="number">1</span>)%(p<span class="number">-1</span>))%p;</span><br><span class="line">    getln(G,ans,n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,<span class="number">1l</span>l*ans[i]*fac[i]%p);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0/" rel="tag"># 生成函数</a>
+              <a href="/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F/" rel="tag"># 多项式</a>
+              <a href="/tags/%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%8F%8D%E6%BC%94/" rel="tag"># 二项式反演</a>
+              <a href="/tags/%E5%AE%B9%E6%96%A5/" rel="tag"># 容斥</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/29/%E3%80%8CTHUPC2019%E3%80%8D%E6%89%BE%E6%A0%91/" rel="prev" title="「THUPC2019」找树">
+      <i class="fa fa-chevron-left"></i> 「THUPC2019」找树
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/03/%E3%80%8CNOI2019%E3%80%8D%E5%BA%8F%E5%88%97/" rel="next" title="「NOI2019」序列">
+      「NOI2019」序列 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+<!-- require APlayer -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    <!-- require MetingJS-->
+    <script src="https://cdn.jsdelivr.net/npm/meting@1.2/dist/Meting.min.js"></script> 
+	<!--网易云-->   
+    <div class="aplayer" 
+      data-id="5246566946" 
+      data-server="netease" 
+      data-type="playlist" 
+      data-fixed="true" 
+      data-autoplay="false" 
+      data-list-folded="true"
+      data-mutex="true"
+      data-order="random" 
+      data-loop="all"
+      data-volume="0.4" 
+      data-theme="#FADFA3" 
+      data-preload="auto" > 
+    </div>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="AzusaCat"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">AzusaCat</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">AzusaCat</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'mrFMgDKOa2CvtBeD7CUzjR9B-gzGzoHsz',
+      appKey: 'miAoX0qqIvhAvxAHYOcO7fFR',
+      placeholder: "Just go go",
+      avatar: 'mp',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: 'zh-cn' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: '',
+      avatar_cdn:'',
+      emojiCDN: '//i0.hdslb.com/bfs/emote/',
+      emojiMaps: {
+      "蛆音娘_卖萌":"4cd1024d0c2ecee93224477946656d32c1705ccf.png@112w_112h.webp" ,
+      "蛆音娘_吃瓜群众":"5d0d6cc54b508d30b4f50b6b5f7b7e1e259d84ea.png@112w_112h.webp" ,
+      "蛆音娘_吃惊":"7a4cb0b644214d476ce198ddf6a7a0aa31311199.png@112w_112h.webp" ,
+      "蛆音娘_害怕":"7407634bf67bfe9d7806f15d57608a1b18c2b4c2.png@112w_112h.webp" ,
+      "蛆音娘_扶额":"a4d8f95baaa24821fd591a7dbeee1b869e760f59.png@112w_112h.webp" ,
+      "蛆音娘_滑稽":"d3717f10ffe9787336bc39a09214270988521a67.png@112w_112h.webp" ,
+      "蛆音娘_哼":"8854f1b8a82126e3b87f3a1563da5feb55b23e71.png@112w_112h.webp" ,
+      "蛆音娘_机智":"e543c0a823ca915df9362283f4ae950e9e9cc2e9.png@112w_112h.webp" ,
+      "蛆音娘_哭泣":"a23055546c19eba663b16370b8e072394d87ff53.png@112w_112h.webp" ,
+      "蛆音娘_睡觉觉":"40ef7e6d931acb37e5514b70d13663e86dc3698b.png@112w_112h.webp" ,
+      "蛆音娘_生气":"bf398cbbcfaae107d1b59aaf03895f38422e3d87.png@112w_112h.webp" ,
+      "蛆音娘_偷看":"52463ded4f23649db10ba3ced662ed946c5edf0b.png@112w_112h.webp" ,
+      "蛆音娘_吐血":"5772d22015e5b2b40a9fe302b5967ec7282ac848.png@112w_112h.webp" ,
+      "蛆音娘_无语":"b6c763c6484ce2e48299ceb21861e46318868871.png@112w_112h.webp" ,
+      "蛆音娘_摇头":"b7278f750c6f2235f41f37056d727f25d3bf781f.png@112w_112h.webp" ,
+      "蛆音娘_疑问":"7750b698d15a1b8e83c0f59106e8e9cd5cb57897.png@112w_112h.webp" ,
+      "蛆音娘_die":"52543025a070fde5c01a10320c9636ec3173ac99.png@112w_112h.webp" ,
+      "蛆音娘_OK":"52a0dcee66c91bf123bf53bd48a269b1317d17f9.png@112w_112h.webp" ,
+      "蛆音娘_肥皂":"7f1a857e9430dcf3050ce0ef5fa19aefebea6dc4.png@112w_112h.webp" ,
+      "蛆音娘_大笑":"1d3355fb89c24ab3c50e5c152d8b990a290dc63e.png@112w_112h.webp" ,
+      "2233娘_大笑":"16b8794be990cefa6caeba4d901b934a227ee3b8.png@112w_112h.webp" ,
+      "2233娘_吃惊":"d1628c43d35b1530c0504a643ff80b6189fa0a43.png@112w_112h.webp" ,
+      "2233娘_大哭":"476a2a60f6e337b8c0697a592e0aa82781f6b33b.png@112w_112h.webp" ,
+      "2233娘_耶":"d7178e258a0efc969b65ccc2b1322fb235f5dff4.png@112w_112h.webp" ,
+      "2233娘_卖萌":"ea893aa25355de95ab4f03c2dad3f0c58d0c159e.png@112w_112h.webp" ,
+      "2233娘_疑问":"0b41f509351958dbb63d472fec0132d1bd03bd14.png@112w_112h.webp" ,
+      "2233娘_汗":"247cd9df8cdf84b18368c21e3b2dd374e84c0927.png@112w_112h.webp" ,
+      "2233娘_困惑":"714eeb4eae0d0933b4ff08b7df788b1982f6b940.png@112w_112h.webp" ,
+      "2233娘_怒":"f31953119c51b9748016440ac0b632f779929b37.png@112w_112h.webp" ,
+      "2233娘_委屈":"d9d0bf9d358af8d5761093ec66d4e3f60d963a63.png@112w_112h.webp" ,
+      "2233娘_郁闷":"485203fe7100f2c8fc40b2800a18fe20b35f2f1a.png@112w_112h.webp" ,
+      "2233娘_第一":"3754ee6e5985bd0bd7dfb668981f2a8733398ebd.png@112w_112h.webp" ,
+      "2233娘_喝水":"695bf5429472049b52c1e0de586f8a2511195a23.png@112w_112h.webp" ,
+      "2233娘_吐魂":"e999af499edf38a91ca68b1a9d2f97042c1d6734.png@112w_112h.webp" ,
+      "2233娘_无言":"fdb5870f32cfaf7949e0f88a13f6feba4a48b719.png@112w_112h.webp" ,
+      "小电视_笑":"f80d384875183dfe2e24be13011c595c0210d273.png@112w_112h.webp" ,
+      "小电视_发愁":"05e279abbf3f72d5cc45548504a4220c5514b8b9.png@112w_112h.webp" ,
+      "小电视_赞":"86ccf6d0b5480169bf80f3582fae09d7ed455c06.png@112w_112h.webp" ,
+      "小电视_差评":"38456e3bde2839b00b536a8be13934fa57c8e298.png@112w_112h.webp" ,
+      "小电视_嘟嘴":"6fd437f547ef1e4f231ff475d02f58bb94cef5a5.png@112w_112h.webp" ,
+      "小电视_汗":"5c150cec77eae1b05d5ca46526450ff3beeb44d2.png@112w_112h.webp" ,
+      "小电视_害羞":"de3aee88f7b6cc20ba9480c96c02f83a844381a9.png@112w_112h.webp" ,
+      "小电视_吃惊":"05188008ea84c70d94e0076e28de15bf56f4c441.png@112w_112h.webp" ,
+      "小电视_哭泣":"938bdf98df945576ae88e2a22931db07ded9e663.png@112w_112h.webp" ,
+      "小电视_太太喜欢":"eb41a8c04840e4f77e76a4bff7a29ac89c432f4e.png@112w_112h.webp" ,
+      "小电视_好怒啊":"68d524b7e515396b6563d320fb710c64abfb1063.png@112w_112h.webp" ,
+      "小电视_困惑":"6853161f0eab3332b874ab7c6c0311035b7538f3.png@112w_112h.webp" ,
+      "小电视_我好兴奋":"a695fe1301aab2675ab6f6e34757c25a863a8617.png@112w_112h.webp" ,
+      "小电视_思索":"f8219e484d5a55787c3f1722dc3112d0eba03a69.png@112w_112h.webp" ,
+      "小电视_无语":"fbd12affebfdaadd3d721bffdb685a6b1ee71219.png@112w_112h.webp" ,
+      }
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

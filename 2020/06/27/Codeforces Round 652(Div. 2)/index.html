@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script>  
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://azusacat1111.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="A. FashionabLee 问是否可以通过旋转使得在平面直角坐标系中的正 \(n\) 边形同时有至少一条边与 X 轴平行，有至少一条边与 Y 轴平行。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Codeforces Round &amp;#35;652 (Div. 2)简要题解">
+<meta property="og:url" content="https://azusacat1111.github.io/2020/06/27/Codeforces%20Round%20652(Div.%202)/index.html">
+<meta property="og:site_name" content="AzusaCat&#39;s Blog">
+<meta property="og:description" content="A. FashionabLee 问是否可以通过旋转使得在平面直角坐标系中的正 \(n\) 边形同时有至少一条边与 X 轴平行，有至少一条边与 Y 轴平行。">
+<meta property="article:published_time" content="2020-06-27T02:00:37.000Z">
+<meta property="article:modified_time" content="2020-07-04T09:55:29.045Z">
+<meta property="article:author" content="AzusaCat">
+<meta property="article:tag" content="套题题解">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://azusacat1111.github.io/2020/06/27/Codeforces%20Round%20652(Div.%202)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Codeforces Round &#35;652 (Div. 2)简要题解 | AzusaCat's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AzusaCat's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/06/27/Codeforces%20Round%20652(Div.%202)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="AzusaCat">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AzusaCat's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Codeforces Round &#35;652 (Div. 2)简要题解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-27 10:00:37" itemprop="dateCreated datePublished" datetime="2020-06-27T10:00:37+08:00">2020-06-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-04 17:55:29" itemprop="dateModified" datetime="2020-07-04T17:55:29+08:00">2020-07-04</time>
+              </span>
+
+          
+            <span id="/2020/06/27/Codeforces%20Round%20652(Div.%202)/" class="post-meta-item leancloud_visitors" data-flag-title="Codeforces Round &#35;652 (Div. 2)简要题解" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/06/27/Codeforces%20Round%20652(Div.%202)/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/27/Codeforces%20Round%20652(Div.%202)/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="a.-fashionablee">A. <a href="https://codeforces.com/contest/1369/problem/A" target="_blank" rel="noopener">FashionabLee</a></h3>
+<p>问是否可以通过旋转使得在平面直角坐标系中的正 <span class="math inline">\(n\)</span> 边形同时有至少一条边与 X 轴平行，有至少一条边与 Y 轴平行。</p>
+<a id="more"></a>
+<p>显然，当且仅当 <span class="math inline">\(n\bmod 4=0\)</span> 时有解，因为通过轴对称性可知可以被分为全等的四份（我一开始没看清题WA了一次/dk）</p>
+<p>提交记录：<a href="https://codeforces.com/problemset/submission/1369/84757021" target="_blank" rel="noopener">#84757021</a></p>
+<h3 id="b.-accuratelee">B. <a href="https://codeforces.com/contest/1369/problem/B" target="_blank" rel="noopener">AccurateLee</a></h3>
+<p>给定一个01串 <span class="math inline">\(s\)</span> ，如果 <span class="math inline">\(s_i=1\)</span> 且 <span class="math inline">\(s_{i+1}=0\)</span> 那么可以选择这两个数中的一个删除，然后后面的串向前补全。问这个串经过若干操作后最短的长度是多少，如果有多个最短的，输出字典序最小的。</p>
+<p>我们考虑 <span class="math inline">\(1...0...1... 0\)</span> 这样的串，我们可以把它消到只剩下一个 <span class="math inline">\(0\)</span> （先用每个0前面的1消掉0，留下最后一个0消掉前面的所有1）。</p>
+<p>对于含有前缀0和后缀1的情况，显然它们都不能被消去，所以最后答案为 前缀0的个数+[除去前缀0和后缀1后不是空串] 个0 和 后缀1的个数 个1。</p>
+<p>提交记录：<a href="https://codeforces.com/problemset/submission/1369/84770401" target="_blank" rel="noopener">#84770401</a></p>
+<h3 id="c.-rationallee">C. <a href="https://codeforces.com/contest/1369/problem/C" target="_blank" rel="noopener">RationalLee</a></h3>
+<p>给定 <span class="math inline">\(n\)</span> 个元素，<span class="math inline">\(k\)</span> 个集合，你需要把每个元素恰好放在一个集合内。第 <span class="math inline">\(i\)</span> 个集合需要放进恰好 <span class="math inline">\(w_i\)</span> 个元素，第 <span class="math inline">\(j\)</span> 个元素的价值为 <span class="math inline">\(a_j\)</span> ，每个集合的价值为它包含的元素的价值的最大值和最小值之和（如果只有一个元素计算两次），求所有集合的价值之和的最大值。<span class="math inline">\(k\leqslant n\leqslant 2\times 10^5\)</span>。</p>
+<p>考虑贪心，如果我们有 <span class="math inline">\(w=1\)</span> 的集合，那么一定优先把最大的元素放到这种集合里。我们把元素按价值从大到小排序，把集合按大小从小到大排序，那么首先往第 <span class="math inline">\(i\)</span> 个集合内放入第 <span class="math inline">\(i\)</span> 个元素，然后贪心把价值小的元素放入大的集合中（比如说剩下的元素为 <span class="math inline">\(5,3,1\)</span> 集合大小为 <span class="math inline">\(2,1\)</span>，那么就分成 <span class="math inline">\(\{3,1\},\{5\}\)</span> ，这样就是答案。</p>
+<p>提交记录：<a href="https://codeforces.com/problemset/submission/1369/84777478" target="_blank" rel="noopener">#84777478</a></p>
+<h3 id="d.-tediouslee">D. <a href="https://codeforces.com/contest/1369/problem/D" target="_blank" rel="noopener">TediousLee</a></h3>
+<p>给定一种有根树的构造方式，版本1为一个单独的节点，对于版本 <span class="math inline">\(i\)</span> ，我们从版本 <span class="math inline">\(i-1\)</span> 递推：对于版本 <span class="math inline">\(i-1\)</span> 的每个节点，如果它没有儿子，那么长出一个儿子；如果有一个儿子，那么再长出两个新的儿子；如果有三个儿子，那么不变。</p>
+<p>现在给定版本 <span class="math inline">\(n\)</span> 的树，每个节点一开始都是绿色，如果一个节点有三个儿子，且它们和这个节点本身都是绿色，那么可以把这四个点染成黄色，问最多能染出多少黄色的节点，答案 <span class="math inline">\(\bmod 10^9+7\)</span>。<span class="math inline">\(n\leqslant2\times 10^6\)</span>。</p>
+<p>我们发现对于版本 <span class="math inline">\(i(i\geqslant3)\)</span> ，它实际上由一个根接上两个版本 <span class="math inline">\(i-2\)</span> 的树再接上一个版本 <span class="math inline">\(i-1\)</span> 的树构成，那么我们可以考虑递推。发现这实际上在求一个类似最大独立集的东西，设 <span class="math inline">\(f[n][0/1]\)</span> 为版本 <span class="math inline">\(n\)</span> ，是否染了根节点的色的答案，那么对于 <span class="math inline">\(n\geqslant 3\)</span> 则有 <span class="math display">\[
+\left\{
+\begin{aligned}
+&amp;f[n][0]=2*\max(f[n-2][0],f[n-2][1])+\max(f[n-1][0],f[n-1][1])\\
+&amp;f[n][1]=2*f[n-2][0]+f[n-1][0]+4
+\end{aligned}
+\right.
+\]</span> 这个东西在取模意义下是会WA的，因为取模后的 <span class="math inline">\(\max\)</span> 不一定是取模前的 <span class="math inline">\(\max\)</span> ，但是如果你直接这样交上去是会AC的，因为 <span class="math inline">\(f[n][0]\)</span> 和 <span class="math inline">\(f[n][1]\)</span> 的差实际上很小，在 <span class="math inline">\(n\leqslant 2\times 10^6\)</span> 的情况下不会出现两个数取模次数不一样的情况。</p>
+<p>考虑能不能不用 <span class="math inline">\(\max\)</span> 来做，我们设 <span class="math inline">\(f_n\)</span> 表示 <span class="math inline">\(n\)</span> 的答案，<span class="math inline">\(r_i\)</span> 表示是否可以在不染根节点的情况下让答案达到 <span class="math inline">\(f_n\)</span> （对应到我们刚才的想法就是若 <span class="math inline">\(f[n][0]\geqslant f[n][1]\)</span> 则 <span class="math inline">\(r_n=1\)</span>），那么有 <span class="math inline">\(r_0=r_1=1\)</span> ，我们发现当 <span class="math inline">\(r_{n-1}=r_{n-2}=1\)</span> 时，我们可以把根节点染色，这时候染色的答案是不染色的答案+4，所以此时 <span class="math inline">\(r_n=0\)</span> ，其他时刻如果我们强制染根节点，最多只会让答案+4，但是子树的答案至少少了4，所以不优，这时 <span class="math inline">\(r_n=1\)</span>。简单归纳就知道当且仅当 <span class="math inline">\(n\bmod 3=0\)</span> 时 <span class="math inline">\(r_n=0\)</span> ，所以有 <span class="math inline">\(f_n=f_{n-1}+2*f_{n-2}+4[n\bmod 3=0]\)</span> ，这样就避免了同时取模和取 <span class="math inline">\(\max\)</span> ，然后这题也可以用矩阵快速幂或者其他方法加速到 <span class="math inline">\(n=10^{18}\)</span>。</p>
+<p>提交记录（第一种方法）：<a href="https://codeforces.com/problemset/submission/1369/84785701" target="_blank" rel="noopener">#84785701</a></p>
+<h3 id="e.-deadlee">E. <a href="https://codeforces.com/contest/1369/problem/E" target="_blank" rel="noopener">DeadLee</a></h3>
+<p>你有 <span class="math inline">\(n\)</span> 种菜和 <span class="math inline">\(m\)</span> 个朋友。每种菜有 <span class="math inline">\(w_i\)</span> 份，每个朋友有两种喜欢的菜（不会相同）。你需要安排朋友来的顺序，每个朋友来了会吃掉他喜欢的菜各一份（如果某一种没有就不吃那一种），问是否有一种顺序使得每个朋友都能吃到至少一种他喜欢的菜，有的话输出任意一种方案。<span class="math inline">\(n,m\leqslant 2\times 10^5\)</span>。</p>
+<p>我们把菜看成点，对每个朋友喜欢的两种菜之间连上一条边，设每个点的度数为 <span class="math inline">\(d_i\)</span>，即喜欢吃这种菜的朋友的个数。</p>
+<p>首先，我们发现如果 <span class="math inline">\(\forall i,d_i&gt;w_i\)</span> 则无解（证明待补），如果 <span class="math inline">\(\exist i,w_i\geqslant d_i\)</span> ，那么对于所有与 <span class="math inline">\(i\)</span> 相连的边都可以吃 <span class="math inline">\(i\)</span> ，我们把这些边放到栈中，并且将与这些边相连的点的 <span class="math inline">\(d\)</span> 都减去1（重边减去多次）。重复这个步骤如果最终所有边都被访过那么就合法，这时从栈顶一个一个输出就是答案。</p>
+<p>提交记录：<a href="https://codeforces.com/contest/1369/submission/84807161" target="_blank" rel="noopener">#84807161</a></p>
+<h3 id="f.-barelee">F. <a href="https://codeforces.com/contest/1369/problem/F" target="_blank" rel="noopener">BareLee</a></h3>
+<p>现在还不是很明白，所以鸽了。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%A5%97%E9%A2%98%E9%A2%98%E8%A7%A3/" rel="tag"># 套题题解</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/21/HEOI2020%20%E9%80%80%E5%BD%B9%E8%AE%B0/" rel="prev" title="HEOI2020 退役记">
+      <i class="fa fa-chevron-left"></i> HEOI2020 退役记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/28/%E3%80%8CBJOI2020%E3%80%8D%E5%B0%81%E5%8D%B0/" rel="next" title="「BJOI2020」封印">
+      「BJOI2020」封印 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+<!-- require APlayer -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    <!-- require MetingJS-->
+    <script src="https://cdn.jsdelivr.net/npm/meting@1.2/dist/Meting.min.js"></script> 
+	<!--网易云-->   
+    <div class="aplayer" 
+      data-id="5246566946" 
+      data-server="netease" 
+      data-type="playlist" 
+      data-fixed="true" 
+      data-autoplay="false" 
+      data-list-folded="true"
+      data-mutex="true"
+      data-order="random" 
+      data-loop="all"
+      data-volume="0.4" 
+      data-theme="#FADFA3" 
+      data-preload="auto" > 
+    </div>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#a.-fashionablee"><span class="nav-number">1.</span> <span class="nav-text">A. FashionabLee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b.-accuratelee"><span class="nav-number">2.</span> <span class="nav-text">B. AccurateLee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c.-rationallee"><span class="nav-number">3.</span> <span class="nav-text">C. RationalLee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d.-tediouslee"><span class="nav-number">4.</span> <span class="nav-text">D. TediousLee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#e.-deadlee"><span class="nav-number">5.</span> <span class="nav-text">E. DeadLee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#f.-barelee"><span class="nav-number">6.</span> <span class="nav-text">F. BareLee</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="AzusaCat"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">AzusaCat</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">AzusaCat</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'mrFMgDKOa2CvtBeD7CUzjR9B-gzGzoHsz',
+      appKey: 'miAoX0qqIvhAvxAHYOcO7fFR',
+      placeholder: "Just go go",
+      avatar: 'mp',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: 'zh-cn' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: '',
+      avatar_cdn:'',
+      emojiCDN: '//i0.hdslb.com/bfs/emote/',
+      emojiMaps: {
+      "蛆音娘_卖萌":"4cd1024d0c2ecee93224477946656d32c1705ccf.png@112w_112h.webp" ,
+      "蛆音娘_吃瓜群众":"5d0d6cc54b508d30b4f50b6b5f7b7e1e259d84ea.png@112w_112h.webp" ,
+      "蛆音娘_吃惊":"7a4cb0b644214d476ce198ddf6a7a0aa31311199.png@112w_112h.webp" ,
+      "蛆音娘_害怕":"7407634bf67bfe9d7806f15d57608a1b18c2b4c2.png@112w_112h.webp" ,
+      "蛆音娘_扶额":"a4d8f95baaa24821fd591a7dbeee1b869e760f59.png@112w_112h.webp" ,
+      "蛆音娘_滑稽":"d3717f10ffe9787336bc39a09214270988521a67.png@112w_112h.webp" ,
+      "蛆音娘_哼":"8854f1b8a82126e3b87f3a1563da5feb55b23e71.png@112w_112h.webp" ,
+      "蛆音娘_机智":"e543c0a823ca915df9362283f4ae950e9e9cc2e9.png@112w_112h.webp" ,
+      "蛆音娘_哭泣":"a23055546c19eba663b16370b8e072394d87ff53.png@112w_112h.webp" ,
+      "蛆音娘_睡觉觉":"40ef7e6d931acb37e5514b70d13663e86dc3698b.png@112w_112h.webp" ,
+      "蛆音娘_生气":"bf398cbbcfaae107d1b59aaf03895f38422e3d87.png@112w_112h.webp" ,
+      "蛆音娘_偷看":"52463ded4f23649db10ba3ced662ed946c5edf0b.png@112w_112h.webp" ,
+      "蛆音娘_吐血":"5772d22015e5b2b40a9fe302b5967ec7282ac848.png@112w_112h.webp" ,
+      "蛆音娘_无语":"b6c763c6484ce2e48299ceb21861e46318868871.png@112w_112h.webp" ,
+      "蛆音娘_摇头":"b7278f750c6f2235f41f37056d727f25d3bf781f.png@112w_112h.webp" ,
+      "蛆音娘_疑问":"7750b698d15a1b8e83c0f59106e8e9cd5cb57897.png@112w_112h.webp" ,
+      "蛆音娘_die":"52543025a070fde5c01a10320c9636ec3173ac99.png@112w_112h.webp" ,
+      "蛆音娘_OK":"52a0dcee66c91bf123bf53bd48a269b1317d17f9.png@112w_112h.webp" ,
+      "蛆音娘_肥皂":"7f1a857e9430dcf3050ce0ef5fa19aefebea6dc4.png@112w_112h.webp" ,
+      "蛆音娘_大笑":"1d3355fb89c24ab3c50e5c152d8b990a290dc63e.png@112w_112h.webp" ,
+      "2233娘_大笑":"16b8794be990cefa6caeba4d901b934a227ee3b8.png@112w_112h.webp" ,
+      "2233娘_吃惊":"d1628c43d35b1530c0504a643ff80b6189fa0a43.png@112w_112h.webp" ,
+      "2233娘_大哭":"476a2a60f6e337b8c0697a592e0aa82781f6b33b.png@112w_112h.webp" ,
+      "2233娘_耶":"d7178e258a0efc969b65ccc2b1322fb235f5dff4.png@112w_112h.webp" ,
+      "2233娘_卖萌":"ea893aa25355de95ab4f03c2dad3f0c58d0c159e.png@112w_112h.webp" ,
+      "2233娘_疑问":"0b41f509351958dbb63d472fec0132d1bd03bd14.png@112w_112h.webp" ,
+      "2233娘_汗":"247cd9df8cdf84b18368c21e3b2dd374e84c0927.png@112w_112h.webp" ,
+      "2233娘_困惑":"714eeb4eae0d0933b4ff08b7df788b1982f6b940.png@112w_112h.webp" ,
+      "2233娘_怒":"f31953119c51b9748016440ac0b632f779929b37.png@112w_112h.webp" ,
+      "2233娘_委屈":"d9d0bf9d358af8d5761093ec66d4e3f60d963a63.png@112w_112h.webp" ,
+      "2233娘_郁闷":"485203fe7100f2c8fc40b2800a18fe20b35f2f1a.png@112w_112h.webp" ,
+      "2233娘_第一":"3754ee6e5985bd0bd7dfb668981f2a8733398ebd.png@112w_112h.webp" ,
+      "2233娘_喝水":"695bf5429472049b52c1e0de586f8a2511195a23.png@112w_112h.webp" ,
+      "2233娘_吐魂":"e999af499edf38a91ca68b1a9d2f97042c1d6734.png@112w_112h.webp" ,
+      "2233娘_无言":"fdb5870f32cfaf7949e0f88a13f6feba4a48b719.png@112w_112h.webp" ,
+      "小电视_笑":"f80d384875183dfe2e24be13011c595c0210d273.png@112w_112h.webp" ,
+      "小电视_发愁":"05e279abbf3f72d5cc45548504a4220c5514b8b9.png@112w_112h.webp" ,
+      "小电视_赞":"86ccf6d0b5480169bf80f3582fae09d7ed455c06.png@112w_112h.webp" ,
+      "小电视_差评":"38456e3bde2839b00b536a8be13934fa57c8e298.png@112w_112h.webp" ,
+      "小电视_嘟嘴":"6fd437f547ef1e4f231ff475d02f58bb94cef5a5.png@112w_112h.webp" ,
+      "小电视_汗":"5c150cec77eae1b05d5ca46526450ff3beeb44d2.png@112w_112h.webp" ,
+      "小电视_害羞":"de3aee88f7b6cc20ba9480c96c02f83a844381a9.png@112w_112h.webp" ,
+      "小电视_吃惊":"05188008ea84c70d94e0076e28de15bf56f4c441.png@112w_112h.webp" ,
+      "小电视_哭泣":"938bdf98df945576ae88e2a22931db07ded9e663.png@112w_112h.webp" ,
+      "小电视_太太喜欢":"eb41a8c04840e4f77e76a4bff7a29ac89c432f4e.png@112w_112h.webp" ,
+      "小电视_好怒啊":"68d524b7e515396b6563d320fb710c64abfb1063.png@112w_112h.webp" ,
+      "小电视_困惑":"6853161f0eab3332b874ab7c6c0311035b7538f3.png@112w_112h.webp" ,
+      "小电视_我好兴奋":"a695fe1301aab2675ab6f6e34757c25a863a8617.png@112w_112h.webp" ,
+      "小电视_思索":"f8219e484d5a55787c3f1722dc3112d0eba03a69.png@112w_112h.webp" ,
+      "小电视_无语":"fbd12affebfdaadd3d721bffdb685a6b1ee71219.png@112w_112h.webp" ,
+      }
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

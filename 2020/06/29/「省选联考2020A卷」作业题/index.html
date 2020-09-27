@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script>  
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://azusacat1111.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="给定一张带边权的简单无向连通图，定义一棵生成树 \(T\) 的权值为 \[ val(T)&#x3D;\left(\sum\limits_{i&#x3D;1}^{n-1}w_{e_i}\right)\times\gcd(w_{e_1},w_{e_2},\dots,w_{e_{n-1}}) \] 求所有生成树的权值之和。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「省选联考2020A卷」作业题">
+<meta property="og:url" content="https://azusacat1111.github.io/2020/06/29/%E3%80%8C%E7%9C%81%E9%80%89%E8%81%94%E8%80%832020A%E5%8D%B7%E3%80%8D%E4%BD%9C%E4%B8%9A%E9%A2%98/index.html">
+<meta property="og:site_name" content="AzusaCat&#39;s Blog">
+<meta property="og:description" content="给定一张带边权的简单无向连通图，定义一棵生成树 \(T\) 的权值为 \[ val(T)&#x3D;\left(\sum\limits_{i&#x3D;1}^{n-1}w_{e_i}\right)\times\gcd(w_{e_1},w_{e_2},\dots,w_{e_{n-1}}) \] 求所有生成树的权值之和。">
+<meta property="article:published_time" content="2020-06-29T07:33:49.000Z">
+<meta property="article:modified_time" content="2020-07-04T09:55:18.424Z">
+<meta property="article:author" content="AzusaCat">
+<meta property="article:tag" content="矩阵树定理">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://azusacat1111.github.io/2020/06/29/%E3%80%8C%E7%9C%81%E9%80%89%E8%81%94%E8%80%832020A%E5%8D%B7%E3%80%8D%E4%BD%9C%E4%B8%9A%E9%A2%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>「省选联考2020A卷」作业题 | AzusaCat's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AzusaCat's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/06/29/%E3%80%8C%E7%9C%81%E9%80%89%E8%81%94%E8%80%832020A%E5%8D%B7%E3%80%8D%E4%BD%9C%E4%B8%9A%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="AzusaCat">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AzusaCat's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          「省选联考2020A卷」作业题
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-29 15:33:49" itemprop="dateCreated datePublished" datetime="2020-06-29T15:33:49+08:00">2020-06-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-04 17:55:18" itemprop="dateModified" datetime="2020-07-04T17:55:18+08:00">2020-07-04</time>
+              </span>
+
+          
+            <span id="/2020/06/29/%E3%80%8C%E7%9C%81%E9%80%89%E8%81%94%E8%80%832020A%E5%8D%B7%E3%80%8D%E4%BD%9C%E4%B8%9A%E9%A2%98/" class="post-meta-item leancloud_visitors" data-flag-title="「省选联考2020A卷」作业题" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/06/29/%E3%80%8C%E7%9C%81%E9%80%89%E8%81%94%E8%80%832020A%E5%8D%B7%E3%80%8D%E4%BD%9C%E4%B8%9A%E9%A2%98/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/29/%E3%80%8C%E7%9C%81%E9%80%89%E8%81%94%E8%80%832020A%E5%8D%B7%E3%80%8D%E4%BD%9C%E4%B8%9A%E9%A2%98/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>给定一张带边权的简单无向连通图，定义一棵生成树 <span class="math inline">\(T\)</span> 的权值为 <span class="math display">\[
+val(T)=\left(\sum\limits_{i=1}^{n-1}w_{e_i}\right)\times\gcd(w_{e_1},w_{e_2},\dots,w_{e_{n-1}})
+\]</span> 求所有生成树的权值之和。 <a id="more"></a> <span class="math inline">\(n\leqslant 30 , m\leqslant\frac{n(n-1)}{2},1\leqslant w_i\leqslant 152501\)</span> 。</p>
+<p>首先我们把碍事的 <span class="math inline">\(\gcd\)</span> 消掉，这里通过欧拉反演，即 <span class="math inline">\(\varphi*I=id\)</span> （证明的话把 <span class="math inline">\(1\dots n\)</span> 的数按与 <span class="math inline">\(n\)</span> 的 <span class="math inline">\(\gcd\)</span> 分类）。当然也可以直接减掉倍数好像还更方便。那么简单推下式子： <span class="math display">\[
+\begin{aligned}
+&amp;\sum\limits_T\left(\sum\limits_{i=1}^{n-1}w_{e_i}\right)\times\gcd(w_{e_1},w_{e_2},\dots,w_{e_{n-1}})（现在开始设\gcd 为 g）\\
+=&amp;\sum\limits_T\left(\sum\limits_{i=1}^{n-1}w_{e_i}\right)\times\sum\limits_{d|g}\varphi(d)\\
+=&amp;\sum\limits_{d=1}^{w_{max}}\varphi(d)\sum\limits_{ T\wedge\forall i,d|w_{e_i}}\left(\sum\limits_{i=1}^{n-1}w_{e_i}\right)
+\end{aligned}
+\]</span> 我们枚举 <span class="math inline">\(d\)</span> ，每次找出所有 <span class="math inline">\(w_i\)</span> 为 <span class="math inline">\(d\)</span> 的倍数的边，我们现在需要求出仅由这些边构成的生成树的边权和的和。对于这个，我们构造一个模 <span class="math inline">\(x^2\)</span> 意义下的多项式矩阵，对每条边重新定义边权为 <span class="math inline">\(1+w_ix\)</span> 。基尔霍夫矩阵的主余子式等于 <span class="math inline">\(\sum\limits_T\prod\limits_{i=1}^{n-1}w_i\)</span> （这个我不会证明），那么我们把重新定义的边权带进去发现一次项系数就是我们要求的边权和之和。</p>
+<p>然后我们考虑 <span class="math inline">\(\bmod x^2\)</span> 意义下的多项式四则运算，加减法没有区别，乘法：<span class="math inline">\((a+bx)(c+dx)=ac+(ad+bc)x\)</span>，除法：<span class="math inline">\(\frac{a+bx}{c+dx}=\frac{a}{c}+\frac{bc-ad}{c^2}x\)</span> （证明的话乘一个 <span class="math inline">\(c+dx\)</span> 就好了）。当 <span class="math inline">\(c=0\)</span> 怎么办？对于选取每一行的主元，我们找到不为0的次数最低的那一项，如果次数为0那么就直接做，如果为1说明这一列在当前行后面的常数项都为0，此时除法应该特判为 <span class="math inline">\(\frac{bx}{dx}=\frac{b}{d}\)</span>（我不是很确定这里的必要性，代码是否特判都过了）。这样的话对 <span class="math inline">\(1-w_{max}\)</span> 都做一遍矩阵树复杂度是 <span class="math inline">\(O(wn^3)\)</span> 的，我们可以做一个剪枝，当添加入的边大于等于 <span class="math inline">\(n-1\)</span> 时才去做矩阵树，这样的复杂度是 <span class="math inline">\(O(n^3\max\sigma_0w)\)</span> 即 <span class="math inline">\(144\times n^3\)</span> ，可以通过本题。</p>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> <span class="keyword">const</span> N=<span class="number">152501</span>,p=<span class="number">998244353</span>;</span><br><span class="line"><span class="keyword">int</span> n,u[<span class="number">2505</span>],v[<span class="number">2505</span>],w[<span class="number">2505</span>],phi[N+<span class="number">5</span>],pr[<span class="number">50005</span>],cnt;</span><br><span class="line"><span class="keyword">bool</span> flag[N+<span class="number">5</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    phi[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=N;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!flag[i])pr[++cnt]=i,phi[i]=i<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=cnt&amp;&amp;i*pr[j]&lt;=N;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            flag[i*pr[j]]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(!(i%pr[j]))&#123;phi[i*pr[j]]=phi[i]*pr[j];<span class="keyword">break</span>;&#125;</span><br><span class="line">            phi[i*pr[j]]=phi[i]*(pr[j]<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mod</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;x)</span></span>&#123;<span class="keyword">return</span> x&gt;=p?x-p:x;&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pw</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(y)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(y&amp;<span class="number">1</span>)res=<span class="number">1l</span>l*res*x%p;</span><br><span class="line">        x=<span class="number">1l</span>l*x*x%p;</span><br><span class="line">        y&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">poly</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x0,x1;</span><br><span class="line">    poly()&#123;x0=x1=<span class="number">0</span>;&#125;</span><br><span class="line">    poly(<span class="keyword">int</span> a,<span class="keyword">int</span> b)&#123;x0=a,x1=b;&#125;</span><br><span class="line">    <span class="keyword">friend</span> poly <span class="keyword">operator</span> +(poly a,poly b)</span><br><span class="line">        &#123;<span class="keyword">return</span> poly(mod(a.x0+b.x0),mod(a.x1+b.x1));&#125;</span><br><span class="line">    <span class="keyword">friend</span> poly <span class="keyword">operator</span> -(poly a,poly b)</span><br><span class="line">        &#123;<span class="keyword">return</span> poly(mod(a.x0-b.x0+p),mod(a.x1-b.x1+p));&#125;</span><br><span class="line">    <span class="keyword">friend</span> poly <span class="keyword">operator</span> *(poly a,poly b)</span><br><span class="line">        &#123;<span class="keyword">return</span> poly(<span class="number">1l</span>l*a.x0*b.x0%p,mod(<span class="number">1l</span>l*a.x0*b.x1%p+<span class="number">1l</span>l*a.x1*b.x0%p));&#125;</span><br><span class="line">    <span class="keyword">friend</span> poly <span class="keyword">operator</span> /(poly a,poly b)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a.x0==<span class="number">0</span>&amp;&amp;b.x0==<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> inv=pw(b.x1,p<span class="number">-2</span>);</span><br><span class="line">            <span class="keyword">return</span> poly(<span class="number">1l</span>l*a.x1*inv%p,<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> inv=pw(b.x0,p<span class="number">-2</span>);</span><br><span class="line">        <span class="keyword">return</span> poly(<span class="number">1l</span>l*a.x0*inv%p,((<span class="number">1l</span>l*a.x1*b.x0<span class="number">-1l</span>l*a.x0*b.x1)%p*inv%p*inv%p+p)%p);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;mat[<span class="number">31</span>][<span class="number">31</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">deg</span><span class="params">(poly a)</span></span>&#123;<span class="keyword">return</span> a.x0?<span class="number">0</span>:(a.x1?<span class="number">1</span>:<span class="number">2</span>);&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">det</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> f=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> c=i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">            <span class="keyword">if</span>(deg(mat[j][i])&lt;deg(mat[c][i]))c=j;</span><br><span class="line">        <span class="keyword">if</span>(c!=i)swap(mat[i],mat[c]),f*=<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">if</span>(deg(mat[i][i])==<span class="number">2</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            poly t=mat[j][i]/mat[i][i];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=i;k&lt;=n;k++)</span><br><span class="line">                mat[j][k]=mat[j][k]-mat[i][k]*t;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    poly res;</span><br><span class="line">    <span class="keyword">if</span>(f==<span class="number">1</span>)res=poly(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">else</span> res=poly(p<span class="number">-1</span>,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)res=res*mat[i][i];</span><br><span class="line">    <span class="keyword">return</span> res.x1;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    init();</span><br><span class="line">    <span class="keyword">int</span> m,ans=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    n--;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;u[i],&amp;v[i],&amp;w[i]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(mat,<span class="number">0</span>,<span class="keyword">sizeof</span>(mat));</span><br><span class="line">        <span class="keyword">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">            <span class="keyword">if</span>(!(w[j]%i))</span><br><span class="line">            &#123;</span><br><span class="line">                mat[u[j]][v[j]]=mat[u[j]][v[j]]-poly(<span class="number">1</span>,w[j]);</span><br><span class="line">                mat[v[j]][u[j]]=mat[v[j]][u[j]]-poly(<span class="number">1</span>,w[j]);</span><br><span class="line">                mat[u[j]][u[j]]=mat[u[j]][u[j]]+poly(<span class="number">1</span>,w[j]);</span><br><span class="line">                mat[v[j]][v[j]]=mat[v[j]][v[j]]+poly(<span class="number">1</span>,w[j]);</span><br><span class="line">                cnt++;</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">if</span>(cnt&lt;n)<span class="keyword">continue</span>;</span><br><span class="line">        ans=mod(ans+<span class="number">1l</span>l*det()*phi[i]%p);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%9F%A9%E9%98%B5%E6%A0%91%E5%AE%9A%E7%90%86/" rel="tag"># 矩阵树定理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/28/%E3%80%8CBJOI2020%E3%80%8D%E5%B0%81%E5%8D%B0/" rel="prev" title="「BJOI2020」封印">
+      <i class="fa fa-chevron-left"></i> 「BJOI2020」封印
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/29/%E3%80%8CNOI2006%E3%80%8D%E7%BD%91%E7%BB%9C%E6%94%B6%E8%B4%B9/" rel="next" title="「NOI2006」网络收费">
+      「NOI2006」网络收费 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+<!-- require APlayer -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    <!-- require MetingJS-->
+    <script src="https://cdn.jsdelivr.net/npm/meting@1.2/dist/Meting.min.js"></script> 
+	<!--网易云-->   
+    <div class="aplayer" 
+      data-id="5246566946" 
+      data-server="netease" 
+      data-type="playlist" 
+      data-fixed="true" 
+      data-autoplay="false" 
+      data-list-folded="true"
+      data-mutex="true"
+      data-order="random" 
+      data-loop="all"
+      data-volume="0.4" 
+      data-theme="#FADFA3" 
+      data-preload="auto" > 
+    </div>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="AzusaCat"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">AzusaCat</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">AzusaCat</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'mrFMgDKOa2CvtBeD7CUzjR9B-gzGzoHsz',
+      appKey: 'miAoX0qqIvhAvxAHYOcO7fFR',
+      placeholder: "Just go go",
+      avatar: 'mp',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: 'zh-cn' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: '',
+      avatar_cdn:'',
+      emojiCDN: '//i0.hdslb.com/bfs/emote/',
+      emojiMaps: {
+      "蛆音娘_卖萌":"4cd1024d0c2ecee93224477946656d32c1705ccf.png@112w_112h.webp" ,
+      "蛆音娘_吃瓜群众":"5d0d6cc54b508d30b4f50b6b5f7b7e1e259d84ea.png@112w_112h.webp" ,
+      "蛆音娘_吃惊":"7a4cb0b644214d476ce198ddf6a7a0aa31311199.png@112w_112h.webp" ,
+      "蛆音娘_害怕":"7407634bf67bfe9d7806f15d57608a1b18c2b4c2.png@112w_112h.webp" ,
+      "蛆音娘_扶额":"a4d8f95baaa24821fd591a7dbeee1b869e760f59.png@112w_112h.webp" ,
+      "蛆音娘_滑稽":"d3717f10ffe9787336bc39a09214270988521a67.png@112w_112h.webp" ,
+      "蛆音娘_哼":"8854f1b8a82126e3b87f3a1563da5feb55b23e71.png@112w_112h.webp" ,
+      "蛆音娘_机智":"e543c0a823ca915df9362283f4ae950e9e9cc2e9.png@112w_112h.webp" ,
+      "蛆音娘_哭泣":"a23055546c19eba663b16370b8e072394d87ff53.png@112w_112h.webp" ,
+      "蛆音娘_睡觉觉":"40ef7e6d931acb37e5514b70d13663e86dc3698b.png@112w_112h.webp" ,
+      "蛆音娘_生气":"bf398cbbcfaae107d1b59aaf03895f38422e3d87.png@112w_112h.webp" ,
+      "蛆音娘_偷看":"52463ded4f23649db10ba3ced662ed946c5edf0b.png@112w_112h.webp" ,
+      "蛆音娘_吐血":"5772d22015e5b2b40a9fe302b5967ec7282ac848.png@112w_112h.webp" ,
+      "蛆音娘_无语":"b6c763c6484ce2e48299ceb21861e46318868871.png@112w_112h.webp" ,
+      "蛆音娘_摇头":"b7278f750c6f2235f41f37056d727f25d3bf781f.png@112w_112h.webp" ,
+      "蛆音娘_疑问":"7750b698d15a1b8e83c0f59106e8e9cd5cb57897.png@112w_112h.webp" ,
+      "蛆音娘_die":"52543025a070fde5c01a10320c9636ec3173ac99.png@112w_112h.webp" ,
+      "蛆音娘_OK":"52a0dcee66c91bf123bf53bd48a269b1317d17f9.png@112w_112h.webp" ,
+      "蛆音娘_肥皂":"7f1a857e9430dcf3050ce0ef5fa19aefebea6dc4.png@112w_112h.webp" ,
+      "蛆音娘_大笑":"1d3355fb89c24ab3c50e5c152d8b990a290dc63e.png@112w_112h.webp" ,
+      "2233娘_大笑":"16b8794be990cefa6caeba4d901b934a227ee3b8.png@112w_112h.webp" ,
+      "2233娘_吃惊":"d1628c43d35b1530c0504a643ff80b6189fa0a43.png@112w_112h.webp" ,
+      "2233娘_大哭":"476a2a60f6e337b8c0697a592e0aa82781f6b33b.png@112w_112h.webp" ,
+      "2233娘_耶":"d7178e258a0efc969b65ccc2b1322fb235f5dff4.png@112w_112h.webp" ,
+      "2233娘_卖萌":"ea893aa25355de95ab4f03c2dad3f0c58d0c159e.png@112w_112h.webp" ,
+      "2233娘_疑问":"0b41f509351958dbb63d472fec0132d1bd03bd14.png@112w_112h.webp" ,
+      "2233娘_汗":"247cd9df8cdf84b18368c21e3b2dd374e84c0927.png@112w_112h.webp" ,
+      "2233娘_困惑":"714eeb4eae0d0933b4ff08b7df788b1982f6b940.png@112w_112h.webp" ,
+      "2233娘_怒":"f31953119c51b9748016440ac0b632f779929b37.png@112w_112h.webp" ,
+      "2233娘_委屈":"d9d0bf9d358af8d5761093ec66d4e3f60d963a63.png@112w_112h.webp" ,
+      "2233娘_郁闷":"485203fe7100f2c8fc40b2800a18fe20b35f2f1a.png@112w_112h.webp" ,
+      "2233娘_第一":"3754ee6e5985bd0bd7dfb668981f2a8733398ebd.png@112w_112h.webp" ,
+      "2233娘_喝水":"695bf5429472049b52c1e0de586f8a2511195a23.png@112w_112h.webp" ,
+      "2233娘_吐魂":"e999af499edf38a91ca68b1a9d2f97042c1d6734.png@112w_112h.webp" ,
+      "2233娘_无言":"fdb5870f32cfaf7949e0f88a13f6feba4a48b719.png@112w_112h.webp" ,
+      "小电视_笑":"f80d384875183dfe2e24be13011c595c0210d273.png@112w_112h.webp" ,
+      "小电视_发愁":"05e279abbf3f72d5cc45548504a4220c5514b8b9.png@112w_112h.webp" ,
+      "小电视_赞":"86ccf6d0b5480169bf80f3582fae09d7ed455c06.png@112w_112h.webp" ,
+      "小电视_差评":"38456e3bde2839b00b536a8be13934fa57c8e298.png@112w_112h.webp" ,
+      "小电视_嘟嘴":"6fd437f547ef1e4f231ff475d02f58bb94cef5a5.png@112w_112h.webp" ,
+      "小电视_汗":"5c150cec77eae1b05d5ca46526450ff3beeb44d2.png@112w_112h.webp" ,
+      "小电视_害羞":"de3aee88f7b6cc20ba9480c96c02f83a844381a9.png@112w_112h.webp" ,
+      "小电视_吃惊":"05188008ea84c70d94e0076e28de15bf56f4c441.png@112w_112h.webp" ,
+      "小电视_哭泣":"938bdf98df945576ae88e2a22931db07ded9e663.png@112w_112h.webp" ,
+      "小电视_太太喜欢":"eb41a8c04840e4f77e76a4bff7a29ac89c432f4e.png@112w_112h.webp" ,
+      "小电视_好怒啊":"68d524b7e515396b6563d320fb710c64abfb1063.png@112w_112h.webp" ,
+      "小电视_困惑":"6853161f0eab3332b874ab7c6c0311035b7538f3.png@112w_112h.webp" ,
+      "小电视_我好兴奋":"a695fe1301aab2675ab6f6e34757c25a863a8617.png@112w_112h.webp" ,
+      "小电视_思索":"f8219e484d5a55787c3f1722dc3112d0eba03a69.png@112w_112h.webp" ,
+      "小电视_无语":"fbd12affebfdaadd3d721bffdb685a6b1ee71219.png@112w_112h.webp" ,
+      }
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

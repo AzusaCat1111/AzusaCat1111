@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script>  
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://azusacat1111.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="由于我的多项式板子实现不够精细，所以这篇博客中的文章都没有放代码。建议找一个精细实现的板子，速度会快很多。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多项式全家桶">
+<meta property="og:url" content="https://azusacat1111.github.io/2019/12/22/%E5%A4%9A%E9%A1%B9%E5%BC%8F/index.html">
+<meta property="og:site_name" content="AzusaCat&#39;s Blog">
+<meta property="og:description" content="由于我的多项式板子实现不够精细，所以这篇博客中的文章都没有放代码。建议找一个精细实现的板子，速度会快很多。">
+<meta property="article:published_time" content="2019-12-22T06:40:54.000Z">
+<meta property="article:modified_time" content="2020-09-02T12:48:06.748Z">
+<meta property="article:author" content="AzusaCat">
+<meta property="article:tag" content="多项式">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://azusacat1111.github.io/2019/12/22/%E5%A4%9A%E9%A1%B9%E5%BC%8F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>多项式全家桶 | AzusaCat's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AzusaCat's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2019/12/22/%E5%A4%9A%E9%A1%B9%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="AzusaCat">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AzusaCat's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          多项式全家桶
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-22 14:40:54" itemprop="dateCreated datePublished" datetime="2019-12-22T14:40:54+08:00">2019-12-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-02 20:48:06" itemprop="dateModified" datetime="2020-09-02T20:48:06+08:00">2020-09-02</time>
+              </span>
+
+          
+            <span id="/2019/12/22/%E5%A4%9A%E9%A1%B9%E5%BC%8F/" class="post-meta-item leancloud_visitors" data-flag-title="多项式全家桶" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/12/22/%E5%A4%9A%E9%A1%B9%E5%BC%8F/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/22/%E5%A4%9A%E9%A1%B9%E5%BC%8F/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>由于我的多项式板子实现不够精细，所以这篇博客中的文章都没有放代码。建议找一个精细实现的板子，速度会快很多。</p>
+<a id="more"></a>
+<h4 id="任意模数-ntt">任意模数 NTT</h4>
+<p>字面意思。</p>
+<p>如果不取模，按 OI 常见数据范围来讲两个多项式相乘以后系数不超过 <span class="math inline">\(10^9\times10^9\times10^5=10^{23}\)</span>，如果我们算出该多项式分别 <span class="math inline">\(\bmod\)</span> 3 个 NTT 模数下的值，我们就可以通过 CRT 合并计算出模三个模数之积的值，而这样最高精度能达到 <span class="math inline">\(10^{26}\)</span> 级别，足够应付。但是这种方法一次多项式乘法需要 9 次 DFT，比较慢。下面介绍一下比较常见的优化拆系数 FFT。</p>
+<p>众所周知，FFT 中不用取模，只需要结果取一次模就可以了。但是这题最大的系数达到了 <span class="math inline">\(10^{23}\)</span> 级别，直接 FFT 精度不足。对此我们引出拆系数 FFT。</p>
+<p>设 <span class="math inline">\(bas\)</span> 为一个 <span class="math inline">\(\sqrt{p}\)</span> 级别的数，<span class="math inline">\(F(x),G(x)\)</span> 为我们要进行乘法的多项式，那么我们可以把 两个多项式表示成以下形式： <span class="math display">\[
+F(x)=basA(x)+B(x)\\
+G(x)=basC(x)+D(x)
+\]</span> 其中，<span class="math inline">\([x^n]A(x)=\lfloor \frac{[x^n]F(x)}{bas} \rfloor\)</span>，<span class="math inline">\([x^n]B(x)=[x^n]F(x)\bmod bas\)</span>，对于 <span class="math inline">\(C(x),D(x)\)</span> 同理。这样系数就被降低到了 <span class="math inline">\(10^5bas^2\)</span> 的级别。那么有 <span class="math display">\[
+\begin{aligned}
+F(x)G(x)&amp;=(basA(x)+B(x))(basC(x)+D(x))\\
+&amp;=bas^2A(x)C(x)+bas(A(x)D(x)+B(x)C(x))+B(x)D(x)
+\end{aligned}
+\]</span> 这样先算出 <span class="math inline">\(A(x),B(x),C(x),D(x)\)</span> 的点值表示，然后根据乘的系数不同做三次 IDFT，这样一次多项式乘法一共要做 7 次 FFT。</p>
+<p>我们发现 DFT 的时候虚部一开始全为 0，可以通过一些方法利用上这里，减少 DFT 次数。</p>
+<p>首先我们要明白 DFT 的本质是 <span class="math inline">\(F(w_n^k)=\sum\limits_{i=0}^nf_iw_n^{ki}\)</span> ，假设我们现在要算出 <span class="math inline">\(A(x)\)</span> 与 <span class="math inline">\(B(x)\)</span> 的点值表示。</p>
+<p>如果我们知道了一个数组使得 <span class="math inline">\(F[k]=A(w_n^k)+iB(w_n^k)\)</span>，<span class="math inline">\(G[k]=A(w_n^k)-iB(w_n^k)\)</span>，那么我们可以通过解方程组的方式知道 <span class="math inline">\(A(w_n^k)\)</span> 与 <span class="math inline">\(B(w_n^k)\)</span>。</p>
+<p>现在我们尝试推导 <span class="math inline">\(F\)</span> 与 <span class="math inline">\(G\)</span> 的关系，通过 DFT 的定义可以知道： <span class="math display">\[
+\begin{aligned}
+F[k]&amp;=A(w_n^k)+iB(w_n^k)\\
+&amp;=\sum\limits_{j=0}^{n-1}a_iw_n^{kj}+i\sum\limits_{j=0}^nb_jw_n^{kj}\\
+&amp;=\sum\limits_{j=0}^{n-1}(a_j+ib_j)w_n^{kj}\\
+&amp;=\sum\limits_{j=0}^{n-1}(a_j+ib_j)(\cos(X)+i\sin(X))\\
+&amp;=\sum\limits_{j=0}^{n-1}(a_j\cos(X)-b_j\sin(X))+i(b_j\cos(X)+a_j\sin(X))\\
+\end{aligned}
+\]</span> 其中，<span class="math inline">\(X=\frac{2\pi kj}{n}\)</span>。</p>
+<p>同时，我们有 <span class="math display">\[
+\begin{aligned}
+G[n-k]&amp;=A(w_n^{n-k})-iB(w_n^{n-k})\\
+&amp;=A(w_n^{-k})-iB(w_n^{-k})\\
+&amp;=\sum\limits_{j=0}^{n-1}a_iw_n^{-kj}-i\sum\limits_{j=0}^nb_jw_n^{-kj}\\
+&amp;=\sum\limits_{j=0}^{n-1}(a_j-ib_j)w_n^{-kj}\\
+&amp;=\sum\limits_{j=0}^{n-1}(a_j-ib_j)(\cos(X)-i\sin(X))\\
+&amp;=\sum\limits_{j=0}^{n-1}(a_j\cos(X)-b_j\sin(X))-i(b_j\cos(X)+a_j\sin(X))\\
+\end{aligned}
+\]</span> 所以，我们发现 <span class="math inline">\(F[k]\)</span> 与 <span class="math inline">\(G[n-k]\)</span> 是共轭的（<span class="math inline">\(k=0\)</span> 时要特判一下放到 <span class="math inline">\(G[0]\)</span> 去），所以我们只需要计算出 <span class="math inline">\(F\)</span>，就可以 <span class="math inline">\(O(n)\)</span> 计算出 <span class="math inline">\(G\)</span>。这样只需要 2 次 FFT，就可以计算出四个多项式的点值。</p>
+<p>然后考虑 IDFT 部分，这里也可以省一次 FFT。我们正常求 IDFT 的时候最后结果全部都在实部（不明白去看单位根反演），那么如果我们在最开始每个点值都乘上 <span class="math inline">\(i\)</span>，那么最后出来的结果应该都在虚部，而且数值和放在实部上相等。我们知道 FFT 是一个线性变换，所以我们可以把要求的两个多项式分别放在实部和虚部上，然后 IDFT 之后实部和虚部上就是分别的原多项式了。这样就又省了一次 FFT，一次多项式乘法总共需要 4 次。</p>
+<p>实际使用一般设 <span class="math inline">\(bas\)</span> 为 <span class="math inline">\(2\)</span> 的次幂，比较方便提取系数。</p>
+<h4 id="多项式求逆乘法逆">多项式求逆（乘法逆）</h4>
+<p>给定 <span class="math inline">\(n-1\)</span> 次多项式 <span class="math inline">\(F(x)\)</span> ，求出 <span class="math inline">\(G(x)\)</span> 使得 <span class="math inline">\(F(x)G(x)\equiv1\pmod{x^n}\)</span>。</p>
+<p>我们要注意乘法逆实际是有无穷项的，只不过我们这里只需要保留前 <span class="math inline">\(n\)</span> 项。</p>
+<p>首先， <span class="math inline">\(F(x)\)</span> 在系数模质数有逆元的充要条件是 <span class="math inline">\(F(0)\not=0\)</span> ，即常数项 <span class="math inline">\([x^0]F(x)\)</span> 不为 <span class="math inline">\(0\)</span> 。必要性显然因为常数项怎么乘都是 <span class="math inline">\(0\)</span> ，接下来的构造方式证明了这也是充分条件。</p>
+<p>我们先考虑朴素的构造方式，假设我们已知 <span class="math inline">\(G(x)\)</span> 前 <span class="math inline">\(m\)</span> 项的值，那么我们算出其与 <span class="math inline">\(F(x)\)</span> 的乘积，设此时 <span class="math inline">\(m+1\)</span> 次项的系数为 <span class="math inline">\(a\)</span> ，那么 <span class="math inline">\(F(0)[x^{m+1}]G(x)=-a\)</span> ，因为 <span class="math inline">\(F(0)\not=0\)</span> ，所以 <span class="math inline">\(F(0)\)</span> 在模 <span class="math inline">\(p\)</span> 意义下存在逆元，所以 <span class="math inline">\([x^{m+1}]G(x)=(-a)*(F(0))^{-1}\)</span> ，这样我们每一次可以计算出一项直到 <span class="math inline">\(n\)</span> 项，复杂度为 <span class="math inline">\(O(n^2)\)</span> 。</p>
+<p>我们考虑已知 <span class="math inline">\(m\)</span> 项的情况下是否能得到更多项的系数，而不是只推出了后一项。我们考虑倍增，设 <span class="math inline">\(H(x)\)</span> 为 <span class="math inline">\(G(x)\bmod x^m\)</span>，即只含有 <span class="math inline">\(G(x)\)</span> 前 <span class="math inline">\(m\)</span> 项的多项式。</p>
+<p>则我们有 <span class="math display">\[
+G(x)-H(x)\equiv 0\pmod{x^m}
+\]</span></p>
+<p>两边同时平方 <span class="math display">\[
+(G(x)-H(x))^2\equiv0\pmod{x^{2m}}
+\]</span> 平方使得项度增加了一倍 （ 因为 <span class="math inline">\(x^m\)</span> 以下的项都为 <span class="math inline">\(0\)</span>，<span class="math inline">\(x^m\)</span> 以上的项只能和 <span class="math inline">\(x^m\)</span> 以上的项相乘，这样指数是大于等于 <span class="math inline">\(2m\)</span> 的，会被 <span class="math inline">\(\bmod x^{2m}\)</span> 消掉）。</p>
+<p>接下来将括号展开 <span class="math display">\[
+G^2(x)-2G(x)H(x)+H^2(x)\equiv 0\pmod{x^{2m}}
+\]</span> 两边同乘 <span class="math inline">\(F(x)\)</span> <span class="math display">\[
+F(x)G^2(x)-2F(x)G(x)H(x)+F(x)H^2(x)\equiv 0\pmod{x^{2m}}
+\]</span> 由定义我们有 <span class="math inline">\(F(x)G(x)\equiv 1\pmod{x^{2m}}\)</span> <span class="math display">\[
+G(x)-2H(x)+F(x)H^2(x)\equiv 0\pmod{x^{2m}}\\
+G(x)\equiv 2H(x)-F(x)H^2(x)\pmod{x^{2m}}
+\]</span> 所以我们只需要用三次 NTT 就可以把项数提高一倍。至于递归算还是迭代算，常数应该差距不大，看个人习惯吧。</p>
+<h4 id="分治fft">分治FFT</h4>
+<p>给定数组 <span class="math inline">\(g[1],...,g[n-1]\)</span>，求 <span class="math inline">\(f[0],...,f[n-1]\)</span>，其中 <span class="math display">\[
+f[i]=\sum\limits_{j=1}^i{f[i-j]g[j]}\\f[0]=1
+\]</span> 在模 <span class="math inline">\(998244353\)</span> 意义下进行</p>
+<p>考虑分治，先计算左半边，再计算左对右贡献，最后计算右半边，复杂度 <span class="math inline">\(O(N\log^2N)\)</span>。</p>
+<p>也可以求逆解决，设 <span class="math display">\[
+F(x)=\sum\limits_{i=0}^{n-1}f[i]x^i\\G(x)=\sum\limits_{i=0}^{n-1}g[i]x^i
+\]</span> 其中，<span class="math inline">\(g[0]=0\)</span></p>
+<p>对其卷积（在 <span class="math inline">\(\bmod x^n\)</span> 意义下进行） <span class="math display">\[
+F(x)G(x)\sum\limits_{k=0}^{n-1}\sum\limits_{i+j=k}f[i]g[j]x^k\\
+F(x)G(x)=\sum\limits_{k=0}^{n-1}f[k]x^k-f[0]\\
+F(x)G(x)=F(x)-f[0]\\
+F(x)(G(x)-1)=-f[0]\\
+F(x)=\frac{f[0]}{1-G(x)}
+\]</span> （第二行是因为 <span class="math inline">\(g[0]=0\)</span> ,所以 <span class="math inline">\(f[0]g[0]=0\)</span>）由于 <span class="math inline">\(f[0]=1\)</span>，求逆就好了，复杂度<span class="math inline">\(O(N\log N)\)</span>。</p>
+<h4 id="多项式-ln">多项式 <span class="math inline">\(\ln\)</span></h4>
+<p>求 <span class="math inline">\(B(x)\)</span> 使得 <span class="math display">\[
+B(x)\equiv \ln A(x) \pmod {x^n}
+\]</span> 设 <span class="math display">\[
+G(x)=\ln(x)
+\]</span></p>
+<p><span class="math display">\[
+B(x)\equiv G(A(x))\pmod {x^n}
+\]</span></p>
+<p>两边同时求导得 <span class="math display">\[
+B&#39;(x)\equiv G&#39;(A(x))A&#39;(x)\pmod {x^n}
+\]</span></p>
+<p><span class="math display">\[
+B&#39;(x)\equiv \frac{A&#39;(x)}{A(x)}\pmod {x^n}
+\]</span></p>
+<p><span class="math display">\[
+B(x) \equiv \int \frac{A&#39;(x)}{A(x)}dx\pmod {x^n}
+\]</span></p>
+<p>多项式求导，求逆，积分即可</p>
+<p>注：</p>
+<p><span class="math display">\[
+A&#39;(x)=\sum\limits_{i=1}^{n-1}ia_ix^{i-1}
+\]</span></p>
+<p><span class="math display">\[
+\int A(x)dx=\sum\limits_{i=0}^{n-1}\frac{a_{i}}{i+1}x^{i+1}
+\]</span></p>
+<h4 id="多项式除法和取模">多项式除法和取模</h4>
+<p>首先，已知 <span class="math inline">\(n\)</span> 次多项式 <span class="math inline">\(F(x)=\sum\limits_{i=0}^nf_ix^i\)</span> ，则 <span class="math inline">\(x^nF(\frac{1}{x})=F_r(x)\)</span> ，其中 <span class="math inline">\(F_r(x)=\sum\limits_{i=0}^nf_{n-i}x^i\)</span> ，即将 <span class="math inline">\(F(x)\)</span> 系数翻转后的多项式。</p>
+<p>现在，给定 <span class="math inline">\(n\)</span> 次多项式 <span class="math inline">\(F(x)\)</span> 和 <span class="math inline">\(m\)</span> 次多项式 <span class="math inline">\(G(x)\)</span> <span class="math inline">\((n&gt;m)\)</span> ，求出 <span class="math inline">\(n-m\)</span> 次多项式 <span class="math inline">\(Q(x)\)</span> 和次数小于 <span class="math inline">\(m\)</span> 的多项式 <span class="math inline">\(R(x)\)</span> 使得 <span class="math inline">\(F(x)=G(x)Q(x)+R(x)\)</span></p>
+<p>首先两边同乘 <span class="math inline">\(x^n\)</span></p>
+<p>则有 <span class="math display">\[
+x^nF(x)=x^mG(x)x^{n-m}Q(x)+x^{n-m}x^mR(x)
+\]</span> 将 <span class="math inline">\(x\)</span> 替换为 <span class="math inline">\(\frac{1}{x}\)</span> <span class="math display">\[
+x^nF(\frac{1}{x})=x^mG(\frac{1}{x})x^{n-m+1}Q(\frac{1}{x})+x^{n-m}x^{m-1}R(\frac{1}{x})
+\]</span> 套用上面的公式 <span class="math display">\[
+F_r(x)=G_r(x)Q_r(x)+x^{n-m+1}R_r(x)
+\]</span> 我们发现 <span class="math inline">\(Q_r(x)\)</span> 刚好是 <span class="math inline">\(n-m\)</span> 次多项式所以两边对 <span class="math inline">\(x^{n-m+1}\)</span> 取模以消掉 <span class="math inline">\(R_r(x)\)</span> 这一项 <span class="math display">\[
+F_r(x)\equiv G_r(x)Q_r(x)\pmod{x^{n-m+1}}
+\]</span> 所以我们只需要求出 <span class="math inline">\(G_r(x)\)</span> 的逆元，再与 <span class="math inline">\(F_r(x)\)</span> 相乘就得到了 <span class="math inline">\(Q_r(x)\)</span> ，再利用定义计算出 <span class="math inline">\(R(x)\)</span>。复杂度为 <span class="math inline">\(O(n\log n)\)</span>。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F/" rel="tag"># 多项式</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/26/bsgs-exbsgs/" rel="next" title="bsgs">
+      bsgs <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+<!-- require APlayer -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    <!-- require MetingJS-->
+    <script src="https://cdn.jsdelivr.net/npm/meting@1.2/dist/Meting.min.js"></script> 
+	<!--网易云-->   
+    <div class="aplayer" 
+      data-id="5246566946" 
+      data-server="netease" 
+      data-type="playlist" 
+      data-fixed="true" 
+      data-autoplay="false" 
+      data-list-folded="true"
+      data-mutex="true"
+      data-order="random" 
+      data-loop="all"
+      data-volume="0.4" 
+      data-theme="#FADFA3" 
+      data-preload="auto" > 
+    </div>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#任意模数-ntt"><span class="nav-number">1.</span> <span class="nav-text">任意模数 NTT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多项式求逆乘法逆"><span class="nav-number">2.</span> <span class="nav-text">多项式求逆（乘法逆）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分治fft"><span class="nav-number">3.</span> <span class="nav-text">分治FFT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多项式-ln"><span class="nav-number">4.</span> <span class="nav-text">多项式 \(\ln\)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多项式除法和取模"><span class="nav-number">5.</span> <span class="nav-text">多项式除法和取模</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="AzusaCat"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">AzusaCat</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">AzusaCat</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'mrFMgDKOa2CvtBeD7CUzjR9B-gzGzoHsz',
+      appKey: 'miAoX0qqIvhAvxAHYOcO7fFR',
+      placeholder: "Just go go",
+      avatar: 'mp',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: 'zh-cn' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: '',
+      avatar_cdn:'',
+      emojiCDN: '//i0.hdslb.com/bfs/emote/',
+      emojiMaps: {
+      "蛆音娘_卖萌":"4cd1024d0c2ecee93224477946656d32c1705ccf.png@112w_112h.webp" ,
+      "蛆音娘_吃瓜群众":"5d0d6cc54b508d30b4f50b6b5f7b7e1e259d84ea.png@112w_112h.webp" ,
+      "蛆音娘_吃惊":"7a4cb0b644214d476ce198ddf6a7a0aa31311199.png@112w_112h.webp" ,
+      "蛆音娘_害怕":"7407634bf67bfe9d7806f15d57608a1b18c2b4c2.png@112w_112h.webp" ,
+      "蛆音娘_扶额":"a4d8f95baaa24821fd591a7dbeee1b869e760f59.png@112w_112h.webp" ,
+      "蛆音娘_滑稽":"d3717f10ffe9787336bc39a09214270988521a67.png@112w_112h.webp" ,
+      "蛆音娘_哼":"8854f1b8a82126e3b87f3a1563da5feb55b23e71.png@112w_112h.webp" ,
+      "蛆音娘_机智":"e543c0a823ca915df9362283f4ae950e9e9cc2e9.png@112w_112h.webp" ,
+      "蛆音娘_哭泣":"a23055546c19eba663b16370b8e072394d87ff53.png@112w_112h.webp" ,
+      "蛆音娘_睡觉觉":"40ef7e6d931acb37e5514b70d13663e86dc3698b.png@112w_112h.webp" ,
+      "蛆音娘_生气":"bf398cbbcfaae107d1b59aaf03895f38422e3d87.png@112w_112h.webp" ,
+      "蛆音娘_偷看":"52463ded4f23649db10ba3ced662ed946c5edf0b.png@112w_112h.webp" ,
+      "蛆音娘_吐血":"5772d22015e5b2b40a9fe302b5967ec7282ac848.png@112w_112h.webp" ,
+      "蛆音娘_无语":"b6c763c6484ce2e48299ceb21861e46318868871.png@112w_112h.webp" ,
+      "蛆音娘_摇头":"b7278f750c6f2235f41f37056d727f25d3bf781f.png@112w_112h.webp" ,
+      "蛆音娘_疑问":"7750b698d15a1b8e83c0f59106e8e9cd5cb57897.png@112w_112h.webp" ,
+      "蛆音娘_die":"52543025a070fde5c01a10320c9636ec3173ac99.png@112w_112h.webp" ,
+      "蛆音娘_OK":"52a0dcee66c91bf123bf53bd48a269b1317d17f9.png@112w_112h.webp" ,
+      "蛆音娘_肥皂":"7f1a857e9430dcf3050ce0ef5fa19aefebea6dc4.png@112w_112h.webp" ,
+      "蛆音娘_大笑":"1d3355fb89c24ab3c50e5c152d8b990a290dc63e.png@112w_112h.webp" ,
+      "2233娘_大笑":"16b8794be990cefa6caeba4d901b934a227ee3b8.png@112w_112h.webp" ,
+      "2233娘_吃惊":"d1628c43d35b1530c0504a643ff80b6189fa0a43.png@112w_112h.webp" ,
+      "2233娘_大哭":"476a2a60f6e337b8c0697a592e0aa82781f6b33b.png@112w_112h.webp" ,
+      "2233娘_耶":"d7178e258a0efc969b65ccc2b1322fb235f5dff4.png@112w_112h.webp" ,
+      "2233娘_卖萌":"ea893aa25355de95ab4f03c2dad3f0c58d0c159e.png@112w_112h.webp" ,
+      "2233娘_疑问":"0b41f509351958dbb63d472fec0132d1bd03bd14.png@112w_112h.webp" ,
+      "2233娘_汗":"247cd9df8cdf84b18368c21e3b2dd374e84c0927.png@112w_112h.webp" ,
+      "2233娘_困惑":"714eeb4eae0d0933b4ff08b7df788b1982f6b940.png@112w_112h.webp" ,
+      "2233娘_怒":"f31953119c51b9748016440ac0b632f779929b37.png@112w_112h.webp" ,
+      "2233娘_委屈":"d9d0bf9d358af8d5761093ec66d4e3f60d963a63.png@112w_112h.webp" ,
+      "2233娘_郁闷":"485203fe7100f2c8fc40b2800a18fe20b35f2f1a.png@112w_112h.webp" ,
+      "2233娘_第一":"3754ee6e5985bd0bd7dfb668981f2a8733398ebd.png@112w_112h.webp" ,
+      "2233娘_喝水":"695bf5429472049b52c1e0de586f8a2511195a23.png@112w_112h.webp" ,
+      "2233娘_吐魂":"e999af499edf38a91ca68b1a9d2f97042c1d6734.png@112w_112h.webp" ,
+      "2233娘_无言":"fdb5870f32cfaf7949e0f88a13f6feba4a48b719.png@112w_112h.webp" ,
+      "小电视_笑":"f80d384875183dfe2e24be13011c595c0210d273.png@112w_112h.webp" ,
+      "小电视_发愁":"05e279abbf3f72d5cc45548504a4220c5514b8b9.png@112w_112h.webp" ,
+      "小电视_赞":"86ccf6d0b5480169bf80f3582fae09d7ed455c06.png@112w_112h.webp" ,
+      "小电视_差评":"38456e3bde2839b00b536a8be13934fa57c8e298.png@112w_112h.webp" ,
+      "小电视_嘟嘴":"6fd437f547ef1e4f231ff475d02f58bb94cef5a5.png@112w_112h.webp" ,
+      "小电视_汗":"5c150cec77eae1b05d5ca46526450ff3beeb44d2.png@112w_112h.webp" ,
+      "小电视_害羞":"de3aee88f7b6cc20ba9480c96c02f83a844381a9.png@112w_112h.webp" ,
+      "小电视_吃惊":"05188008ea84c70d94e0076e28de15bf56f4c441.png@112w_112h.webp" ,
+      "小电视_哭泣":"938bdf98df945576ae88e2a22931db07ded9e663.png@112w_112h.webp" ,
+      "小电视_太太喜欢":"eb41a8c04840e4f77e76a4bff7a29ac89c432f4e.png@112w_112h.webp" ,
+      "小电视_好怒啊":"68d524b7e515396b6563d320fb710c64abfb1063.png@112w_112h.webp" ,
+      "小电视_困惑":"6853161f0eab3332b874ab7c6c0311035b7538f3.png@112w_112h.webp" ,
+      "小电视_我好兴奋":"a695fe1301aab2675ab6f6e34757c25a863a8617.png@112w_112h.webp" ,
+      "小电视_思索":"f8219e484d5a55787c3f1722dc3112d0eba03a69.png@112w_112h.webp" ,
+      "小电视_无语":"fbd12affebfdaadd3d721bffdb685a6b1ee71219.png@112w_112h.webp" ,
+      }
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>
