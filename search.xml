@@ -75,6 +75,7 @@ F_i=\max(G_i,\frac{F_{i-1}+F_{i+1}}{2})
     <url>/2020/09/21/ARC103/</url>
     <content><![CDATA[<h3 id="c--">C - ////</h3>
 <p>计算出 <code>t1[]</code> 和 <code>t2[]</code> 表示奇数和偶数位置上每个数出现的次数，枚举奇数位改成了哪一种数，那么偶数位就改成不等于这个数之外的出现最多的数，用前缀和后缀最大值解决。</p>
+<a id="more"></a>
 <h3 id="d---robot-arms">D - Robot Arms</h3>
 <p>首先考虑无解的情况，当存在两个点 <span class="math inline">\((x_1,y_1),(x_2,y_2)\)</span>，且 <span class="math inline">\(x_1+y_1\not\equiv x_2+y_2\pmod 2\)</span> 时，一定无解。因为任何两个点的操作一定是把某一个 <span class="math inline">\(\pm d_i\)</span> 改成 <span class="math inline">\(\mp d_i\)</span>，这样差一定是 <span class="math inline">\(2d_i\)</span> 为偶数，所以所有的 <span class="math inline">\(x_i+y_i\)</span> 奇偶性一定相同。</p>
 <p>然后考虑构造方案，看到最多只有 <span class="math inline">\(40\)</span> 节考虑倍增。我们让 <span class="math inline">\(d={1,2,4,\dots,2^k}\)</span>，那么通过作图可以发现，所有可以达到的点为 <span class="math inline">\(x+y&lt;2^k\)</span> 且为奇数的所有点。至于构造方案，从大到小枚举长度，每一次走走完后的坐标距离目标最近的点，这样一定可以走到。</p>
