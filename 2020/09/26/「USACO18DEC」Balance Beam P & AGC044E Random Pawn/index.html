@@ -48,20 +48,21 @@
   };
 </script>
 
-  <meta name="description" content="这东西就一个式子，但是能推出很多有意思的东西。">
+  <meta name="description" content="这两道题是一个类型的，所以放到一起写了。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="单位根反演">
-<meta property="og:url" content="https://s1rius.top/2020/07/28/%E5%8D%95%E4%BD%8D%E6%A0%B9%E5%8F%8D%E6%BC%94/index.html">
+<meta property="og:title" content="「USACO18DEC」Balance Beam P &amp; AGC044E Random Pawn">
+<meta property="og:url" content="https://s1rius.top/2020/09/26/%E3%80%8CUSACO18DEC%E3%80%8DBalance%20Beam%20P%20&%20AGC044E%20Random%20Pawn/index.html">
 <meta property="og:site_name" content="S1rius&#39; Blog">
-<meta property="og:description" content="这东西就一个式子，但是能推出很多有意思的东西。">
-<meta property="article:published_time" content="2020-07-28T07:31:39.000Z">
-<meta property="article:modified_time" content="2020-08-06T09:53:32.487Z">
+<meta property="og:description" content="这两道题是一个类型的，所以放到一起写了。">
+<meta property="article:published_time" content="2020-09-26T07:16:22.000Z">
+<meta property="article:modified_time" content="2020-09-27T01:51:14.552Z">
 <meta property="article:author" content="S1rius">
-<meta property="article:tag" content="fft">
-<meta property="article:tag" content="单位根反演">
+<meta property="article:tag" content="dp">
+<meta property="article:tag" content="期望">
+<meta property="article:tag" content="构造">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://s1rius.top/2020/07/28/%E5%8D%95%E4%BD%8D%E6%A0%B9%E5%8F%8D%E6%BC%94/">
+<link rel="canonical" href="https://s1rius.top/2020/09/26/%E3%80%8CUSACO18DEC%E3%80%8DBalance%20Beam%20P%20&%20AGC044E%20Random%20Pawn/">
 
 
 <script id="page-configurations">
@@ -73,7 +74,7 @@
   };
 </script>
 
-  <title>单位根反演 | S1rius' Blog</title>
+  <title>「USACO18DEC」Balance Beam P & AGC044E Random Pawn | S1rius' Blog</title>
   
 
 
@@ -207,7 +208,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://s1rius.top/2020/07/28/%E5%8D%95%E4%BD%8D%E6%A0%B9%E5%8F%8D%E6%BC%94/">
+    <link itemprop="mainEntityOfPage" href="https://s1rius.top/2020/09/26/%E3%80%8CUSACO18DEC%E3%80%8DBalance%20Beam%20P%20&%20AGC044E%20Random%20Pawn/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -220,7 +221,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          单位根反演
+          「USACO18DEC」Balance Beam P & AGC044E Random Pawn
         </h1>
 
         <div class="post-meta">
@@ -230,18 +231,18 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-07-28 15:31:39" itemprop="dateCreated datePublished" datetime="2020-07-28T15:31:39+08:00">2020-07-28</time>
+              <time title="创建时间：2020-09-26 15:16:22" itemprop="dateCreated datePublished" datetime="2020-09-26T15:16:22+08:00">2020-09-26</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-06 17:53:32" itemprop="dateModified" datetime="2020-08-06T17:53:32+08:00">2020-08-06</time>
+                <time title="修改时间：2020-09-27 09:51:14" itemprop="dateModified" datetime="2020-09-27T09:51:14+08:00">2020-09-27</time>
               </span>
 
           
-            <span id="/2020/07/28/%E5%8D%95%E4%BD%8D%E6%A0%B9%E5%8F%8D%E6%BC%94/" class="post-meta-item leancloud_visitors" data-flag-title="单位根反演" title="阅读次数">
+            <span id="/2020/09/26/%E3%80%8CUSACO18DEC%E3%80%8DBalance%20Beam%20P%20&%20AGC044E%20Random%20Pawn/" class="post-meta-item leancloud_visitors" data-flag-title="「USACO18DEC」Balance Beam P & AGC044E Random Pawn" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -256,8 +257,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/07/28/%E5%8D%95%E4%BD%8D%E6%A0%B9%E5%8F%8D%E6%BC%94/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/28/%E5%8D%95%E4%BD%8D%E6%A0%B9%E5%8F%8D%E6%BC%94/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/09/26/%E3%80%8CUSACO18DEC%E3%80%8DBalance%20Beam%20P%20&%20AGC044E%20Random%20Pawn/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/09/26/%E3%80%8CUSACO18DEC%E3%80%8DBalance%20Beam%20P%20&%20AGC044E%20Random%20Pawn/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -272,108 +273,33 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>这东西就一个式子，但是能推出很多有意思的东西。</p>
+        <p>这两道题是一个类型的，所以放到一起写了。</p>
 <a id="more"></a>
-<p><span class="math display">\[
-[n\mid a]=\frac{1}{n}\sum\limits_{i=0}^{n-1}w_n^{ai}
-\]</span> 其中 <span class="math inline">\(\mid\)</span> 为整除符号，<span class="math inline">\(w_n^i\)</span> 为第 <span class="math inline">\(i\)</span> 个 <span class="math inline">\(n\)</span> 次单位根。</p>
-<p>考虑证明：</p>
-<ul>
-<li>当 <span class="math inline">\(n\mid a\)</span> 时，设 <span class="math inline">\(a=kn\)</span>，则 <span class="math display">\[
-\begin{aligned}
-&amp;\frac{1}{n}\sum\limits_{i=0}^{n-1}w_n^{ai}\\
-=&amp;\frac{1}{n}\sum\limits_{i=0}^{n-1}w_n^{nki}\\
-=&amp;\frac{1}{n}\sum\limits_{i=0}^{n-1}(w_n^n)^{ki}\\
-=&amp;\frac{1}{n}\sum\limits_{i=0}^{n-1}1\\
-=&amp;1
-\end{aligned}
-\]</span></li>
-</ul>
-<p>当 <span class="math inline">\(n\nmid a\)</span> 时，考虑等比数列求和 <span class="math display">\[
-\begin{aligned}
-&amp;\frac{1}{n}\sum\limits_{i=0}^{n-1}w_n^{ai}\\
-=&amp;\frac{1}{n}\frac{1-w_n^{an}}{1-w_n^a}
-\end{aligned}
-\]</span> 注意到 <span class="math inline">\(1-w_n^{an}=0\)</span> 且 <span class="math inline">\(1-w_n^a\not= 0\)</span>（这也是为啥 <span class="math inline">\(n\mid a\)</span> 时不能这么做，因为公比为 <span class="math inline">\(1\)</span> 了），所以原式为 <span class="math inline">\(0\)</span>。</p>
-<p>注意一下如果在模质数意义下有 <span class="math inline">\(n\)</span> 次单位根（即 <span class="math inline">\(n\mid(p-1)\)</span>）那么这个式子也是成立的。</p>
-<p>一个推导： <span class="math display">\[
-[a\equiv b\pmod n]=\frac{1}{n}\sum\limits_{i=0}^{n-1}w_n^{ai}w_n^{-bi}
-\]</span></p>
-<p>另一个推导：如果我们有一个项数很多的多项式（设项数为 <span class="math inline">\(n\)</span>），我们想求 <span class="math inline">\([x^t]f(x),[x^{k+t}]f(x),[x^{2k+t}]f(x),\dots\)</span> 之和，且满足：</p>
-<ul>
-<li><span class="math inline">\(k\)</span> 较小</li>
-<li>多项式的点值便于快速计算</li>
-<li>如果是在模质数意义下，则应存在 <span class="math inline">\(k\)</span> 次单位根</li>
-</ul>
-<p>我们可以通过单位根反演快速计算，具体如下： <span class="math display">\[
-\begin{aligned}
-&amp;\sum\limits_{i=0}^{n-1}[i\equiv t\pmod k][x^i]f(x)\\
-=&amp;\frac{1}{k}\sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{k-1}w_k^{(i-t)j}[x^i]f(x)\\
-=&amp;\frac{1}{k}\sum\limits_{j=0}^{k-1}w_k^{-tj}\sum\limits_{i=0}^{n-1}w_k^{ij}[x^i]f(x)\\
-=&amp;\frac{1}{k}\sum\limits_{j=0}^{k-1}w_k^{-tj}f(w_k^j)
-\end{aligned}
-\]</span> 来一道例题</p>
-<h4 id="loj6485-ljj-学二项式定理">loj6485 LJJ 学二项式定理</h4>
-<p>输入以下变量的值：$ n, s , a_0 , a_1 , a_2 , a_3$，求以下式子的值： <span class="math display">\[
-\left[ \sum_{i=0}^n \left( {n\choose i} \cdot s^{i} \cdot a_{i\bmod 4} \right)     \right] \bmod 998244353
-\]</span> 我们枚举 <span class="math inline">\(a_0,a_1,a_2,a_3\)</span> 前面的系数，则 <span class="math display">\[
-\begin{aligned}
-ans=&amp;\sum\limits_{k=0}^3a_k\sum\limits_{i=0}^n[i\bmod4=k]\binom{n}{i}s^i\\
-=&amp;\sum\limits_{k=0}^3a_k\sum\limits_{i=0}^n[4\mid(i-k)]\binom{n}{i}s^i\\
-=&amp;\frac{1}{4}\sum\limits_{k=0}^3a_k\sum\limits_{i=0}^{n}\sum_{j=0}^{3}w_4^{j(i-k)}\binom{n}{i}s^i\\
-=&amp;\frac{1}{4}\sum\limits_{k=0}^3a_k\sum\limits_{i=0}^{n}\sum_{j=0}^{3}w_4^{ji}w_4^{-jk}\binom{n}{i}s^i\\
-=&amp;\frac{1}{4}\sum\limits_{k=0}^3a_k\sum_{j=0}^{3}w_4^{-jk}\sum\limits_{i=0}^{n}w_4^{ji}\binom{n}{i}s^i\\
-=&amp;\frac{1}{4}\sum\limits_{k=0}^3a_k\sum_{j=0}^{3}w_4^{-jk}(sw_t^j+1)^n
-\end{aligned}
-\]</span> 然后在模 <span class="math inline">\(998244353\)</span> 意义下的 <span class="math inline">\(4\)</span> 次单位根为 <span class="math inline">\(g^{\frac{p-1}{4}}\)</span>，其中 <span class="math inline">\(g\)</span> 是某个原根。直接快速幂就好了。</p>
-<p><a href="https://loj.ac/submission/880657" target="_blank" rel="noopener">代码</a></p>
-<h4 id="用单位根反演证明-idft-正确性">用单位根反演证明 IDFT 正确性</h4>
-<p>证明 IDFT 那个方法本质就是单位根反演。 <span class="math display">\[
-\begin{aligned}
-f&#39;[k]&amp;=\sum\limits_{i=0}^nw_n^{-ki}F(w_n^i)\\
-&amp;=\sum\limits_{i=0}^{n-1}w_n^{-ki}\sum\limits_{j=0}^{n-1}f_jw_n^{ij}\\
-&amp;=\sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{n-1}f_jw_n^{(j-k)i}\\
-&amp;=\sum\limits_{j=0}^{n-1}f_j\sum\limits_{i=0}^{n-1}w_n^{(j-k)i}\\
-&amp;=\sum\limits_{j=0}^{n-1}f_j[(j-k)\mid n]\\
-&amp;=nf_k
-\end{aligned}
-\]</span></p>
-<h4 id="bluesteins-algorithm">Bluestein's Algorithm</h4>
-<p>有的时候我们单位根反演完了以后要对每个 <span class="math inline">\(k\)</span> 求形似 <span class="math inline">\(\sum\limits_{i=0}^{n-1}w_n^{ik}f_i\)</span> 的东西，而 <span class="math inline">\(n\)</span> 不一定是 <span class="math inline">\(2\)</span> 的次幂。暴力求是 <span class="math inline">\(O(n^2)\)</span> 的，有没有优化方法？</p>
-<p>注意到这实际上是一个任意长度的 DFT，当 <span class="math inline">\(n\)</span> 是 <span class="math inline">\(2\)</span> 的次幂时就是普通的 FFT，而 <span class="math inline">\(n\)</span> 不是 <span class="math inline">\(2\)</span> 的次幂时不能直接 FFT，我们考虑对 <span class="math inline">\(ik\)</span> 做文章。</p>
-<p>形式1： <span class="math display">\[
-ik=\frac{-(k-i)^2+i^2+k^2}{2}
-\]</span> 所以有 <span class="math display">\[
-\begin{aligned}
-&amp;\sum\limits_{i=0}^{n-1}w_n^{ik}f_i\\
-=&amp;\sum\limits_{i=0}^{n-1}w_n^{\frac{-(k-i)^2}{2}+\frac{i^2}{2}+\frac{k^2}{2}}f_i\\
-=&amp;w_n^{\frac{k^2}{2}}\sum\limits_{i=0}^{n-1}w_n^{\frac{-(k-i)^2}{2}}w_n^{\frac{i^2}{2}}f_i\\
-=&amp;w_{2n}^{k^2}\sum\limits_{i=0}^{n-1}w_{2n}^{-(k-i)^2}w_{2n}^{i^2}f_i\\
-\end{aligned}
-\]</span> 我们注意到求和号右面是一个卷积的形式，所以我们做一次正常的卷积就可以了。</p>
-<p>有的时候我们是在模质数意义下做的，可能没有 <span class="math inline">\(2n\)</span> 次单位根，所以这个时候我们要利用到形式2： <span class="math display">\[
-ik=\binom{i+k}{2}-\binom{i}{2}-\binom{k}{2}
-\]</span> 所以有 <span class="math display">\[
-\begin{aligned}
-&amp;\sum\limits_{i=0}^{n-1}w_n^{ik}f_i\\
-=&amp;\sum\limits_{i=0}^{n-1}w_n^{\binom{i+k}{2}-\binom{i}{2}-\binom{k}{2}}f_i\\
-=&amp;w_n^{-\binom{k}{2}}\sum\limits_{i=0}^{n-1}w_n^{\binom{i+k}{2}}w_n^{-\binom{i}{2}}f_i\\
-=&amp;w_n^{-\binom{k}{2}}\sum\limits_{i=0}^{n-1}w_n^{\binom{i+k}{2}}w_n^{-\binom{i}{2}}f_i\\
-\end{aligned}
-\]</span> 这样就可以避免不存在 <span class="math inline">\(2n\)</span> 次单位根的问题了。</p>
-<p>这个东西可以用来做循环卷积，即 <span class="math display">\[
-c_k=\sum\limits_{i=0}^n\sum\limits_{j=0}^{n}[i+j\equiv k\pmod n]a_ib_j
-\]</span> 然后是推式子时间 <span class="math display">\[
-\begin{aligned}
-c_k&amp;=\sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{n-1}[i+j\equiv k\pmod n]a_ib_j\\
-&amp;=\sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{n-1}[(i+j-k)\bmod n=0]a_ib_j\\
-&amp;=\frac{1}{n}\sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{n-1}\sum\limits_{t=0}^{n-1}w_n^{t(i+j-k)}a_ib_j\\
-&amp;=\frac{1}{n}\sum\limits_{t=0}^{n-1}w_n^{-kt}\left(\sum\limits_{i=0}^{n-1}w_n^{it}a_i\right)\left(\sum\limits_{j=0}^{n-1}w_n^{jt}b_j\right)
-\end{aligned}
-\]</span> 注意到两个括号内都是长度为 <span class="math inline">\(n\)</span> 的 DFT，所以对 <span class="math inline">\(a\)</span> 和 <span class="math inline">\(b\)</span> 做任意基 DFT，然后相乘就得到点值表示了，最后需要做长度为 <span class="math inline">\(n\)</span> 的 IDFT，和正着做类似。</p>
-<p>顺便说一下关于 FFT 的本质，我们需要注意到如果我们把两个长为 <span class="math inline">\(n\)</span> 的数组都做一遍 DFT，然后对应位相乘再 IDFT 回去，这样得到的是两个数组做长度为 <span class="math inline">\(n\)</span> 的循环卷积。我们平时写的 FFT 也是长度为 <span class="math inline">\(2^k\)</span> 的循环卷积，只不过我们一开始已经补到了比最高次还要高的 <span class="math inline">\(2^k\)</span> 长度，所以不会出现循环。</p>
-<p>给一道关于 FFT 本质的例题：<a href="/2020/07/29/「CTSC2010」性能优化/">「CTSC2010」性能优化</a>，这篇写的比较辣鸡，建议看别人的。</p>
-<p>再给一道比较难的单位根反演的例题：<a href="/2020/08/05/「HNOI2019」白兔之舞/">「HNOI2019」白兔之舞</a></p>
+<h4 id="balance-beam-p">Balance Beam P</h4>
+<p>我们不算那个什么关键点了，直接设 <span class="math inline">\(E_i\)</span> 为最优策略下从 <span class="math inline">\(i\)</span> 开始的报酬。那么我们有 <span class="math inline">\(E_0=E_{n+1}=0\)</span>，同时考虑这一步的决策，如果走，那么期望为 <span class="math inline">\(\dfrac{E_{i-1}+E_{i+1}}{2}\)</span>，如果不走，报酬是 <span class="math inline">\(f_i\)</span>。</p>
+<p>所以我们有 <span class="math display">\[
+E_{i}=\max(\frac{E_{i-1}+E_{i+1}}{2},f_i)\quad (1\leqslant i\leqslant n)
+\]</span> 我们有以下定论：点集 <span class="math inline">\(\{(i,E_i)\}\)</span> 在点集 <span class="math inline">\(\{(i,f_i)\}\cup\{(0,0),(n+1,0)\}\)</span> 所构成的凸包上。</p>
+<p>我们不难发现 <span class="math inline">\(E_i\)</span> 等于 <span class="math inline">\((i,f_i)\)</span> 和经过 <span class="math inline">\((i-1,E_{i-1})\)</span> 与 <span class="math inline">\((i+1,E_{i+1})\)</span> 两点的直线在 <span class="math inline">\(x=i\)</span> 出的纵坐标的较大值，则其一定是凸的；同时不难发现，<span class="math inline">\(\{(i,f_i)\}\cup\{(0,0),(n+1,0)\}\)</span> 构成的凸包一定满足上述条件。</p>
+<p>下面我们证明这样的点集是唯一的。为此我们扩展一下状态：给定平面中 <span class="math inline">\(n\)</span> 个点 <span class="math inline">\((x_i,y_i)\)</span> 和点 <span class="math inline">\((x_0,f_0),(x_{n+1},f_{n+1})\)</span>，满足 <span class="math inline">\(x_i\)</span> 互不相同且从小到大排列。设<span class="math inline">\(f_i=\max(y_i,\dfrac{x_{i+1}-x_i}{x_{i+1}-x_{i-1}}f_{i-1}+\dfrac{x_i-x_{i-1}}{x_{i+1}-x_{i-1}}f_{i+1})\)</span>，从图形意义上依旧是相邻的两个点形成直线和给定点的较高点。则我们只需要证明 <span class="math inline">\(\{(x_i,f_i)\}\)</span> 的每一个顶点都是给定点集中的点。我们考虑归纳证明。</p>
+<p>当 <span class="math inline">\(n=1\)</span> 时显然成立。</p>
+<p>当 <span class="math inline">\(n&gt;1\)</span> 时，考虑任意添加最后一个点，如果其在前 <span class="math inline">\(n+1\)</span> 个点形成的凸包内部，则继续；反之新形成的凸包一定由原凸包上点的子集和新加入的点组成。这样一定不会有不属于原点集的点。</p>
+<p>所以我们只需要维护原点集的凸包，这个可以线性实现。</p>
+<p>代码（这题卡精度最后输出的时候不要用 <code>double</code> 要用 <code>__int128</code>）：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> __int128 ll;</span><br><span class="line">ll a[<span class="number">200005</span>];</span><br><span class="line"><span class="keyword">int</span> q[<span class="number">200005</span>],tl;</span><br><span class="line"><span class="keyword">double</span> f[<span class="number">200005</span>];</span><br><span class="line"><span class="function">ll <span class="title">crs</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> z)</span></span>&#123;<span class="keyword">return</span> ((y-x)*(a[y]-a[z])-(y-z)*(a[y]-a[x]));&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(tl&gt;<span class="number">1</span>&amp;&amp;crs(q[tl<span class="number">-1</span>],q[tl],x)&lt;=<span class="number">0</span>)tl--;</span><br><span class="line">    q[++tl]=x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(__int128 x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x&lt;=<span class="number">9</span>)&#123;<span class="built_in">putchar</span>(<span class="string">'0'</span>+x);<span class="keyword">return</span>;&#125;</span><br><span class="line">    write(x/<span class="number">10</span>);</span><br><span class="line">    <span class="built_in">putchar</span>(<span class="string">'0'</span>+x%<span class="number">10</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    q[tl=<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> x;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;x);</span><br><span class="line">        a[i]=x;</span><br><span class="line">        a[i]*=<span class="number">100000</span>;</span><br><span class="line">        add(i);</span><br><span class="line">    &#125;</span><br><span class="line">    add(n+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> now=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(q[now+<span class="number">1</span>]&lt;=i)now++;</span><br><span class="line">        write(((((q[now+<span class="number">1</span>]-i)*a[q[now]])+(i-q[now])*a[q[now+<span class="number">1</span>]])/(q[now+<span class="number">1</span>]-q[now])));</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">""</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="random-pawn">Random Pawn</h4>
+<p>上一道题的加强版。</p>
+<p>首先我们发现，如果走到了环上的最大值，则一定会停止，所以我们可以在最大值处破环为链（令 <span class="math inline">\(0\)</span> 和 <span class="math inline">\(n\)</span> 都为最大值）。</p>
+<p>令 <span class="math inline">\(E_i\)</span> 为从 <span class="math inline">\(i\)</span> 开始的期望，那么我们现在也可以写出转移： <span class="math display">\[
+E_i=\max(A_i,\frac{E_{i-1}+E_{i+1}}{2}-B_i)
+\]</span> 如果没有 <span class="math inline">\(B_i\)</span>，那就是上一道题了，我们现在考虑把 <span class="math inline">\(B_i\)</span> 消掉。</p>
+<p>我们尝试构造一个数列 <span class="math inline">\(\{C_i\}\)</span>，那么有 <span class="math display">\[
+E_i-C_i=\max(A_i-C_i,\frac{E_{i-1}-C_{i-1}+E_{i+1}-C_{i+1}}{2}+\frac{C_{i-1}+C_{i+1}}{2}-B_i-C_i)
+\]</span> 如果我们的 <span class="math inline">\({C_n}\)</span> 能让 <span class="math inline">\(\dfrac{C_{i-1}+C_{i+1}}{2}-B_i-C_i=0\)</span>，设 <span class="math inline">\(F_i=E_i-C_i,G_i=A_i-C_i\)</span>，则有 <span class="math display">\[
+F_i=\max(G_i,\frac{F_{i-1}+F_{i+1}}{2})
+\]</span> 这个就是上一道题的形式了，<span class="math inline">\(C_i\)</span> 可以随便确定 <span class="math inline">\(C_0,C_1\)</span> 然后直接递推得到（<span class="math inline">\(C_i=2C_{i-1}+2B_{i-1}-C_{i-2}\)</span>）。</p>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line">ll tmp1[<span class="number">200005</span>],tmp2[<span class="number">200005</span>],a[<span class="number">200005</span>],b[<span class="number">200005</span>],c[<span class="number">200005</span>],g[<span class="number">200005</span>];</span><br><span class="line"><span class="keyword">int</span> q[<span class="number">200005</span>],tl;</span><br><span class="line"><span class="function">ll <span class="title">crs</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> z)</span></span>&#123;<span class="keyword">return</span> ((y-x)*(g[y]-g[z])-(y-z)*(g[y]-g[x]));&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(tl&gt;<span class="number">1</span>&amp;&amp;crs(q[tl<span class="number">-1</span>],q[tl],x)&lt;=<span class="number">0</span>)tl--;</span><br><span class="line">    q[++tl]=x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,mx=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;tmp1[i]);</span><br><span class="line">        <span class="keyword">if</span>(tmp1[i]&gt;tmp1[mx])mx=i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)<span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;tmp2[i]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=mx;i&lt;=n;i++)a[i-mx]=tmp1[i],b[i-mx]=tmp2[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=mx;i++)a[n-mx+i]=tmp1[i],b[n-mx+i]=tmp2[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)c[i]=<span class="number">2</span>*c[i<span class="number">-1</span>]+<span class="number">2</span>*b[i<span class="number">-1</span>]-c[i<span class="number">-2</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=n;i++)g[i]=a[i]-c[i],add(i);</span><br><span class="line">    <span class="keyword">int</span> now=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">double</span> res=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(q[now+<span class="number">1</span>]&lt;=i)now++;</span><br><span class="line">        res+=((((q[now+<span class="number">1</span>]-i)*g[q[now]])+(i-q[now])*g[q[now+<span class="number">1</span>]])*<span class="number">1.0</span>/(q[now+<span class="number">1</span>]-q[now]))+c[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.12lf"</span>,res/n);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -383,8 +309,9 @@ c_k&amp;=\sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{n-1}[i+j\equiv k\pmod n]a_ib_
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/fft/" rel="tag"># fft</a>
-              <a href="/tags/%E5%8D%95%E4%BD%8D%E6%A0%B9%E5%8F%8D%E6%BC%94/" rel="tag"># 单位根反演</a>
+              <a href="/tags/dp/" rel="tag"># dp</a>
+              <a href="/tags/%E6%9C%9F%E6%9C%9B/" rel="tag"># 期望</a>
+              <a href="/tags/%E6%9E%84%E9%80%A0/" rel="tag"># 构造</a>
           </div>
 
         
@@ -393,13 +320,10 @@ c_k&amp;=\sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{n-1}[i+j\equiv k\pmod n]a_ib_
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/07/27/%E3%80%8CCTS2019%E3%80%8D%E7%8F%8D%E7%8F%A0/" rel="prev" title="「CTS2019」珍珠">
-      <i class="fa fa-chevron-left"></i> 「CTS2019」珍珠
+    <a href="/2020/09/23/ARC102/" rel="prev" title="ARC102">
+      <i class="fa fa-chevron-left"></i> ARC102
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/07/29/%E3%80%8CCTSC2010%E3%80%8D%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="next" title="「CTSC2010」性能优化">
-      「CTSC2010」性能优化 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -480,7 +404,7 @@ c_k&amp;=\sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{n-1}[i+j\equiv k\pmod n]a_ib_
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#loj6485-ljj-学二项式定理"><span class="nav-number">1.</span> <span class="nav-text">loj6485 LJJ 学二项式定理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用单位根反演证明-idft-正确性"><span class="nav-number">2.</span> <span class="nav-text">用单位根反演证明 IDFT 正确性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bluesteins-algorithm"><span class="nav-number">3.</span> <span class="nav-text">Bluestein&#39;s Algorithm</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#balance-beam-p"><span class="nav-number">1.</span> <span class="nav-text">Balance Beam P</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#random-pawn"><span class="nav-number">2.</span> <span class="nav-text">Random Pawn</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
