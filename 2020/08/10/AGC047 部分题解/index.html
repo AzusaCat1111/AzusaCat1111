@@ -51,16 +51,16 @@
   <meta name="description" content="A - Integer Product 由于每一个数都可以表示为十进制下的有限小数，所以化成分数后其分母的只可能含有 \(2\) 和 \(5\) 两个质因子。记录其次数，那么就是求 \(2\) 和 \(5\) 的次数加起来都大于等于 \(0\) 的数对个数。这个可以开一个桶暴力计算。 为了方便，一开始把每个数都乘上 \(10^9\)，这样求的就是次数加起来大于等于 \(18\) 的数对个数。复">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AGC047 部分题解">
-<meta property="og:url" content="https://azusacat1111.github.io/2020/08/10/AtCoder%20Grand%20Contest%20047%20%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/index.html">
+<meta property="og:url" content="https://azusacat1111.github.io/2020/08/10/AGC047%20%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/index.html">
 <meta property="og:site_name" content="AzusaCat&#39;s Blog">
 <meta property="og:description" content="A - Integer Product 由于每一个数都可以表示为十进制下的有限小数，所以化成分数后其分母的只可能含有 \(2\) 和 \(5\) 两个质因子。记录其次数，那么就是求 \(2\) 和 \(5\) 的次数加起来都大于等于 \(0\) 的数对个数。这个可以开一个桶暴力计算。 为了方便，一开始把每个数都乘上 \(10^9\)，这样求的就是次数加起来大于等于 \(18\) 的数对个数。复">
 <meta property="article:published_time" content="2020-08-10T13:11:13.000Z">
-<meta property="article:modified_time" content="2020-09-27T07:15:05.051Z">
+<meta property="article:modified_time" content="2020-10-09T01:02:54.860Z">
 <meta property="article:author" content="AzusaCat">
 <meta property="article:tag" content="套题题解">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://azusacat1111.github.io/2020/08/10/AtCoder%20Grand%20Contest%20047%20%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/">
+<link rel="canonical" href="https://azusacat1111.github.io/2020/08/10/AGC047%20%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/">
 
 
 <script id="page-configurations">
@@ -206,7 +206,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/08/10/AtCoder%20Grand%20Contest%20047%20%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/08/10/AGC047%20%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -236,11 +236,11 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-27 15:15:05" itemprop="dateModified" datetime="2020-09-27T15:15:05+08:00">2020-09-27</time>
+                <time title="修改时间：2020-10-09 09:02:54" itemprop="dateModified" datetime="2020-10-09T09:02:54+08:00">2020-10-09</time>
               </span>
 
           
-            <span id="/2020/08/10/AtCoder%20Grand%20Contest%20047%20%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="AGC047 部分题解" title="阅读次数">
+            <span id="/2020/08/10/AGC047%20%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="AGC047 部分题解" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -255,8 +255,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/08/10/AtCoder%20Grand%20Contest%20047%20%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/10/AtCoder%20Grand%20Contest%20047%20%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/08/10/AGC047%20%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/10/AGC047%20%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -271,22 +271,34 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="a---integer-product">A - Integer Product</h2>
+        <h3 id="a---integer-product">A - Integer Product</h3>
 <p>由于每一个数都可以表示为十进制下的有限小数，所以化成分数后其分母的只可能含有 <span class="math inline">\(2\)</span> 和 <span class="math inline">\(5\)</span> 两个质因子。记录其次数，那么就是求 <span class="math inline">\(2\)</span> 和 <span class="math inline">\(5\)</span> 的次数加起来都大于等于 <span class="math inline">\(0\)</span> 的数对个数。这个可以开一个桶暴力计算。</p>
-<p>为了方便，一开始把每个数都乘上 <span class="math inline">\(10^9\)</span>，这样求的就是次数加起来大于等于 <span class="math inline">\(18\)</span> 的数对个数。复杂度 <span class="math inline">\(O(n\log^2n)\)</span>（实际上是次数的乘积之和，应该比这个小）。</p>
+<p>为了方便，一开始把每个数都乘上 <span class="math inline">\(10^9\)</span>，这样求的就是次数加起来大于等于 <span class="math inline">\(18\)</span> 的数对个数。复杂度 <span class="math inline">\(O(n\log^2n)\)</span>。</p>
 <p><a href="https://atcoder.jp/contests/agc047/submissions/15784117" target="_blank" rel="noopener">代码</a></p>
 <a id="more"></a>
-<h2 id="b---first-second">B - First Second</h2>
+<h3 id="b---first-second">B - First Second</h3>
 <p>不难发现，如果 <span class="math inline">\(T\)</span> 能从 <span class="math inline">\(S\)</span> 得到，那么 <span class="math inline">\(T\)</span> 一定可以表示为 <span class="math inline">\(S\)</span> 中的一个字符拼上 <span class="math inline">\(S\)</span> 的一个后缀（可以为空后缀，字符必须在后缀前）。</p>
 <p>考虑用 Trie 树，我们每一次倒着插入一个 <span class="math inline">\(S_i\)</span>，额外开一个数组 <code>sum[x][c]</code> 记录 <span class="math inline">\(x\)</span> 的子树内字符 <span class="math inline">\(c\)</span> 的出边数量，这样每走一步我们都看一下 <span class="math inline">\(S\)</span> 前面的字符种类，如果有把 <code>sum[x][c]</code> 对应加上 1，全插入完以后再查询一下就做完了。复杂度 <span class="math inline">\(O(26\sum|S|)\)</span>。上述操作也可以通过哈希完成，但是我一开始写的哈希跑的太慢了过不去。</p>
 <p><a href="https://atcoder.jp/contests/agc047/submissions/15788874" target="_blank" rel="noopener">代码</a></p>
-<h2 id="c---product-modulo">C - Product Modulo</h2>
+<h3 id="c---product-modulo">C - Product Modulo</h3>
 <p>我们发现模数很小而且是质数，所以我们考虑计算 <span class="math inline">\(A_iA_j=c\)</span> 的 <span class="math inline">\((i,j)\)</span> 的数量。因为是质数，存在原根（温馨提示 <span class="math inline">\(200003\)</span> 的一个原根是 <span class="math inline">\(5\)</span>），所以我们可以把每一个数都取离散对数，那么乘法就变成了加法，这样可以通过 FFT 快速计算（注意不能用单模 NTT 可能会爆）。复杂度 <span class="math inline">\(O(n+p\log p)\)</span>。</p>
 <p><a href="https://atcoder.jp/contests/agc047/submissions/15810387" target="_blank" rel="noopener">代码</a></p>
-<h2 id="d---twin-binary-trees">D - Twin Binary Trees</h2>
+<h3 id="d---twin-binary-trees">D - Twin Binary Trees</h3>
 <p>首先我们发现如果我们确定了两条特殊边，那么我们就唯一确定了一条回路。我们考虑枚举这条回路在第一棵树上的 LCA，那么所有的回路在第一棵树上的叶子一定分别在两个子树内。</p>
 <p>我们设两棵子树分别为 <span class="math inline">\(L\)</span> 和 <span class="math inline">\(R\)</span>，我们先枚举 <span class="math inline">\(L\)</span> 中的每个叶子，然后我们参照 LNOI LCA 那道题的套路，把第二棵树中对应叶子（通过特殊边连接的）到第二棵树上的根上的每个节点加上从枚举的 LCA 到这个节点的编号乘积。然后我们枚举 <span class="math inline">\(R\)</span> 中的叶子，并从第二棵树中对应的叶子向上跳，那么每当我们跳到一个点 <span class="math inline">\(x\)</span> 时，在第二棵树的 LCA 为这个点的所有回路的总贡献为 <span class="math inline">\(\text{dis}(LCA,x)\cdot(w[x]-x\cdot w[pre])\)</span>，其中 <span class="math inline">\(pre\)</span> 是上一个经过的点，<span class="math inline">\(w\)</span> 是点上的权值， <span class="math inline">\(\text{dis}\)</span> 为 LCA 到 <span class="math inline">\(x\)</span> 路径点的乘积（不含端点），要减去 <span class="math inline">\(x\cdot w[pre]\)</span> 是因为要减去 LCA 已经被算过的部分。这样总复杂度为 <span class="math inline">\(O(H^22^H)\)</span>。</p>
 <p><a href="https://atcoder.jp/contests/agc047/submissions/15812896" target="_blank" rel="noopener">代码</a></p>
+<h3 id="e---product-simulation">E - Product Simulation</h3>
+<p>我们考虑把 <span class="math inline">\(A,B\)</span> 分解成二进制后再乘。一共要干三件事：预处理 <span class="math inline">\(2\)</span> 的次幂；提取出 <span class="math inline">\(A,B\)</span> 在二进制中的每一位；二进制下乘法。</p>
+<p>可以发现 <span class="math inline">\(A=B=0\)</span> 怎么操作都是 <span class="math inline">\(0\)</span>，所以下面均讨论 <span class="math inline">\(A,B\)</span> 至少有一个不是 <span class="math inline">\(0\)</span> 的情况。</p>
+<p>注意到一定有 <span class="math inline">\(A&lt;2A+2B\)</span>，所以可以得到 <span class="math inline">\(1\)</span>，然后就可以处理出 <span class="math inline">\(2\)</span> 的次幂。</p>
+<p>考虑如何分解，我们从高向低位 <code>for</code>，设当前处理到第 <span class="math inline">\(i\)</span> 位，只考虑更高位时 <span class="math inline">\(A\)</span> 的值为 <span class="math inline">\(nowa\)</span>，如果这一位为 <span class="math inline">\(1\)</span> 则有 <span class="math inline">\(nowa+2^i\leqslant A\)</span>，即 <span class="math inline">\(nowa+2^i&lt;A+1\)</span>。注意求出这一位的值以后我们需要花 <span class="math inline">\(O(\log A)\)</span> 的时间通过计算好的每一位的值重新计算 <span class="math inline">\(nowa\)</span>。对于 <span class="math inline">\(B\)</span> 同理。这一部分的复杂度是 <span class="math inline">\(O(\log^2A)\)</span>。</p>
+<p>接下来考虑二进制下的乘法，设 <span class="math inline">\(fa_i\)</span> 为 <span class="math inline">\(A\)</span> 的二进制表示下第 <span class="math inline">\(i\)</span> 位的值，<span class="math inline">\(fb_i\)</span> 同理，则： <span class="math display">\[
+AB=\sum\limits_{i.j}fa_ifb_j2^{i+j}
+\]</span> 注意到 <span class="math inline">\(fa_i,fb_j\)</span> 都是 <span class="math inline">\(0,1\)</span> 变量，故 <span class="math inline">\(fa_ifb_j=[1&lt;fa_i+fb_j]\)</span>，这样枚举 <span class="math inline">\(i,j\)</span>，然后把<span class="math inline">\(fa_ifb_j\)</span>连续左移 <span class="math inline">\(i+j\)</span> 次就是这两位的贡献，这样的复杂度是 <span class="math inline">\(O(\log^3A)\)</span>。</p>
+<p>我们可以转换思路枚举 <span class="math inline">\(i+j\)</span>，我不是很会用语言描述，所以直接贴一个官方题解给出的代码，相信很好看懂：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">58</span>; k &gt;= <span class="number">0</span>; k--) &#123;</span><br><span class="line">    answer *= <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= k; i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> j = k - i;</span><br><span class="line">        <span class="keyword">if</span>(i &lt; <span class="number">30</span> &amp;&amp; j &lt; <span class="number">30</span>) &#123;</span><br><span class="line">            answer += <span class="number">1</span>&lt;(a_bits[i]+b_bits[j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个的复杂度是 <span class="math inline">\(O(\log^2A)\)</span>。</p>
+<p><a href="https://atcoder.jp/contests/agc047/submissions/17262484" target="_blank" rel="noopener">代码</a></p>
 
     </div>
 
@@ -392,7 +404,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#a---integer-product"><span class="nav-number">1.</span> <span class="nav-text">A - Integer Product</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#b---first-second"><span class="nav-number">2.</span> <span class="nav-text">B - First Second</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#c---product-modulo"><span class="nav-number">3.</span> <span class="nav-text">C - Product Modulo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#d---twin-binary-trees"><span class="nav-number">4.</span> <span class="nav-text">D - Twin Binary Trees</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#a---integer-product"><span class="nav-number">1.</span> <span class="nav-text">A - Integer Product</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b---first-second"><span class="nav-number">2.</span> <span class="nav-text">B - First Second</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c---product-modulo"><span class="nav-number">3.</span> <span class="nav-text">C - Product Modulo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d---twin-binary-trees"><span class="nav-number">4.</span> <span class="nav-text">D - Twin Binary Trees</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#e---product-simulation"><span class="nav-number">5.</span> <span class="nav-text">E - Product Simulation</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
