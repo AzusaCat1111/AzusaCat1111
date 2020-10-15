@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>CF908H New Year and Boolean Bridges</title>
-    <url>/2020/10/15/%C2%96CF908H%20New%20Year%20and%20Boolean%20Bridges/</url>
+    <url>/2020/10/15/CF908H%20New%20Year%20and%20Boolean%20Bridges/</url>
     <content><![CDATA[<p>设 <span class="math inline">\(f(i,j)\)</span> 表示 <span class="math inline">\(i\)</span> 是否能直接或间接到达 <span class="math inline">\(j\)</span>。</p>
 <p>给定一个 <span class="math inline">\(n\times n\)</span> 的矩阵 <span class="math inline">\(G\)</span>，求满足以下条件的有向图的最小边数：</p>
 <ul>
