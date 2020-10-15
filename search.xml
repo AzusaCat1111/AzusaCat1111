@@ -12,7 +12,6 @@
 </ul>
 <p><span class="math inline">\(n\leqslant 47\)</span>。</p>
 <a id="more"></a>
-<p>TEST</p>
 <p>我们考虑每一种的限制。可以发现，<code>A</code> 相当于两个点在同一个强连通分量中，<code>O</code> 相当于两个点在同一个弱联通分量中，<code>X</code> 相当于两个点在同一个弱连通分量但是不在同一个强连通分量中。</p>
 <p>不难发现，如果我们确定了每个点在哪个强连通分量中，那么最优的连边方案一定是每个强连通内部连成一个环，强连通分量之间再串成一条链（因为最后一定要形成弱联通图）。</p>
 <p>我们注意到，如果一个点单独为一个强连通分量，其是否加入另一个强连通分量对答案没有影响；如果两个强连通分量的点数均 <span class="math inline">\(\geqslant 2\)</span>，把它们合并可以减少一条边。于是，如果最终的图有 <span class="math inline">\(x\)</span> 个点数 <span class="math inline">\(\geqslant 2\)</span> 的强连通分量，则其最优方案的连边数为 <span class="math inline">\(n-1+x\)</span>。</p>
