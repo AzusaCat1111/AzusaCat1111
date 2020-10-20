@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>CF1163F Indecisive Taxi Fee</title>
+    <url>/2020/10/16/CF1163F%20Indecisive%20Taxi%20Fee/</url>
+    <content><![CDATA[<p>首先，我们预处理出以点 <span class="math inline">\(1\)</span> 和点 <span class="math inline">\(n\)</span> 为源点到每个点的最短路，同时建出以 <span class="math inline">\(1\)</span> 为根的最短路树，则其包括了一条 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 的最短路。对于一种修改 <span class="math inline">\((u,v,w)\)</span>，我们有以下四种情况：</p>
+<ul>
+<li><p>不在 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 的最短路上（此处指我们找出的那个，下同），边权变大，此时答案一定不变。</p></li>
+<li><p>不在 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 的最短路上，边权变小，此时可能产生一条新的最短路 <span class="math inline">\(1,u,v,n\)</span>，用 <span class="math inline">\(dis_{1,u}+w_{u,v}+dis_{v,n}\)</span> 和原最短路取较小值。</p></li>
+<li><p>在 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 的最短路上，边权变小，此时答案为原最短路减去变小的值。</p></li>
+<li><p>在 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 的最短路上，边权变大，此时情况比较复杂我们在后面讨论。</p></li>
+</ul>
+<p>注意到前三种都可以 <span class="math inline">\(O(1)\)</span> 回答，所以我们只需要分析最后一种情况。</p>
+<p>边权改变后，我们有两种可能性：仍旧经过这条边，这时的答案为原最短路长度+这条边增加的长度；也有可能不经过这条边，下面我们只分析这种情况。</p>
+<p>我们枚举每一条原来不在最短路树上的边 <span class="math inline">\((u,v)\)</span>，考虑删掉哪些边时其可能对答案造成贡献，不难发现在 <span class="math inline">\(\text{lca(u,n)}-\text{lca}(v,n)\)</span> 路径上的边都可以被其贡献，假设 <span class="math inline">\(\text{lca(u,n)}\)</span> 深度更浅，则贡献为 <span class="math inline">\(dis_{1,u}+w_{u,v}+dis_{v,n}\)</span>，可以证明 <span class="math inline">\(v\)</span> 到 <span class="math inline">\(n\)</span> 的最短路径一定不会经过 <span class="math inline">\(\text{lca(u,n)}-\text{lca}(v,n)\)</span> 路径上的边，而且如果这条路径经过了多条非树边，在每一条边时都会计算贡献不会漏掉 。所以我们只需要拎出 <span class="math inline">\(1-n\)</span> 的链，然后对这个链开一棵线段树，修改是区间取 <span class="math inline">\(\min\)</span> 的形式，但是由于只需要单点查询，所以直接标记永久化就可以了。</p>
+]]></content>
+      <tags>
+        <tag>最短路</tag>
+        <tag>最短路树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>最小乘积生成树</title>
     <url>/2020/10/16/%E6%9C%80%E5%B0%8F%E4%B9%98%E7%A7%AF%E7%94%9F%E6%88%90%E6%A0%91/</url>
     <content><![CDATA[<p>给定 <span class="math inline">\(n\)</span> 个点 <span class="math inline">\(m\)</span> 条边的无向图，每条边有两个权值 <span class="math inline">\(a_i,b_i\)</span>，求一棵生成树使得 <span class="math display">\[
@@ -786,7 +805,7 @@ f&#39;[k]&amp;=\sum\limits_{i=0}^nw_n^{-ki}F(w_n^i)\\
 &amp;=\sum\limits_{i=0}^{n-1}w_n^{-ki}\sum\limits_{j=0}^{n-1}f_jw_n^{ij}\\
 &amp;=\sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{n-1}f_jw_n^{(j-k)i}\\
 &amp;=\sum\limits_{j=0}^{n-1}f_j\sum\limits_{i=0}^{n-1}w_n^{(j-k)i}\\
-&amp;=\sum\limits_{j=0}^{n-1}f_j[(j-k)\mid n]\\
+&amp;=n\sum\limits_{j=0}^{n-1}f_j[n\mid (j-k)]\\
 &amp;=nf_k
 \end{aligned}
 \]</span></p>
