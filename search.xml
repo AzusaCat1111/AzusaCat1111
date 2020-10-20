@@ -12,11 +12,12 @@
 </ul>
 <p>注意到前三种都可以 <span class="math inline">\(O(1)\)</span> 回答，所以我们只需要分析最后一种情况。</p>
 <p>边权改变后，我们有两种可能性：仍旧经过这条边，这时的答案为原最短路长度+这条边增加的长度；也有可能不经过这条边，下面我们只分析这种情况。</p>
-<p>我们枚举每一条原来不在最短路树上的边 <span class="math inline">\((u,v)\)</span>，考虑删掉哪些边时其可能对答案造成贡献，不难发现在 <span class="math inline">\(\text{lca(u,n)}-\text{lca}(v,n)\)</span> 路径上的边都可以被其贡献，假设 <span class="math inline">\(\text{lca(u,n)}\)</span> 深度更浅，则贡献为 <span class="math inline">\(dis_{1,u}+w_{u,v}+dis_{v,n}\)</span>，可以证明 <span class="math inline">\(v\)</span> 到 <span class="math inline">\(n\)</span> 的最短路径一定不会经过 <span class="math inline">\(\text{lca(u,n)}-\text{lca}(v,n)\)</span> 路径上的边，而且如果这条路径经过了多条非树边，在每一条边时都会计算贡献不会漏掉 。所以我们只需要拎出 <span class="math inline">\(1-n\)</span> 的链，然后对这个链开一棵线段树，修改是区间取 <span class="math inline">\(\min\)</span> 的形式，但是由于只需要单点查询，所以直接标记永久化就可以了。</p>
+<p>我们枚举每一条原来不在最短路树上的边 <span class="math inline">\((u,v)\)</span>，考虑删掉哪些边时其可能对答案造成贡献，不难发现在 <span class="math inline">\(\text{lca}(u,n)-\text{lca}(v,n)\)</span> 路径上的边都可以被其贡献，假设 <span class="math inline">\(\text{lca}(u,n)\)</span> 深度更浅，则贡献为 <span class="math inline">\(dis_{1,u}+w_{u,v}+dis_{v,n}\)</span>，可以证明 <span class="math inline">\(v\)</span> 到 <span class="math inline">\(n\)</span> 的最短路径一定不会经过 <span class="math inline">\(\text{lca}(u,n)-\text{lca}(v,n)\)</span> 路径上的边，而且如果这条路径经过了多条非树边，在每一条边时都会计算贡献不会漏掉 。所以我们只需要拎出 <span class="math inline">\(1-n\)</span> 的链，然后对这个链开一棵线段树，修改是区间取 <span class="math inline">\(\min\)</span> 的形式，但是由于只需要单点查询，所以直接标记永久化就可以了。</p>
 ]]></content>
       <tags>
         <tag>最短路</tag>
         <tag>最短路树</tag>
+        <tag>hide</tag>
       </tags>
   </entry>
   <entry>

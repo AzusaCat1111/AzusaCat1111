@@ -62,7 +62,7 @@
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
+    isHome: false,
     isPost: false
   };
 </script>
@@ -197,101 +197,6 @@
             
 
   <div class="posts-expand">
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/10/16/CF1163F%20Indecisive%20Taxi%20Fee/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="AzusaCat">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AzusaCat's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/16/CF1163F%20Indecisive%20Taxi%20Fee/" class="post-title-link" itemprop="url">CF1163F Indecisive Taxi Fee</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-16 22:04:41" itemprop="dateCreated datePublished" datetime="2020-10-16T22:04:41+08:00">2020-10-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-17 09:48:46" itemprop="dateModified" datetime="2020-10-17T09:48:46+08:00">2020-10-17</time>
-              </span>
-
-          
-            <span id="/2020/10/16/CF1163F%20Indecisive%20Taxi%20Fee/" class="post-meta-item leancloud_visitors" data-flag-title="CF1163F Indecisive Taxi Fee" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/10/16/CF1163F%20Indecisive%20Taxi%20Fee/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/16/CF1163F%20Indecisive%20Taxi%20Fee/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>首先，我们预处理出以点 <span class="math inline">\(1\)</span> 和点 <span class="math inline">\(n\)</span> 为源点到每个点的最短路，同时建出以 <span class="math inline">\(1\)</span> 为根的最短路树，则其包括了一条 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 的最短路。对于一种修改 <span class="math inline">\((u,v,w)\)</span>，我们有以下四种情况：</p>
-<ul>
-<li><p>不在 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 的最短路上（此处指我们找出的那个，下同），边权变大，此时答案一定不变。</p></li>
-<li><p>不在 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 的最短路上，边权变小，此时可能产生一条新的最短路 <span class="math inline">\(1,u,v,n\)</span>，用 <span class="math inline">\(dis_{1,u}+w_{u,v}+dis_{v,n}\)</span> 和原最短路取较小值。</p></li>
-<li><p>在 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 的最短路上，边权变小，此时答案为原最短路减去变小的值。</p></li>
-<li><p>在 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 的最短路上，边权变大，此时情况比较复杂我们在后面讨论。</p></li>
-</ul>
-<p>注意到前三种都可以 <span class="math inline">\(O(1)\)</span> 回答，所以我们只需要分析最后一种情况。</p>
-<p>边权改变后，我们有两种可能性：仍旧经过这条边，这时的答案为原最短路长度+这条边增加的长度；也有可能不经过这条边，下面我们只分析这种情况。</p>
-<p>我们枚举每一条原来不在最短路树上的边 <span class="math inline">\((u,v)\)</span>，考虑删掉哪些边时其可能对答案造成贡献，不难发现在 <span class="math inline">\(\text{lca(u,n)}-\text{lca}(v,n)\)</span> 路径上的边都可以被其贡献，假设 <span class="math inline">\(\text{lca(u,n)}\)</span> 深度更浅，则贡献为 <span class="math inline">\(dis_{1,u}+w_{u,v}+dis_{v,n}\)</span>，可以证明 <span class="math inline">\(v\)</span> 到 <span class="math inline">\(n\)</span> 的最短路径一定不会经过 <span class="math inline">\(\text{lca(u,n)}-\text{lca}(v,n)\)</span> 路径上的边，而且如果这条路径经过了多条非树边，在每一条边时都会计算贡献不会漏掉 。所以我们只需要拎出 <span class="math inline">\(1-n\)</span> 的链，然后对这个链开一棵线段树，修改是区间取 <span class="math inline">\(\min\)</span> 的形式，但是由于只需要单点查询，所以直接标记永久化就可以了。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
         
   
   
@@ -1034,104 +939,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/09/20/CF516E%20Drazil%20and%20His%20Happy%20Friends/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="AzusaCat">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AzusaCat's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/20/CF516E%20Drazil%20and%20His%20Happy%20Friends/" class="post-title-link" itemprop="url">CF516E Drazil and His Happy Friends</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-20 17:05:06" itemprop="dateCreated datePublished" datetime="2020-09-20T17:05:06+08:00">2020-09-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-08 14:54:22" itemprop="dateModified" datetime="2020-10-08T14:54:22+08:00">2020-10-08</time>
-              </span>
-
-          
-            <span id="/2020/09/20/CF516E%20Drazil%20and%20His%20Happy%20Friends/" class="post-meta-item leancloud_visitors" data-flag-title="CF516E Drazil and His Happy Friends" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/09/20/CF516E%20Drazil%20and%20His%20Happy%20Friends/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/09/20/CF516E%20Drazil%20and%20His%20Happy%20Friends/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="https://codeforces.com/problemset/problem/516/E" target="_blank" rel="noopener">题目链接</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/09/20/CF516E%20Drazil%20and%20His%20Happy%20Friends/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1226,7 +1038,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1376,56 +1188,6 @@ window.addEventListener('pjax:success', () => {
   
 
   
-      
-<script type="text/x-mathjax-config">
-    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        extensions: ['[mhchem]/mhchem.js'],
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') {
-          next = next.nextSibling;
-        }
-        if (next && next.nodeName.toLowerCase() === 'br') {
-          next.parentNode.removeChild(next);
-        }
-      }
-    });
-  });
-
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
-      if (element.nodeName.toLowerCase() == 'li') {
-        element = element.parentNode;
-      }
-      element.classList.add('has-jax');
-    }
-  });
-</script>
-<script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
-    MathJax.Hub.Typeset();
-  }, window.MathJax);
-</script>
-
-    
 
   
 
