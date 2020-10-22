@@ -18,7 +18,10 @@
 <p>我们考虑 <span class="math inline">\(fl\)</span> 的转移，<span class="math inline">\(fr\)</span> 的转移类似：</p>
 <ul>
 <li>当 <span class="math inline">\(fr(l+1,r)&gt;a_r\)</span> 时，我们直接把 <span class="math inline">\(l\)</span> 这一堆取完就行了，所以此时 <span class="math inline">\(fl(l,r)=1\)</span>。</li>
-<li>反之两个人一定是一个一个取，分别考虑一个人只会机械地取一个，另外一个人要多久才能到达必胜状态：假设最左面的石子堆有 <span class="math inline">\(x\)</span> 个石子，对于第一个人，第二个人取了 <span class="math inline">\(a_r-fr(l+1,r)+1\)</span> 个后可以直接取完；对于第二个人，第一个人取了 <span class="math inline">\(x-fl(l,r-1)+1\)</span> 个后可以直接取完，故 <span class="math inline">\(a_r-fr(l+1,r)+1+1\leqslant x-fl(l,r-1)+1\)</span>，即 <span class="math inline">\(x\geqslant fl(l,r-1)-fr(l+1,r)+a_r+1\)</span>，故 <span class="math inline">\(fl(l,r)=fl(l,r-1)-fr(l+1,r)+a_r+1\)</span>。</li>
+<li>反之两个人一定是一个一个取，分别考虑一个人只会机械地取一个，另外一个人要多久才能到达必胜状态：假设最左面的石子堆有 <span class="math inline">\(x\)</span> 个石子，对于第一个人，第二个人取了 <span class="math inline">\(a_r-fr(l+1,r)+1\)</span> 个后可以直接取完；对于第二个人，第一个人取了 <span class="math inline">\(x-fl(l,r-1)+1\)</span> 个后可以直接取完，所以有 <span class="math display">\[
+a_r-fr(l+1,r)+1+1\leqslant x-fl(l,r-1)+1\\
+x\geqslant fl(l,r-1)-fr(l+1,r)+a_r+1
+\]</span> 故 <span class="math inline">\(fl(l,r)=fl(l,r-1)-fr(l+1,r)+a_r+1\)</span>。</li>
 </ul>
 <p>所以单组数据复杂度为 <span class="math inline">\(O(n^2)\)</span>。</p>
 <p><a href="https://atcoder.jp/contests/agc048/submissions/17536129" target="_blank" rel="noopener">提交记录</a></p>
