@@ -1,16 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>AGC048 简要题解</title>
+    <url>/2020/10/22/AGC048%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/</url>
+    <content><![CDATA[<h3 id="a---atcoder-s">A - atcoder &lt; S</h3>
+<p>随便做，我的做法是枚举 <span class="math inline">\(S\)</span> 和 <span class="math inline">\(\bf{atcoder}\)</span> 的前缀，然后一次一定是把最靠近的目标字符转移过来。</p>
+<p><a href="https://atcoder.jp/contests/agc048/submissions/17508555" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="b---bracket-score">B - Bracket Score</h3>
+<p>如果把所有奇数位置上的 <span class="math inline">\(A\)</span> 和 <span class="math inline">\(B\)</span> 调换，那么某种选择每一位是 <span class="math inline">\(A\)</span> 还是 <span class="math inline">\(B\)</span> 的方案合法当且仅当选了新的 <span class="math inline">\(A\)</span> 和 <span class="math inline">\(B\)</span> 中各 <span class="math inline">\(\dfrac{n}{2}\)</span> 个数。证明考虑一对匹配的括号中间一定夹着偶数个括号，所以一定是一个 <span class="math inline">\(A\)</span> 一个 <span class="math inline">\(B\)</span>，充分性考虑把相邻的 <span class="math inline">\(AB\)</span> 或 <span class="math inline">\(BA\)</span> 合成一对括号，然后删掉这两个元素，一直做下去一定能消完，显然这样方案合法。所以随便上个贪心（我用的是先把较大的选了然后按差值调整）就行了。</p>
+<p><a href="https://atcoder.jp/contests/agc048/submissions/17512550" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="c---penguin-skating">C - Penguin Skating</h3>
+<p>如果我们定义 <span class="math inline">\(x_i,0\leqslant i\leqslant n\)</span> 为开始局面第 <span class="math inline">\(i\)</span> 和第 <span class="math inline">\(i+1\)</span> 企鹅之间的空位个数（认为两端加上两只占位用企鹅）， <span class="math inline">\(y_i\)</span> 同理是结束局面的情况。那么我们每一次操作就是选择一个 <span class="math inline">\(i\)</span>，然后让 <span class="math inline">\(x_{i-1}:=x_{i-1}+x_i\)</span> 或 <span class="math inline">\(x_{i+1}:=x_{i+1}+x_i\)</span>。所以最终局面的 <span class="math inline">\(y_i\)</span> 每一个都对应原 <span class="math inline">\(x\)</span> 序列的一段区间的和，且都是按顺序的。所以我们只需要用双指针扫一遍每个 <span class="math inline">\(y_i\)</span> 对应的区间，复杂度 <span class="math inline">\(O(n)\)</span>，注意当两端为 <span class="math inline">\(0\)</span> 时由于保证移动次数最小要往里缩。</p>
+<p><a href="https://atcoder.jp/contests/agc048/submissions/17520100" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="d---pocky-game">D - Pocky Game</h3>
+<p>我们发现一个人取石子一定是一次取一颗或者是取完一堆，因为取一颗可以到达所有取多颗但取不满的后继局面，一定不劣。同时，如果轮到某一个人取，那么他能取的那堆石子越多越好。</p>
+<p>定义 <span class="math inline">\(fl(l,r)\)</span> 表示现在还剩下 <span class="math inline">\([l,r]\)</span> 中的石子没有被取，轮到第一个人先手，这时 <span class="math inline">\(a_l\)</span> 至少为多少才能保证第一个人必胜（假设我们可以随意改变 <span class="math inline">\(a_l\)</span> 的值，但是其它的值固定），类似地，<span class="math inline">\(fr(l,r)\)</span> 为让 <span class="math inline">\(r\)</span> 先手 <span class="math inline">\(a_r\)</span> 至少多少保证第二个人必胜。则第一个人必胜当且仅当 <span class="math inline">\(fl(1,n)\leqslant a_1\)</span>。</p>
+<p>我们考虑 <span class="math inline">\(fl\)</span> 的转移，<span class="math inline">\(fr\)</span> 的转移类似：</p>
+<ul>
+<li>当 <span class="math inline">\(fr(l+1,r)&gt;a_r\)</span> 时，我们直接把 <span class="math inline">\(l\)</span> 这一堆取完就行了，所以此时 <span class="math inline">\(fl(l,r)=1\)</span>。</li>
+<li>反之两个人一定是一个一个取，分别考虑一个人只会机械地取一个，另外一个人要多久才能到达必胜状态：假设最左面的石子堆有 <span class="math inline">\(x\)</span> 个石子，对于第一个人，第二个人取了 <span class="math inline">\(a_r-fr(l+1,r)+1\)</span> 个后可以直接取完；对于第二个人，第一个人取了 <span class="math inline">\(x-fl(l,r-1)+1\)</span> 个后可以直接取完，故 <span class="math inline">\(a_r-fr(l+1,r)+1+1\leqslant x-fl(l,r-1)+1\)</span>，即 <span class="math inline">\(x\geqslant fl(l,r-1)-fr(l+1,r)+a_r+1\)</span>，故 <span class="math inline">\(fl(l,r)=fl(l,r-1)-fr(l+1,r)+a_r+1\)</span>。</li>
+</ul>
+<p>所以单组数据复杂度为 <span class="math inline">\(O(n^2)\)</span>。</p>
+<p><a href="https://atcoder.jp/contests/agc048/submissions/17536129" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="e---strange-relation">E - Strange Relation</h3>
+]]></content>
+      <tags>
+        <tag>套题题解</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CF1416E Splits</title>
     <url>/2020/10/22/CF1416E%20Splits/</url>
-    <content><![CDATA[<p>我们发现可以一开始让答案为 <span class="math inline">\(2n\)</span>，然后每有两个相邻的相同的数就让答案 <span class="math inline">\(-1\)</span>，故我们只需要最大化相邻的相同的数的数目。</p>
+    <content><![CDATA[<p>给定长为 <span class="math inline">\(n\)</span> 的数列 <span class="math inline">\(a\)</span>，你需要构造一个长为 <span class="math inline">\(2n\)</span> 的数列 <span class="math inline">\(b\)</span>，且 <span class="math inline">\(a_i=b_{2i-1}+b_{2i}\)</span>，<span class="math inline">\(b_i&gt;0\)</span>，最小化将 <span class="math inline">\(b\)</span> 的相同数字缩到一起后 <span class="math inline">\(b\)</span> 的长度。<span class="math inline">\(n\leqslant 10^5\)</span>，<span class="math inline">\(2\leqslant a_i\leqslant 10^9\)</span>。</p>
+<p>我们发现可以一开始让答案为 <span class="math inline">\(2n\)</span>，然后每有两个相邻的相同的数就让答案 <span class="math inline">\(-1\)</span>，故我们只需要最大化相邻的相同的数的数目。</p>
+<a id="more"></a>
 <p>先考虑暴力 dp，设 <span class="math inline">\(f(i,j)\)</span> 为考虑了前 <span class="math inline">\(i\)</span> 个数，且 <span class="math inline">\(d_i=j\)</span> 时最多有多少相邻的相同的数。设 <span class="math inline">\(a_i=x\)</span>，我们有三类转移： <span class="math display">\[
 f(i,j)=\max_{k=1}^{a_{i-1}-1} f(i-1,k)+[x-j=k]+[2j=x]
 \]</span> 我们注意到，<span class="math inline">\(\max f(i-1,k)\)</span> 可以向任何位置转移，所以对于相同的 <span class="math inline">\(i\)</span>，<span class="math inline">\(\max f(i,k)-\min f(i,k)\leqslant 2\)</span>。</p>
 <p>接下来，我们把第一维砍掉，设 <span class="math inline">\(i-1\)</span> 的 dp 数组为 <span class="math inline">\(g\)</span>，<span class="math inline">\(maxg\)</span> 为其最大值，<span class="math inline">\(i\)</span> 的为 <span class="math inline">\(f\)</span>，那么我们可以把转移看成三步：</p>
 <ul>
 <li>令所有 <span class="math inline">\(f(i)=maxg\)</span>。</li>
-<li>对所有 <span class="math inline">\(max(1,x-a_{i-1}+1)\leqslant i &lt;x\)</span>，<span class="math inline">\(f(i)=\max(f(i),g(x-i)+1)\)</span>。</li>
+<li>对所有 <span class="math inline">\(\max(1,x-a_{i-1}+1)\leqslant i &lt;x\)</span>，<span class="math inline">\(f(i)=\max(f(i),g(x-i)+1)\)</span>。</li>
 <li>若 <span class="math inline">\(2i=x\)</span>，<span class="math inline">\(f(i)=f(i)+1\)</span>。</li>
 </ul>
 <p>现在，我们令变量 <span class="math inline">\(zero\)</span> 表示同一层（<span class="math inline">\(i\)</span> 相同）中最小的 <span class="math inline">\(f\)</span> 的值，集合 <span class="math inline">\(one\)</span> 表示 <span class="math inline">\(f(i)=zero+1\)</span> 的所有下标 <span class="math inline">\(i\)</span>，<span class="math inline">\(two\)</span> 表示是否存在 <span class="math inline">\(f(i)=zero+2\)</span> 的 <span class="math inline">\(i\)</span>，有记录其下标，反之为 <span class="math inline">\(-1\)</span>。不难发现 <span class="math inline">\(two\)</span> 一定等于 <span class="math inline">\(-1\)</span> 或 <span class="math inline">\(\dfrac{x}{2}\)</span>。</p>
@@ -509,7 +539,7 @@ g(z,c)=\sum\limits_{t\mid c}\mu^2(t)g(\lfloor\frac{z}{t}\rfloor,t)
   </entry>
   <entry>
     <title>AGC047 简要题解</title>
-    <url>/2020/08/10/AGC047%20%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/</url>
+    <url>/2020/08/10/AGC047%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/</url>
     <content><![CDATA[<h3 id="a---integer-product">A - Integer Product</h3>
 <p>由于每一个数都可以表示为十进制下的有限小数，所以化成分数后其分母的只可能含有 <span class="math inline">\(2\)</span> 和 <span class="math inline">\(5\)</span> 两个质因子。记录其次数，那么就是求 <span class="math inline">\(2\)</span> 和 <span class="math inline">\(5\)</span> 的次数加起来都大于等于 <span class="math inline">\(0\)</span> 的数对个数。这个可以开一个桶暴力计算。</p>
 <p>为了方便，一开始把每个数都乘上 <span class="math inline">\(10^9\)</span>，这样求的就是次数加起来大于等于 <span class="math inline">\(18\)</span> 的数对个数。复杂度 <span class="math inline">\(O(n\log^2n)\)</span>。</p>
