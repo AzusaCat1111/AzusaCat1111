@@ -232,7 +232,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-23 11:51:19" itemprop="dateModified" datetime="2020-10-23T11:51:19+08:00">2020-10-23</time>
+                <time title="修改时间：2020-10-23 11:52:11" itemprop="dateModified" datetime="2020-10-23T11:52:11+08:00">2020-10-23</time>
               </span>
 
           
@@ -270,43 +270,14 @@
           <h3 id="a---atcoder-s">A - atcoder &lt; S</h3>
 <p>随便做，我的做法是枚举 <span class="math inline">\(S\)</span> 和 <span class="math inline">\(\bf{atcoder}\)</span> 的前缀，然后一次一定是把最靠近的目标字符转移过来。</p>
 <p><a href="https://atcoder.jp/contests/agc048/submissions/17508555" target="_blank" rel="noopener">提交记录</a></p>
-<h3 id="b---bracket-score">B - Bracket Score</h3>
-<p>如果把所有奇数位置上的 <span class="math inline">\(A\)</span> 和 <span class="math inline">\(B\)</span> 调换，那么某种选择每一位是 <span class="math inline">\(A\)</span> 还是 <span class="math inline">\(B\)</span> 的方案合法当且仅当选了新的 <span class="math inline">\(A\)</span> 和 <span class="math inline">\(B\)</span> 中各 <span class="math inline">\(\dfrac{n}{2}\)</span> 个数。证明考虑一对匹配的括号中间一定夹着偶数个括号，所以一定是一个 <span class="math inline">\(A\)</span> 一个 <span class="math inline">\(B\)</span>，充分性考虑把相邻的 <span class="math inline">\(AB\)</span> 或 <span class="math inline">\(BA\)</span> 合成一对括号，然后删掉这两个元素，一直做下去一定能消完，显然这样方案合法。所以随便上个贪心（我用的是先把较大的选了然后按差值调整）就行了。</p>
-<p><a href="https://atcoder.jp/contests/agc048/submissions/17512550" target="_blank" rel="noopener">提交记录</a></p>
-<h3 id="c---penguin-skating">C - Penguin Skating</h3>
-<p>如果我们定义 <span class="math inline">\(x_i,0\leqslant i\leqslant n\)</span> 为开始局面第 <span class="math inline">\(i\)</span> 和第 <span class="math inline">\(i+1\)</span> 企鹅之间的空位个数（认为两端加上两只占位用企鹅）， <span class="math inline">\(y_i\)</span> 同理是结束局面的情况。那么我们每一次操作就是选择一个 <span class="math inline">\(i\)</span>，然后让 <span class="math inline">\(x_{i-1}:=x_{i-1}+x_i\)</span> 或 <span class="math inline">\(x_{i+1}:=x_{i+1}+x_i\)</span>。所以最终局面的 <span class="math inline">\(y_i\)</span> 每一个都对应原 <span class="math inline">\(x\)</span> 序列的一段区间的和，且都是按顺序的。所以我们只需要用双指针扫一遍每个 <span class="math inline">\(y_i\)</span> 对应的区间，复杂度 <span class="math inline">\(O(n)\)</span>，注意当两端为 <span class="math inline">\(0\)</span> 时由于保证移动次数最小要往里缩。</p>
-<p><a href="https://atcoder.jp/contests/agc048/submissions/17520100" target="_blank" rel="noopener">提交记录</a></p>
-<h3 id="d---pocky-game">D - Pocky Game</h3>
-<p>我们发现一个人取石子一定是一次取一颗或者是取完一堆，因为取一颗可以到达所有取多颗但取不满的后继局面，一定不劣。同时，如果轮到某一个人取，那么他能取的那堆石子越多越好。</p>
-<p>定义 <span class="math inline">\(fl(l,r)\)</span> 表示现在还剩下 <span class="math inline">\([l,r]\)</span> 中的石子没有被取，轮到第一个人先手，这时 <span class="math inline">\(a_l\)</span> 至少为多少才能保证第一个人必胜（假设我们可以随意改变 <span class="math inline">\(a_l\)</span> 的值，但是其它的值固定），类似地，<span class="math inline">\(fr(l,r)\)</span> 为让 <span class="math inline">\(r\)</span> 先手 <span class="math inline">\(a_r\)</span> 至少多少保证第二个人必胜。则第一个人必胜当且仅当 <span class="math inline">\(fl(1,n)\leqslant a_1\)</span>。</p>
-<p>我们考虑 <span class="math inline">\(fl\)</span> 的转移，<span class="math inline">\(fr\)</span> 的转移类似：</p>
-<ul>
-<li>当 <span class="math inline">\(fr(l+1,r)&gt;a_r\)</span> 时，我们直接把 <span class="math inline">\(l\)</span> 这一堆取完就行了，所以此时 <span class="math inline">\(fl(l,r)=1\)</span>。</li>
-<li>反之两个人一定是一个一个取，分别考虑一个人只会机械地取一个，另外一个人要多久才能到达必胜状态：假设最左面的石子堆有 <span class="math inline">\(x\)</span> 个石子，对于第一个人，第二个人取了 <span class="math inline">\(a_r-fr(l+1,r)+1\)</span> 个后可以直接取完；对于第二个人，第一个人取了 <span class="math inline">\(x-fl(l,r-1)+1\)</span> 个后可以直接取完，所以有 <span class="math display">\[
-a_r-fr(l+1,r)+1+1\leqslant x-fl(l,r-1)+1\\
-x\geqslant fl(l,r-1)-fr(l+1,r)+a_r+1
-\]</span> 故 <span class="math inline">\(fl(l,r)=fl(l,r-1)-fr(l+1,r)+a_r+1\)</span>。</li>
-</ul>
-<p>所以单组数据复杂度为 <span class="math inline">\(O(n^2)\)</span>。</p>
-<p><a href="https://atcoder.jp/contests/agc048/submissions/17536129" target="_blank" rel="noopener">提交记录</a></p>
-<h3 id="e---strange-relation">E - Strange Relation</h3>
-<p><del>官方题解中文翻译版</del></p>
-<p>首先有一个结论：假设给定了 <span class="math inline">\(A,T\)</span> 欲求 <span class="math inline">\(f(A,T)\)</span>，令 <span class="math inline">\(z_i=A_i+Tx_i\)</span>，则对于字典序最大的 <span class="math inline">\(x\)</span>，一定不存在一个 <span class="math inline">\(i&gt;1\)</span>，使得 <span class="math inline">\(A_1-T&lt;z_i\leqslant A_1\)</span>。如果存在，我们选择那个最靠前的 <span class="math inline">\(i\)</span>，让其 <span class="math inline">\(x_i\)</span> 变大，然后我们一定可以通过调整使得新的 <span class="math inline">\(x\)</span> 也满足要求，这样字典序会变大。</p>
-<p>然后我们考虑从 <span class="math inline">\(x=f(A,T)\)</span> 递推出 <span class="math inline">\(x&#39;=f((A_2,A_3,\dots,A_n),T)\)</span>。具体地，对任意 <span class="math inline">\(i&gt;1\)</span>，若 <span class="math inline">\(A_i+Tx_i&gt;A_1\)</span>，则 <span class="math inline">\(x&#39;_{i-1}=x_i-1\)</span>，反之 <span class="math inline">\(x&#39;_{i-1}=x_i\)</span>。不难发现，这样的构造一定是正确的。</p>
-<p>同时，既然我们能从 <span class="math inline">\(x\)</span> 推出 <span class="math inline">\(x&#39;\)</span>，反过来用这个方法我们也可以从 <span class="math inline">\(x&#39;\)</span> 推出 <span class="math inline">\(x\)</span>，同时，如果 <span class="math inline">\(x&#39;\)</span> 是字典序最大的，那么由其推出的 <span class="math inline">\(x\)</span> 也是字典序最大的。所以我们尝试从 <span class="math inline">\(f((A_2,A_3,\dots,A_n),T)\)</span> 推出 <span class="math inline">\(f(A,T)\)</span>。</p>
-<p>设 <span class="math inline">\(g(A,T)\)</span> 表示 <span class="math inline">\(f(A,T)\)</span> 的最后一个元素。我们注意到，其只与 <span class="math inline">\(g((A_2,A_3,\dots,A_n),T)\)</span>，<span class="math inline">\(A_1\)</span>，<span class="math inline">\(A_n\)</span> 有关，所以我们就可以设一个 dp，先枚举 <span class="math inline">\(A_n\)</span>，然后设 <span class="math inline">\(dp(i,j)\)</span> 为考虑了 <span class="math inline">\((A_i,\dots,A_n)\)</span>，<span class="math inline">\(g((A_i,\dots,A_n),T)=j\)</span> 的方案数，转移枚举 <span class="math inline">\(A_{i-1}\)</span> 直接转移即可。</p>
-<p>然后对于其它位置的值，我们都可以类似做一遍 dp 得到。这样总复杂度 <span class="math inline">\(O(n^3k^2)\)</span>。</p>
-<p><a href="https://atcoder.jp/contests/agc048/submissions/17580914" target="_blank" rel="noopener">提交记录</a></p>
-<h3 id="f---01-record">F - 01 Record</h3>
-<p>我们首先把 <span class="math inline">\(S\)</span> 翻转，然后把过程倒过来，那么每一个数都对应了一个子序列 <code>10101...</code>。我们把这样 <code>1</code> 开头，<code>10</code> 交替出现的子序列称为“好的”。然后我们每一次从 <span class="math inline">\(S\)</span> 中删去最长的好的子序列，不难发现如果最后有 <code>0</code> 剩下一定无解；反之我们得到了一个序列 <span class="math inline">\(\{l_n\}\)</span>，代表每一次删去的子序列的长度，显然该序列单调不增。</p>
-<p>假设一开始被写在黑板上的数是 <span class="math inline">\(x_1,x_2,\dots,x_m(x_1\geqslant x_2\geqslant \dots \geqslant x_m)\)</span>，我们考虑判断这组 <span class="math inline">\(x\)</span> 是否合法：首先一定有 <span class="math inline">\(\sum l_i=\sum x_i\)</span>，然后考虑一定有 <span class="math inline">\(x_1\leqslant l_1\)</span>，扩展到更一般的情况，考虑任何一个前缀 <span class="math inline">\(x_1,x_2,\dots,x_i\)</span>，一定有 <span class="math display">\[
-\sum\limits_{i=1}^i \lfloor\frac{x_i}{2}\rfloor\leqslant \sum\limits_{i=1}^i \lfloor\frac{l_i}{2}\rfloor\\
-\sum\limits_{i=1}^i \lceil\frac{x_i}{2}\rceil\leqslant \sum\limits_{i=1}^i \lceil\frac{l_i}{2}\rceil
-\]</span> 即前 <span class="math inline">\(i\)</span> 个数中因抹掉而产生的 <code>0</code>/<code>1</code> 一定不大于前 <span class="math inline">\(i\)</span> 个好的子序列的 <code>0</code>/<code>1</code>。必要性比较显然，因为前 <span class="math inline">\(i\)</span> 个数最多只能对应 <span class="math inline">\(i\)</span> 个子序列，按照子序列的长度从大到小排序一定会让限制最松，而这种情况都不满足的话就一定无解。</p>
-<p>可以证明，这也是 <span class="math inline">\(x\)</span> 合法的充分条件，证明见<a href="https://atcoder.jp/contests/agc048/editorial/240" target="_blank" rel="noopener">官方题解</a>。</p>
-<p>所以我们可以设计一个 dp，我们按 <span class="math inline">\(x_i\)</span> 降序填入，设 <span class="math inline">\(f(i,j,a,b)\)</span> 表示现在填了 <span class="math inline">\(i\)</span> 个 <span class="math inline">\(x\)</span> 序列中的数，最后一个数是 <span class="math inline">\(j\)</span>，<span class="math inline">\(\lfloor\dfrac{x_i}{2}\rfloor=a\)</span>，<span class="math inline">\(\lceil\dfrac{x_i}{2}\rceil=b\)</span> 的方案数。注意到我们是降序填的，所以一定有 <span class="math inline">\(ij\leqslant |S|\)</span>，所以前两位的状态数是 <span class="math inline">\(O(|S|\log|S|)\)</span> 的，转移可以用前缀和优化至 <span class="math inline">\(O(1)\)</span>，所以总复杂度 <span class="math inline">\(O(|S|^3\log|S|)\)</span>。</p>
-<p><a href="https://atcoder.jp/contests/agc048/submissions/17582186" target="_blank" rel="noopener">提交记录</a></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/10/22/AGC048%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

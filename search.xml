@@ -6,6 +6,7 @@
     <content><![CDATA[<h3 id="a---atcoder-s">A - atcoder &lt; S</h3>
 <p>随便做，我的做法是枚举 <span class="math inline">\(S\)</span> 和 <span class="math inline">\(\bf{atcoder}\)</span> 的前缀，然后一次一定是把最靠近的目标字符转移过来。</p>
 <p><a href="https://atcoder.jp/contests/agc048/submissions/17508555" target="_blank" rel="noopener">提交记录</a></p>
+<a id="more"></a>
 <h3 id="b---bracket-score">B - Bracket Score</h3>
 <p>如果把所有奇数位置上的 <span class="math inline">\(A\)</span> 和 <span class="math inline">\(B\)</span> 调换，那么某种选择每一位是 <span class="math inline">\(A\)</span> 还是 <span class="math inline">\(B\)</span> 的方案合法当且仅当选了新的 <span class="math inline">\(A\)</span> 和 <span class="math inline">\(B\)</span> 中各 <span class="math inline">\(\dfrac{n}{2}\)</span> 个数。证明考虑一对匹配的括号中间一定夹着偶数个括号，所以一定是一个 <span class="math inline">\(A\)</span> 一个 <span class="math inline">\(B\)</span>，充分性考虑把相邻的 <span class="math inline">\(AB\)</span> 或 <span class="math inline">\(BA\)</span> 合成一对括号，然后删掉这两个元素，一直做下去一定能消完，显然这样方案合法。所以随便上个贪心（我用的是先把较大的选了然后按差值调整）就行了。</p>
 <p><a href="https://atcoder.jp/contests/agc048/submissions/17512550" target="_blank" rel="noopener">提交记录</a></p>
