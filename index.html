@@ -201,6 +201,217 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/10/24/ARC106%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="AzusaCat">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AzusaCat's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/24/ARC106%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" class="post-title-link" itemprop="url">ARC106 简要题解</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-10-24 21:47:54 / 修改时间：22:18:14" itemprop="dateCreated datePublished" datetime="2020-10-24T21:47:54+08:00">2020-10-24</time>
+            </span>
+
+          
+            <span id="/2020/10/24/ARC106%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="ARC106 简要题解" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/10/24/ARC106%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/24/ARC106%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="a---106">A - 106</h3>
+<p>枚举 <span class="math inline">\(3\)</span> 的次幂，看一下差是否是 <span class="math inline">\(5\)</span> 的次幂。</p>
+<p><a href="https://atcoder.jp/contests/arc106/submissions/17610129" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="b---values">B - Values</h3>
+<p>可以发现一个连通块内值可以任意变化，所以只需要 check 每个连通块的 <span class="math inline">\(\sum a\)</span> 和 <span class="math inline">\(\sum b\)</span> 是否相等。</p>
+<p><a href="https://atcoder.jp/contests/arc106/submissions/17612755" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="c---solutions">C - Solutions</h3>
+<p>可以发现，按 <span class="math inline">\(r\)</span> 排序是正解，同时按 <span class="math inline">\(l\)</span> 排序答案至少也是 <span class="math inline">\(1\)</span>，如果答案 <span class="math inline">\(=m\)</span>，则两个算法都能得到正确答案，所以把 <span class="math inline">\(m&lt;0\)</span> 和 <span class="math inline">\(m\geqslant n-1\)</span> 特判掉，注意这里还需要特判 <span class="math inline">\(n=1\)</span>。</p>
+<p>构造如下：</p>
+<p><a href="https://imgchr.com/i/BZTrng" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/10/24/BZTrng.md.png" alt="qwq"></a></p>
+<p><a href="https://atcoder.jp/contests/arc106/submissions/17623529" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="d---powers">D - Powers</h3>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;\sum\limits_{l=1}^{n-1}\sum\limits_{r=l+1}^n(a_l+a_r)^k\\
+=&amp;\sum\limits_{l=1}^{n-1}\sum\limits_{r=l+1}^n\sum\limits_{i=0}^k\binom{k}{i}a_l^ia_r^{k-i}\\
+=&amp;\left(k!\sum\limits_{i+j=k}\frac{\sum a^i}{i!}\frac{\sum a^j}{j!}-\sum\limits_{i=1}^n(2i)^k\right)\div2
+\end{aligned}
+\]</span></p>
+<p>这个是个卷积的形式，可以 <span class="math inline">\(O(nk)\)</span> 求出幂次和的 EGF 然后 <span class="math inline">\(O(k^2)\)</span> 卷积求解。</p>
+<p><a href="https://atcoder.jp/contests/arc106/submissions/17633435" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="e---medals">E - Medals</h3>
+<p>咕咕咕</p>
+<h3 id="f---figures">F - Figures</h3>
+<p>考虑 prufer 序列，给其编一个组合意义：每个部分先任意选一个接口，然后再任意选 <span class="math inline">\(n-2\)</span> 个接口，所以答案为 <span class="math display">\[
+\left(\prod d_i\right)\left(\sum (d_i-1)\right)^{\underline{n-2}}
+\]</span> <a href="https://atcoder.jp/contests/arc106/submissions/17639864" target="_blank" rel="noopener">提交记录</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/10/24/AGC046%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="AzusaCat">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AzusaCat's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/24/AGC046%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" class="post-title-link" itemprop="url">AGC046 简要题解</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-10-24 10:51:28 / 修改时间：19:59:10" itemprop="dateCreated datePublished" datetime="2020-10-24T10:51:28+08:00">2020-10-24</time>
+            </span>
+
+          
+            <span id="/2020/10/24/AGC046%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="AGC046 简要题解" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/10/24/AGC046%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/24/AGC046%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="a---takahashikun-the-strider">A - Takahashikun, The Strider</h3>
+<p>可以发现行走的路线在以 <span class="math inline">\((1,0)\)</span> 为圆心，半径为 <span class="math inline">\(1\)</span> 的圆上，所以当再一次面向 <span class="math inline">\(y\)</span> 轴合法，根据简单的数论知识可知答案为 <span class="math inline">\(\dfrac{360}{\gcd(n,360)}\)</span>。</p>
+<p><a href="https://atcoder.jp/contests/agc046/submissions/17597983" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="b---extension">B - Extension</h3>
+<p>有个比较简单的做法，设 <span class="math inline">\(f(i,j)\)</span> 表示 <span class="math inline">\(c=i,d=j\)</span> 的答案，考虑最后一行填了行还是列，这部分是 <span class="math inline">\(jf(i-1,j)+if(i,j-1)\)</span>，注意如果新形成的左上角没有涂黑，则其会在填行和填列中都被计算一遍，所以要减去没有涂到左上角的方案数 <span class="math inline">\((i-1)(j-1)f(i-1,j-1)\)</span>。</p>
+<p><a href="https://atcoder.jp/contests/agc046/submissions/17597924" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="c---shift">C - Shift</h3>
+<p>显然最多操作次数不会超过 <span class="math inline">\(n\)</span>，也就是直接一步到最终位置，所以把 <span class="math inline">\(m\)</span> 的范围降到了 <span class="math inline">\(n\)</span>。</p>
+<p>把 <span class="math inline">\(0\)</span> 看作分隔符，记 <span class="math inline">\(a_i\)</span> 表示第 <span class="math inline">\(i\)</span> 个 <span class="math inline">\(0\)</span> 前连续的 <span class="math inline">\(1\)</span> 的个数，然后我们考虑把 <span class="math inline">\(1\)</span> 插入到 <span class="math inline">\(0\)</span> 里。设 <span class="math inline">\(f(i,j,k)\)</span> 表示考虑了前 <span class="math inline">\(i\)</span> 个 <span class="math inline">\(0\)</span>，目前一共填了 <span class="math inline">\(j\)</span> 个 <span class="math inline">\(1\)</span>，用了 <span class="math inline">\(k\)</span> 次操作，同时我们要保证操作次数最少。 转移时考虑最后一段填了多少个 <span class="math inline">\(1\)</span>，如果不多于一开始的个数，则不需要操作；反之需要花费操作次数从后面借，那么有转移： <span class="math display">\[
+f(i,j,k)=\sum\limits_{c=0}^{a_i}f(i-1,j-c,k)+\sum\limits_{c=a_i+1}^{a_i+k}f(i-1,j-c,k+a_i-c)
+\]</span> 可以用前缀和优化转移，复杂度 <span class="math inline">\(O(n^3)\)</span>，但是不优化也能过。</p>
+<p><a href="https://atcoder.jp/contests/agc046/submissions/17598887" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="d---secret-passage">D - Secret Passage</h3>
+<p>我们把过程拆为删数和填数两部分，则删掉两个数以后我们可以先存着不删除，我们管这种叫“自由”的数。</p>
+<p>设 <span class="math inline">\(f(i,j,k)\)</span> 表示 <span class="math inline">\(i\)</span> 及以后的数不变，有 <span class="math inline">\(j\)</span> 个自由的 <span class="math inline">\(0\)</span>，<span class="math inline">\(k\)</span> 个自由的 <span class="math inline">\(1\)</span> 是否合法。转移要不然是删往后两位中的一位，要不然是添加一些自由的数再删掉。</p>
+<p>然后考虑填，设 <span class="math inline">\(g(i,j,k)\)</span> 表示 <span class="math inline">\(i\)</span> 及以后的数不变，有 <span class="math inline">\(j\)</span> 个自由的 <span class="math inline">\(0\)</span>，<span class="math inline">\(k\)</span> 个自由的 <span class="math inline">\(1\)</span> 能填出多少方案，边界条件 <span class="math inline">\(g(0,j,k)=\dbinom{j+k}{j}\)</span>，转移时为了保证不重复，如果最前一位能填原序列的数就填。</p>
+<p>注意到有的时候 <span class="math inline">\(f(i,j,k)\)</span> 能填出的状态可能完全包含了 <span class="math inline">\(f(i&#39;,j&#39;,k&#39;)\)</span> 能填出的状态，所以要把 <span class="math inline">\(f(i&#39;,j&#39;,k&#39;)\)</span> 置为 <span class="math inline">\(0\)</span>。</p>
+<p><a href="https://atcoder.jp/contests/agc046/submissions/17387084" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="e---permutation-cover">E - Permutation Cover</h3>
+<p>考虑什么时候无解，可以发现，如果 <span class="math inline">\(2minA+1\leqslant maxA\)</span> 则无解，因为单独把这两种数提出来，可以发现要不然在中见连续出现了三个 <span class="math inline">\(maxA\)</span>，要不然在两端连续出现了两个 <span class="math inline">\(maxA\)</span>。</p>
+<p>同时可以证明，如果 <span class="math inline">\(2minA+1&lt;maxA\)</span> 则一定有解，考虑每一次把最小的拿出来，然后每一个空都可以插入两个相同的更多的数。</p>
+<p>然后我们考虑计算固定某个前缀，且这个前缀的末尾是一个排列的序列是否存在，这时比较特殊的是如果 <span class="math inline">\(2minA+1=maxA\)</span>，也可能有解，且有解当且仅当在最后的排列中，所有出现 <span class="math inline">\(maxA\)</span> 次的元素都在出现 <span class="math inline">\(minA\)</span> 次的元素之前，证明就是这一次左面可以连续两个出现 <span class="math inline">\(maxA\)</span> 次的元素。</p>
+<p>所以我们每次枚举新添加的一串的长度然后取字典序最大的，假设固定长度我们可以贪心解决。</p>
+<p><a href="https://atcoder.jp/contests/agc046/submissions/17424101" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="f---forbidden-tournament">F - Forbidden Tournament</h3>
+<p>咕咕咕</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/10/22/AGC048%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -933,195 +1144,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/09/23/ARC102%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="AzusaCat">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AzusaCat's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/23/ARC102%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" class="post-title-link" itemprop="url">ARC102 简要题解</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-23 08:06:49" itemprop="dateCreated datePublished" datetime="2020-09-23T08:06:49+08:00">2020-09-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-08 15:07:02" itemprop="dateModified" datetime="2020-10-08T15:07:02+08:00">2020-10-08</time>
-              </span>
-
-          
-            <span id="/2020/09/23/ARC102%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="ARC102 简要题解" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/09/23/ARC102%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/09/23/ARC102%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="c---triangular-relationship">C - Triangular Relationship</h3>
-<p>如果 <span class="math inline">\(K\)</span> 是奇数，那么一定有 <span class="math inline">\(K\mid a,K\mid b,K\mid c\)</span>，所以答案为 <span class="math inline">\(\lfloor\frac{N}{K}\rfloor^3\)</span>。</p>
-<p>如果 <span class="math inline">\(K\)</span> 是偶数，还有可能 <span class="math inline">\(a,b,c\equiv \frac{K}{2}\pmod K\)</span>，所以在奇数的基础上还要加上 <span class="math inline">\(\left(\lfloor\frac{N-\frac{K}{2}}{K}\rfloor+1\right)^3\)</span>，注意如果 <span class="math inline">\(N&lt;\frac{K}{2}\)</span> 时不能加上。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/09/23/ARC102%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/09/21/ARC103%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="AzusaCat">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AzusaCat's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/21/ARC103%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" class="post-title-link" itemprop="url">ARC103 简要题解</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-21 21:36:17" itemprop="dateCreated datePublished" datetime="2020-09-21T21:36:17+08:00">2020-09-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-27 10:36:12" itemprop="dateModified" datetime="2020-09-27T10:36:12+08:00">2020-09-27</time>
-              </span>
-
-          
-            <span id="/2020/09/21/ARC103%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="ARC103 简要题解" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/09/21/ARC103%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/09/21/ARC103%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="c--">C - /\/\/\/</h3>
-<p>计算出 <code>t1[]</code> 和 <code>t2[]</code> 表示奇数和偶数位置上每个数出现的次数，枚举奇数位改成了哪一种数，那么偶数位就改成不等于这个数之外的出现最多的数，用前缀和后缀最大值解决。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/09/21/ARC103%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1214,7 +1236,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">46</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

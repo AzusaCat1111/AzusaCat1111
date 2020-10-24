@@ -48,19 +48,19 @@
   };
 </script>
 
-  <meta name="description" content="题目描述 给定长度为 \(2^n\) 两个序列 \(A\),\(B\)，设 \[ C_i&#x3D;\sum_{j\oplus k &#x3D; i}A_j \times B_k \] 分别当\(\oplus\)是\(\text{or}\),\(\text{and}\)和\(\text{xor}\)时求出\(C\)">
+  <meta name="description" content="A - Takahashikun, The Strider 可以发现行走的路线在以 \((1,0)\) 为圆心，半径为 \(1\) 的圆上，所以当再一次面向 \(y\) 轴合法，根据简单的数论知识可知答案为 \(\dfrac{360}{\gcd(n,360)}\)。 提交记录 B - Extension 有个比较简单的做法，设 \(f(i,j)\) 表示 \(c&#x3D;i,d&#x3D;j\) 的答案，考">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FWT学习笔记">
-<meta property="og:url" content="https://azusacat1111.github.io/2020/01/29/fwt/index.html">
+<meta property="og:title" content="AGC046 简要题解">
+<meta property="og:url" content="https://azusacat1111.github.io/2020/10/24/AGC046%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/index.html">
 <meta property="og:site_name" content="AzusaCat&#39;s Blog">
-<meta property="og:description" content="题目描述 给定长度为 \(2^n\) 两个序列 \(A\),\(B\)，设 \[ C_i&#x3D;\sum_{j\oplus k &#x3D; i}A_j \times B_k \] 分别当\(\oplus\)是\(\text{or}\),\(\text{and}\)和\(\text{xor}\)时求出\(C\)">
-<meta property="article:published_time" content="2020-01-29T12:59:25.000Z">
-<meta property="article:modified_time" content="2020-07-04T09:58:11.113Z">
+<meta property="og:description" content="A - Takahashikun, The Strider 可以发现行走的路线在以 \((1,0)\) 为圆心，半径为 \(1\) 的圆上，所以当再一次面向 \(y\) 轴合法，根据简单的数论知识可知答案为 \(\dfrac{360}{\gcd(n,360)}\)。 提交记录 B - Extension 有个比较简单的做法，设 \(f(i,j)\) 表示 \(c&#x3D;i,d&#x3D;j\) 的答案，考">
+<meta property="article:published_time" content="2020-10-24T02:51:28.000Z">
+<meta property="article:modified_time" content="2020-10-24T11:59:10.583Z">
 <meta property="article:author" content="AzusaCat">
-<meta property="article:tag" content="FWT">
+<meta property="article:tag" content="套题题解">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://azusacat1111.github.io/2020/01/29/fwt/">
+<link rel="canonical" href="https://azusacat1111.github.io/2020/10/24/AGC046%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
 
 
 <script id="page-configurations">
@@ -72,7 +72,7 @@
   };
 </script>
 
-  <title>FWT学习笔记 | AzusaCat's Blog</title>
+  <title>AGC046 简要题解 | AzusaCat's Blog</title>
   
 
 
@@ -206,7 +206,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/01/29/fwt/">
+    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/10/24/AGC046%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -219,7 +219,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          FWT学习笔记
+          AGC046 简要题解
         </h1>
 
         <div class="post-meta">
@@ -228,19 +228,13 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-01-29 20:59:25" itemprop="dateCreated datePublished" datetime="2020-01-29T20:59:25+08:00">2020-01-29</time>
+              <time title="创建时间：2020-10-24 10:51:28 / 修改时间：19:59:10" itemprop="dateCreated datePublished" datetime="2020-10-24T10:51:28+08:00">2020-10-24</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-04 17:58:11" itemprop="dateModified" datetime="2020-07-04T17:58:11+08:00">2020-07-04</time>
-              </span>
 
           
-            <span id="/2020/01/29/fwt/" class="post-meta-item leancloud_visitors" data-flag-title="FWT学习笔记" title="阅读次数">
+            <span id="/2020/10/24/AGC046%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="AGC046 简要题解" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -255,8 +249,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/01/29/fwt/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/01/29/fwt/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/10/24/AGC046%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/24/AGC046%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -271,56 +265,32 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="题目描述">题目描述</h3>
-<p>给定长度为 <span class="math inline">\(2^n\)</span> 两个序列 <span class="math inline">\(A\)</span>,<span class="math inline">\(B\)</span>，设 <span class="math display">\[
-C_i=\sum_{j\oplus k = i}A_j \times B_k
-\]</span></p>
-<p>分别当<span class="math inline">\(\oplus\)</span>是<span class="math inline">\(\text{or}\)</span>,<span class="math inline">\(\text{and}\)</span>和<span class="math inline">\(\text{xor}\)</span>时求出<span class="math inline">\(C\)</span></p>
-<a id="more"></a>
-<h3 id="什么是fwt">什么是FWT</h3>
-<p>FWT（快速沃尔什变换）是一种类似FFT的优化卷积运算的算法，只不过卷积时下标由<span class="math inline">\(+\)</span>变成了位运算。类似FFT，我们需要找到一种变换方式，设<span class="math inline">\(A\)</span>，<span class="math inline">\(B\)</span>为原序列，<span class="math inline">\(FWT(A)\)</span>，<span class="math inline">\(FWT(B)\)</span>变换后的序列，<span class="math inline">\(\otimes\)</span>为卷积运算，<span class="math inline">\(*\)</span>为对应下标相乘的运算，使得 <span class="math display">\[
-FWT(A\otimes B)=FWTA*FWTB
-\]</span> （想想FFT，通过变换为点值表达使得卷积运算可以变为对应下标相乘，两者实际上思想一样！）</p>
-<p>接下来说一下如何实现</p>
-<h4 id="or">OR</h4>
-<p>设<span class="math inline">\(A\)</span>为原序列，<span class="math inline">\(FWT_A\)</span>为变换后序列，则有 <span class="math display">\[
-FWT_A[i]=\sum\limits_{i|j=i}A[j]
-\]</span> 考虑为什么是对的，我们考虑两个变换后的数组按位相乘后的结果 <span class="math display">\[
-FWT_A[i]*FWT_B[i]=(\sum\limits_{i|j=i}A[j])*(\sum\limits_{i|k=i}B[k])\\
-=\sum\limits_{i|(j|k)=i}A[j]*B[k]
-\]</span> 这正是<span class="math inline">\(FWT_{A*B}\)</span>！</p>
-<p>但是不能直接这么求，像FFT，我们是否可以把原序列分为两半，通过子问题的解合并出问题的解呢？是可以的，下面给出式子 <span class="math display">\[
-FWT_A=
-\begin{cases}
-A &amp;     &amp;|A|=1\\
-merge(FWT_{A_0},FWT_{A_0}+FWT_{A_1})&amp;    &amp;\text{otherwise}
-\end{cases}
-\]</span></p>
-<p>其中，<span class="math inline">\(merge\)</span>为把两个序列拼接起来（左面的序列拼合完成后下标较小），<span class="math inline">\(A_0\)</span>，<span class="math inline">\(A_1\)</span>分别为序列的前半部分（下标较小的部分）和后半部分，<span class="math inline">\(+\)</span>为对应下标的值相加。</p>
-<p>考虑正确性，当<span class="math inline">\(|A|=1\)</span>时，显然只有这一个元素，当<span class="math inline">\(|A|\not =1\)</span>时，我们按下标的最高位分为<span class="math inline">\(0\)</span>与<span class="math inline">\(1\)</span>两部分，递归处理左右两边，再考虑这一位的影响，因为只有<span class="math inline">\(0|0=0\)</span>，所以<span class="math inline">\(0\)</span>只有自己的贡献，而<span class="math inline">\(0|1=1,1|1=1\)</span>，所以<span class="math inline">\(0\)</span>和<span class="math inline">\(1\)</span>都有贡献。</p>
-<p>或者换种想法，最初定义<span class="math inline">\(FWT\)</span>的式子，如果我们把下标看作集合的状压表示，那么<span class="math inline">\(FWT_A[i]\)</span>实际上是<span class="math inline">\(i\)</span>所有子集对应值的和，我们按位相加时，保证除了最高位，其他低位都是相等的（低位的子集已经递归算过），所以我们只关注最高位，而这一位下标为0或者为1都是这一位为1的子集，所以右边是左右相加，而左边只有0是0的子集，所以只有左边一半。</p>
-<p>接下来考虑逆变换，也就是把<span class="math inline">\(FWT\)</span>序列还原为原序列。其实很简单，就是解方程，下面直接给出式子，不做解释 <span class="math display">\[
-IFWT_A=
-\begin{cases}
-FWT_A &amp;     &amp;|A|=1\\
-merge(IFWT{A_0},IFWT{A_1}-IFWT{A_0})&amp;    &amp;\text{otherwise}
-\end{cases}
-\]</span> 然后对于整个序列，<span class="math inline">\(IFWT_A\)</span>就是它自己了</p>
-<p>下面是<span class="math inline">\(or\)</span>的代码</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fwtor</span><span class="params">(<span class="keyword">int</span> *f,<span class="keyword">int</span> n,<span class="keyword">int</span> op)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> len=<span class="number">2</span>;len&lt;=n;len&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i+=len)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;i+(len&gt;&gt;<span class="number">1</span>);j++)</span><br><span class="line">                <span class="keyword">if</span>(op==<span class="number">1</span>)f[j+(len&gt;&gt;<span class="number">1</span>)]+=f[j],f[j+(len&gt;&gt;<span class="number">1</span>)]%=p;</span><br><span class="line">                <span class="keyword">else</span> f[j+(len&gt;&gt;<span class="number">1</span>)]+=(p-f[j]),f[j+(len&gt;&gt;<span class="number">1</span>)]%=p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><span class="math inline">\(p\)</span>是板子题的模数，op==1时是正变换，其它时为逆变换，采用像FFT一样的迭代实现</p>
-<h4 id="and">AND</h4>
-<p>and操作和or操作类似，下面只给出式子和代码 <span class="math display">\[
-FWT_A[i]=\sum\limits_{i\&amp;j=i}A[j]
-\]</span> <span class="math display">\[
-FWT_A=
-\begin{cases}
-A &amp;     &amp;|A|=1\\
-merge(FWT_{A_0+A_1},FWT_{A_0})&amp;    &amp;\text{otherwise}
-\end{cases}
-\]</span></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fwtand</span><span class="params">(<span class="keyword">int</span> *f,<span class="keyword">int</span> n,<span class="keyword">int</span> op)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> len=<span class="number">2</span>;len&lt;=n;len&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i+=len)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;i+(len&gt;&gt;<span class="number">1</span>);j++)</span><br><span class="line">                <span class="keyword">if</span>(op==<span class="number">1</span>)f[j]+=f[j+(len&gt;&gt;<span class="number">1</span>)],f[j]%=p;</span><br><span class="line">                <span class="keyword">else</span> f[j]+=(p-f[j+(len&gt;&gt;<span class="number">1</span>)]),f[j]%=p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="xor">XOR</h4>
+        <h3 id="a---takahashikun-the-strider">A - Takahashikun, The Strider</h3>
+<p>可以发现行走的路线在以 <span class="math inline">\((1,0)\)</span> 为圆心，半径为 <span class="math inline">\(1\)</span> 的圆上，所以当再一次面向 <span class="math inline">\(y\)</span> 轴合法，根据简单的数论知识可知答案为 <span class="math inline">\(\dfrac{360}{\gcd(n,360)}\)</span>。</p>
+<p><a href="https://atcoder.jp/contests/agc046/submissions/17597983" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="b---extension">B - Extension</h3>
+<p>有个比较简单的做法，设 <span class="math inline">\(f(i,j)\)</span> 表示 <span class="math inline">\(c=i,d=j\)</span> 的答案，考虑最后一行填了行还是列，这部分是 <span class="math inline">\(jf(i-1,j)+if(i,j-1)\)</span>，注意如果新形成的左上角没有涂黑，则其会在填行和填列中都被计算一遍，所以要减去没有涂到左上角的方案数 <span class="math inline">\((i-1)(j-1)f(i-1,j-1)\)</span>。</p>
+<p><a href="https://atcoder.jp/contests/agc046/submissions/17597924" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="c---shift">C - Shift</h3>
+<p>显然最多操作次数不会超过 <span class="math inline">\(n\)</span>，也就是直接一步到最终位置，所以把 <span class="math inline">\(m\)</span> 的范围降到了 <span class="math inline">\(n\)</span>。</p>
+<p>把 <span class="math inline">\(0\)</span> 看作分隔符，记 <span class="math inline">\(a_i\)</span> 表示第 <span class="math inline">\(i\)</span> 个 <span class="math inline">\(0\)</span> 前连续的 <span class="math inline">\(1\)</span> 的个数，然后我们考虑把 <span class="math inline">\(1\)</span> 插入到 <span class="math inline">\(0\)</span> 里。设 <span class="math inline">\(f(i,j,k)\)</span> 表示考虑了前 <span class="math inline">\(i\)</span> 个 <span class="math inline">\(0\)</span>，目前一共填了 <span class="math inline">\(j\)</span> 个 <span class="math inline">\(1\)</span>，用了 <span class="math inline">\(k\)</span> 次操作，同时我们要保证操作次数最少。 转移时考虑最后一段填了多少个 <span class="math inline">\(1\)</span>，如果不多于一开始的个数，则不需要操作；反之需要花费操作次数从后面借，那么有转移： <span class="math display">\[
+f(i,j,k)=\sum\limits_{c=0}^{a_i}f(i-1,j-c,k)+\sum\limits_{c=a_i+1}^{a_i+k}f(i-1,j-c,k+a_i-c)
+\]</span> 可以用前缀和优化转移，复杂度 <span class="math inline">\(O(n^3)\)</span>，但是不优化也能过。</p>
+<p><a href="https://atcoder.jp/contests/agc046/submissions/17598887" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="d---secret-passage">D - Secret Passage</h3>
+<p>我们把过程拆为删数和填数两部分，则删掉两个数以后我们可以先存着不删除，我们管这种叫“自由”的数。</p>
+<p>设 <span class="math inline">\(f(i,j,k)\)</span> 表示 <span class="math inline">\(i\)</span> 及以后的数不变，有 <span class="math inline">\(j\)</span> 个自由的 <span class="math inline">\(0\)</span>，<span class="math inline">\(k\)</span> 个自由的 <span class="math inline">\(1\)</span> 是否合法。转移要不然是删往后两位中的一位，要不然是添加一些自由的数再删掉。</p>
+<p>然后考虑填，设 <span class="math inline">\(g(i,j,k)\)</span> 表示 <span class="math inline">\(i\)</span> 及以后的数不变，有 <span class="math inline">\(j\)</span> 个自由的 <span class="math inline">\(0\)</span>，<span class="math inline">\(k\)</span> 个自由的 <span class="math inline">\(1\)</span> 能填出多少方案，边界条件 <span class="math inline">\(g(0,j,k)=\dbinom{j+k}{j}\)</span>，转移时为了保证不重复，如果最前一位能填原序列的数就填。</p>
+<p>注意到有的时候 <span class="math inline">\(f(i,j,k)\)</span> 能填出的状态可能完全包含了 <span class="math inline">\(f(i&#39;,j&#39;,k&#39;)\)</span> 能填出的状态，所以要把 <span class="math inline">\(f(i&#39;,j&#39;,k&#39;)\)</span> 置为 <span class="math inline">\(0\)</span>。</p>
+<p><a href="https://atcoder.jp/contests/agc046/submissions/17387084" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="e---permutation-cover">E - Permutation Cover</h3>
+<p>考虑什么时候无解，可以发现，如果 <span class="math inline">\(2minA+1\leqslant maxA\)</span> 则无解，因为单独把这两种数提出来，可以发现要不然在中见连续出现了三个 <span class="math inline">\(maxA\)</span>，要不然在两端连续出现了两个 <span class="math inline">\(maxA\)</span>。</p>
+<p>同时可以证明，如果 <span class="math inline">\(2minA+1&lt;maxA\)</span> 则一定有解，考虑每一次把最小的拿出来，然后每一个空都可以插入两个相同的更多的数。</p>
+<p>然后我们考虑计算固定某个前缀，且这个前缀的末尾是一个排列的序列是否存在，这时比较特殊的是如果 <span class="math inline">\(2minA+1=maxA\)</span>，也可能有解，且有解当且仅当在最后的排列中，所有出现 <span class="math inline">\(maxA\)</span> 次的元素都在出现 <span class="math inline">\(minA\)</span> 次的元素之前，证明就是这一次左面可以连续两个出现 <span class="math inline">\(maxA\)</span> 次的元素。</p>
+<p>所以我们每次枚举新添加的一串的长度然后取字典序最大的，假设固定长度我们可以贪心解决。</p>
+<p><a href="https://atcoder.jp/contests/agc046/submissions/17424101" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="f---forbidden-tournament">F - Forbidden Tournament</h3>
+<p>咕咕咕</p>
 
     </div>
 
@@ -330,7 +300,7 @@ merge(FWT_{A_0+A_1},FWT_{A_0})&amp;    &amp;\text{otherwise}
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/FWT/" rel="tag"># FWT</a>
+              <a href="/tags/%E5%A5%97%E9%A2%98%E9%A2%98%E8%A7%A3/" rel="tag"># 套题题解</a>
           </div>
 
         
@@ -339,12 +309,12 @@ merge(FWT_{A_0+A_1},FWT_{A_0})&amp;    &amp;\text{otherwise}
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/01/21/%E3%80%8CZJOI2015%E3%80%8D%E5%9C%B0%E9%9C%87%E5%90%8E%E7%9A%84%E5%B9%BB%E6%83%B3%E4%B9%A1/" rel="prev" title="「ZJOI2015」地震后的幻想乡">
-      <i class="fa fa-chevron-left"></i> 「ZJOI2015」地震后的幻想乡
+    <a href="/2020/10/22/AGC048%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" rel="prev" title="AGC048 简要题解">
+      <i class="fa fa-chevron-left"></i> AGC048 简要题解
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/06/13/CF235D/" rel="next" title="CF235D Graph Game">
-      CF235D Graph Game <i class="fa fa-chevron-right"></i>
+    <a href="/2020/10/24/ARC106%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" rel="next" title="ARC106 简要题解">
+      ARC106 简要题解 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -426,7 +396,7 @@ merge(FWT_{A_0+A_1},FWT_{A_0})&amp;    &amp;\text{otherwise}
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是fwt"><span class="nav-number">2.</span> <span class="nav-text">什么是FWT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#or"><span class="nav-number">2.1.</span> <span class="nav-text">OR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#and"><span class="nav-number">2.2.</span> <span class="nav-text">AND</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xor"><span class="nav-number">2.3.</span> <span class="nav-text">XOR</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#a---takahashikun-the-strider"><span class="nav-number">1.</span> <span class="nav-text">A - Takahashikun, The Strider</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b---extension"><span class="nav-number">2.</span> <span class="nav-text">B - Extension</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c---shift"><span class="nav-number">3.</span> <span class="nav-text">C - Shift</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d---secret-passage"><span class="nav-number">4.</span> <span class="nav-text">D - Secret Passage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#e---permutation-cover"><span class="nav-number">5.</span> <span class="nav-text">E - Permutation Cover</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#f---forbidden-tournament"><span class="nav-number">6.</span> <span class="nav-text">F - Forbidden Tournament</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
