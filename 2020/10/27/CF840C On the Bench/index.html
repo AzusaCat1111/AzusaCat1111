@@ -48,19 +48,19 @@
   };
 </script>
 
-  <meta name="description" content="A - Takahashikun, The Strider 可以发现行走的路线在以 \((1,0)\) 为圆心，半径为 \(1\) 的圆上，所以当再一次面向 \(y\) 轴合法，根据简单的数论知识可知答案为 \(\dfrac{360}{\gcd(n,360)}\)。 提交记录 B - Extension 有个比较简单的做法，设 \(f(i,j)\) 表示 \(c&#x3D;i,d&#x3D;j\) 的答案，考">
+  <meta name="description" content="注意到若 \(a_i&#x3D;c^2r\)，则让 \(a_i:&#x3D;r\) 答案不会变。 则现在将问题转化为有 \(n\) 个有标号的不同颜色的球，问有多少种排列使得没有同色球相邻，设 \(a_i\) 为颜色为 \(i\) 的球的个数。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AGC046 简要题解">
-<meta property="og:url" content="https://azusacat1111.github.io/2020/10/24/AGC046%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/index.html">
+<meta property="og:title" content="CF840C On the Bench">
+<meta property="og:url" content="https://azusacat1111.github.io/2020/10/27/CF840C%20On%20the%20Bench/index.html">
 <meta property="og:site_name" content="AzusaCat&#39;s Blog">
-<meta property="og:description" content="A - Takahashikun, The Strider 可以发现行走的路线在以 \((1,0)\) 为圆心，半径为 \(1\) 的圆上，所以当再一次面向 \(y\) 轴合法，根据简单的数论知识可知答案为 \(\dfrac{360}{\gcd(n,360)}\)。 提交记录 B - Extension 有个比较简单的做法，设 \(f(i,j)\) 表示 \(c&#x3D;i,d&#x3D;j\) 的答案，考">
-<meta property="article:published_time" content="2020-10-24T02:51:28.000Z">
-<meta property="article:modified_time" content="2020-10-24T11:59:10.583Z">
+<meta property="og:description" content="注意到若 \(a_i&#x3D;c^2r\)，则让 \(a_i:&#x3D;r\) 答案不会变。 则现在将问题转化为有 \(n\) 个有标号的不同颜色的球，问有多少种排列使得没有同色球相邻，设 \(a_i\) 为颜色为 \(i\) 的球的个数。">
+<meta property="article:published_time" content="2020-10-27T09:45:25.000Z">
+<meta property="article:modified_time" content="2020-10-27T11:52:01.325Z">
 <meta property="article:author" content="AzusaCat">
-<meta property="article:tag" content="套题题解">
+<meta property="article:tag" content="生成函数">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://azusacat1111.github.io/2020/10/24/AGC046%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
+<link rel="canonical" href="https://azusacat1111.github.io/2020/10/27/CF840C%20On%20the%20Bench/">
 
 
 <script id="page-configurations">
@@ -72,7 +72,7 @@
   };
 </script>
 
-  <title>AGC046 简要题解 | AzusaCat's Blog</title>
+  <title>CF840C On the Bench | AzusaCat's Blog</title>
   
 
 
@@ -206,7 +206,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/10/24/AGC046%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/10/27/CF840C%20On%20the%20Bench/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -219,7 +219,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          AGC046 简要题解
+          CF840C On the Bench
         </h1>
 
         <div class="post-meta">
@@ -230,11 +230,11 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-10-24 10:51:28 / 修改时间：19:59:10" itemprop="dateCreated datePublished" datetime="2020-10-24T10:51:28+08:00">2020-10-24</time>
+              <time title="创建时间：2020-10-27 17:45:25 / 修改时间：19:52:01" itemprop="dateCreated datePublished" datetime="2020-10-27T17:45:25+08:00">2020-10-27</time>
             </span>
 
           
-            <span id="/2020/10/24/AGC046%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="AGC046 简要题解" title="阅读次数">
+            <span id="/2020/10/27/CF840C%20On%20the%20Bench/" class="post-meta-item leancloud_visitors" data-flag-title="CF840C On the Bench" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -249,8 +249,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/10/24/AGC046%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/24/AGC046%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/10/27/CF840C%20On%20the%20Bench/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/27/CF840C%20On%20the%20Bench/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -265,32 +265,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="a---takahashikun-the-strider">A - Takahashikun, The Strider</h3>
-<p>可以发现行走的路线在以 <span class="math inline">\((1,0)\)</span> 为圆心，半径为 <span class="math inline">\(1\)</span> 的圆上，所以当再一次面向 <span class="math inline">\(y\)</span> 轴合法，根据简单的数论知识可知答案为 <span class="math inline">\(\dfrac{360}{\gcd(n,360)}\)</span>。</p>
-<p><a href="https://atcoder.jp/contests/agc046/submissions/17597983" target="_blank" rel="noopener">提交记录</a></p>
-<h3 id="b---extension">B - Extension</h3>
-<p>有个比较简单的做法，设 <span class="math inline">\(f(i,j)\)</span> 表示 <span class="math inline">\(c=i,d=j\)</span> 的答案，考虑最后一行填了行还是列，这部分是 <span class="math inline">\(jf(i-1,j)+if(i,j-1)\)</span>，注意如果新形成的左上角没有涂黑，则其会在填行和填列中都被计算一遍，所以要减去没有涂到左上角的方案数 <span class="math inline">\((i-1)(j-1)f(i-1,j-1)\)</span>。</p>
-<p><a href="https://atcoder.jp/contests/agc046/submissions/17597924" target="_blank" rel="noopener">提交记录</a></p>
-<h3 id="c---shift">C - Shift</h3>
-<p>显然最多操作次数不会超过 <span class="math inline">\(n\)</span>，也就是直接一步到最终位置，所以把 <span class="math inline">\(m\)</span> 的范围降到了 <span class="math inline">\(n\)</span>。</p>
-<p>把 <span class="math inline">\(0\)</span> 看作分隔符，记 <span class="math inline">\(a_i\)</span> 表示第 <span class="math inline">\(i\)</span> 个 <span class="math inline">\(0\)</span> 前连续的 <span class="math inline">\(1\)</span> 的个数，然后我们考虑把 <span class="math inline">\(1\)</span> 插入到 <span class="math inline">\(0\)</span> 里。设 <span class="math inline">\(f(i,j,k)\)</span> 表示考虑了前 <span class="math inline">\(i\)</span> 个 <span class="math inline">\(0\)</span>，目前一共填了 <span class="math inline">\(j\)</span> 个 <span class="math inline">\(1\)</span>，用了 <span class="math inline">\(k\)</span> 次操作，同时我们要保证操作次数最少。 转移时考虑最后一段填了多少个 <span class="math inline">\(1\)</span>，如果不多于一开始的个数，则不需要操作；反之需要花费操作次数从后面借，那么有转移： <span class="math display">\[
-f(i,j,k)=\sum\limits_{c=0}^{a_i}f(i-1,j-c,k)+\sum\limits_{c=a_i+1}^{a_i+k}f(i-1,j-c,k+a_i-c)
-\]</span> 可以用前缀和优化转移，复杂度 <span class="math inline">\(O(n^3)\)</span>，但是不优化也能过。</p>
-<p><a href="https://atcoder.jp/contests/agc046/submissions/17598887" target="_blank" rel="noopener">提交记录</a></p>
-<h3 id="d---secret-passage">D - Secret Passage</h3>
-<p>我们把过程拆为删数和填数两部分，则删掉两个数以后我们可以先存着不删除，我们管这种叫“自由”的数。</p>
-<p>设 <span class="math inline">\(f(i,j,k)\)</span> 表示 <span class="math inline">\(i\)</span> 及以后的数不变，有 <span class="math inline">\(j\)</span> 个自由的 <span class="math inline">\(0\)</span>，<span class="math inline">\(k\)</span> 个自由的 <span class="math inline">\(1\)</span> 是否合法。转移要不然是删往后两位中的一位，要不然是添加一些自由的数再删掉。</p>
-<p>然后考虑填，设 <span class="math inline">\(g(i,j,k)\)</span> 表示 <span class="math inline">\(i\)</span> 及以后的数不变，有 <span class="math inline">\(j\)</span> 个自由的 <span class="math inline">\(0\)</span>，<span class="math inline">\(k\)</span> 个自由的 <span class="math inline">\(1\)</span> 能填出多少方案，边界条件 <span class="math inline">\(g(0,j,k)=\dbinom{j+k}{j}\)</span>，转移时为了保证不重复，如果最前一位能填原序列的数就填。</p>
-<p>注意到有的时候 <span class="math inline">\(f(i,j,k)\)</span> 能填出的状态可能完全包含了 <span class="math inline">\(f(i&#39;,j&#39;,k&#39;)\)</span> 能填出的状态，所以要把 <span class="math inline">\(f(i&#39;,j&#39;,k&#39;)\)</span> 置为 <span class="math inline">\(0\)</span>。</p>
-<p><a href="https://atcoder.jp/contests/agc046/submissions/17387084" target="_blank" rel="noopener">提交记录</a></p>
-<h3 id="e---permutation-cover">E - Permutation Cover</h3>
-<p>考虑什么时候无解，可以发现，如果 <span class="math inline">\(2minA+1\leqslant maxA\)</span> 则无解，因为单独把这两种数提出来，可以发现要不然在中见连续出现了三个 <span class="math inline">\(maxA\)</span>，要不然在两端连续出现了两个 <span class="math inline">\(maxA\)</span>。</p>
-<p>同时可以证明，如果 <span class="math inline">\(2minA+1&lt;maxA\)</span> 则一定有解，考虑每一次把最小的拿出来，然后每一个空都可以插入两个相同的更多的数。</p>
-<p>然后我们考虑计算固定某个前缀，且这个前缀的末尾是一个排列的序列是否存在，这时比较特殊的是如果 <span class="math inline">\(2minA+1=maxA\)</span>，也可能有解，且有解当且仅当在最后的排列中，所有出现 <span class="math inline">\(maxA\)</span> 次的元素都在出现 <span class="math inline">\(minA\)</span> 次的元素之前，证明就是这一次左面可以连续两个出现 <span class="math inline">\(maxA\)</span> 次的元素。</p>
-<p>所以我们每次枚举新添加的一串的长度然后取字典序最大的，假设固定长度我们可以贪心解决。</p>
-<p><a href="https://atcoder.jp/contests/agc046/submissions/17424101" target="_blank" rel="noopener">提交记录</a></p>
-<h3 id="f---forbidden-tournament">F - Forbidden Tournament</h3>
-<p>咕咕咕</p>
+        <p>注意到若 <span class="math inline">\(a_i=c^2r\)</span>，则让 <span class="math inline">\(a_i:=r\)</span> 答案不会变。</p>
+<p>则现在将问题转化为有 <span class="math inline">\(n\)</span> 个有标号的不同颜色的球，问有多少种排列使得没有同色球相邻，设 <span class="math inline">\(a_i\)</span> 为颜色为 <span class="math inline">\(i\)</span> 的球的个数。</p>
+<a id="more"></a>
+<p>我们考虑容斥，我们注意到没有同色球相邻等价于 <span class="math inline">\(n-1\)</span> 个限制：<span class="math inline">\(\forall i=1\rightarrow n-1\)</span>，<span class="math inline">\(i\)</span> 和 <span class="math inline">\(i+1\)</span> 上的球的颜色不同 。设 <span class="math inline">\(f(i)\)</span> 表示恰好有 <span class="math inline">\(i\)</span> 个限制未被满足的方案数，<span class="math inline">\(g(i)\)</span> 为钦定 <span class="math inline">\(i\)</span> 个位置的限制未被满足的方案数，注意到这是一个子集反演的形式（把每个位置的限制是否被满足看作集合的元素），则 <span class="math inline">\(f(0)=\sum\limits_{i=0}^{n-1}(-1)^ig(i)\)</span>。</p>
+<p>考虑求 <span class="math inline">\(g(i)\)</span>，我们考虑每种颜色球的贡献。与整体的情况类似，我们认为每一种球也有 <span class="math inline">\(a_k-1\)</span> 个限制：最终排列完之后第 <span class="math inline">\(i\)</span> 个球和第 <span class="math inline">\(i+1\)</span> 个球不能相邻。</p>
+<p>注意到如果我们钦定了某个位置的限制不满足，则会把两个球缩到一起。如果钦定有 <span class="math inline">\(i\)</span> 个限制不满足，最后相当于把这种颜色的球缩成了 <span class="math inline">\(a_k-i\)</span> 段，由于最后的拼接是关于球的段数的，所以我们写出关于最后剩余球的段数的 EGF： <span class="math display">\[
+F_k(z)=a_k!\sum\limits_{i=1}^{a_k}\binom{a_k-1}{i-1}\frac{z^i}{i!}
+\]</span> 所以有 <span class="math inline">\(g(i)=(n-i)![z^{n-i}]\prod F_k(z)\)</span>。</p>
+<p>由于这题模数是 <span class="math inline">\(10^9+7\)</span> 而且 <span class="math inline">\(n\)</span> 比较小，所以用了暴力卷积，否则可以使用分治+NTT 优化至 <span class="math inline">\(O(n\log^2n)\)</span>。</p>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> <span class="keyword">const</span> p=<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">305</span>],b[<span class="number">305</span>],fac[<span class="number">305</span>],inv[<span class="number">305</span>];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v[<span class="number">305</span>];</span><br><span class="line"><span class="keyword">bool</span> visited[<span class="number">305</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pw</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(y)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(y&amp;<span class="number">1</span>)res=<span class="number">1l</span>l*res*x%p;</span><br><span class="line">        x=<span class="number">1l</span>l*x*x%p;</span><br><span class="line">        y&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,m=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]);</span><br><span class="line">    fac[<span class="number">0</span>]=inv[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        fac[i]=<span class="number">1l</span>l*fac[i<span class="number">-1</span>]*i%p,inv[i]=<span class="number">1l</span>l*inv[i<span class="number">-1</span>]*pw(i,p<span class="number">-2</span>)%p;</span><br><span class="line">        <span class="keyword">if</span>(visited[i])<span class="keyword">continue</span>;</span><br><span class="line">        m++;b[m]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> t=(<span class="keyword">int</span>)(<span class="built_in">sqrt</span>(((<span class="keyword">long</span> <span class="keyword">double</span>)a[i])*a[j])+<span class="number">1e-12</span>);</span><br><span class="line">            <span class="keyword">if</span>(<span class="number">1l</span>l*t*t==<span class="number">1l</span>l*a[i]*a[j])visited[j]=<span class="number">1</span>,b[m]++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;res(<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        v[i].resize(b[i]+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=b[i];j++)v[i][j]=<span class="number">1l</span>l*fac[b[i]<span class="number">-1</span>]*inv[j<span class="number">-1</span>]%p*inv[b[i]-j]%p*inv[j]%p;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;tmp(res.size()+v[i].size()<span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=b[i];j++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;res.size();k++)</span><br><span class="line">                tmp[j+k]=(tmp[j+k]+<span class="number">1l</span>l*v[i][j]*res[k])%p;</span><br><span class="line">        res=tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;res.size();i++)</span><br><span class="line">        ans=(ans+<span class="number">1l</span>l*((i&amp;<span class="number">1</span>)?p<span class="number">-1</span>:<span class="number">1</span>)*fac[n-i]%p*res[n-i])%p;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)ans=<span class="number">1l</span>l*ans*fac[b[i]]%p;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -300,7 +285,7 @@ f(i,j,k)=\sum\limits_{c=0}^{a_i}f(i-1,j-c,k)+\sum\limits_{c=a_i+1}^{a_i+k}f(i-1,
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E5%A5%97%E9%A2%98%E9%A2%98%E8%A7%A3/" rel="tag"># 套题题解</a>
+              <a href="/tags/%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0/" rel="tag"># 生成函数</a>
           </div>
 
         
@@ -309,13 +294,10 @@ f(i,j,k)=\sum\limits_{c=0}^{a_i}f(i-1,j-c,k)+\sum\limits_{c=a_i+1}^{a_i+k}f(i-1,
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/10/22/AGC048%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" rel="prev" title="AGC048 简要题解">
-      <i class="fa fa-chevron-left"></i> AGC048 简要题解
+    <a href="/2020/10/24/ARC106%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" rel="prev" title="ARC106 简要题解">
+      <i class="fa fa-chevron-left"></i> ARC106 简要题解
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/10/24/ARC106%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" rel="next" title="ARC106 简要题解">
-      ARC106 简要题解 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -396,7 +378,6 @@ f(i,j,k)=\sum\limits_{c=0}^{a_i}f(i-1,j-c,k)+\sum\limits_{c=a_i+1}^{a_i+k}f(i-1,
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#a---takahashikun-the-strider"><span class="nav-number">1.</span> <span class="nav-text">A - Takahashikun, The Strider</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b---extension"><span class="nav-number">2.</span> <span class="nav-text">B - Extension</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c---shift"><span class="nav-number">3.</span> <span class="nav-text">C - Shift</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d---secret-passage"><span class="nav-number">4.</span> <span class="nav-text">D - Secret Passage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#e---permutation-cover"><span class="nav-number">5.</span> <span class="nav-text">E - Permutation Cover</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#f---forbidden-tournament"><span class="nav-number">6.</span> <span class="nav-text">F - Forbidden Tournament</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

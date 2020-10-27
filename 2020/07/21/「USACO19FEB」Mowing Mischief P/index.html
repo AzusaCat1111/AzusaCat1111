@@ -51,10 +51,10 @@
   <meta name="description" content="给你一个长、宽均为 \(T\) 的网格图，左下角坐标为 \((0,0)\)，右上角坐标为 \((T,T)\)。现在图上面有 \(n\) 个点（一定在格点上），你需要选择一些点，使得你选择的点按 \(x\) 从小到大排序后 \(y\) 也单调上升。最大化选的点的数量；在此基础上，让排序好的相邻的两点形成的矩形的面积之和最小。输出最小面积和。\(T\leqslant 10^6,N\leqslant 2">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「USACO19FEB」Mowing Mischief P">
-<meta property="og:url" content="https://azusacat1111.github.io/2020/07/21/%E3%80%8CUSACO19FEB%E3%80%8DMowing_Mischief_P/index.html">
+<meta property="og:url" content="https://azusacat1111.github.io/2020/07/21/%E3%80%8CUSACO19FEB%E3%80%8DMowing%20Mischief%20P/index.html">
 <meta property="og:site_name" content="AzusaCat&#39;s Blog">
 <meta property="og:description" content="给你一个长、宽均为 \(T\) 的网格图，左下角坐标为 \((0,0)\)，右上角坐标为 \((T,T)\)。现在图上面有 \(n\) 个点（一定在格点上），你需要选择一些点，使得你选择的点按 \(x\) 从小到大排序后 \(y\) 也单调上升。最大化选的点的数量；在此基础上，让排序好的相邻的两点形成的矩形的面积之和最小。输出最小面积和。\(T\leqslant 10^6,N\leqslant 2">
-<meta property="og:image" content="https://azusacat1111.github.io/2020/07/21/%E3%80%8CUSACO19FEB%E3%80%8DMowing_Mischief_P/1.png">
+<meta property="og:image" content="https://azusacat1111.github.io/2020/07/21/%E3%80%8CUSACO19FEB%E3%80%8DMowing%20Mischief%20P/1.png">
 <meta property="article:published_time" content="2020-07-21T12:09:15.000Z">
 <meta property="article:modified_time" content="2020-07-21T23:52:24.804Z">
 <meta property="article:author" content="AzusaCat">
@@ -62,9 +62,9 @@
 <meta property="article:tag" content="线段树">
 <meta property="article:tag" content="决策单调性">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://azusacat1111.github.io/2020/07/21/%E3%80%8CUSACO19FEB%E3%80%8DMowing_Mischief_P/1.png">
+<meta name="twitter:image" content="https://azusacat1111.github.io/2020/07/21/%E3%80%8CUSACO19FEB%E3%80%8DMowing%20Mischief%20P/1.png">
 
-<link rel="canonical" href="https://azusacat1111.github.io/2020/07/21/%E3%80%8CUSACO19FEB%E3%80%8DMowing_Mischief_P/">
+<link rel="canonical" href="https://azusacat1111.github.io/2020/07/21/%E3%80%8CUSACO19FEB%E3%80%8DMowing%20Mischief%20P/">
 
 
 <script id="page-configurations">
@@ -210,7 +210,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/07/21/%E3%80%8CUSACO19FEB%E3%80%8DMowing_Mischief_P/">
+    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/07/21/%E3%80%8CUSACO19FEB%E3%80%8DMowing%20Mischief%20P/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -244,7 +244,7 @@
               </span>
 
           
-            <span id="/2020/07/21/%E3%80%8CUSACO19FEB%E3%80%8DMowing_Mischief_P/" class="post-meta-item leancloud_visitors" data-flag-title="「USACO19FEB」Mowing Mischief P" title="阅读次数">
+            <span id="/2020/07/21/%E3%80%8CUSACO19FEB%E3%80%8DMowing%20Mischief%20P/" class="post-meta-item leancloud_visitors" data-flag-title="「USACO19FEB」Mowing Mischief P" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -259,8 +259,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/07/21/%E3%80%8CUSACO19FEB%E3%80%8DMowing_Mischief_P/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/21/%E3%80%8CUSACO19FEB%E3%80%8DMowing_Mischief_P/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/07/21/%E3%80%8CUSACO19FEB%E3%80%8DMowing%20Mischief%20P/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/21/%E3%80%8CUSACO19FEB%E3%80%8DMowing%20Mischief%20P/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -290,7 +290,7 @@ f[j]-x_iy_j-x_jy_i+x_jy_j\leq f[k]-x_iy_k-x_ky_i+x_ky_k\\
 (y_k-y_j)x_i+(x_k-x_j)y_i\leq f[k]-f[j]+x_ky_k-x_jy_j
 \]</span> 我们注意到，对于两个 <span class="math inline">\(l\)</span> 相同的点 <span class="math inline">\(j,k\)</span>，若 <span class="math inline">\(x_j&lt;x_k\)</span>，那么一定有 <span class="math inline">\(y_j&gt;y_k\)</span>。因为如果依旧有 <span class="math inline">\(y_j&lt;y_k\)</span> 那么 <span class="math inline">\(l_k\)</span> 就可以从 <span class="math inline">\(l_j\)</span> 转移过来，它们的 <span class="math inline">\(l\)</span> 就不相等了。反过来同理。</p>
 <p>那么如果我们把 <span class="math inline">\(x_i\)</span>，<span class="math inline">\(y_i\)</span> 看作变量，那么 <span class="math inline">\(j\)</span> 比 <span class="math inline">\(k\)</span> 优的情况对应了坐标系里的一个半平面（也就是不等式的解集），而且因为我们钦定 <span class="math inline">\(j&gt;k\)</span>，那么这个半平面一定长这个样子</p>
-<p><img src="/2020/07/21/%E3%80%8CUSACO19FEB%E3%80%8DMowing_Mischief_P/1.png"></p>
+<p><img src="/2020/07/21/%E3%80%8CUSACO19FEB%E3%80%8DMowing%20Mischief%20P/1.png"></p>
 <p>其中蓝色为解集部分，解集一定是一条斜率为正的直线的下方。那么要更新的点一定被这条直线分为了两部分。那么如果在 <span class="math inline">\(i\)</span> 时，<span class="math inline">\(j\)</span> 比 <span class="math inline">\(k\)</span> 优（即点 <span class="math inline">\(i\)</span> 在蓝色区域内），那么对于 <span class="math inline">\(u&gt;i\)</span>，<span class="math inline">\(j\)</span> 也一定比 <span class="math inline">\(k\)</span> 优。这样的话对于一组 <span class="math inline">\(l\)</span> 相同的询问，他们的最优决策位置一定是单调不增的。这就可以决策单调性了。</p>
 <p>注意一下上面的分析都忽略了 <span class="math inline">\(x\)</span> 和 <span class="math inline">\(y\)</span> 的限制，那么如何满足呢？注意到对于任何一个点，可行的决策点都是一个区间，所以对每一排开一个线段树，线段树分治一下，把询问丢到所有符合要求的区间内，这样如果一个询问被挂在了某个区间内，区间内的点都可以转移到它，最后把答案取 <span class="math inline">\(\max\)</span> 就好了。如果以分治或者二分+单调队列计算决策单调性，总的复杂度为 <span class="math inline">\(O\left(n(\log^2n+\log T)\right)\)</span>。</p>
 <p>需要特殊注意的是每次计算一个区间时，不要直接和 <span class="math inline">\(f[mid]\)</span> 比较，需要再开一个变量记录只包含这段区间中的决策点时的最小值，要不然有时已经算过的 <span class="math inline">\(f[mid]\)</span> 比整个区间的决策都优，这样就会错误。</p>
@@ -418,7 +418,7 @@ f[j]-x_iy_j-x_jy_i+x_jy_j\leq f[k]-x_iy_k-x_ky_i+x_ky_k\\
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-count">47</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
