@@ -48,20 +48,19 @@
   };
 </script>
 
-  <meta name="description" content="给出n个数\(q_i\)，给出\(F_j\)的定义如下： \[ F_j &#x3D; \sum_{i&lt;j}\frac{q_i q_j}{(i-j)^2 }-\sum_{i&gt;j}\frac{q_i q_j}{(i-j)^2 } \] 令\(E_i&#x3D;\frac{F_i}{q_i}\)，求\(E_i\)">
+  <meta name="description" content="A - Xor Battle 我们从后往前维护 \(0\) 的线性基，当遇到某一个属于 \(1\) 的数时，如果其不能被当前线性基内的数表示，则 \(1\) 必胜，反正是否异或这个数没有影响，如果扫完了都没有判断成功，则 \(0\) 必胜。 提交记录">
 <meta property="og:type" content="article">
-<meta property="og:title" content="「ZJOI2014」力">
-<meta property="og:url" content="https://azusacat1111.github.io/2019/12/29/%E3%80%8CZJOI2014%E3%80%8D%E5%8A%9B/index.html">
+<meta property="og:title" content="AGC045 简要题解">
+<meta property="og:url" content="https://azusacat1111.github.io/2020/10/28/AGC045%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/index.html">
 <meta property="og:site_name" content="AzusaCat&#39;s Blog">
-<meta property="og:description" content="给出n个数\(q_i\)，给出\(F_j\)的定义如下： \[ F_j &#x3D; \sum_{i&lt;j}\frac{q_i q_j}{(i-j)^2 }-\sum_{i&gt;j}\frac{q_i q_j}{(i-j)^2 } \] 令\(E_i&#x3D;\frac{F_i}{q_i}\)，求\(E_i\)">
-<meta property="article:published_time" content="2019-12-29T02:54:53.000Z">
-<meta property="article:modified_time" content="2020-07-04T09:57:27.534Z">
+<meta property="og:description" content="A - Xor Battle 我们从后往前维护 \(0\) 的线性基，当遇到某一个属于 \(1\) 的数时，如果其不能被当前线性基内的数表示，则 \(1\) 必胜，反正是否异或这个数没有影响，如果扫完了都没有判断成功，则 \(0\) 必胜。 提交记录">
+<meta property="article:published_time" content="2020-10-28T02:59:19.000Z">
+<meta property="article:modified_time" content="2020-10-29T11:35:08.004Z">
 <meta property="article:author" content="AzusaCat">
-<meta property="article:tag" content="多项式">
-<meta property="article:tag" content="FFT">
+<meta property="article:tag" content="套题题解">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://azusacat1111.github.io/2019/12/29/%E3%80%8CZJOI2014%E3%80%8D%E5%8A%9B/">
+<link rel="canonical" href="https://azusacat1111.github.io/2020/10/28/AGC045%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
 
 
 <script id="page-configurations">
@@ -73,7 +72,7 @@
   };
 </script>
 
-  <title>「ZJOI2014」力 | AzusaCat's Blog</title>
+  <title>AGC045 简要题解 | AzusaCat's Blog</title>
   
 
 
@@ -207,7 +206,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2019/12/29/%E3%80%8CZJOI2014%E3%80%8D%E5%8A%9B/">
+    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/10/28/AGC045%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -220,7 +219,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          「ZJOI2014」力
+          AGC045 简要题解
         </h1>
 
         <div class="post-meta">
@@ -230,18 +229,18 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-12-29 10:54:53" itemprop="dateCreated datePublished" datetime="2019-12-29T10:54:53+08:00">2019-12-29</time>
+              <time title="创建时间：2020-10-28 10:59:19" itemprop="dateCreated datePublished" datetime="2020-10-28T10:59:19+08:00">2020-10-28</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-04 17:57:27" itemprop="dateModified" datetime="2020-07-04T17:57:27+08:00">2020-07-04</time>
+                <time title="修改时间：2020-10-29 19:35:08" itemprop="dateModified" datetime="2020-10-29T19:35:08+08:00">2020-10-29</time>
               </span>
 
           
-            <span id="/2019/12/29/%E3%80%8CZJOI2014%E3%80%8D%E5%8A%9B/" class="post-meta-item leancloud_visitors" data-flag-title="「ZJOI2014」力" title="阅读次数">
+            <span id="/2020/10/28/AGC045%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="AGC045 简要题解" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -256,8 +255,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/12/29/%E3%80%8CZJOI2014%E3%80%8D%E5%8A%9B/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/29/%E3%80%8CZJOI2014%E3%80%8D%E5%8A%9B/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/10/28/AGC045%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/28/AGC045%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -272,24 +271,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>给出n个数<span class="math inline">\(q_i\)</span>，给出<span class="math inline">\(F_j\)</span>的定义如下： <span class="math display">\[
-F_j = \sum_{i&lt;j}\frac{q_i q_j}{(i-j)^2 }-\sum_{i&gt;j}\frac{q_i q_j}{(i-j)^2 }
-\]</span></p>
-<p>令<span class="math inline">\(E_i=\frac{F_i}{q_i}\)</span>，求<span class="math inline">\(E_i\)</span></p>
+        <h3 id="a---xor-battle">A - Xor Battle</h3>
+<p>我们从后往前维护 <span class="math inline">\(0\)</span> 的线性基，当遇到某一个属于 <span class="math inline">\(1\)</span> 的数时，如果其不能被当前线性基内的数表示，则 <span class="math inline">\(1\)</span> 必胜，反正是否异或这个数没有影响，如果扫完了都没有判断成功，则 <span class="math inline">\(0\)</span> 必胜。</p>
+<p><a href="https://atcoder.jp/contests/agc045/submissions/16785139" target="_blank" rel="noopener">提交记录</a></p>
 <a id="more"></a>
-<p><span class="math display">\[
-E_j=\sum_{i&lt;j}\frac{q_i}{(i-j)^2 }-\sum_{i&gt;j}\frac{q_i}{(i-j)^2 }
-\]</span></p>
-<p>设<span class="math inline">\(f[i]=q[i],g[i]=\frac{1}{i^2}\)</span></p>
-<p>则 <span class="math display">\[
-E_j=\sum\limits_{i&lt;j}f[i]g[j-i]-\sum\limits_{i&gt;j}f[i]g[i-j]\\
-E_j=\sum\limits_{i=1}^{j-1}f[i]g[j-i]-\sum\limits_{i=j+1}^nf[i]g[i-j]
-\]</span> 设<span class="math inline">\(f&#39;[i]=f[n-i+1]\)</span></p>
-<p>则 <span class="math display">\[
-E_j=\sum\limits_{i=1}^{j-1}f[i]g[j-i]-\sum\limits_{i=1}^{n-j}f&#39;[i]g[j-i]
-\]</span> 直接卷积就好</p>
-<p>code:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">double</span> <span class="keyword">const</span> pi=<span class="built_in">acos</span>(<span class="number">-1</span>);</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">comp</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">double</span> r=<span class="number">0</span>,i=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">friend</span> comp <span class="keyword">operator</span> +(<span class="keyword">const</span> comp &amp;x,<span class="keyword">const</span> comp &amp;y)&#123;<span class="keyword">return</span> (comp)&#123;x.r+y.r,x.i+y.i&#125;;&#125;</span><br><span class="line">    <span class="keyword">friend</span> comp <span class="keyword">operator</span> -(<span class="keyword">const</span> comp &amp;x,<span class="keyword">const</span> comp &amp;y)&#123;<span class="keyword">return</span> (comp)&#123;x.r-y.r,x.i-y.i&#125;;&#125;</span><br><span class="line">    <span class="keyword">friend</span> comp <span class="keyword">operator</span> *(<span class="keyword">const</span> comp &amp;x,<span class="keyword">const</span> comp &amp;y)&#123;<span class="keyword">return</span> (comp)&#123;x.r*y.r-x.i*y.i,x.r*y.i+x.i*y.r&#125;;&#125;</span><br><span class="line">&#125;q[<span class="number">400005</span>],qq[<span class="number">400005</span>],f[<span class="number">400005</span>];</span><br><span class="line"><span class="keyword">int</span> r[<span class="number">400005</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getrev</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)r[i]=(r[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)+((i&amp;<span class="number">1</span>)?(n&gt;&gt;<span class="number">1</span>):<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fft</span><span class="params">(comp* f,<span class="keyword">int</span> n,<span class="keyword">int</span> op)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)<span class="keyword">if</span>(i&lt;r[i])swap(f[i],f[r[i]]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> len=<span class="number">2</span>;len&lt;=n;len&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> q=len&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        comp wn=&#123;<span class="built_in">cos</span>(<span class="number">2</span>*pi/len),op*<span class="built_in">sin</span>(<span class="number">2</span>*pi/len)&#125;;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i+=len)</span><br><span class="line">        &#123;</span><br><span class="line">            comp w=&#123;<span class="number">1</span>,<span class="number">0</span>&#125;;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;i+q;++j)</span><br><span class="line">            &#123;</span><br><span class="line">                comp d=f[j+q]*w;</span><br><span class="line">                f[j+q]=f[j]-d;</span><br><span class="line">                f[j]=f[j]+d;</span><br><span class="line">                w=w*wn;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)<span class="built_in">scanf</span>(<span class="string">"%lf"</span>,&amp;q[i].r),qq[n-i+<span class="number">1</span>].r=q[i].r;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)f[i].r=(((<span class="keyword">double</span>)<span class="number">1.0</span>)/(<span class="keyword">double</span>)i/(<span class="keyword">double</span>)i);</span><br><span class="line">    <span class="keyword">int</span> len=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(len&lt;(n&lt;&lt;<span class="number">1</span>))len&lt;&lt;=<span class="number">1</span>;</span><br><span class="line">    getrev(len);</span><br><span class="line">    fft(q,len,<span class="number">1</span>),fft(qq,len,<span class="number">1</span>),fft(f,len,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++)q[i]=q[i]*f[i],qq[i]=qq[i]*f[i];</span><br><span class="line">    fft(q,len,<span class="number">-1</span>),fft(qq,len,<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)<span class="built_in">printf</span>(<span class="string">"%.5lf\n"</span>,(q[i].r-qq[n-i+<span class="number">1</span>].r)/len);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="b---01-unbalanced">B - 01 Unbalanced</h3>
+<p>把 <span class="math inline">\(0\)</span> 看作 <span class="math inline">\(-1\)</span>，那么现在就是让这个序列的最大前缀和减去最小前缀和最小。</p>
+<p>设 <span class="math inline">\(f(z)\)</span> 表示保证最大前缀和不超过 <span class="math inline">\(z\)</span>，最小前缀和最大能为多少。考虑怎么求，我们先把所有的 <code>?</code> 设为 <span class="math inline">\(-1\)</span>，然后再从前向后扫，如果当前是 <code>?</code>，且将其设为 <span class="math inline">\(1\)</span> 后不会使得最大前缀和超过 <span class="math inline">\(z\)</span>，那么就可以贪心地将其置为 <span class="math inline">\(1\)</span>，判断可以通过计算后缀最大前缀和来实现。</p>
+<p>设把 <code>?</code> 都设为 <span class="math inline">\(-1\)</span> 时最大前缀和为 <span class="math inline">\(m\)</span>，看上去我们要对所有 <span class="math inline">\(z\geqslant m\)</span> 都需要求出 <span class="math inline">\(z-f(z)\)</span>，但注意到一定有 <span class="math inline">\(z-f(z)\leqslant z+2-f(z+2)\)</span>。因为如果令 <span class="math inline">\(z:=z+2\)</span>，根据我们的算法，至多额外有一个位置由 <code>-1</code> 变成了 <code>1</code>，所以 <span class="math inline">\(f(z+2)-f(z)\leqslant 2\)</span>，所以我们只需要求出 <span class="math inline">\(m-f(m)\)</span> 和 <span class="math inline">\(m+1-f(m+1)\)</span> 取较小值。</p>
+<p><a href="https://atcoder.jp/contests/agc045/submissions/16786897" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="c---range-set">C - Range Set</h3>
+<p>详见<a href="https://azusacat1111.github.io/2020/09/17/AGC045C%20Range%20Set/#more">这篇题解</a></p>
+<h3 id="d---lamps-and-buttons">D - Lamps and Buttons</h3>
+<p>考虑最优策略是什么：如果按了一个 <span class="math inline">\(p_i=i\)</span> 的按钮，则直接失败；反之可以把 <span class="math inline">\(i\)</span> 所在的环全部点亮，如果某次操作结束所有环都被点亮，则胜利。由于每一种排列出现概率都是相等的，所以前 <span class="math inline">\(k\)</span> 个元素以什么顺序按胜负概率也是相等的，所以我们只需要按顺序按未确定的灯。</p>
+<p>我们枚举 <span class="math inline">\(t(t\leqslant A)\)</span> 为 <span class="math inline">\([1,A]\)</span> 中第一个自环的位置（如果 <span class="math inline">\([1,A]\)</span> 中没有自环，认为 <span class="math inline">\(t=A+1\)</span>） ，则获胜条件为：对任意 <span class="math inline">\(i\in[A+1,n]\)</span>，存在 <span class="math inline">\(x\in[1,t)\)</span> 使得 <span class="math inline">\(i,x\)</span> 在同一个环内。</p>
+<p>为了保证 <span class="math inline">\(t\)</span> 是第一个自环的位置，我们需要容斥（二项式反演）钦定 <span class="math inline">\(t\)</span> 之前有多少自环，那么现在问题转化为：计算长度为 <span class="math inline">\(a+b+c\)</span> 的排列数量，且对于 <span class="math inline">\(i\in[a+1,a+b]\)</span>，保证存在 <span class="math inline">\(x\in[1,a]\)</span> 使得 <span class="math inline">\(i,x\)</span> 在同一个环内。考虑一个一个插空，前 <span class="math inline">\(a\)</span> 个任意；对 <span class="math inline">\(i\in[a+1,a+b]\)</span>，有 <span class="math inline">\(i-1\)</span> 中方案插进去；最后 <span class="math inline">\(c\)</span> 个也任意。化简可知答案为 <span class="math inline">\(\dfrac{a(a+b+c)!}{a+b}\)</span> 。</p>
+<p><a href="https://atcoder.jp/contests/agc045/submissions/17711692" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="e---fragile-balls">E - Fragile Balls</h3>
+<p>我们把每个球看作一条 <span class="math inline">\(A_i\)</span> 连向 <span class="math inline">\(B_i\)</span> 的有向边。</p>
+<p>考虑 <span class="math inline">\(C_i=1\)</span> 的情况什么时候有解，结论是当且仅当这个图存在一个连通块，使得它是（不是包含）一个长度大于等于 <span class="math inline">\(2\)</span> 的环（这里连通块指弱联通）。必要性考虑这样的连通块一定一开始每个盒子都有一个球，没法动，而 <span class="math inline">\(C_i=1\)</span>，不能从其他位置借球过来；充分性考虑对某一个连通块缩强连通然后拓扑排序，每次找到拓扑序最小的强连通分量。由于每个点在这个强连通内部的出度和入度都不为 <span class="math inline">\(0\)</span>，只需找到某个与其它强连通分量相连的点，其一开始一定有 <span class="math inline">\(\geqslant 2\)</span> 个球，先遍历这个强连通分量，然后再去放到新的强连通分量里，这样会使遍历到的强连通分量也至少有一个盒子至少有两个球。</p>
+<p>然后我们考虑一般的情况，设 <span class="math inline">\(P=\sum [A_i\not=B_i]\)</span>，<span class="math inline">\(X\)</span> 为长度大于等于 <span class="math inline">\(2\)</span> 的环的连通块个数 ，<span class="math inline">\(Y\)</span> 为我们“使用”的单独一个自环的连通块数目（“使用”指我们把它移走然后又移回来），<span class="math inline">\(Z\)</span> 为不是环的连通块中使用的自环个数。则我们有以下结论：有解当且仅当 <span class="math inline">\(\sum(C_i-1)\)</span>（不包含未使用的自环）大于等于 <span class="math inline">\(X+Y\)</span>，且如果 <span class="math inline">\(X+Y\geqslant 1\)</span>，则存在一个 <span class="math inline">\(i\)</span>，其不在是环的连通块中且 <span class="math inline">\(C_i\geqslant 2\)</span>。这时答案为 <span class="math inline">\(P+X+2Y+Z\)</span>。证明类似 <span class="math inline">\(C_i=1\)</span> 时，仍旧可以构造出每一步都能继续走的方案，具体可以看官方题解。</p>
+<p>所以我们只需要处理出单独的自环和在连通块中的自环（用并查集实现），然后贪心+双指针求解，复杂度 <span class="math inline">\(O(m\log m)\)</span>。</p>
+<p><a href="https://atcoder.jp/contests/agc045/submissions/17716915" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="f---division-into-multiples">F - Division into Multiples</h3>
+<p>咕咕咕</p>
 
     </div>
 
@@ -299,8 +304,7 @@ E_j=\sum\limits_{i=1}^{j-1}f[i]g[j-i]-\sum\limits_{i=1}^{n-j}f&#39;[i]g[j-i]
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F/" rel="tag"># 多项式</a>
-              <a href="/tags/FFT/" rel="tag"># FFT</a>
+              <a href="/tags/%E5%A5%97%E9%A2%98%E9%A2%98%E8%A7%A3/" rel="tag"># 套题题解</a>
           </div>
 
         
@@ -309,13 +313,10 @@ E_j=\sum\limits_{i=1}^{j-1}f[i]g[j-i]-\sum\limits_{i=1}^{n-j}f&#39;[i]g[j-i]
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/12/29/csp2019%E6%B8%B8%E8%AE%B0/" rel="prev" title="csp2019游记">
-      <i class="fa fa-chevron-left"></i> csp2019游记
+    <a href="/2020/10/27/CF840C%20On%20the%20Bench/" rel="prev" title="CF840C On the Bench">
+      <i class="fa fa-chevron-left"></i> CF840C On the Bench
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/01/17/KDtree/" rel="next" title="K-Dtree学习笔记">
-      K-Dtree学习笔记 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -396,6 +397,7 @@ E_j=\sum\limits_{i=1}^{j-1}f[i]g[j-i]-\sum\limits_{i=1}^{n-j}f&#39;[i]g[j-i]
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#a---xor-battle"><span class="nav-number">1.</span> <span class="nav-text">A - Xor Battle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b---01-unbalanced"><span class="nav-number">2.</span> <span class="nav-text">B - 01 Unbalanced</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c---range-set"><span class="nav-number">3.</span> <span class="nav-text">C - Range Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d---lamps-and-buttons"><span class="nav-number">4.</span> <span class="nav-text">D - Lamps and Buttons</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#e---fragile-balls"><span class="nav-number">5.</span> <span class="nav-text">E - Fragile Balls</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#f---division-into-multiples"><span class="nav-number">6.</span> <span class="nav-text">F - Division into Multiples</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

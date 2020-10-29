@@ -1,12 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>AGC045 简要题解</title>
+    <url>/2020/10/28/AGC045%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/</url>
+    <content><![CDATA[<h3 id="a---xor-battle">A - Xor Battle</h3>
+<p>我们从后往前维护 <span class="math inline">\(0\)</span> 的线性基，当遇到某一个属于 <span class="math inline">\(1\)</span> 的数时，如果其不能被当前线性基内的数表示，则 <span class="math inline">\(1\)</span> 必胜，反正是否异或这个数没有影响，如果扫完了都没有判断成功，则 <span class="math inline">\(0\)</span> 必胜。</p>
+<p><a href="https://atcoder.jp/contests/agc045/submissions/16785139" target="_blank" rel="noopener">提交记录</a></p>
+<a id="more"></a>
+<h3 id="b---01-unbalanced">B - 01 Unbalanced</h3>
+<p>把 <span class="math inline">\(0\)</span> 看作 <span class="math inline">\(-1\)</span>，那么现在就是让这个序列的最大前缀和减去最小前缀和最小。</p>
+<p>设 <span class="math inline">\(f(z)\)</span> 表示保证最大前缀和不超过 <span class="math inline">\(z\)</span>，最小前缀和最大能为多少。考虑怎么求，我们先把所有的 <code>?</code> 设为 <span class="math inline">\(-1\)</span>，然后再从前向后扫，如果当前是 <code>?</code>，且将其设为 <span class="math inline">\(1\)</span> 后不会使得最大前缀和超过 <span class="math inline">\(z\)</span>，那么就可以贪心地将其置为 <span class="math inline">\(1\)</span>，判断可以通过计算后缀最大前缀和来实现。</p>
+<p>设把 <code>?</code> 都设为 <span class="math inline">\(-1\)</span> 时最大前缀和为 <span class="math inline">\(m\)</span>，看上去我们要对所有 <span class="math inline">\(z\geqslant m\)</span> 都需要求出 <span class="math inline">\(z-f(z)\)</span>，但注意到一定有 <span class="math inline">\(z-f(z)\leqslant z+2-f(z+2)\)</span>。因为如果令 <span class="math inline">\(z:=z+2\)</span>，根据我们的算法，至多额外有一个位置由 <code>-1</code> 变成了 <code>1</code>，所以 <span class="math inline">\(f(z+2)-f(z)\leqslant 2\)</span>，所以我们只需要求出 <span class="math inline">\(m-f(m)\)</span> 和 <span class="math inline">\(m+1-f(m+1)\)</span> 取较小值。</p>
+<p><a href="https://atcoder.jp/contests/agc045/submissions/16786897" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="c---range-set">C - Range Set</h3>
+<p>详见<a href="https://azusacat1111.github.io/2020/09/17/AGC045C%20Range%20Set/#more">这篇题解</a></p>
+<h3 id="d---lamps-and-buttons">D - Lamps and Buttons</h3>
+<p>考虑最优策略是什么：如果按了一个 <span class="math inline">\(p_i=i\)</span> 的按钮，则直接失败；反之可以把 <span class="math inline">\(i\)</span> 所在的环全部点亮，如果某次操作结束所有环都被点亮，则胜利。由于每一种排列出现概率都是相等的，所以前 <span class="math inline">\(k\)</span> 个元素以什么顺序按胜负概率也是相等的，所以我们只需要按顺序按未确定的灯。</p>
+<p>我们枚举 <span class="math inline">\(t(t\leqslant A)\)</span> 为 <span class="math inline">\([1,A]\)</span> 中第一个自环的位置（如果 <span class="math inline">\([1,A]\)</span> 中没有自环，认为 <span class="math inline">\(t=A+1\)</span>） ，则获胜条件为：对任意 <span class="math inline">\(i\in[A+1,n]\)</span>，存在 <span class="math inline">\(x\in[1,t)\)</span> 使得 <span class="math inline">\(i,x\)</span> 在同一个环内。</p>
+<p>为了保证 <span class="math inline">\(t\)</span> 是第一个自环的位置，我们需要容斥（二项式反演）钦定 <span class="math inline">\(t\)</span> 之前有多少自环，那么现在问题转化为：计算长度为 <span class="math inline">\(a+b+c\)</span> 的排列数量，且对于 <span class="math inline">\(i\in[a+1,a+b]\)</span>，保证存在 <span class="math inline">\(x\in[1,a]\)</span> 使得 <span class="math inline">\(i,x\)</span> 在同一个环内。考虑一个一个插空，前 <span class="math inline">\(a\)</span> 个任意；对 <span class="math inline">\(i\in[a+1,a+b]\)</span>，有 <span class="math inline">\(i-1\)</span> 中方案插进去；最后 <span class="math inline">\(c\)</span> 个也任意。化简可知答案为 <span class="math inline">\(\dfrac{a(a+b+c)!}{a+b}\)</span> 。</p>
+<p><a href="https://atcoder.jp/contests/agc045/submissions/17711692" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="e---fragile-balls">E - Fragile Balls</h3>
+<p>我们把每个球看作一条 <span class="math inline">\(A_i\)</span> 连向 <span class="math inline">\(B_i\)</span> 的有向边。</p>
+<p>考虑 <span class="math inline">\(C_i=1\)</span> 的情况什么时候有解，结论是当且仅当这个图存在一个连通块，使得它是（不是包含）一个长度大于等于 <span class="math inline">\(2\)</span> 的环（这里连通块指弱联通）。必要性考虑这样的连通块一定一开始每个盒子都有一个球，没法动，而 <span class="math inline">\(C_i=1\)</span>，不能从其他位置借球过来；充分性考虑对某一个连通块缩强连通然后拓扑排序，每次找到拓扑序最小的强连通分量。由于每个点在这个强连通内部的出度和入度都不为 <span class="math inline">\(0\)</span>，只需找到某个与其它强连通分量相连的点，其一开始一定有 <span class="math inline">\(\geqslant 2\)</span> 个球，先遍历这个强连通分量，然后再去放到新的强连通分量里，这样会使遍历到的强连通分量也至少有一个盒子至少有两个球。</p>
+<p>然后我们考虑一般的情况，设 <span class="math inline">\(P=\sum [A_i\not=B_i]\)</span>，<span class="math inline">\(X\)</span> 为长度大于等于 <span class="math inline">\(2\)</span> 的环的连通块个数 ，<span class="math inline">\(Y\)</span> 为我们“使用”的单独一个自环的连通块数目（“使用”指我们把它移走然后又移回来），<span class="math inline">\(Z\)</span> 为不是环的连通块中使用的自环个数。则我们有以下结论：有解当且仅当 <span class="math inline">\(\sum(C_i-1)\)</span>（不包含未使用的自环）大于等于 <span class="math inline">\(X+Y\)</span>，且如果 <span class="math inline">\(X+Y\geqslant 1\)</span>，则存在一个 <span class="math inline">\(i\)</span>，其不在是环的连通块中且 <span class="math inline">\(C_i\geqslant 2\)</span>。这时答案为 <span class="math inline">\(P+X+2Y+Z\)</span>。证明类似 <span class="math inline">\(C_i=1\)</span> 时，仍旧可以构造出每一步都能继续走的方案，具体可以看官方题解。</p>
+<p>所以我们只需要处理出单独的自环和在连通块中的自环（用并查集实现），然后贪心+双指针求解，复杂度 <span class="math inline">\(O(m\log m)\)</span>。</p>
+<p><a href="https://atcoder.jp/contests/agc045/submissions/17716915" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="f---division-into-multiples">F - Division into Multiples</h3>
+<p>咕咕咕</p>
+]]></content>
+      <tags>
+        <tag>套题题解</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CF840C On the Bench</title>
     <url>/2020/10/27/CF840C%20On%20the%20Bench/</url>
     <content><![CDATA[<p>注意到若 <span class="math inline">\(a_i=c^2r\)</span>，则让 <span class="math inline">\(a_i:=r\)</span> 答案不会变。</p>
 <p>则现在将问题转化为有 <span class="math inline">\(n\)</span> 个有标号的不同颜色的球，问有多少种排列使得没有同色球相邻，设 <span class="math inline">\(a_i\)</span> 为颜色为 <span class="math inline">\(i\)</span> 的球的个数。</p>
 <a id="more"></a>
-<p>我们考虑容斥，我们注意到没有同色球相邻等价于 <span class="math inline">\(n-1\)</span> 个限制：<span class="math inline">\(\forall i=1\rightarrow n-1\)</span>，<span class="math inline">\(i\)</span> 和 <span class="math inline">\(i+1\)</span> 上的球的颜色不同 。设 <span class="math inline">\(f(i)\)</span> 表示恰好有 <span class="math inline">\(i\)</span> 个限制未被满足的方案数，<span class="math inline">\(g(i)\)</span> 为钦定 <span class="math inline">\(i\)</span> 个位置的限制未被满足的方案数，注意到这是一个子集反演的形式（把每个位置的限制是否被满足看作集合的元素），则 <span class="math inline">\(f(0)=\sum\limits_{i=0}^{n-1}(-1)^ig(i)\)</span>。</p>
+<p>我们考虑容斥，我们注意到没有同色球相邻等价于 <span class="math inline">\(n-1\)</span> 个限制：<span class="math inline">\(\forall i=1\rightarrow n-1\)</span>，<span class="math inline">\(i\)</span> 和 <span class="math inline">\(i+1\)</span> 上的球的颜色不同 。设 <span class="math inline">\(f(i)\)</span> 表示恰好有 <span class="math inline">\(i\)</span> 个限制未被满足的方案数，<span class="math inline">\(g(i)\)</span> 为钦定 <span class="math inline">\(i\)</span> 个位置的限制未被满足的方案数，注意到这是一个子集反演的形式（把每个位置的限制是否被满足看作集合的元素）（update：经过讨论这似乎是二项式反演，只不过二项式反演和子集反演在求 <span class="math inline">\(f(0)\)</span> 时是一致的），则 <span class="math inline">\(f(0)=\sum\limits_{i=0}^{n-1}(-1)^ig(i)\)</span>。</p>
 <p>考虑求 <span class="math inline">\(g(i)\)</span>，我们考虑每种颜色球的贡献。与整体的情况类似，我们认为每一种球也有 <span class="math inline">\(a_k-1\)</span> 个限制：最终排列完之后第 <span class="math inline">\(i\)</span> 个球和第 <span class="math inline">\(i+1\)</span> 个球不能相邻。</p>
 <p>注意到如果我们钦定了某个位置的限制不满足，则会把两个球缩到一起。如果钦定有 <span class="math inline">\(i\)</span> 个限制不满足，最后相当于把这种颜色的球缩成了 <span class="math inline">\(a_k-i\)</span> 段，由于最后的拼接是关于球的段数的，所以我们写出关于最后剩余球的段数的 EGF： <span class="math display">\[
 F_k(z)=a_k!\sum\limits_{i=1}^{a_k}\binom{a_k-1}{i-1}\frac{z^i}{i!}
