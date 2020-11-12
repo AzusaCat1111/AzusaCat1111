@@ -201,6 +201,229 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/11/11/AGC043%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="AzusaCat">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AzusaCat's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/11/AGC043%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" class="post-title-link" itemprop="url">AGC043 简要题解</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-11 17:45:39" itemprop="dateCreated datePublished" datetime="2020-11-11T17:45:39+08:00">2020-11-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-12 18:08:56" itemprop="dateModified" datetime="2020-11-12T18:08:56+08:00">2020-11-12</time>
+              </span>
+
+          
+            <span id="/2020/11/11/AGC043%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="AGC043 简要题解" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/11/11/AGC043%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/11/AGC043%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="a---range-flip-find-route">A - Range Flip Find Route</h3>
+<p>直接 dp，转移根据贪心显然 <span class="math display">\[
+f(i,j)=\min(f(i,j-1)+[(i,j)是墙][(i,j-1)不是墙],f(i-1,j)+[(i,j)是墙][(i-1,j)不是墙])
+\]</span> 不知道为什么只开到 <span class="math inline">\(100\)</span> 还给了 <span class="math inline">\(2s\)</span>，还以为我 A 都想假了。</p>
+<p><a href="https://atcoder.jp/contests/agc043/submissions/18045218" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="b---123-triangle">B - 123 Triangle</h3>
+<p>牛牛题。</p>
+<p>由于每次都是两个数的差的形式，所以我们把 <span class="math inline">\(1,2,3\)</span> 变为 <span class="math inline">\(0,1,2\)</span>。先考虑判答案的奇偶性，我们暂时把 <span class="math inline">\(2\)</span> 改为 <span class="math inline">\(0\)</span>，显然不会影响奇偶性，这样可以发现差的绝对值等价于异或和。这样就可以考虑 <span class="math inline">\(a\)</span> 中每个元素的贡献，不难发现 <span class="math inline">\(a_i\)</span> 被算了 <span class="math inline">\(\dbinom{n-1}{i-1}\)</span> 次，所以找出所有 <span class="math inline">\(a_i=1\)</span> 的数，对组合数求和就知道了答案的奇偶性，计算组合数模 <span class="math inline">\(2\)</span> 可以求出阶乘 <span class="math inline">\(2\)</span> 的因子的次数。</p>
+<p>然后如果答案是 <span class="math inline">\(1\)</span> 就结束了，然后考虑判 <span class="math inline">\(0\)</span> 和 <span class="math inline">\(2\)</span>，注意到序列如果有 <span class="math inline">\(1\)</span> 则答案一定不为 <span class="math inline">\(2\)</span>，因为某行如果有一个 <span class="math inline">\(1\)</span>，直到这一行都是 <span class="math inline">\(1\)</span> 之前下一行一定也有 <span class="math inline">\(1\)</span>，而全部都是 <span class="math inline">\(1\)</span> 话后面就都是 <span class="math inline">\(0\)</span>。</p>
+<p>所以我们只需要考虑只有 <span class="math inline">\(0,2\)</span> 的情况，发现还可以按照判奇偶性的方法再做一遍。</p>
+<p><a href="https://atcoder.jp/contests/agc043/submissions/18045991" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="c---giant-graph">C - Giant Graph</h3>
+<p>我觉得还是牛牛题，但是 zzz 说是水题，我菜死了/kk</p>
+<p>我们不难发现选 <span class="math inline">\(x+y+z\)</span> 最大的点一定最优，同时根据连边方式 <span class="math inline">\(x+y+z\)</span> 相同的点之间不会连边。这样我们选择的点是可以递推出来的。</p>
+<p>我们考虑把无向边变为有向边，让编号小的点向编号大的点连边，这样会形成一个 DAG。我们发现一个点最后会被选当且仅当其后继节点都没有被选。注意到这和公平组合游戏的又想图游戏完全一致，即如果不能向后走时必败，则这个点会被选当且仅当它是必败态。</p>
+<p>注意到我们每一次移动只会有一维变化，所以这可以看作三个独立游戏的叠加，于是我们对每一张图都求出每个点 SG 函数，则答案为 <span class="math inline">\(\sum\limits_{SGA_i\oplus SGB_j\oplus SGC_k=0}10^{18(i+j+k)}\)</span>，这个是个异或卷积可以用 FWT 完成。但是我们发现一张边数为 <span class="math inline">\(m\)</span> 的有向图游戏的最大 SG 值是 <span class="math inline">\(O(\sqrt m)\)</span> 的，所以可以直接暴力枚举前两项，总复杂度 <span class="math inline">\(O(n+m)\)</span> （求 SG 函数是线性的）。</p>
+<p><a href="https://atcoder.jp/contests/agc043/submissions/18046690" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="d---merge-triplets">D - Merge Triplets</h3>
+<p>我们注意到如果某个 <span class="math inline">\(A\)</span> 序列中满足某两项前一项大于后一项，则这两项一定在最终的排列中连续，特殊的，如果同时有 <span class="math inline">\(A_{i,1}&gt;A_{i,2},A_{i,1}&gt;A_{i,3}\)</span>，则这三项在最终的排列中连续。</p>
+<p>我们把这种一定连续的长度小于等于 <span class="math inline">\(3\)</span> 的元素缩为一段，那么我们一定有以下限制：</p>
+<ul>
+<li>对于每个长度大于等于 <span class="math inline">\(2\)</span> 的段，段首元素最大。</li>
+<li>长度为 <span class="math inline">\(2\)</span> 的段的数量不超过长度为 <span class="math inline">\(1\)</span> 的段的数量，因为如果出现一个长为 <span class="math inline">\(2\)</span> 的段，它所在的序列一定还剩下一个长为 <span class="math inline">\(1\)</span> 的段。</li>
+</ul>
+<p>假设我们已经知道了每个段内部的元素，我们注意到把这些段组合成合法（不能继续缩）的序列后，其形成的排列是固定的，该排列一定是按段首从小到大排序后依次连接形成的排列。进一步地，对于一种段的划分方式，其一定和一个合法排列对应，所以我们只需要对合法的段的划分方案计数。</p>
+<p>设 <span class="math inline">\(f(i,j)\)</span> 表示考虑了 <span class="math inline">\(1\sim i\)</span>，目前长度为 <span class="math inline">\(1\)</span> 的组的个数减去长度为 <span class="math inline">\(2\)</span> 的组的个数为 <span class="math inline">\(j\)</span> 的方案数，转移考虑 <span class="math inline">\(i\)</span> 和谁在一组，故有 <span class="math display">\[
+f(i,j)=f(i-1,j-1)+(i-1)f(i-2,j+1)+(i-1)(i-2)f(i-3,j)
+\]</span> 答案就是 <span class="math inline">\(\sum\limits_{i\geqslant 0} f(3n,i)\)</span>，复杂度 <span class="math inline">\(O(n^2)\)</span>。</p>
+<p>注意有的题解说要保证最后第二维是 <span class="math inline">\(3\)</span> 的倍数，其实不是 <span class="math inline">\(3\)</span> 的倍数最后方案数一定是 <span class="math inline">\(0\)</span>。</p>
+<p><a href="https://atcoder.jp/contests/agc043/submissions/18055765" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="e---topology">E - Topology</h3>
+<p>请先保证正确理解题意。</p>
+<p>先考虑给定绳子和点如何判是否合法，这里有一个结论：每个点分别做关于 <span class="math inline">\(x\)</span> 轴的直线，我们从绳子上任何一个位置出发一直走直到回到这个位置，每经过某个点 <span class="math inline">\(u_i\)</span> 所在直线的上半部分（这个点上方的部分）就写下一个 <span class="math inline">\(u_i\)</span>；经过下半部分则写下一个 <span class="math inline">\(d_i\)</span>，这样最终会形成一个字符串，情况合法当且仅当你可以通过连续消去两个相邻的完全相同的字符（字符下标也需一致）最后把这个字符串清空。证明考虑连续两个相邻的字符等价于绳子穿过了这个条线然后又绕了个弯从同侧回来，我们把绳子抽出来不会碰到任何点。</p>
+<p>然后我们考虑判断无解，显然如果某个点合法但是存在其某个子集不合法则无解，下面的构造方式说明了充分性。</p>
+<p>我们考虑找出所有极小的不合法集合，现在假设我们只考虑只有全集 <span class="math inline">\(S\)</span> 不合法，任何一个子集都合法的情况，则我们递归构造：</p>
+<ul>
+<li>若 <span class="math inline">\(|S|=1\)</span> 则构造字符串 <span class="math inline">\(u_1d_1\)</span>。</li>
+<li>若 <span class="math inline">\(|S|&gt;1\)</span> 取出点 <span class="math inline">\(1\)</span>，先从上面经过，即添加一个 <span class="math inline">\(u_1\)</span>，然后递归构造删掉这个点的集合，然后再从上面回来，即添加一个 <span class="math inline">\(u_1\)</span>，再从下面经过，添加一个 <span class="math inline">\(d_1\)</span>，然后我们对把刚才递归构造部分的字符串反过来再接到后面，最后再添加一个 <span class="math inline">\(d_1\)</span>。</li>
+</ul>
+<p>不难发现，该字符串没有任何两个相邻且相同的字符，同时可以发现，如果删掉任意一个点，一定会导致某两个相同的字符连到一起，而根据我们的构造方式，断点处两端会一直被删除直到字符串被清空，所以这样是合法的。</p>
+<p>考虑一般的情况，如果有多个极小不合法集合，则我们只需要把每个字符串拼到一起就可以了，但是要注意可能会经过不在当前构造集合内部的点，这时要只从同一边经过。可以发现这样也是正确的。</p>
+<p>这样的总长度是 <span class="math inline">\(O(n3^n)\)</span> 的（感觉由于只做极小的不合法集合远远到不了）。</p>
+<p><a href="https://atcoder.jp/contests/agc043/submissions/18062111" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="f---jewelry-box">F - Jewelry Box</h3>
+<p>不会线性规划（网络流），先咕着。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/11/11/AGC044%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="AzusaCat">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AzusaCat's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/11/AGC044%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" class="post-title-link" itemprop="url">AGC044 简要题解</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-11 14:39:42 / 修改时间：17:44:50" itemprop="dateCreated datePublished" datetime="2020-11-11T14:39:42+08:00">2020-11-11</time>
+            </span>
+
+          
+            <span id="/2020/11/11/AGC044%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="AGC044 简要题解" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/11/11/AGC044%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/11/AGC044%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="a---pay-to-win">A - Pay to Win</h3>
+<p>暴力记忆化搜索，每次可以转移至 <span class="math inline">\(\lfloor\dfrac{n}{5}\rfloor\)</span> 和 <span class="math inline">\(\lceil\dfrac{n}{5}\rceil\)</span>（<span class="math inline">\(2,3\)</span> 同理），再和 <span class="math inline">\(nD\)</span> 取 <span class="math inline">\(\min\)</span>，注意到每一次的 <span class="math inline">\(n\)</span> 都是 <span class="math inline">\(\dfrac{N}{2^x3^y5^z}\)</span> 上下取整的形式，所以复杂度是对的。</p>
+<p><a href="https://atcoder.jp/contests/agc044/submissions/16984884" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="b---joker">B - Joker</h3>
+<p>先算出每个点的最短路，注意到不会超过 <span class="math inline">\(n\)</span>，所以每次删掉一个人后暴力向外更新最短路，由于每一次更新至少让 <span class="math inline">\(\sum dis\)</span> 减少 <span class="math inline">\(1\)</span>，所以总复杂度 <span class="math inline">\(O(n^3)\)</span>。</p>
+<p><a href="https://atcoder.jp/contests/agc044/submissions/16995863" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="c---strange-dance">C - Strange Dance</h3>
+<p>和 2020 联合省选 D2T2 一样（我要是在省选前做了这道题该多好），可以从低位到高位建一个三进制 trie，第一种操作直接打标记，第二种操作相当于把这位循环移位，并递归一开始是 <span class="math inline">\(2\)</span> 的子树。</p>
+<p><a href="https://atcoder.jp/contests/agc044/submissions/16996337" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="d---guess-the-password-e---random-pawn">D - Guess the Password &amp; E - Random Pawn</h3>
+<p>见<a href="/2020/10/30/2020-10-06%20水题选讲/">这里</a>。</p>
+<p><a href="https://atcoder.jp/contests/agc044/submissions/16997413" target="_blank" rel="noopener">D 提交记录</a>，<a href="https://atcoder.jp/contests/agc044/submissions/17055817" target="_blank" rel="noopener">E 提交记录</a></p>
+<h3 id="f---name-preserving-clubs">F - Name-Preserving Clubs</h3>
+<p>毒瘤题，咕咕咕。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/10/30/2020-10-06%20%E6%B0%B4%E9%A2%98%E9%80%89%E8%AE%B2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -325,7 +548,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-29 19:35:08" itemprop="dateModified" datetime="2020-10-29T19:35:08+08:00">2020-10-29</time>
+                <time title="修改时间：2020-11-11 14:32:48" itemprop="dateModified" datetime="2020-11-11T14:32:48+08:00">2020-11-11</time>
               </span>
 
           
@@ -970,192 +1193,11 @@ f(i,j,k)=\sum\limits_{c=0}^{a_i}f(i-1,j-c,k)+\sum\limits_{c=a_i+1}^{a_i+k}f(i-1,
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/10/15/CF908H%20New%20Year%20and%20Boolean%20Bridges/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="AzusaCat">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AzusaCat's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/15/CF908H%20New%20Year%20and%20Boolean%20Bridges/" class="post-title-link" itemprop="url">CF908H New Year and Boolean Bridges</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-10-15 20:53:55 / 修改时间：21:53:20" itemprop="dateCreated datePublished" datetime="2020-10-15T20:53:55+08:00">2020-10-15</time>
-            </span>
-
-          
-            <span id="/2020/10/15/CF908H%20New%20Year%20and%20Boolean%20Bridges/" class="post-meta-item leancloud_visitors" data-flag-title="CF908H New Year and Boolean Bridges" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/10/15/CF908H%20New%20Year%20and%20Boolean%20Bridges/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/15/CF908H%20New%20Year%20and%20Boolean%20Bridges/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>设 <span class="math inline">\(f(i,j)\)</span> 表示 <span class="math inline">\(i\)</span> 是否能直接或间接到达 <span class="math inline">\(j\)</span>。</p>
-<p>给定一个 <span class="math inline">\(n\times n\)</span> 的矩阵 <span class="math inline">\(G\)</span>，求满足以下条件的有向图的最小边数：</p>
-<ul>
-<li>若 <span class="math inline">\(G_{i,j}=\mathsf{A}\)</span>，则要求 <span class="math inline">\(f(i,j) \operatorname{and} f(j,i)=1\)</span>。</li>
-<li>若 <span class="math inline">\(G_{i,j}=\mathsf{O}\)</span>，则要求 <span class="math inline">\(f(i,j) \operatorname{or} f(j,i)=1\)</span>。</li>
-<li>若 <span class="math inline">\(G_{i,j}=\mathsf{X}\)</span>，则要求 <span class="math inline">\(f(i,j) \operatorname{xor} f(j,i)=1\)</span>。</li>
-</ul>
-<p><span class="math inline">\(n\leqslant 47\)</span>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/10/15/CF908H%20New%20Year%20and%20Boolean%20Bridges/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/10/08/ARC104%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="AzusaCat">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AzusaCat's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/08/ARC104%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" class="post-title-link" itemprop="url">ARC104 简要题解</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-10-08 14:06:39 / 修改时间：21:34:04" itemprop="dateCreated datePublished" datetime="2020-10-08T14:06:39+08:00">2020-10-08</time>
-            </span>
-
-          
-            <span id="/2020/10/08/ARC104%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="ARC104 简要题解" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/10/08/ARC104%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/08/ARC104%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>A,B 的题解被梓喵二号吃了，只剩下了提交记录。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/10/08/ARC104%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1243,7 +1285,7 @@ f(i,j,k)=\sum\limits_{c=0}^{a_i}f(i-1,j-c,k)+\sum\limits_{c=a_i+1}^{a_i+k}f(i-1,
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">51</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

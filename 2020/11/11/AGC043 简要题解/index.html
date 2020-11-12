@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script>  
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://AzusaCat1111.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="A - Range Flip Find Route 直接 dp，转移根据贪心显然 \[ f(i,j)&#x3D;\min(f(i,j-1)+[(i,j)是墙][(i,j-1)不是墙],f(i-1,j)+[(i,j)是墙][(i-1,j)不是墙]) \] 不知道为什么只开到 \(100\) 还给了 \(2s\)，还以为我 A 都想假了。 提交记录 B - 123 Triangle 牛牛题。 由于">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AGC043 简要题解">
+<meta property="og:url" content="https://azusacat1111.github.io/2020/11/11/AGC043%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/index.html">
+<meta property="og:site_name" content="AzusaCat&#39;s Blog">
+<meta property="og:description" content="A - Range Flip Find Route 直接 dp，转移根据贪心显然 \[ f(i,j)&#x3D;\min(f(i,j-1)+[(i,j)是墙][(i,j-1)不是墙],f(i-1,j)+[(i,j)是墙][(i-1,j)不是墙]) \] 不知道为什么只开到 \(100\) 还给了 \(2s\)，还以为我 A 都想假了。 提交记录 B - 123 Triangle 牛牛题。 由于">
+<meta property="article:published_time" content="2020-11-11T09:45:39.000Z">
+<meta property="article:modified_time" content="2020-11-12T10:08:56.351Z">
+<meta property="article:author" content="AzusaCat">
+<meta property="article:tag" content="套题题解">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://azusacat1111.github.io/2020/11/11/AGC043%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>AGC043 简要题解 | AzusaCat's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AzusaCat's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://azusacat1111.github.io/2020/11/11/AGC043%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="AzusaCat">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AzusaCat's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AGC043 简要题解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-11 17:45:39" itemprop="dateCreated datePublished" datetime="2020-11-11T17:45:39+08:00">2020-11-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-12 18:08:56" itemprop="dateModified" datetime="2020-11-12T18:08:56+08:00">2020-11-12</time>
+              </span>
+
+          
+            <span id="/2020/11/11/AGC043%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="AGC043 简要题解" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/11/11/AGC043%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/11/AGC043%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="a---range-flip-find-route">A - Range Flip Find Route</h3>
+<p>直接 dp，转移根据贪心显然 <span class="math display">\[
+f(i,j)=\min(f(i,j-1)+[(i,j)是墙][(i,j-1)不是墙],f(i-1,j)+[(i,j)是墙][(i-1,j)不是墙])
+\]</span> 不知道为什么只开到 <span class="math inline">\(100\)</span> 还给了 <span class="math inline">\(2s\)</span>，还以为我 A 都想假了。</p>
+<p><a href="https://atcoder.jp/contests/agc043/submissions/18045218" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="b---123-triangle">B - 123 Triangle</h3>
+<p>牛牛题。</p>
+<p>由于每次都是两个数的差的形式，所以我们把 <span class="math inline">\(1,2,3\)</span> 变为 <span class="math inline">\(0,1,2\)</span>。先考虑判答案的奇偶性，我们暂时把 <span class="math inline">\(2\)</span> 改为 <span class="math inline">\(0\)</span>，显然不会影响奇偶性，这样可以发现差的绝对值等价于异或和。这样就可以考虑 <span class="math inline">\(a\)</span> 中每个元素的贡献，不难发现 <span class="math inline">\(a_i\)</span> 被算了 <span class="math inline">\(\dbinom{n-1}{i-1}\)</span> 次，所以找出所有 <span class="math inline">\(a_i=1\)</span> 的数，对组合数求和就知道了答案的奇偶性，计算组合数模 <span class="math inline">\(2\)</span> 可以求出阶乘 <span class="math inline">\(2\)</span> 的因子的次数。</p>
+<p>然后如果答案是 <span class="math inline">\(1\)</span> 就结束了，然后考虑判 <span class="math inline">\(0\)</span> 和 <span class="math inline">\(2\)</span>，注意到序列如果有 <span class="math inline">\(1\)</span> 则答案一定不为 <span class="math inline">\(2\)</span>，因为某行如果有一个 <span class="math inline">\(1\)</span>，直到这一行都是 <span class="math inline">\(1\)</span> 之前下一行一定也有 <span class="math inline">\(1\)</span>，而全部都是 <span class="math inline">\(1\)</span> 话后面就都是 <span class="math inline">\(0\)</span>。</p>
+<p>所以我们只需要考虑只有 <span class="math inline">\(0,2\)</span> 的情况，发现还可以按照判奇偶性的方法再做一遍。</p>
+<p><a href="https://atcoder.jp/contests/agc043/submissions/18045991" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="c---giant-graph">C - Giant Graph</h3>
+<p>我觉得还是牛牛题，但是 zzz 说是水题，我菜死了/kk</p>
+<p>我们不难发现选 <span class="math inline">\(x+y+z\)</span> 最大的点一定最优，同时根据连边方式 <span class="math inline">\(x+y+z\)</span> 相同的点之间不会连边。这样我们选择的点是可以递推出来的。</p>
+<p>我们考虑把无向边变为有向边，让编号小的点向编号大的点连边，这样会形成一个 DAG。我们发现一个点最后会被选当且仅当其后继节点都没有被选。注意到这和公平组合游戏的又想图游戏完全一致，即如果不能向后走时必败，则这个点会被选当且仅当它是必败态。</p>
+<p>注意到我们每一次移动只会有一维变化，所以这可以看作三个独立游戏的叠加，于是我们对每一张图都求出每个点 SG 函数，则答案为 <span class="math inline">\(\sum\limits_{SGA_i\oplus SGB_j\oplus SGC_k=0}10^{18(i+j+k)}\)</span>，这个是个异或卷积可以用 FWT 完成。但是我们发现一张边数为 <span class="math inline">\(m\)</span> 的有向图游戏的最大 SG 值是 <span class="math inline">\(O(\sqrt m)\)</span> 的，所以可以直接暴力枚举前两项，总复杂度 <span class="math inline">\(O(n+m)\)</span> （求 SG 函数是线性的）。</p>
+<p><a href="https://atcoder.jp/contests/agc043/submissions/18046690" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="d---merge-triplets">D - Merge Triplets</h3>
+<p>我们注意到如果某个 <span class="math inline">\(A\)</span> 序列中满足某两项前一项大于后一项，则这两项一定在最终的排列中连续，特殊的，如果同时有 <span class="math inline">\(A_{i,1}&gt;A_{i,2},A_{i,1}&gt;A_{i,3}\)</span>，则这三项在最终的排列中连续。</p>
+<p>我们把这种一定连续的长度小于等于 <span class="math inline">\(3\)</span> 的元素缩为一段，那么我们一定有以下限制：</p>
+<ul>
+<li>对于每个长度大于等于 <span class="math inline">\(2\)</span> 的段，段首元素最大。</li>
+<li>长度为 <span class="math inline">\(2\)</span> 的段的数量不超过长度为 <span class="math inline">\(1\)</span> 的段的数量，因为如果出现一个长为 <span class="math inline">\(2\)</span> 的段，它所在的序列一定还剩下一个长为 <span class="math inline">\(1\)</span> 的段。</li>
+</ul>
+<p>假设我们已经知道了每个段内部的元素，我们注意到把这些段组合成合法（不能继续缩）的序列后，其形成的排列是固定的，该排列一定是按段首从小到大排序后依次连接形成的排列。进一步地，对于一种段的划分方式，其一定和一个合法排列对应，所以我们只需要对合法的段的划分方案计数。</p>
+<p>设 <span class="math inline">\(f(i,j)\)</span> 表示考虑了 <span class="math inline">\(1\sim i\)</span>，目前长度为 <span class="math inline">\(1\)</span> 的组的个数减去长度为 <span class="math inline">\(2\)</span> 的组的个数为 <span class="math inline">\(j\)</span> 的方案数，转移考虑 <span class="math inline">\(i\)</span> 和谁在一组，故有 <span class="math display">\[
+f(i,j)=f(i-1,j-1)+(i-1)f(i-2,j+1)+(i-1)(i-2)f(i-3,j)
+\]</span> 答案就是 <span class="math inline">\(\sum\limits_{i\geqslant 0} f(3n,i)\)</span>，复杂度 <span class="math inline">\(O(n^2)\)</span>。</p>
+<p>注意有的题解说要保证最后第二维是 <span class="math inline">\(3\)</span> 的倍数，其实不是 <span class="math inline">\(3\)</span> 的倍数最后方案数一定是 <span class="math inline">\(0\)</span>。</p>
+<p><a href="https://atcoder.jp/contests/agc043/submissions/18055765" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="e---topology">E - Topology</h3>
+<p>请先保证正确理解题意。</p>
+<p>先考虑给定绳子和点如何判是否合法，这里有一个结论：每个点分别做关于 <span class="math inline">\(x\)</span> 轴的直线，我们从绳子上任何一个位置出发一直走直到回到这个位置，每经过某个点 <span class="math inline">\(u_i\)</span> 所在直线的上半部分（这个点上方的部分）就写下一个 <span class="math inline">\(u_i\)</span>；经过下半部分则写下一个 <span class="math inline">\(d_i\)</span>，这样最终会形成一个字符串，情况合法当且仅当你可以通过连续消去两个相邻的完全相同的字符（字符下标也需一致）最后把这个字符串清空。证明考虑连续两个相邻的字符等价于绳子穿过了这个条线然后又绕了个弯从同侧回来，我们把绳子抽出来不会碰到任何点。</p>
+<p>然后我们考虑判断无解，显然如果某个点合法但是存在其某个子集不合法则无解，下面的构造方式说明了充分性。</p>
+<p>我们考虑找出所有极小的不合法集合，现在假设我们只考虑只有全集 <span class="math inline">\(S\)</span> 不合法，任何一个子集都合法的情况，则我们递归构造：</p>
+<ul>
+<li>若 <span class="math inline">\(|S|=1\)</span> 则构造字符串 <span class="math inline">\(u_1d_1\)</span>。</li>
+<li>若 <span class="math inline">\(|S|&gt;1\)</span> 取出点 <span class="math inline">\(1\)</span>，先从上面经过，即添加一个 <span class="math inline">\(u_1\)</span>，然后递归构造删掉这个点的集合，然后再从上面回来，即添加一个 <span class="math inline">\(u_1\)</span>，再从下面经过，添加一个 <span class="math inline">\(d_1\)</span>，然后我们对把刚才递归构造部分的字符串反过来再接到后面，最后再添加一个 <span class="math inline">\(d_1\)</span>。</li>
+</ul>
+<p>不难发现，该字符串没有任何两个相邻且相同的字符，同时可以发现，如果删掉任意一个点，一定会导致某两个相同的字符连到一起，而根据我们的构造方式，断点处两端会一直被删除直到字符串被清空，所以这样是合法的。</p>
+<p>考虑一般的情况，如果有多个极小不合法集合，则我们只需要把每个字符串拼到一起就可以了，但是要注意可能会经过不在当前构造集合内部的点，这时要只从同一边经过。可以发现这样也是正确的。</p>
+<p>这样的总长度是 <span class="math inline">\(O(n3^n)\)</span> 的（感觉由于只做极小的不合法集合远远到不了）。</p>
+<p><a href="https://atcoder.jp/contests/agc043/submissions/18062111" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="f---jewelry-box">F - Jewelry Box</h3>
+<p>不会线性规划（网络流），先咕着。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%A5%97%E9%A2%98%E9%A2%98%E8%A7%A3/" rel="tag"># 套题题解</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/11/AGC044%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" rel="prev" title="AGC044 简要题解">
+      <i class="fa fa-chevron-left"></i> AGC044 简要题解
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+<!-- require APlayer -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    <!-- require MetingJS-->
+    <script src="https://cdn.jsdelivr.net/npm/meting@1.2/dist/Meting.min.js"></script> 
+	<!--网易云-->   
+    <div class="aplayer" 
+      data-id="5246566946" 
+      data-server="netease" 
+      data-type="playlist" 
+      data-fixed="true" 
+      data-autoplay="false" 
+      data-list-folded="true"
+      data-mutex="true"
+      data-order="random" 
+      data-loop="all"
+      data-volume="0.4" 
+      data-theme="#FADFA3" 
+      data-preload="auto" > 
+    </div>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#a---range-flip-find-route"><span class="nav-number">1.</span> <span class="nav-text">A - Range Flip Find Route</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b---123-triangle"><span class="nav-number">2.</span> <span class="nav-text">B - 123 Triangle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c---giant-graph"><span class="nav-number">3.</span> <span class="nav-text">C - Giant Graph</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d---merge-triplets"><span class="nav-number">4.</span> <span class="nav-text">D - Merge Triplets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#e---topology"><span class="nav-number">5.</span> <span class="nav-text">E - Topology</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#f---jewelry-box"><span class="nav-number">6.</span> <span class="nav-text">F - Jewelry Box</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="AzusaCat"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">AzusaCat</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">AzusaCat</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'mrFMgDKOa2CvtBeD7CUzjR9B-gzGzoHsz',
+      appKey: 'miAoX0qqIvhAvxAHYOcO7fFR',
+      placeholder: "Just go go",
+      avatar: 'mp',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: 'zh-cn' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: '',
+      avatar_cdn:'',
+      emojiCDN: '//i0.hdslb.com/bfs/emote/',
+      emojiMaps: {
+      "蛆音娘_卖萌":"4cd1024d0c2ecee93224477946656d32c1705ccf.png@112w_112h.webp" ,
+      "蛆音娘_吃瓜群众":"5d0d6cc54b508d30b4f50b6b5f7b7e1e259d84ea.png@112w_112h.webp" ,
+      "蛆音娘_吃惊":"7a4cb0b644214d476ce198ddf6a7a0aa31311199.png@112w_112h.webp" ,
+      "蛆音娘_害怕":"7407634bf67bfe9d7806f15d57608a1b18c2b4c2.png@112w_112h.webp" ,
+      "蛆音娘_扶额":"a4d8f95baaa24821fd591a7dbeee1b869e760f59.png@112w_112h.webp" ,
+      "蛆音娘_滑稽":"d3717f10ffe9787336bc39a09214270988521a67.png@112w_112h.webp" ,
+      "蛆音娘_哼":"8854f1b8a82126e3b87f3a1563da5feb55b23e71.png@112w_112h.webp" ,
+      "蛆音娘_机智":"e543c0a823ca915df9362283f4ae950e9e9cc2e9.png@112w_112h.webp" ,
+      "蛆音娘_哭泣":"a23055546c19eba663b16370b8e072394d87ff53.png@112w_112h.webp" ,
+      "蛆音娘_睡觉觉":"40ef7e6d931acb37e5514b70d13663e86dc3698b.png@112w_112h.webp" ,
+      "蛆音娘_生气":"bf398cbbcfaae107d1b59aaf03895f38422e3d87.png@112w_112h.webp" ,
+      "蛆音娘_偷看":"52463ded4f23649db10ba3ced662ed946c5edf0b.png@112w_112h.webp" ,
+      "蛆音娘_吐血":"5772d22015e5b2b40a9fe302b5967ec7282ac848.png@112w_112h.webp" ,
+      "蛆音娘_无语":"b6c763c6484ce2e48299ceb21861e46318868871.png@112w_112h.webp" ,
+      "蛆音娘_摇头":"b7278f750c6f2235f41f37056d727f25d3bf781f.png@112w_112h.webp" ,
+      "蛆音娘_疑问":"7750b698d15a1b8e83c0f59106e8e9cd5cb57897.png@112w_112h.webp" ,
+      "蛆音娘_die":"52543025a070fde5c01a10320c9636ec3173ac99.png@112w_112h.webp" ,
+      "蛆音娘_OK":"52a0dcee66c91bf123bf53bd48a269b1317d17f9.png@112w_112h.webp" ,
+      "蛆音娘_肥皂":"7f1a857e9430dcf3050ce0ef5fa19aefebea6dc4.png@112w_112h.webp" ,
+      "蛆音娘_大笑":"1d3355fb89c24ab3c50e5c152d8b990a290dc63e.png@112w_112h.webp" ,
+      "2233娘_大笑":"16b8794be990cefa6caeba4d901b934a227ee3b8.png@112w_112h.webp" ,
+      "2233娘_吃惊":"d1628c43d35b1530c0504a643ff80b6189fa0a43.png@112w_112h.webp" ,
+      "2233娘_大哭":"476a2a60f6e337b8c0697a592e0aa82781f6b33b.png@112w_112h.webp" ,
+      "2233娘_耶":"d7178e258a0efc969b65ccc2b1322fb235f5dff4.png@112w_112h.webp" ,
+      "2233娘_卖萌":"ea893aa25355de95ab4f03c2dad3f0c58d0c159e.png@112w_112h.webp" ,
+      "2233娘_疑问":"0b41f509351958dbb63d472fec0132d1bd03bd14.png@112w_112h.webp" ,
+      "2233娘_汗":"247cd9df8cdf84b18368c21e3b2dd374e84c0927.png@112w_112h.webp" ,
+      "2233娘_困惑":"714eeb4eae0d0933b4ff08b7df788b1982f6b940.png@112w_112h.webp" ,
+      "2233娘_怒":"f31953119c51b9748016440ac0b632f779929b37.png@112w_112h.webp" ,
+      "2233娘_委屈":"d9d0bf9d358af8d5761093ec66d4e3f60d963a63.png@112w_112h.webp" ,
+      "2233娘_郁闷":"485203fe7100f2c8fc40b2800a18fe20b35f2f1a.png@112w_112h.webp" ,
+      "2233娘_第一":"3754ee6e5985bd0bd7dfb668981f2a8733398ebd.png@112w_112h.webp" ,
+      "2233娘_喝水":"695bf5429472049b52c1e0de586f8a2511195a23.png@112w_112h.webp" ,
+      "2233娘_吐魂":"e999af499edf38a91ca68b1a9d2f97042c1d6734.png@112w_112h.webp" ,
+      "2233娘_无言":"fdb5870f32cfaf7949e0f88a13f6feba4a48b719.png@112w_112h.webp" ,
+      "小电视_笑":"f80d384875183dfe2e24be13011c595c0210d273.png@112w_112h.webp" ,
+      "小电视_发愁":"05e279abbf3f72d5cc45548504a4220c5514b8b9.png@112w_112h.webp" ,
+      "小电视_赞":"86ccf6d0b5480169bf80f3582fae09d7ed455c06.png@112w_112h.webp" ,
+      "小电视_差评":"38456e3bde2839b00b536a8be13934fa57c8e298.png@112w_112h.webp" ,
+      "小电视_嘟嘴":"6fd437f547ef1e4f231ff475d02f58bb94cef5a5.png@112w_112h.webp" ,
+      "小电视_汗":"5c150cec77eae1b05d5ca46526450ff3beeb44d2.png@112w_112h.webp" ,
+      "小电视_害羞":"de3aee88f7b6cc20ba9480c96c02f83a844381a9.png@112w_112h.webp" ,
+      "小电视_吃惊":"05188008ea84c70d94e0076e28de15bf56f4c441.png@112w_112h.webp" ,
+      "小电视_哭泣":"938bdf98df945576ae88e2a22931db07ded9e663.png@112w_112h.webp" ,
+      "小电视_太太喜欢":"eb41a8c04840e4f77e76a4bff7a29ac89c432f4e.png@112w_112h.webp" ,
+      "小电视_好怒啊":"68d524b7e515396b6563d320fb710c64abfb1063.png@112w_112h.webp" ,
+      "小电视_困惑":"6853161f0eab3332b874ab7c6c0311035b7538f3.png@112w_112h.webp" ,
+      "小电视_我好兴奋":"a695fe1301aab2675ab6f6e34757c25a863a8617.png@112w_112h.webp" ,
+      "小电视_思索":"f8219e484d5a55787c3f1722dc3112d0eba03a69.png@112w_112h.webp" ,
+      "小电视_无语":"fbd12affebfdaadd3d721bffdb685a6b1ee71219.png@112w_112h.webp" ,
+      }
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>
