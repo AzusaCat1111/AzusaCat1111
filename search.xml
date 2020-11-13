@@ -6,6 +6,7 @@
     <content><![CDATA[<h3 id="c---candles">C - Candles</h3>
 <p>枚举最后点燃的区间是什么（长度一定为 <span class="math inline">\(k\)</span> ），这个区间的答案根据左端点右端点是否在原点两侧判一下就好。</p>
 <p><a href="https://atcoder.jp/contests/arc101/submissions/18065588" target="_blank" rel="noopener">提交记录</a></p>
+<a id="more"></a>
 <h3 id="d---median-of-medians">D - Median of Medians</h3>
 <p>先二分答案，然后 check 答案是否小于等于 <span class="math inline">\(x\)</span>，设 <span class="math inline">\(s_i\)</span> 表示 <span class="math inline">\([a_i\leqslant x]\)</span> 的前缀和，则一个区间 <span class="math inline">\((l,r]\)</span> 的中位数小于等于 <span class="math inline">\(x\)</span> 当且仅当 <span class="math inline">\(s_r-s_l\geqslant\lfloor\dfrac{r-l}{2}\rfloor +1\)</span>，即 <span class="math inline">\(2s_r-r\geqslant 2s_l-l+1\)</span>，用树状数组求出中位数小于等于 <span class="math inline">\(x\)</span> 的区间个数和 <span class="math inline">\(\lfloor\dfrac{n(n-1)}{4}\rfloor+1\)</span> 比较即可。</p>
 <p><a href="https://atcoder.jp/contests/arc101/submissions/18066012" target="_blank" rel="noopener">提交记录</a></p>
