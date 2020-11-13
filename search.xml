@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>ARC101 简要题解</title>
+    <url>/2020/11/14/ARC101%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/</url>
+    <content><![CDATA[<h3 id="c---candles">C - Candles</h3>
+<p>枚举最后点燃的区间是什么（长度一定为 <span class="math inline">\(k\)</span> ），这个区间的答案根据左端点右端点是否在原点两侧判一下就好。</p>
+<p><a href="https://atcoder.jp/contests/arc101/submissions/18065588" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="d---median-of-medians">D - Median of Medians</h3>
+<p>先二分答案，然后 check 答案是否小于等于 <span class="math inline">\(x\)</span>，设 <span class="math inline">\(s_i\)</span> 表示 <span class="math inline">\([a_i\leqslant x]\)</span> 的前缀和，则一个区间 <span class="math inline">\((l,r]\)</span> 的中位数小于等于 <span class="math inline">\(x\)</span> 当且仅当 <span class="math inline">\(s_r-s_l\geqslant\lfloor\dfrac{r-l}{2}\rfloor +1\)</span>，即 <span class="math inline">\(2s_r-r\geqslant 2s_l-l+1\)</span>，用树状数组求出中位数小于等于 <span class="math inline">\(x\)</span> 的区间个数和 <span class="math inline">\(\lfloor\dfrac{n(n-1)}{4}\rfloor+1\)</span> 比较即可。</p>
+<p><a href="https://atcoder.jp/contests/arc101/submissions/18066012" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="e---ribbons-on-tree">E - Ribbons on Tree</h3>
+<p>先考虑容斥，钦定某个集合的边强制不选，设 <span class="math inline">\(g(S)\)</span> 表示强制不选 <span class="math inline">\(S\)</span> 中的边集后任意配对的方案数，则答案根据子集容斥为 <span class="math inline">\(\sum(-1)^{|S|}g(S)\)</span>。</p>
+<p>先考虑知道 <span class="math inline">\(S\)</span> 怎么求 <span class="math inline">\(g(S)\)</span>，假设把 <span class="math inline">\(S\)</span> 中的边删掉后形成了大小为 <span class="math inline">\(n_1,n_2,\dots,n_c\)</span> 的连通块，显然连通块之间是独立的，考虑一个连通块的答案，其只与大小有关，具体地设 <span class="math inline">\(h(n)\)</span> 为大小为 <span class="math inline">\(n\)</span> 的连通块的答案，则有： <span class="math display">\[
+\begin{equation}
+h(n)=
+\begin{cases}
+0\quad &amp;2\not \mid n\\
+(n-1)(n-3)\dots1 \quad &amp;2\mid n
+\end{cases}
+\end{equation}
+\]</span> 显然当 <span class="math inline">\(n\)</span> 是奇数无法匹配完为 <span class="math inline">\(0\)</span>，<span class="math inline">\(n\)</span> 为偶数时每一次找到编号最大的点然后选择和它匹配的点，每一次分别有 <span class="math inline">\((n-1),(n-3),\dots,1\)</span> 种方案。</p>
+<p>然后考虑快速算 <span class="math inline">\(\sum (-1)^{|S|}g(S)\)</span>，设 <span class="math inline">\(f(u,i)\)</span> 表示以 <span class="math inline">\(u\)</span> 为根的子树，现在还有 <span class="math inline">\(i\)</span> 个点没有匹配过的方案数。转移时先做一个树形背包，然后我们考虑 <span class="math inline">\(u\)</span> 向 <span class="math inline">\(fa\)</span> 连的这条边是否要被覆盖，如果不是，那就要让这个子树内的点自行匹配，然后因为 <span class="math inline">\(|S|\)</span> 变大了 <span class="math inline">\(1\)</span> 还要取反，即 <span class="math inline">\(f(u,0)=-\sum_\limits{2\mid i}f(u,i)h(i)\)</span>。 最后根节点由于没有连向 <span class="math inline">\(fa\)</span> 的边所以 <span class="math inline">\(f(root,0)\)</span> 不取反，答案为 <span class="math inline">\(f(root,0)\)</span>。复杂度 <span class="math inline">\(O(n^2)\)</span>。</p>
+<p>可能有疑问为什么做背包的时候不需要考虑互相连，因为这一部分的答案会在上面某个时候确定断掉某条边时被记上。</p>
+<p><a href="https://atcoder.jp/contests/arc101/submissions/18074324" target="_blank" rel="noopener">提交记录</a></p>
+<h3 id="f---robots-and-exits">F - Robots and Exits</h3>
+<p>套路题（但是还是没想出来 /kk）。显然每个机器人只可能从其左右最近的出口（如果有）出去，先把只有一边有出口的删掉不影响答案，然后我们把剩下的机器人看作坐标系中的一个点 <span class="math inline">\((x,y)\)</span>，分别表示其到离其最近的左/右出口距离。可以知道一个机器人最后从哪个出口出去只和向左移动的历史最大值和向右移动的历史最大值哪个先到达了这个机器人这一维的坐标有关。同时如果我们把历史最大值也看做点，那么我们发现如果某个机器人代表的点在历史最大值的移动轨迹上方，则其一定从左出口出去，反之同理（在线上时看哪一维先到达）。</p>
+<p>那么我们转化一下题意，你需要求出用一条每次只能向上或向右走一格的线从原点开始把点集分成两个本质不同的集合的方案数。这个我们可以让线贴着点走，每次钦定下一个在线下方的点，设 <span class="math inline">\(f(i)\)</span> 表示最后一个下方的点是 <span class="math inline">\(i\)</span> 的方案数，则有转移方程 <span class="math display">\[
+f(i)=1+\sum\limits_{x_j&lt;x_i,y_j&lt;y_i}f(j)
+\]</span> 加 <span class="math inline">\(1\)</span> 是从空集转移过来，这个只需要排个序用树状数组维护即可，复杂度 <span class="math inline">\(O(n\log n)\)</span>。</p>
+]]></content>
+      <tags>
+        <tag>套题题解</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>AGC012 简要题解</title>
     <url>/2020/11/13/AGC012%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/</url>
     <content><![CDATA[<p>膜 zzz 赛考了 F，先占个坑，剩下的等我做到这再补。</p>
