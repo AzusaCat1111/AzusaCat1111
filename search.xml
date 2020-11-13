@@ -1,6 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>AGC012 简要题解</title>
+    <url>/2020/11/13/AGC012%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/</url>
+    <content><![CDATA[<p>膜 zzz 赛考了 F，先占个坑，剩下的等我做到这再补。</p>
+<a id="more"></a>
+<h3 id="f---prefix-median">F - Prefix Median</h3>
+<p>给定长为 <span class="math inline">\(2n-1\)</span> 的序列 <span class="math inline">\(a\)</span>，你可以重新排列 <span class="math inline">\(a\)</span>，设重拍后的排列为 <span class="math inline">\(c\)</span>，然后构造一个新的序列 <span class="math inline">\(b\)</span>，使得 <span class="math inline">\(b_1\)</span> 是 <span class="math inline">\(\{c_1\}\)</span> 的中位数，<span class="math inline">\(b_2\)</span> 是 <span class="math inline">\(\{c_1,c_2,c_3\}\)</span> 的中位数，以此类推 <span class="math inline">\(b_n\)</span> 是 <span class="math inline">\(\{c_1,\dots ,c_{2n-1}\}\)</span> 的中位数，求能够得到的本质不同的 <span class="math inline">\(b\)</span> 序列的数量。<span class="math inline">\(n\leqslant 50\)</span>。</p>
+<p>不妨先把 <span class="math inline">\(a\)</span> 排序，我们先需要发现两个性质：</p>
+<ul>
+<li><span class="math inline">\(a_i\leqslant b_i\leqslant a_{2n-i}\)</span>。</li>
+<li>不存在 <span class="math inline">\(i&lt;j\)</span>，使得 <span class="math inline">\(b_j&lt;b_i&lt;b_{j+1}\)</span> 或 <span class="math inline">\(b_{j+1}&lt;b_i&lt;b_j\)</span>。</li>
+</ul>
+<p>我们发现，每当我们向 <span class="math inline">\(c\)</span> 中添加两个数，考虑 <span class="math inline">\(c\)</span> 中位数的变化只可能有三种情况（假设我们现在正在填 <span class="math inline">\(c_{2i-1}\)</span> 和 <span class="math inline">\(c_{2i}\)</span>）：</p>
+<ul>
+<li>这两个数都比 <span class="math inline">\(b_i\)</span> 小，则 <span class="math inline">\(b_{i+1}\)</span> 相较 <span class="math inline">\(b_i\)</span> 在新的 <span class="math inline">\(c\)</span> 中的排名减小了 <span class="math inline">\(1\)</span>（我们认为相等的数之间可以任意比较大小）。</li>
+<li>这两个数都比 <span class="math inline">\(b_i\)</span> 大，则 <span class="math inline">\(b_{i+1}\)</span> 的排名增加了 <span class="math inline">\(1\)</span>。</li>
+<li>这两个数一个比 <span class="math inline">\(b_i\)</span> 小一个比 <span class="math inline">\(b_i\)</span> 大，这样 <span class="math inline">\(b_{i+1}=b_i\)</span>。</li>
+</ul>
+<p>所以性质二就显然了（<span class="math inline">\(b_j+1\)</span> 应该移动到 <span class="math inline">\(b_i\)</span>），由于一定有 <span class="math inline">\(b_n=a_n\)</span>，所以也可以推出性质一。</p>
+<p>同时，我们有结论，满足上面两条性质的 <span class="math inline">\(b\)</span> 序列一定可以由某个 <span class="math inline">\(c\)</span> 生成得到，下面给出构造过程：</p>
+<p>我们倒着考虑 <span class="math inline">\(b\)</span> 的生成过程对其归纳，我们只需要确定 <span class="math inline">\(c_{2n-2}\)</span> 和 <span class="math inline">\(c_{2n-1}\)</span> 的值，然后我们就递归到了子问题。</p>
+<ul>
+<li>若 <span class="math inline">\(b_{n-1}=a_{n-1}\)</span>，考虑 <span class="math inline">\(a_{n-1},a_{n},\dots,a_{2n-1}\)</span> 中一共有 <span class="math inline">\(n+1\)</span> 个数，一定至少有两个数不在 <span class="math inline">\(b_1,b_2,\dots,b_{n-1}\)</span> 中存在（如果多个数相等只要不全部选就可以，因为我们只需要保证在之后 <span class="math inline">\(b\)</span> 中的每个数在 <span class="math inline">\(a\)</span> 中至少出现过一次，所以有多个数相等并不影响构造），于是令 <span class="math inline">\(c_{2n-2},c_{2n-1}\)</span> 为最小的这样的两个数。</li>
+<li>若 <span class="math inline">\(b_{n-1}=a_{n+1}\)</span>，类似上面的情况处理。</li>
+<li>若 <span class="math inline">\(b_{n-1}=a_{n}\)</span>，则 <span class="math inline">\(a_1,\dots,a_{n-1}\)</span> 和 <span class="math inline">\(a_{n+1},\dots,a_{2n-1}\)</span> 中一定各存在至少一个不在 <span class="math inline">\(b_1,\dots,b_{n-1}\)</span> 中的数，分别令 <span class="math inline">\(c_{2n-2}\)</span> 和 <span class="math inline">\(c_{2n-1}\)</span> 为前半部分不在 <span class="math inline">\(b\)</span> 中的最大的数和后半部分不在 <span class="math inline">\(b\)</span> 中的最小的数。</li>
+</ul>
+<p>然后我们把 <span class="math inline">\(c_{2n-2},c_{2n-1}\)</span> 从 <span class="math inline">\(a\)</span> 中删去，不难发现新的 <span class="math inline">\(b_n\)</span> 也是删去这两个数后的 <span class="math inline">\(a\)</span> 的中位数，所以依旧满足条件。</p>
+<p>现在我们考虑 dp，由于靠后的 <span class="math inline">\(b\)</span> 的限制是包含靠前的 <span class="math inline">\(b\)</span> 的，我们考虑从后向前确定 <span class="math inline">\(b\)</span>。</p>
+<p>我们设 <span class="math inline">\(f(i+1,j,k)\)</span> 表示我们现在确定了 <span class="math inline">\(b_{i+1},\dots,b_n\)</span> 的值，正在确定 <span class="math inline">\(b_i\)</span>，且当前候选集合（<span class="math inline">\(b_i\)</span> 可以等于的数）中有 <span class="math inline">\(j\)</span> 个不同的小于等于 <span class="math inline">\(b_{i+1}\)</span> 的数，<span class="math inline">\(k\)</span> 个不同的大于 <span class="math inline">\(b_{i+1}\)</span> 的数。</p>
+<p>首先由于第一条限制变松了，所以我们要把 <span class="math inline">\(a_i\)</span> 和 <span class="math inline">\(a_{2n-i}\)</span> 加入，然后我们考虑枚举 <span class="math inline">\(b_i\)</span> 在候选集合中的排名，然后考虑在 <span class="math inline">\(b_i\)</span> 和 <span class="math inline">\(b_{i+1}\)</span> 之间的数都要被删去，则有转移：</p>
+<ul>
+<li>若 <span class="math inline">\(b_i\leqslant b_{i+1}\)</span>，设 <span class="math inline">\(id\)</span> 表示把小于等于 <span class="math inline">\(b_{i+1}\)</span> 的数排序后 <span class="math inline">\(b_i\)</span> 的排名，则转移到 <span class="math inline">\(f(i-1,j-id+1+[a_i\not=a_{i-1}],k+[a_{2n-i}\not=a_{2n-i+1}]+[id&gt;1])\)</span>。注意三个 <span class="math inline">\([]\)</span> 符号（我忘了它叫什么了 qaq），两个 <span class="math inline">\([a_i\not= a_{i-1}]\)</span> 和 <span class="math inline">\([a_{2n-i}\not=a_{2n-i+1}]\)</span> 是因为如果相等，则候选集合已经有过这个元素了，不能算上，<span class="math inline">\([id&gt;1]\)</span> 是因为如果 <span class="math inline">\(b_i&lt;b_{i+1}\)</span>，则 <span class="math inline">\(b_{i+1}\)</span> 会进到候选集合中比 <span class="math inline">\(b_i\)</span> 大的部分，而如果相等，则还在小于等于 <span class="math inline">\(b_i\)</span> 的那部分。</li>
+<li>若 <span class="math inline">\(b_i&gt;b_{i+1}\)</span>，类似的，转移到 <span class="math inline">\(f(i-1,j+[a_i\not=a_{i-1}]),k-id+[a_{2n-i}\not=a_{2n-i+1}])\)</span> 注意有一些变化，因为 <span class="math inline">\(b_{i+1}\)</span> 不在大于 <span class="math inline">\(b_{i+1}\)</span> 的集合中。</li>
+</ul>
+<p>所以总复杂度 <span class="math inline">\(O(n^4)\)</span>。</p>
+<p><a href="https://atcoder.jp/contests/agc012/submissions/18080014" target="_blank" rel="noopener">提交记录</a></p>
+]]></content>
+      <tags>
+        <tag>套题题解</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>AGC043 简要题解</title>
     <url>/2020/11/11/AGC043%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/</url>
     <content><![CDATA[<h3 id="a---range-flip-find-route">A - Range Flip Find Route</h3>
@@ -8,6 +49,7 @@
 f(i,j)=\min(f(i,j-1)+[(i,j)是墙][(i,j-1)不是墙],f(i-1,j)+[(i,j)是墙][(i-1,j)不是墙])
 \]</span> 不知道为什么只开到 <span class="math inline">\(100\)</span> 还给了 <span class="math inline">\(2s\)</span>，还以为我 A 都想假了。</p>
 <p><a href="https://atcoder.jp/contests/agc043/submissions/18045218" target="_blank" rel="noopener">提交记录</a></p>
+<a id="more"></a>
 <h3 id="b---123-triangle">B - 123 Triangle</h3>
 <p>牛牛题。</p>
 <p>由于每次都是两个数的差的形式，所以我们把 <span class="math inline">\(1,2,3\)</span> 变为 <span class="math inline">\(0,1,2\)</span>。先考虑判答案的奇偶性，我们暂时把 <span class="math inline">\(2\)</span> 改为 <span class="math inline">\(0\)</span>，显然不会影响奇偶性，这样可以发现差的绝对值等价于异或和。这样就可以考虑 <span class="math inline">\(a\)</span> 中每个元素的贡献，不难发现 <span class="math inline">\(a_i\)</span> 被算了 <span class="math inline">\(\dbinom{n-1}{i-1}\)</span> 次，所以找出所有 <span class="math inline">\(a_i=1\)</span> 的数，对组合数求和就知道了答案的奇偶性，计算组合数模 <span class="math inline">\(2\)</span> 可以求出阶乘 <span class="math inline">\(2\)</span> 的因子的次数。</p>
@@ -57,8 +99,9 @@ f(i,j)=f(i-1,j-1)+(i-1)f(i-2,j+1)+(i-1)(i-2)f(i-3,j)
     <title>AGC044 简要题解</title>
     <url>/2020/11/11/AGC044%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/</url>
     <content><![CDATA[<h3 id="a---pay-to-win">A - Pay to Win</h3>
-<p>暴力记忆化搜索，每次可以转移至 <span class="math inline">\(\lfloor\dfrac{n}{5}\rfloor\)</span> 和 <span class="math inline">\(\lceil\dfrac{n}{5}\rceil\)</span>（<span class="math inline">\(2,3\)</span> 同理），再和 <span class="math inline">\(nD\)</span> 取 <span class="math inline">\(\min\)</span>，注意到每一次的 <span class="math inline">\(n\)</span> 都是 <span class="math inline">\(\dfrac{N}{2^x3^y5^z}\)</span> 上下取整的形式，所以复杂度是对的。</p>
+<p>把过程倒过来，暴力记忆化搜索，每次可以转移至 <span class="math inline">\(\lfloor\dfrac{n}{5}\rfloor\)</span> 和 <span class="math inline">\(\lceil\dfrac{n}{5}\rceil\)</span>（<span class="math inline">\(2,3\)</span> 同理），再和 <span class="math inline">\(nD\)</span> 取 <span class="math inline">\(\min\)</span>，注意到每一次的 <span class="math inline">\(n\)</span> 都是 <span class="math inline">\(\dfrac{N}{2^x3^y5^z}\)</span> 上下取整的形式，所以复杂度是对的。</p>
 <p><a href="https://atcoder.jp/contests/agc044/submissions/16984884" target="_blank" rel="noopener">提交记录</a></p>
+<a id="more"></a>
 <h3 id="b---joker">B - Joker</h3>
 <p>先算出每个点的最短路，注意到不会超过 <span class="math inline">\(n\)</span>，所以每次删掉一个人后暴力向外更新最短路，由于每一次更新至少让 <span class="math inline">\(\sum dis\)</span> 减少 <span class="math inline">\(1\)</span>，所以总复杂度 <span class="math inline">\(O(n^3)\)</span>。</p>
 <p><a href="https://atcoder.jp/contests/agc044/submissions/16995863" target="_blank" rel="noopener">提交记录</a></p>
@@ -207,6 +250,7 @@ F_k(z)=a_k!\sum\limits_{i=1}^{a_k}\binom{a_k-1}{i-1}\frac{z^i}{i!}
     <content><![CDATA[<h3 id="a---takahashikun-the-strider">A - Takahashikun, The Strider</h3>
 <p>可以发现行走的路线在以 <span class="math inline">\((1,\frac{1}{2})\)</span> 为圆心，半径为 <span class="math inline">\(1\)</span> 的圆上，所以当再一次面向 <span class="math inline">\(y\)</span> 轴合法，根据简单的数论知识可知答案为 <span class="math inline">\(\dfrac{360}{\gcd(n,360)}\)</span>。</p>
 <p><a href="https://atcoder.jp/contests/agc046/submissions/17597983" target="_blank" rel="noopener">提交记录</a></p>
+<a id="more"></a>
 <h3 id="b---extension">B - Extension</h3>
 <p>有个比较简单的做法，设 <span class="math inline">\(f(i,j)\)</span> 表示 <span class="math inline">\(c=i,d=j\)</span> 的答案，考虑最后一行填了行还是列，这部分是 <span class="math inline">\(jf(i-1,j)+if(i,j-1)\)</span>，注意如果新形成的左上角没有涂黑，则其会在填行和填列中都被计算一遍，所以要减去没有涂到左上角的方案数 <span class="math inline">\((i-1)(j-1)f(i-1,j-1)\)</span>。</p>
 <p><a href="https://atcoder.jp/contests/agc046/submissions/17597924" target="_blank" rel="noopener">提交记录</a></p>

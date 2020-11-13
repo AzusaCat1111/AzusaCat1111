@@ -48,14 +48,14 @@
   };
 </script>
 
-  <meta name="description" content="A - Range Flip Find Route 直接 dp，转移根据贪心显然 \[ f(i,j)&#x3D;\min(f(i,j-1)+[(i,j)是墙][(i,j-1)不是墙],f(i-1,j)+[(i,j)是墙][(i-1,j)不是墙]) \] 不知道为什么只开到 \(100\) 还给了 \(2s\)，还以为我 A 都想假了。 提交记录 B - 123 Triangle 牛牛题。 由于">
+  <meta name="description" content="A - Range Flip Find Route 直接 dp，转移根据贪心显然 \[ f(i,j)&#x3D;\min(f(i,j-1)+[(i,j)是墙][(i,j-1)不是墙],f(i-1,j)+[(i,j)是墙][(i-1,j)不是墙]) \] 不知道为什么只开到 \(100\) 还给了 \(2s\)，还以为我 A 都想假了。 提交记录">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AGC043 简要题解">
 <meta property="og:url" content="https://azusacat1111.github.io/2020/11/11/AGC043%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/index.html">
 <meta property="og:site_name" content="AzusaCat&#39;s Blog">
-<meta property="og:description" content="A - Range Flip Find Route 直接 dp，转移根据贪心显然 \[ f(i,j)&#x3D;\min(f(i,j-1)+[(i,j)是墙][(i,j-1)不是墙],f(i-1,j)+[(i,j)是墙][(i-1,j)不是墙]) \] 不知道为什么只开到 \(100\) 还给了 \(2s\)，还以为我 A 都想假了。 提交记录 B - 123 Triangle 牛牛题。 由于">
+<meta property="og:description" content="A - Range Flip Find Route 直接 dp，转移根据贪心显然 \[ f(i,j)&#x3D;\min(f(i,j-1)+[(i,j)是墙][(i,j-1)不是墙],f(i-1,j)+[(i,j)是墙][(i-1,j)不是墙]) \] 不知道为什么只开到 \(100\) 还给了 \(2s\)，还以为我 A 都想假了。 提交记录">
 <meta property="article:published_time" content="2020-11-11T09:45:39.000Z">
-<meta property="article:modified_time" content="2020-11-12T10:08:56.351Z">
+<meta property="article:modified_time" content="2020-11-13T13:38:27.243Z">
 <meta property="article:author" content="AzusaCat">
 <meta property="article:tag" content="套题题解">
 <meta name="twitter:card" content="summary">
@@ -236,7 +236,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-12 18:08:56" itemprop="dateModified" datetime="2020-11-12T18:08:56+08:00">2020-11-12</time>
+                <time title="修改时间：2020-11-13 21:38:27" itemprop="dateModified" datetime="2020-11-13T21:38:27+08:00">2020-11-13</time>
               </span>
 
           
@@ -276,6 +276,7 @@
 f(i,j)=\min(f(i,j-1)+[(i,j)是墙][(i,j-1)不是墙],f(i-1,j)+[(i,j)是墙][(i-1,j)不是墙])
 \]</span> 不知道为什么只开到 <span class="math inline">\(100\)</span> 还给了 <span class="math inline">\(2s\)</span>，还以为我 A 都想假了。</p>
 <p><a href="https://atcoder.jp/contests/agc043/submissions/18045218" target="_blank" rel="noopener">提交记录</a></p>
+<a id="more"></a>
 <h3 id="b---123-triangle">B - 123 Triangle</h3>
 <p>牛牛题。</p>
 <p>由于每次都是两个数的差的形式，所以我们把 <span class="math inline">\(1,2,3\)</span> 变为 <span class="math inline">\(0,1,2\)</span>。先考虑判答案的奇偶性，我们暂时把 <span class="math inline">\(2\)</span> 改为 <span class="math inline">\(0\)</span>，显然不会影响奇偶性，这样可以发现差的绝对值等价于异或和。这样就可以考虑 <span class="math inline">\(a\)</span> 中每个元素的贡献，不难发现 <span class="math inline">\(a_i\)</span> 被算了 <span class="math inline">\(\dbinom{n-1}{i-1}\)</span> 次，所以找出所有 <span class="math inline">\(a_i=1\)</span> 的数，对组合数求和就知道了答案的奇偶性，计算组合数模 <span class="math inline">\(2\)</span> 可以求出阶乘 <span class="math inline">\(2\)</span> 的因子的次数。</p>
@@ -337,7 +338,10 @@ f(i,j)=f(i-1,j-1)+(i-1)f(i-2,j+1)+(i-1)(i-2)f(i-3,j)
     <a href="/2020/11/11/AGC044%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" rel="prev" title="AGC044 简要题解">
       <i class="fa fa-chevron-left"></i> AGC044 简要题解
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/11/13/AGC012%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" rel="next" title="AGC012 简要题解">
+      AGC012 简要题解 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -434,7 +438,7 @@ f(i,j)=f(i-1,j-1)+(i-1)f(i-2,j+1)+(i-1)(i-2)f(i-3,j)
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-count">52</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

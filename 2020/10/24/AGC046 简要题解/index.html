@@ -48,14 +48,14 @@
   };
 </script>
 
-  <meta name="description" content="A - Takahashikun, The Strider 可以发现行走的路线在以 \((1,\frac{1}{2})\) 为圆心，半径为 \(1\) 的圆上，所以当再一次面向 \(y\) 轴合法，根据简单的数论知识可知答案为 \(\dfrac{360}{\gcd(n,360)}\)。 提交记录 B - Extension 有个比较简单的做法，设 \(f(i,j)\) 表示 \(c&#x3D;i,d">
+  <meta name="description" content="A - Takahashikun, The Strider 可以发现行走的路线在以 \((1,\frac{1}{2})\) 为圆心，半径为 \(1\) 的圆上，所以当再一次面向 \(y\) 轴合法，根据简单的数论知识可知答案为 \(\dfrac{360}{\gcd(n,360)}\)。 提交记录">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AGC046 简要题解">
 <meta property="og:url" content="https://azusacat1111.github.io/2020/10/24/AGC046%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/index.html">
 <meta property="og:site_name" content="AzusaCat&#39;s Blog">
-<meta property="og:description" content="A - Takahashikun, The Strider 可以发现行走的路线在以 \((1,\frac{1}{2})\) 为圆心，半径为 \(1\) 的圆上，所以当再一次面向 \(y\) 轴合法，根据简单的数论知识可知答案为 \(\dfrac{360}{\gcd(n,360)}\)。 提交记录 B - Extension 有个比较简单的做法，设 \(f(i,j)\) 表示 \(c&#x3D;i,d">
+<meta property="og:description" content="A - Takahashikun, The Strider 可以发现行走的路线在以 \((1,\frac{1}{2})\) 为圆心，半径为 \(1\) 的圆上，所以当再一次面向 \(y\) 轴合法，根据简单的数论知识可知答案为 \(\dfrac{360}{\gcd(n,360)}\)。 提交记录">
 <meta property="article:published_time" content="2020-10-24T02:51:28.000Z">
-<meta property="article:modified_time" content="2020-11-08T04:30:56.966Z">
+<meta property="article:modified_time" content="2020-11-13T13:38:42.841Z">
 <meta property="article:author" content="AzusaCat">
 <meta property="article:tag" content="套题题解">
 <meta name="twitter:card" content="summary">
@@ -236,7 +236,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-08 12:30:56" itemprop="dateModified" datetime="2020-11-08T12:30:56+08:00">2020-11-08</time>
+                <time title="修改时间：2020-11-13 21:38:42" itemprop="dateModified" datetime="2020-11-13T21:38:42+08:00">2020-11-13</time>
               </span>
 
           
@@ -274,6 +274,7 @@
         <h3 id="a---takahashikun-the-strider">A - Takahashikun, The Strider</h3>
 <p>可以发现行走的路线在以 <span class="math inline">\((1,\frac{1}{2})\)</span> 为圆心，半径为 <span class="math inline">\(1\)</span> 的圆上，所以当再一次面向 <span class="math inline">\(y\)</span> 轴合法，根据简单的数论知识可知答案为 <span class="math inline">\(\dfrac{360}{\gcd(n,360)}\)</span>。</p>
 <p><a href="https://atcoder.jp/contests/agc046/submissions/17597983" target="_blank" rel="noopener">提交记录</a></p>
+<a id="more"></a>
 <h3 id="b---extension">B - Extension</h3>
 <p>有个比较简单的做法，设 <span class="math inline">\(f(i,j)\)</span> 表示 <span class="math inline">\(c=i,d=j\)</span> 的答案，考虑最后一行填了行还是列，这部分是 <span class="math inline">\(jf(i-1,j)+if(i,j-1)\)</span>，注意如果新形成的左上角没有涂黑，则其会在填行和填列中都被计算一遍，所以要减去没有涂到左上角的方案数 <span class="math inline">\((i-1)(j-1)f(i-1,j-1)\)</span>。</p>
 <p><a href="https://atcoder.jp/contests/agc046/submissions/17597924" target="_blank" rel="noopener">提交记录</a></p>
@@ -431,7 +432,7 @@ f(i,j,k)=\sum\limits_{c=0}^{a_i}f(i-1,j-c,k)+\sum\limits_{c=a_i+1}^{a_i+k}f(i-1,
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-count">52</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
