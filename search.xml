@@ -1,6 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>AGC041 简要题解</title>
+    <url>/2020/11/19/AGC041%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/</url>
+    <content><![CDATA[<h3 id="a---table-tennis-training">A - Table Tennis Training</h3>
+<p>给定位置 <span class="math inline">\(1\sim n\)</span>，一开始有两个人在 <span class="math inline">\(a,b\)</span>，每一次每个人可以任意向左或向右走一步，如果在边上不能越界但是可以不动，问最少多少步结束后两个人在同一个位置。<span class="math inline">\(n\leqslant 10^{18}\)</span>。</p>
+<p>直接枚举向中间贴（只有 <span class="math inline">\(a,b\)</span> 奇偶性相等时才可以）还是都先向左/向右，如果奇偶性不同有个人需要等一步，三种情况取最小值即可。</p>
+<h3 id="b---voting-judges">B - Voting Judges</h3>
+<p>有 <span class="math inline">\(n\)</span> 道题，一开始的评分分别是 <span class="math inline">\(a_i\)</span>，现在有 <span class="math inline">\(m\)</span> 个评委，每个评委可以任选恰好 <span class="math inline">\(v\)</span> 道题将其评分 <span class="math inline">\(+1\)</span>，最后评分前 <span class="math inline">\(p\)</span> 大的题会被选中，问有多少题可以被选中。<span class="math inline">\(n\leqslant 10^5,m\leqslant 10^9\)</span>。</p>
+<p>先把 <span class="math inline">\(a\)</span> 降序排序，前 <span class="math inline">\(p\)</span> 个一定合法，然后考虑剩下的，设有 <span class="math inline">\(k\)</span> 个数比 <span class="math inline">\(a_i+m\)</span> 大，若 <span class="math inline">\(k\geqslant p\)</span> 肯定不合法。然后考虑剩下的情况，我们发现给前 <span class="math inline">\(p-1\)</span> 道题和后 <span class="math inline">\(n-i\)</span> 道题怎么投都无所谓，因为我们只需要保证最后 <span class="math inline">\(a_i\geqslant a_p\)</span>，所以我们优先给这些题投多余的票，如果没有多余的票了，那么合法；反之设每个评委还多出 <span class="math inline">\(t\)</span> 张票，那么合法当且仅当 <span class="math inline">\(\sum\limits_{j=p}^{i-1}{a_i+m-a_j}\geqslant mt\)</span>，这相当于每个这之间的题目还可以投 <span class="math inline">\(a_i+m-a_j\)</span> 张票不会超过 <span class="math inline">\(a_i\)</span>，注意到这个数一定不超过 <span class="math inline">\(m\)</span>，所以我们只需要保证总空位不小于总票数（证明考虑我们每一次添加 <span class="math inline">\(a_i+m-a_j\)</span> 个球，然后排成一排，分别和评委 <span class="math inline">\(1,2,\dots m,1,2,\dots m,\dots\)</span> 对应，可以发现 <span class="math inline">\(k\)</span> 和 <span class="math inline">\(k+m\)</span> 对应的 <span class="math inline">\(j\)</span> 一定不一样，也就是说同一个评委不可能在一道题上投两次）。</p>
+<h3 id="c---domino-quality">C - Domino Quality</h3>
+<p>用 <span class="math inline">\(1\times 2\)</span> 的多米诺填 <span class="math inline">\(n\times n\)</span> 的棋盘，要求覆盖了每一行和每一列的骨牌数量均相等，构造方案或输出无解，<span class="math inline">\(n\leqslant 1000\)</span>。</p>
+<p>不难发现 <span class="math inline">\(1,2\)</span> 无解，手玩出 <span class="math inline">\(3-7\)</span> 的答案，然后设 <span class="math inline">\(k=n\bmod 4\)</span>，在左上角填 <span class="math inline">\(k+4\)</span> 的答案，然后一直顺着对角线填 <span class="math inline">\(4\)</span> 的答案，这样显然合法，记得特判 <span class="math inline">\(n=3\)</span>。</p>
+<h3 id="d---problem-scores">D - Problem Scores</h3>
+<p>求满足以下限制的长为 <span class="math inline">\(n\)</span> 的数列 <span class="math inline">\(A\)</span> 的数目：<span class="math inline">\(1\leqslant A_i\leqslant n\)</span>；<span class="math inline">\(A\)</span> 单调不降；对任意 <span class="math inline">\(0&lt;k&lt;n\)</span>，任何一个大小为 <span class="math inline">\(k+1\)</span> 的子集和严格大于任何一个大小为 <span class="math inline">\(k\)</span> 的子集和。<span class="math inline">\(n\leqslant 5000\)</span>。</p>
+<p>日常不会套路题。我们可以发现，当前 <span class="math inline">\(\lfloor\dfrac{n+1}{2}\rfloor\)</span> 个题的分数大于后 <span class="math inline">\(\lfloor\dfrac{n}{2}\rfloor\)</span> 个题的分数时这个序列合法（因为这个限制最紧，证明考虑任意删除两个元素）。考虑对原序列的差分序列 <span class="math inline">\(C\)</span> 计数，特殊的，我们这里令 <span class="math inline">\(C_0=1\)</span>，则 <span class="math inline">\(\sum C_i&lt;n\)</span>。若 <span class="math inline">\(n\)</span> 为奇数，我们把限制条件列出来，则有（为了方便以下均省略下取整符号）： <span class="math display">\[
+\begin{aligned}
+\sum\limits_{i=1}^{\frac{n+1}{2}}\sum\limits_{j=0}^iC_j&amp;&gt;\sum\limits_{i=\frac{n+1}{2}+1}^n\sum\limits_{j=0}^iC_j\\
+2\sum\limits_{i=1}^{\frac{n+1}{2}}\sum\limits_{j=1}^iC_j&amp;\geqslant\sum\limits_{i=1}^n\sum\limits_{j=1}^iC_j\\
+2\sum\limits_{i=1}^{\frac{n+1}{2}}(\frac{n+1}{2}+1-i)C_i&amp;\geqslant \sum\limits_{i=1}^n(n+1-i)C_i
+\end{aligned}
+\]</span> 对 <span class="math inline">\(n\)</span> 为偶数的情况也类似地推下式子，最后我们有 <span class="math display">\[
+\sum\limits_{i=1}^nB_iC_i\leqslant 0
+\]</span> 其中 <span class="math display">\[
+\begin{equation}
+B_i=
+\begin{cases}
+i-2 &amp;i\leqslant \frac{n}{2}+1\\
+n-i+1 &amp;\text{otherwise}
+\end{cases}
+\end{equation}
+\]</span> 注意到由于原序列单调不降，故 <span class="math inline">\(C_i\geqslant 0\)</span>，注意到只有 <span class="math inline">\(B_1\)</span> 为负，所以我们考虑最后确定 <span class="math inline">\(C_1\)</span> 的值，列出对 <span class="math inline">\(C_1\)</span> 的所有限制可得： <span class="math display">\[
+C_1\leqslant n-1-\sum\limits_{i=2}^nC_i\\
+C_1\geqslant \sum\limits_{i=2}^nB_iC_i\\
+C_1\geqslant 0
+\]</span> 注意到若 <span class="math inline">\(\sum\limits_{i=2}^n(B_i+1)C_i=k\)</span>，则合法的 <span class="math inline">\(C_1\)</span> 数量为 <span class="math inline">\(\max(0,n-k)\)</span>，所以只需要跑一个完全背包，复杂度 <span class="math inline">\(O(n^2)\)</span>。</p>
+<h3 id="e---balancing-network">E - Balancing Network</h3>
+<p>现在有 <span class="math inline">\(n\)</span> 条线 <span class="math inline">\(m\)</span> 个平衡器，平衡器从左往右，第 <span class="math inline">\(i\)</span> 个平衡器连接了 <span class="math inline">\(x_i,y_i(x_i&lt;y_i)\)</span>，你需要给平衡器定向，定向后的平衡器若是从 <span class="math inline">\(x_i\)</span> 指向 <span class="math inline">\(y_i\)</span>，则你从 <span class="math inline">\(x_i\)</span> 走到这个平衡器时会跑到 <span class="math inline">\(y_i\)</span>，你需要给出满足和不满足以下条件的定向方案或判断无解：从每根线的最左面出发一直向右走，最后都会走到同一根线的最右面。<span class="math inline">\(n\leqslant 50000,m\leqslant 100000\)</span>。</p>
+<h5 id="满足条件">满足条件</h5>
+<p>假设我们最后全走到了 <span class="math inline">\(t\)</span>，我们记录 <span class="math inline">\(vis_i\)</span> 表示现在从 <span class="math inline">\(i\)</span> 开始走是否会走到 <span class="math inline">\(t\)</span>，我们从右往左添加平衡器，一开始只有 <span class="math inline">\(vis_t=1\)</span>，若现在添加的平衡器为 <span class="math inline">\((x,y)\)</span>，分类讨论：</p>
+<ul>
+<li>若 <span class="math inline">\(vis_x=vis_y=0\)</span> 或 <span class="math inline">\(vis_x=vis_y=1\)</span> 怎么调都不会改变。</li>
+<li>若 <span class="math inline">\(vis_x=1,vis_y=0\)</span>，把平衡器设为 <span class="math inline">\(y\rightarrow x\)</span> 可以让 <span class="math inline">\(vis_y\)</span> 也变成 <span class="math inline">\(1\)</span>。</li>
+<li>若 <span class="math inline">\(vis_y=1,vis_x=0\)</span> 类似上面。</li>
+</ul>
+<p>注意到这等价于把 <span class="math inline">\(vis_x\)</span> 和 <span class="math inline">\(vis_y\)</span> 都赋值为两者的或，所以我们可以用 bitset 来加速枚举，每一位表示终点为 <span class="math inline">\(i\)</span> 的答案，这样添加一个平衡器就等价于把两个 bitset 或起来，复杂度 <span class="math inline">\(O(\dfrac{nm}{w})\)</span>。</p>
+<h5 id="不满足条件">不满足条件</h5>
+<p>由于 <span class="math inline">\(m&gt;0\)</span>，所以若 <span class="math inline">\(n=2\)</span> 一定无解。下面的构造方式证明了 <span class="math inline">\(n&gt;2\)</span> 时一定有解。</p>
+<p>我们设 <span class="math inline">\(end_i\)</span> 表示 <span class="math inline">\(i\)</span> 目前最后会走到哪里，<span class="math inline">\(siz_i\)</span> 表示最终会走到 <span class="math inline">\(i\)</span> 的线的数量。那么我们只需要保证对任意 <span class="math inline">\(i\)</span>，<span class="math inline">\(siz_i&lt;n\)</span>。我们依旧从后向前添加平衡器，一开始 <span class="math inline">\(end_i=i,siz_i=1\)</span>。假设现在添加的是 <span class="math inline">\((x,y)\)</span>，我们发现，这等价于要不然把 <span class="math inline">\(end_x\)</span> 改为 <span class="math inline">\(end_y\)</span>，要不然把 <span class="math inline">\(end_y\)</span> 改为 <span class="math inline">\(end_x\)</span>。注意到这会使 <span class="math inline">\(siz_{end_x}\)</span> 或 <span class="math inline">\(siz_{end_y}\)</span> 加上 <span class="math inline">\(1\)</span>，所以当 <span class="math inline">\(siz_{end_x}=n-1\)</span> 时定向为 <span class="math inline">\(x\rightarrow y\)</span> 即可，<span class="math inline">\(siz_{end_y}=n-1\)</span> 时同理，注意到由于 <span class="math inline">\(n&gt;2,2n-2&gt;n\)</span>，所以不会出现两个都为 <span class="math inline">\(n-1\)</span> 的情况。如果两个都不为 <span class="math inline">\(n-1\)</span> 任意定向即可。复杂度 <span class="math inline">\(O(n+m)\)</span>。</p>
+<h3 id="f---histogram-rooks">F - Histogram Rooks</h3>
+<p>给定 <span class="math inline">\(n\times n\)</span> 的棋盘，现在第 <span class="math inline">\(i\)</span> 列只有最底下 <span class="math inline">\(h_i\)</span> 个位置没被扣掉，现在往棋盘上未被扣掉的格子上放若干个车，使得每个没被扣掉的格子要不被某个车占领，要不可以被某个车攻击到（车不能跨过被扣掉的格子），求方案数。<span class="math inline">\(n\leqslant 400\)</span>（可以改为 <span class="math inline">\(3000\)</span>）。</p>
+<p>我们称题目中的条件为“被覆盖”。考虑容斥，钦定某些位置一定未被覆盖，并计算每个行连续段的贡献，假设钦定 <span class="math inline">\(k\)</span> 个位置未被覆盖，则容斥系数为 <span class="math inline">\((-1)^k\)</span>。</p>
+<p>我们注意到每一列都是连续的，所以我们考虑钦定某些列中存在未被覆盖的格子。设某个行连续段的长度为 <span class="math inline">\(len\)</span>，这个行连续段有 <span class="math inline">\(p\)</span> 列被钦定未被覆盖。我们考虑这 <span class="math inline">\(p\)</span> 列中在这一行的格子是否被钦定，若一个都没有被钦定，则剩下 <span class="math inline">\(p-len\)</span> 个格子随便填，方案数为 <span class="math inline">\(2^{len-p}\)</span>；若至少有一个格子被钦定，则剩下格子都不能填，方案数为 <span class="math inline">\(1\)</span>，枚举钦定的格子数，带上容斥系数，这部分的总贡献是 <span class="math inline">\(\sum\limits_{i=1}^p(-1)^i\dbinom{p}{i}=-[p\not= 0]\)</span>，所以这个行连续段的贡献为 <span class="math inline">\(2^{len-p}-[p&gt;0]\)</span>。</p>
+<p>其实我们刚才那个容斥是假的，因为我们并没有保证存在钦定未被覆盖的格子的列真的存在了未被覆盖的格子（这句话有点绕，就是说对每个包含这列的行连续段我们都没钦定到这个列的格子，这样就算多了），为此我们再套一层容斥：设 <span class="math inline">\(S\)</span> 表示我们上面钦定的列的集合，<span class="math inline">\(T\)</span> 表示 <span class="math inline">\(S\)</span> 中一定不存在被钦定未被覆盖的格子的列的集合，那么这一层的容斥系数为 <span class="math inline">\((-1)^{|T|}\)</span>。</p>
+<p>现在假设某行的连续段的长度为 <span class="math inline">\(len\)</span>，这个行连续段有 <span class="math inline">\(p\)</span> 列在 <span class="math inline">\(S\)</span> 中，<span class="math inline">\(q\)</span> 列在 <span class="math inline">\(T\)</span> 中，那么现在这个行连续段的贡献变为了 <span class="math inline">\(2^{len-p}+\sum\limits_{i=1}^{p-q}(-1)^i\dbinom{p+q}{i}=2^{len-p}-[p\not=q]\)</span>。注意到我们并不关心 <span class="math inline">\(q\)</span> 具体的值，我们只在乎 <span class="math inline">\(p\)</span> 是否等于 <span class="math inline">\(q\)</span>，关于 <span class="math inline">\(q\)</span> 的容斥系数我们只需要在向 <span class="math inline">\(T\)</span> 中添加元素时同时加上即可。</p>
+<p>现在考虑如何加速这个过程，考虑分治，如果我们每次取当前列的区间内的最小值，发现最小值到底端的行连续段都一致可以一起计算，就可以把区间分为两个子问题再合并，合并时只需要考虑当前列是否加入 <span class="math inline">\(S\)</span> 和 <span class="math inline">\(T\)</span>（其实就是笛卡尔树）。</p>
+<p>所以只需要设状态 <span class="math inline">\(f(i,j,0/1)\)</span> 表示当前 dp 到了矩形 <span class="math inline">\(i\)</span>，<span class="math inline">\(|S|=j\)</span>，<span class="math inline">\(T\)</span> 是否等于 <span class="math inline">\(S\)</span>。</p>
+<p>由于我们只会访问 <span class="math inline">\(O(n)\)</span> 个连续的行连续段，所以总复杂度 <span class="math inline">\(O(n^2\log n)\)</span>，如果预处理系数可以达到 <span class="math inline">\(O(n^2)\)</span>。</p>
+<p><a href="https://atcoder.jp/contests/agc041/submissions?f.Task=&amp;f.LanguageName=&amp;f.Status=AC&amp;f.User=AzusaCat" target="_blank" rel="noopener">提交记录</a></p>
+]]></content>
+      <tags>
+        <tag>套题题解</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>AGC049 简要题解</title>
+    <url>/2020/11/17/AGC049%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/</url>
+    <content><![CDATA[<h3 id="a---erasing-vertices">A - Erasing Vertices</h3>
+<p>给定大小为 <span class="math inline">\(n\)</span> 的有向图，每次随机选择一个未删除的节点，将其与其可以到的的点全部删除，求总操作次数期望，<span class="math inline">\(n\leqslant 100\)</span>。</p>
+<p>考虑贡献，设能到达 <span class="math inline">\(i\)</span> 的节点数为 <span class="math inline">\(d_i\)</span>（包括自己），则其被操作的概率是 <span class="math inline">\(\dfrac{1}{d_i}\)</span>，所以期望是每个点的和，求 <span class="math inline">\(d_i\)</span> 建图跑或者直接 floyd 传递闭包。</p>
+<h3 id="b---flip-digits">B - Flip Digits</h3>
+<p>给定 01 序列 <span class="math inline">\(A,B\)</span>，每次可以选一个 <span class="math inline">\(i&gt;1\)</span>，需保证 <span class="math inline">\(A_i=1\)</span>，然后让 <span class="math inline">\(A_i\leftarrow 0\)</span>，并反转 <span class="math inline">\(A_{i-1}\)</span>，判断把 <span class="math inline">\(A\)</span> 变成 <span class="math inline">\(B\)</span> 的最小操作次数或判定无解，<span class="math inline">\(|A|\leqslant 5\times 10^5\)</span>。</p>
+<p>不开 long long 见祖宗。</p>
+<p>一次操作可以看为向左移动某个 <span class="math inline">\(1\)</span>，最多能移动到向前第一个 <span class="math inline">\(1\)</span> 并把这俩一起消掉。于是开个队列维护 <span class="math inline">\(1\)</span> 的位置然后扫 <span class="math inline">\(B\)</span>，如果当前 <span class="math inline">\(1\)</span> 多就消掉队内的前两个 <span class="math inline">\(1\)</span>，<span class="math inline">\(1\)</span> 不够就从下一个位置移过来，不能直接输出无解，不难发现这样是最优的。</p>
+<h3 id="c---robots">C - Robots</h3>
+<p>数轴上从 <span class="math inline">\(0\)</span> 到 <span class="math inline">\(10^{100}\)</span> 每个位置有个机器人，现在给你 <span class="math inline">\(n\)</span> 种操作，每种操作为让机器人 <span class="math inline">\(A_i\)</span> 向前移动 <span class="math inline">\(1\)</span> 个位置，如果前一个位置有机器人，则把那个机器人弄爆，每种操作有 <span class="math inline">\(B_i\)</span> 个，问你最少修改多少<strong>个</strong>操作（让哪个机器人向前走）使得你可以安排某种操作顺序使得机器人 <span class="math inline">\(0\)</span> 最终不会被弄爆。<span class="math inline">\(n\leqslant 2\times 10^5\)</span>，<span class="math inline">\(0&lt;A_i,B_i\leqslant 10^9\)</span>。</p>
+<p>先考虑答案何时为 <span class="math inline">\(0\)</span>，我们发现如果某个机器人 <span class="math inline">\(i\)</span> 满足 <span class="math inline">\(A_i\leqslant B_i\)</span>，则其一定要被某个机器人弄爆，如果弄爆这个机器人的机器人 <span class="math inline">\(j\)</span> 也满足 <span class="math inline">\(A_j\leqslant B_j\)</span>，则 <span class="math inline">\(j\)</span> 以后也一定要被弄爆，一直这么推下去最后一定有一个 <span class="math inline">\(A_k&gt;B_k\)</span> 的机器人 <span class="math inline">\(k\)</span> 弄爆了上一个机器人，注意到这个机器人一定也都经过了递归栈中的所有机器人，所以我们可以认为一定是某个 <span class="math inline">\(A_k&gt;B_k\)</span> 的机器人弄爆了这个机器人。所以我们只需要判断每个 <span class="math inline">\(A_i\leqslant B_i\)</span> 的机器人是否被某个 <span class="math inline">\(A_k&gt;B_k\)</span> 的机器人覆盖。</p>
+<p>现在考虑一般情况，我们发现可以把修改操作改为删除或添加，删除好说就是把数改成超级大，添加就相当于选中一个对 <span class="math inline">\(A_i\leqslant B_i\)</span> 的 <span class="math inline">\(i\)</span> 的操作对其修改（如果没有显然不需要继续操作了）。若删除了 <span class="math inline">\(x\)</span> 个操作，添加了 <span class="math inline">\(y\)</span> 个操作，则代价为 <span class="math inline">\(\max(x,y)\)</span>。考虑所有 <span class="math inline">\(A_i\leqslant B_i\)</span> 且未被某个 <span class="math inline">\(A_k&gt;B_k\)</span> 的机器人覆盖的 <span class="math inline">\(i\)</span>，我们考虑怎么把它弄爆：要不然添加一个 <span class="math inline">\(A_i+1\)</span> 的操作，添加代价为 <span class="math inline">\(1\)</span>；要不然删除一个能覆盖到 <span class="math inline">\(i\)</span> 的 <span class="math inline">\(j\)</span>，且<span class="math inline">\(A_j\leqslant B_j\)</span> 的操作使得 <span class="math inline">\(A_j=B_j+1\)</span>，删除代价为 <span class="math inline">\(B_j-A_j+1\)</span>。我们发现，如果我们对两个不同的 <span class="math inline">\(j\)</span> 都删除到了 <span class="math inline">\(A_j=B_j+1\)</span>，最后两个机器人都会跑到 <span class="math inline">\(1\)</span>，我们只需要保留 <span class="math inline">\(A\)</span> 更大的那个机器人，所以我们枚举进行删除操作的机器人，然后求出还未被覆盖的机器人数量然后取 <span class="math inline">\(\min\)</span> 即可，复杂度 <span class="math inline">\(O(n)\)</span>。</p>
+<h3 id="d---convex-sequence">D - Convex Sequence</h3>
+<p>发现是个凸包（题目名字说了），我们发现其导数单调，所以我们考虑每次增量构造，我们考虑这种序列这样的一种生成方法：</p>
+<ul>
+<li>钦定最小值位置 <span class="math inline">\(i\)</span>（如果有多个最小值，钦定下标最大的）及其值 <span class="math inline">\(v\)</span>。</li>
+<li>选择若干 <span class="math inline">\(j&lt;i\)</span>，分别把 <span class="math inline">\(a_j,a_{j-1},\dots a_1\)</span> 加上 <span class="math inline">\(1,2,\dots,j\)</span>。</li>
+<li>选择若干 <span class="math inline">\(j&gt;i\)</span>，分别把 <span class="math inline">\(a_j,a_{j+1},\dots,a_n\)</span> 加上 <span class="math inline">\(1,2,\dots,n-j+1\)</span>，特别的，<span class="math inline">\(i+1\)</span> 至少被选择一次。</li>
+</ul>
+<p>我们可以发现，任何一个这样的凸包序列都可以和这样的生成方式一一对应。</p>
+<p>注意到如果我们只需要考虑小于 <span class="math inline">\(i\)</span> 的部分 ，那么这等价于跑一个物品大小为 <span class="math inline">\(n,1,3,6,10,\dots\)</span> 的完全背包，注意不同的物品种类数是 <span class="math inline">\(O(\sqrt m)\)</span> 的，我们可以在 <span class="math inline">\(O(m\sqrt m)\)</span> 的时间解决该问题。</p>
+<p>然后我们考虑大于 <span class="math inline">\(i\)</span> 的部分，这等价于先强制添加一个大小为 <span class="math inline">\(1+2+\dots+n-i\)</span> 的物品然后再跑完全背包。</p>
+<p>现在我们考虑合并两边，先预处理出数组 <span class="math inline">\(f(i,j)\)</span> 表示用前 <span class="math inline">\(i\)</span> 个物品（不包含大小为 <span class="math inline">\(n\)</span> 的那个）填满大小为 <span class="math inline">\(j\)</span> 的背包的方案数，<span class="math inline">\(g(i,j)\)</span> 表示用前 <span class="math inline">\(i\)</span> 个物品和 <span class="math inline">\(n\)</span> 填满大小为 <span class="math inline">\(j\)</span> 的背包，且第 <span class="math inline">\(i\)</span> 个物品至少被填一次的方案数，则答案为 <span class="math inline">\(\sum g(i,j)f(n-i-1,m-j)\)</span>。总复杂度 <span class="math inline">\(O(m\sqrt m)\)</span>，注意物品数开够了（大概要 460），不要像我没注意就开了 330（常用分块块长）。</p>
+<h3 id="e--">E -</h3>
+]]></content>
+      <tags>
+        <tag>套题题解</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ARC101 简要题解</title>
     <url>/2020/11/14/ARC101%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/</url>
     <content><![CDATA[<h3 id="c---candles">C - Candles</h3>
@@ -917,8 +1011,8 @@ AB=\sum\limits_{i.j}fa_ifb_j2^{i+j}
 <h3 id="f---rooks">F - Rooks</h3>
 <p>先考虑 <span class="math inline">\(O(n^2)\)</span> 的 dp。</p>
 <p>不难发现按 <span class="math inline">\(x\)</span> 排序之后每个点能到达的一定是一个区间。设 <span class="math inline">\(f(l,r,0/1)\)</span> 表示从 <span class="math inline">\([l,r]\)</span> 这个状态到无法继续扩展的状态的最小步数，转移只需枚举下一步走哪里。从 <span class="math inline">\(i\)</span> 开始的答案就是 <span class="math inline">\(f(i,i,0)\)</span>。</p>
-<p>我们考虑一种特殊情况：给定的 <span class="math inline">\(x\)</span> 和 <span class="math inline">\(y\)</span> 单调。不难发现从任何点出发都可以吃掉所有点，而且最短路一定是一路吃到 <span class="math inline">\(1\)</span> 再去吃 <span class="math inline">\(n\)</span> 和反过来的较小值。</p>
-<p>我们可以发现如果从点 <span class="math inline">\(i\)</span> 去吃点 <span class="math inline">\(j\)</span>，花费的步数是 <span class="math inline">\(dis(i,j)-1\)</span>（这里是曼哈顿距离），为了方便，我们计算时把代价认为是 <span class="math inline">\(dis(i,j)\)</span>，最后再减掉吃的点的个数。</p>
+<p>我们考虑一种特殊情况：给定的 <span class="math inline">\(x\)</span> 和 <span class="math inline">\(y\)</span> 单调。不难发现从任何点出发都可以吃掉所有车，而且最短路一定是一路吃到 <span class="math inline">\(1\)</span> 再去吃 <span class="math inline">\(n\)</span> 和反过来的较小值。</p>
+<p>我们可以发现如果从点 <span class="math inline">\(i\)</span> 去吃点 <span class="math inline">\(j\)</span>，花费的步数是 <span class="math inline">\(dis(i,j)-1\)</span>（这里是曼哈顿距离），为了方便，我们计算时把代价认为是 <span class="math inline">\(dis(i,j)\)</span>，最后再减掉吃的车的个数。</p>
 <p>有了这种情况我们发现上面那个 <span class="math inline">\(O(n^2)\)</span> 的 dp 有很多无用的状态（因为你来回吃一定不如先一直吃一头再回来），可以优化。</p>
 <p>我们令 <span class="math inline">\(L_i\)</span> 表示从 <span class="math inline">\(i\)</span> 向左出发，保证走过的纵坐标也是连续且单调，最远能走到哪，<span class="math inline">\(R_i\)</span> 类似。那么我们发现从 <span class="math inline">\([l,r]\)</span> 只需要转移到 <span class="math inline">\([L_{l-1},r]\)</span> 和 <span class="math inline">\([l,R_{r+1}]\)</span>，否则根据上面那个贪心一定不优。</p>
 <p>（不保证以下内容正确）这样我们访问到的区间个数是线性的，由于实现用了 <code>map</code> 所以是 <span class="math inline">\(O(n\log n)\)</span> 的。</p>
