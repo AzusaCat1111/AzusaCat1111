@@ -55,9 +55,8 @@
 <meta property="og:site_name" content="AzusaCat&#39;s Blog">
 <meta property="og:description" content="A - Erasing Vertices 给定大小为 \(n\) 的有向图，每次随机选择一个未删除的节点，将其与其可以到的的点全部删除，求总操作次数期望，\(n\leqslant 100\)。 考虑贡献，设能到达 \(i\) 的节点数为 \(d_i\)（包括自己），则其被操作的概率是 \(\dfrac{1}{d_i}\)，所以期望是每个点的和，求 \(d_i\) 建图跑或者直接 floyd 传">
 <meta property="article:published_time" content="2020-11-17T07:53:47.000Z">
-<meta property="article:modified_time" content="2020-11-17T09:06:48.985Z">
+<meta property="article:modified_time" content="2020-11-23T07:09:49.655Z">
 <meta property="article:author" content="AzusaCat">
-<meta property="article:tag" content="套题题解">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://azusacat1111.github.io/2020/11/17/AGC049%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
@@ -228,10 +227,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-11-17 15:53:47 / 修改时间：17:06:48" itemprop="dateCreated datePublished" datetime="2020-11-17T15:53:47+08:00">2020-11-17</time>
+              <time title="创建时间：2020-11-17 15:53:47" itemprop="dateCreated datePublished" datetime="2020-11-17T15:53:47+08:00">2020-11-17</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-23 15:09:49" itemprop="dateModified" datetime="2020-11-23T15:09:49+08:00">2020-11-23</time>
+              </span>
 
           
             <span id="/2020/11/17/AGC049%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="AGC049 简要题解" title="阅读次数">
@@ -268,6 +273,7 @@
         <h3 id="a---erasing-vertices">A - Erasing Vertices</h3>
 <p>给定大小为 <span class="math inline">\(n\)</span> 的有向图，每次随机选择一个未删除的节点，将其与其可以到的的点全部删除，求总操作次数期望，<span class="math inline">\(n\leqslant 100\)</span>。</p>
 <p>考虑贡献，设能到达 <span class="math inline">\(i\)</span> 的节点数为 <span class="math inline">\(d_i\)</span>（包括自己），则其被操作的概率是 <span class="math inline">\(\dfrac{1}{d_i}\)</span>，所以期望是每个点的和，求 <span class="math inline">\(d_i\)</span> 建图跑或者直接 floyd 传递闭包。</p>
+<a id="more"></a>
 <h3 id="b---flip-digits">B - Flip Digits</h3>
 <p>给定 01 序列 <span class="math inline">\(A,B\)</span>，每次可以选一个 <span class="math inline">\(i&gt;1\)</span>，需保证 <span class="math inline">\(A_i=1\)</span>，然后让 <span class="math inline">\(A_i\leftarrow 0\)</span>，并反转 <span class="math inline">\(A_{i-1}\)</span>，判断把 <span class="math inline">\(A\)</span> 变成 <span class="math inline">\(B\)</span> 的最小操作次数或判定无解，<span class="math inline">\(|A|\leqslant 5\times 10^5\)</span>。</p>
 <p>不开 long long 见祖宗。</p>
@@ -287,7 +293,7 @@
 <p>注意到如果我们只需要考虑小于 <span class="math inline">\(i\)</span> 的部分 ，那么这等价于跑一个物品大小为 <span class="math inline">\(n,1,3,6,10,\dots\)</span> 的完全背包，注意不同的物品种类数是 <span class="math inline">\(O(\sqrt m)\)</span> 的，我们可以在 <span class="math inline">\(O(m\sqrt m)\)</span> 的时间解决该问题。</p>
 <p>然后我们考虑大于 <span class="math inline">\(i\)</span> 的部分，这等价于先强制添加一个大小为 <span class="math inline">\(1+2+\dots+n-i\)</span> 的物品然后再跑完全背包。</p>
 <p>现在我们考虑合并两边，先预处理出数组 <span class="math inline">\(f(i,j)\)</span> 表示用前 <span class="math inline">\(i\)</span> 个物品（不包含大小为 <span class="math inline">\(n\)</span> 的那个）填满大小为 <span class="math inline">\(j\)</span> 的背包的方案数，<span class="math inline">\(g(i,j)\)</span> 表示用前 <span class="math inline">\(i\)</span> 个物品和 <span class="math inline">\(n\)</span> 填满大小为 <span class="math inline">\(j\)</span> 的背包，且第 <span class="math inline">\(i\)</span> 个物品至少被填一次的方案数，则答案为 <span class="math inline">\(\sum g(i,j)f(n-i-1,m-j)\)</span>。总复杂度 <span class="math inline">\(O(m\sqrt m)\)</span>，注意物品数开够了（大概要 460），不要像我没注意就开了 330（常用分块块长）。</p>
-<h3 id="e--">E -</h3>
+<p>咕咕咕</p>
 
     </div>
 
@@ -296,9 +302,6 @@
     
 
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E5%A5%97%E9%A2%98%E9%A2%98%E8%A7%A3/" rel="tag"># 套题题解</a>
-          </div>
 
         
 
@@ -393,7 +396,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#a---erasing-vertices"><span class="nav-number">1.</span> <span class="nav-text">A - Erasing Vertices</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b---flip-digits"><span class="nav-number">2.</span> <span class="nav-text">B - Flip Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c---robots"><span class="nav-number">3.</span> <span class="nav-text">C - Robots</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d---convex-sequence"><span class="nav-number">4.</span> <span class="nav-text">D - Convex Sequence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#e--"><span class="nav-number">5.</span> <span class="nav-text">E -</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#a---erasing-vertices"><span class="nav-number">1.</span> <span class="nav-text">A - Erasing Vertices</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b---flip-digits"><span class="nav-number">2.</span> <span class="nav-text">B - Flip Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c---robots"><span class="nav-number">3.</span> <span class="nav-text">C - Robots</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d---convex-sequence"><span class="nav-number">4.</span> <span class="nav-text">D - Convex Sequence</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -409,7 +412,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
