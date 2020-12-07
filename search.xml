@@ -46,6 +46,7 @@
     <url>/2020/11/28/ARC100%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/</url>
     <content><![CDATA[<h3 id="c---linear-approximation">C - Linear Approximation</h3>
 <p>取 <span class="math inline">\(a_i-i\)</span> 的中位数即可。</p>
+<a id="more"></a>
 <h3 id="d---equal-cut">D - Equal Cut</h3>
 <p>考虑枚举第二个分割点，那么考虑另外两个分割点每一个都只有两种可能：最后一个使得前一段和小于等于后一段和的位置或者这个位置再往后一个。这两个分割点的位置随第二个分割点向后移动也是单调向后移动的，双指针维护即可。</p>
 <h3 id="e---or-plus-max">E - Or Plus Max</h3>
@@ -65,7 +66,8 @@ f(i,j)=(k-j+1)f(i-1,j-1)+\sum\limits_{t=j}^{k-1}f(i-1,t)
   <entry>
     <title>鞅与停时定理</title>
     <url>/2020/11/24/%E9%9E%85%E4%B8%8E%E5%81%9C%E6%97%B6%E5%AE%9A%E7%90%86/</url>
-    <content><![CDATA[<p>本文基本不做证明，只简单说明大致内容，由于博主没有数理基础，有错误还望指出（其实大部分在搬 wiki）。</p>
+    <content><![CDATA[<p>本文基本不做证明，只简单说明大致内容，由于博主只是一只猫没有数理基础，有错误还望指出（其实大部分在搬 wiki）。</p>
+<a id="more"></a>
 <h3 id="鞅">鞅</h3>
 <p>鞅最早指一种赌博策略，所以本文会把其和赌博策略部分联系起来。</p>
 <p>定义<strong>离散时间鞅</strong>（本文只讨论离散时间的情况）为满足以下条件的随机过程（依赖于时间的随机变量序列） <span class="math inline">\(X_0,X_1,X_2,\dots\)</span></p>
